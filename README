@@ -1,0 +1,9 @@
+Punybench is a collection of micro benchmarks primarily for
+measuring specific file system oprations.
+
+To Use:
+
+To Make:
+	make
+	make install
+	make clean
