@@ -21,12 +21,14 @@ else
   TARGET = $(BOARD)
 endif
 
+optdir  := /opt/punybench
 os	:= $(shell uname)
 opus    := $(basename $(notdir $(PWD)))
 target  := $(TARGET)
 objdir  :=.$(target)
 sources := $(wildcard *.c)
 objects := $(addprefix $(objdir)/, $(sources:.c=.o))
+libdir  := $(DESTDIR)$(optdir)/lib
 
 include $(makedir)/$(target).mk
 
@@ -50,7 +52,7 @@ else
 endif
 
 $(objdir)/%.o : %.c Makefile
-	@ mkdir -p $(objdir)
+	@mkdir -p $(objdir)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(opus): $(objects)
@@ -58,8 +60,9 @@ $(opus): $(objects)
 	$(AR) $(ARFLAGS) $(objdir)/$@ $(objects)
 
 install:
-	cp $(objdir)/$(opus) /tmp/$(opus).a
-	sudo mv /tmp/$(opus).a /usr/lib/$(opus).a
+	@mkdir -p $(libdir)
+	cp $(objdir)/$(opus) /tmp/$(opus).a # Can't use sudo in nfs home directory
+	sudo mv /tmp/$(opus).a $(libdir)/$(opus).a
 
 clean:
 	@rm -f *.core

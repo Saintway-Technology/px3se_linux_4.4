@@ -21,6 +21,7 @@ else
   TARGET = $(BOARD)
 endif
 
+optdir  := /opt/punybench
 name    := $(basename $(notdir $(PWD)))
 target  := $(TARGET)
 objdir  :=.$(target)
@@ -28,7 +29,7 @@ sources := $(wildcard *.c)
 headers := $(wildcard *.h)
 objects := $(addprefix $(objdir)/, $(sources:.c=.o))
 opus    := $(objdir)/$(name)
-bin     ?= ~/playbin
+bin     := $(DESTDIR)$(optdir)/bin
 
 include $(makedir)/$(target).mk
 
@@ -49,11 +50,11 @@ $(objdir)/%.o : %.c Makefile $(headers)
 
 $(opus):$(objects) $(LIBS)
 	$(CC) $(CFLAGS) $(objects) $(LIBS) -o $(opus)
-	cp $(opus) $(bin)
 
 .PHONEY: install clean test
 
 install:
+	@mkdir -p $(bin)
 	cp $(opus) $(bin)
 
 clean:

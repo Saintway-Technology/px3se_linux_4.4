@@ -21,14 +21,14 @@ else
   TARGET = $(BOARD)
 endif
 
-makedir := $(dir $(lastword $(MAKEFILE_LIST)))
+optdir  := /opt/punybench
 target  := $(TARGET)
 objdir  :=.$(target)
 sources := $(wildcard *.c)
 headers := $(wildcard *.h)
 objects := $(addprefix $(objdir)/, $(sources:.c=))
 opuses  := $(sources:.c=)
-bin     ?= ../bin
+bin      = $(DESTDIR)$(optdir)/bin
 
 include $(makedir)/$(target).mk
 
@@ -48,9 +48,9 @@ $(objdir)/% : %.c $(headers)
 	@ mkdir -p $(objdir)
 	echo $(LIBS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
-	cp $@ $(bin)
 
 install:
+	@ mkdir -p $(bin)
 	cd $(objdir); cp $(opuses) $(bin)
 
 .PHONEY : clean
