@@ -50,11 +50,6 @@ typedef struct arg_s {
 inst_s Inst;
 bool	Done;
 
-int a_range (unsigned max, arg_s *arg)
-{
-	return max ? (rand_r( &arg->seed) % max) : 0;
-}
-
 void pr_inst (inst_s *inst)
 {
 	printf("opens   = %10llu\n", inst->num_opens);
@@ -112,7 +107,8 @@ void gen_name (char *c, arg_s *arg)
 					"_0123456789";
 
 	for (i = 0; i < MAX_NAME - 1; i++) {
-		*c++ = file_name_char[a_range(sizeof(file_name_char)-1, arg)];
+		*c++ = file_name_char[urand_r(sizeof(file_name_char)-1,
+						&arg->seed)];
 	}
 	*c = '\0';
 }
@@ -182,10 +178,10 @@ void fill (int fd, arg_s *arg)
 	char		buf[4096];
 	unsigned long	i, n;
 
-	n = a_range(4, arg)+1;
+	n = urand_r(4, &arg->seed)+1;
 
 	for (i = 0; i <  sizeof(buf); i++) {
-		buf[i] = rnd_char[a_range(sizeof(rnd_char)-1, arg)];
+		buf[i] = rnd_char[urand_r(sizeof(rnd_char)-1, &arg->seed)];
 	}
 	for (i = 0; i < n; i++) {
 		if (write(fd, buf, sizeof(buf)) < 0) {
@@ -462,7 +458,7 @@ void *ztree (void *arg)
 
 void rate (void)
 {
-#define DELTA(x)	delta.x = new.x - old.x	
+#define DELTA(x)	delta.x = new.x - old.x
 	static inst_s	old = { 0 };
 	static inst_s	new;
 	static inst_s	delta;
@@ -535,7 +531,7 @@ struct {
 	.from  = "ztree",
 	.to    = "copy" };
 
-void myopt (int c)
+bool myopt (int c)
 {
 	switch (c) {
 	case 'k':
@@ -551,9 +547,9 @@ void myopt (int c)
 		Myopt.to = optarg;
 		break;
 	default:
-		usage();
-		break;
+		return FALSE;
 	}
+	return TRUE;
 }
 
 int main (int argc, char *argv[])

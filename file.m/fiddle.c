@@ -39,7 +39,7 @@ struct {
 	u64	num_written;
 } Inst;
 
-typedef struct arg_s {
+typedef struct arg_s {	/* per task arguments */
 	unsigned	seed;
 	unint		id;
 	unint		num_files;
@@ -47,18 +47,13 @@ typedef struct arg_s {
 	unint		fiddle;
 } arg_s;
 
-int a_range (unsigned max, arg_s *a)
-{
-	return max ? (rand_r( &a->seed) % max) : 0;
-}
-
 static void randomize (char *buf, unsigned size, arg_s *a)
 {
 	static char	rnd_char[] = "abcdefghijklmnopqrstuvwxyz\n";
 	unsigned	i;
 
 	for (i = 0; i < size; i++) {
-		*buf++ = rnd_char[a_range(sizeof(rnd_char), a)];
+		*buf++ = rnd_char[urand_r(sizeof(rnd_char), &a->seed)];
 	}
 }
 
@@ -106,7 +101,8 @@ void gen_name (char *c, arg_s *arg)
 					"_0123456789";
 
 	for (i = 0; i < MAX_NAME - 1; i++) {
-		*c++ = file_name_char[a_range(sizeof(file_name_char)-1, arg)];
+		*c++ = file_name_char[urand_r(sizeof(file_name_char)-1,
+						&arg->seed)];
 	}
 	*c = '\0';
 }
@@ -309,7 +305,7 @@ void *test (void *arg)
 	// make and cd to directory for thread to play in
 	snprintf(dir, MAX_NAME-1, "fiddle_dir_%ld", a->id);
 	cr_dir(dir);
-	
+
 	// create the number of files with the specific amount of data
 	for (i = 0; i < a->num_files; i++) {
 		mk_path(path, dir, i);
@@ -320,7 +316,7 @@ void *test (void *arg)
 
 	// randomly open files and fiddle with their data
 	for (i = 0; i < a->fiddle; i++) {
-		mk_path(path, dir, a_range(a->num_files, a));
+		mk_path(path, dir, urand_r(a->num_files, &a->seed));
 		fiddle(path, a);
 	}
 
@@ -370,7 +366,7 @@ void start_threads (
 u64	Numfiles = 2;
 u64	Fiddle = 2;
 
-void myopt (int c)
+bool myopt (int c)
 {
 	switch (c) {
 	case 'k':
@@ -380,9 +376,9 @@ void myopt (int c)
 		Fiddle = strtoll(optarg, NULL, 0);
 		break;
 	default:
-		usage();
-		break;
+		return FALSE;
 	}
+	return TRUE;
 }
 
 void usage (void)

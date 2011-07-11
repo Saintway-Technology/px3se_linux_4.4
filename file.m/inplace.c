@@ -52,7 +52,7 @@ static int init(char *name, size_t size)
 {
 	size_t i;
 	int fd;
-	
+
 	fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (fd == -1) {
 		perror(name);
@@ -84,7 +84,7 @@ static void report(char *label, u64 total, size_t n, int iterations)
 
 void usage(void)
 {
-	pr_usage("-f<file> -x<file size> -i<iterations> -r<results_file>");
+	pr_usage("-f<file> -z<file size> -i<iterations> -r<results_file>");
 }
 
 int main(int argc, char *argv[])

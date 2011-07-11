@@ -78,16 +78,16 @@ void fill_file (int fd, u64 size)
 	lseek(fd, 0, 0);
 }
 
-void myopt (int c)
+bool myopt (int c)
 {
 	switch (c) {
 	case 'b':
 		Bufsize_log2 = strtoll(optarg, NULL, 0);
 		break;
 	default:
-		usage();
-		break;
+		return FALSE;
 	}
+	return TRUE;
 }
 
 int main (int argc, char *argv[])
@@ -115,7 +115,7 @@ int main (int argc, char *argv[])
 	for (l = 0; l < Option.loops; l++) {
 		startTimer();
 		for (i = 0; i < n; ++i) {
-			offset = range(numbufs) * bufsize;
+			offset = urand(numbufs) * bufsize;
 			rc = pread(fd, buf, bufsize, offset);
 			if (rc != bufsize) {
 				if (rc == -1) fatal("pread:");

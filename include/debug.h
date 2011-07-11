@@ -22,17 +22,19 @@
 extern "C" {
 #endif
 
-int debugon  (void);
-int debugoff (void);
-int fdebugon (void);
-int fdebugoff(void);
-int debugenv (void);
+bool debugon(void);
+bool debugoff(void);
+bool debug_is_on(void);
+bool debug_is_off(void);
 
+bool fdebugon(void);
+bool fdebugoff(void);
+bool fdebug_is_on(void);
+bool fdebug_is_off(void);
+
+bool debugenv(void);
 void debugstderr(void);
 void debugstdout(void);
-
-bool debug_is_on  (void);
-bool debug_is_off (void);
 
 bool prf     (const char *);
 bool pr      (const char *fn, unsigned line, const char *);
@@ -79,6 +81,7 @@ extern int assertError(const char *what);
 #endif
 
 void stacktrace(void);
+void stacktrace_err(void);
 
 #ifdef __cplusplus
 }

@@ -15,11 +15,12 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
-                                                                                
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <puny.h>
 
+/* Quick test for monster seek followed by a write */
 int main (int argc, char *argv[])
 {
 	int	fd;
