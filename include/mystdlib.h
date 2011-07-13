@@ -11,16 +11,12 @@
  |  GNU General Public License for more details.
  +-------------------------------------------------------------------------*/
 
-#ifndef _MYLIB_H_
-#define _MYLIB_H_ 1
+#ifndef _MYSTDLIB_H_
+#define _MYSTDLIB_H_ 1
 
-#ifndef _STDDEF_H
 #include <stddef.h>
-#endif
 
-#ifndef _STYLE_H_
 #include <style.h>
-#endif
 
 void *myalloc (unsigned size);
 void *myrealloc (void *p, unsigned size);
