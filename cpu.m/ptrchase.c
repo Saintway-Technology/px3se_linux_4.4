@@ -123,7 +123,7 @@ void chaseTest (void) {
     }
     if (num_pointers == MaxPointers) break;
     num_pointers *= StepSize;
-    if (num_pointers) num_pointers = MaxPointers;
+    if (num_pointers > MaxPointers) num_pointers = MaxPointers;
     iter /= StepSize;
     if (iter == 0) iter = 1;
   }
