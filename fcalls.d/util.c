@@ -18,9 +18,10 @@
 #include <util.h>
 
 #include "fcalls.h"
+#include "main.h"
 
-/* PrErrorp prints an error message including location */
-void PrErrorp (Where_s w, const char *fmt, ...) {
+/* PrErrork prints an error message including location */
+void PrErrork (Where_s w, const char *fmt, ...) {
   int lasterr = errno;
   va_list args;
 
@@ -41,34 +42,32 @@ void PrErrorp (Where_s w, const char *fmt, ...) {
   }
   va_end(args);
   fprintf(stderr, "\n");
-  if (StackTrace) stacktrace_err();
-  if (Fatal) exit(2); /* conventional value for failed execution */
+  if (Local_option.stack_trace) stacktrace_err();
+  if (Local_option.exit_on_error) exit(2);
 }
 
 /* RndName generates a random name. The caller must free the returned name */
-char *RndName (unsigned n) {
+char *RndName (void) {
   static char namechar[] = "abcdefghijklmnopqrstuvwxyz"
          "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
          "_";
   char *s;
   unint i;
 
-  if (!n) return NULL;
-
-  s = emalloc(n);
-  for (i = 0; i < n - 1; i++) {
+  s = emalloc(NAME_LEN);
+  for (i = 0; i < NAME_LEN - 1; i++) {
     s[i] = namechar[urand(sizeof(namechar) - 1)];
   }
   s[i] = '\0';
   return s;
 }
 
-/* Mkstr creates a string by concatenating all the string
+/* Catstr creates a string by concatenating all the string
  * arguments. The last string must be NULL.
  * Caller must free the returned pointer.
  * O(n^2), so don't pass too many strings.
  */
-char *Mkstr (char *s, ...) {
+char *Catstr (char *s, ...) {
   char *t;
   char *u;
   int sum;
@@ -102,7 +101,12 @@ static inline u8 Hash (s64 x) {
   return crc32( &x, sizeof(x));
 }
 
-/* Fill a buffer of size n with bytes starting with a seed */
+/* Fill a buffer of size n with bytes.
+ * The values used to fill the buffer are derived
+ * from the offset in the file for the data.
+ * When the data is read, we can then check that
+ * is the correct data for that location in the file.
+ */
 void Fill (void *buf, int n, s64 offset) {
   u8 *b = buf;
   u8 *end = &b[n];
@@ -113,15 +117,15 @@ void Fill (void *buf, int n, s64 offset) {
   }
 }
 
-/* IsSamep: does the buffer have the same content that was set by Fill */
-bool IsSamep (Where_s w, void *buf, int n, s64 offset) {
-  u8 *b = buf;
-  u8 *end = &b[n];
+/* CheckFillk: does the buffer have the same content that was set by Fill */
+bool CheckFillk (Where_s w, const void *buf, int n, s64 offset) {
+  const u8 *b = buf;
+  const u8 *end = &b[n];
 
   for (; b < end; b++) {
     if (*b != Hash(offset)) {
-      PrErrorp(w,
-        "IsSame at offset %td expected 0x%2x"
+      PrErrork(w,
+        "CheckFill at offset %td expected 0x%2x"
         " but is 0x%2x",
         b - (u8 *)buf, Hash(offset), *b);
       return FALSE;
@@ -129,4 +133,36 @@ bool IsSamep (Where_s w, void *buf, int n, s64 offset) {
     ++offset;
   }
   return TRUE;
+}
+
+/* CheckEqk: checks if the two buffers are equal */
+bool CheckEqk (Where_s w, const void *b1, const void *b2, int n) {
+  if (memcmp(b1, b2, n) != 0) {
+    PrErrork(w, "CheckEq");
+    return FALSE;
+  }
+  return TRUE;
+}
+
+/* CheckFailed: reports failure of expression */
+bool CheckFailed (Where_s w, const char *e) {
+  PrErrork(w, " %s", e);
+  return FALSE;
+}
+
+/* CrFile creates a file of specified size and Fills it with data. */
+void CrFile (const char *name, u64 size) {
+  u8 buf[Local_option.block_size];
+  int fd;
+  u64 offset;
+
+  fd = creat(name, 0666);
+  for (offset = 0; size; offset += Local_option.block_size) {
+    unint n = Local_option.block_size;
+    if (n > size) n = size;
+    Fill(buf, n, offset);
+    write(fd, buf, n);
+    size -= n;
+  }
+  close(fd);
 }
