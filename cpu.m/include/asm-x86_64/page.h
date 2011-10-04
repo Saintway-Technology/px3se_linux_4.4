@@ -110,10 +110,10 @@ typedef struct { unsigned long pgprot; } pgprot_t;
 #define PAGE_OFFSET		((unsigned long)__PAGE_OFFSET)
 
 /* Note: __pa(&symbol_visible_to_c) should be always replaced with __pa_symbol.
-   Otherwise you risk miscompilation. */ 
+   Otherwise you risk miscompilation. */
 #define __pa(x)			(((unsigned long)(x)>=__START_KERNEL_map)?(unsigned long)(x) - (unsigned long)__START_KERNEL_map:(unsigned long)(x) - PAGE_OFFSET)
 /* __pa_symbol should be used for C visible symbols.
-   This seems to be the official gcc blessed way to do such arithmetic. */ 
+   This seems to be the official gcc blessed way to do such arithmetic. */
 #define __pa_symbol(x)		\
 	({unsigned long v;  \
 	  asm("" : "=r" (v) : "0" (x)); \
