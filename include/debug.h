@@ -47,35 +47,35 @@ bool prmem   (const char *, const void *, unsigned int);
 bool prbytes (const char *, const void *, unsigned int);
 bool print   (const char *fn, unsigned line, const char *format, ...);
 
-#define FN_ARG __FUNCTION__, __LINE__
-#define FN prf(__FUNCTION__)
-#define HERE pr(FN_ARG, NULL)
-#define PR(_s_) pr(FN_ARG, # _s_)
-#define PRd(_x_) prd(FN_ARG, # _x_, _x_)
-#define PRp(_x_) prp(FN_ARG, # _x_, _x_)
-#define PRs(_x_) prs(FN_ARG, # _x_, _x_)
-#define PRu(_x_) pru(FN_ARG, # _x_, _x_)
-#define PRx(_x_) prx(FN_ARG, # _x_, _x_)
-#define PRg(_x_) prg(FN_ARG, # _x_, _x_)
-#define PRid(_x_) prid(FN_ARG, # _x_, _x_)
+#define FN_ARG		__FUNCTION__, __LINE__
+#define FN		prf(__FUNCTION__)
+#define HERE		pr(FN_ARG, NULL)
+#define PR(_s_)		pr(FN_ARG, # _s_)
+#define PRd(_x_)	prd(FN_ARG, # _x_, _x_)
+#define PRp(_x_)	prp(FN_ARG, # _x_, _x_)
+#define PRs(_x_)	prs(FN_ARG, # _x_, _x_)
+#define PRu(_x_)	pru(FN_ARG, # _x_, _x_)
+#define PRx(_x_)	prx(FN_ARG, # _x_, _x_)
+#define PRg(_x_)	prg(FN_ARG, # _x_, _x_)
+#define PRid(_x_)	prid(FN_ARG, # _x_, _x_)
 
 typedef struct counter_s counter_s;
 struct counter_s {
-  counter_s *next;
-  const char *where;
-  const char *fn;
-  u64 count;
+	counter_s	*next;
+	const char	*where;
+	const char	*fn;
+	u64		count;
 };
 void count (counter_s *coutner);
 void report (void);
-#define CNT { \
-  static counter_s counter = { NULL, WHERE, __FUNCTION__, 0 }; \
-  count( &counter); \
+#define CNT {								\
+	static counter_s counter = { NULL, WHERE, __FUNCTION__, 0 };	\
+	count( &counter);						\
 }
 
 #ifndef assert
 extern int assertError(const char *what);
-#define assert(_e_) ((void)((_e_) || assertError(WHERE " (" # _e_ ")")))
+#define assert(_e_)	((void)((_e_) || assertError(WHERE " (" # _e_ ")")))
 #endif
 
 void stacktrace(void);

@@ -20,17 +20,17 @@
 #define INITIAL_CRC32 0xffffffffUL
 
 #ifdef __KERNEL__
-  u64 hash_string_64_tau (const char *t);
-  u32 hash_string_32_tau (const char *t);
+	u64 hash_string_64_tau (const char *t);
+	u32 hash_string_32_tau (const char *t);
 #endif
-  u64 update_crc64 (const void *buf, unint len, u64 crc);
-  u64 crc64 (const void *buf, unint len);
-  u64 hash_string_64 (const char *t);
+	u64 update_crc64 (const void *buf, unint len, u64 crc);
+	u64 crc64 (const void *buf, unint len);
+	u64 hash_string_64 (const char *t);
 
-  u32 crc32 (const void *buf, unint len);
-  u32 hash_unicode_32 (const u16 *t);
-  u32 hash_string_32 (const char *t);
-  u32 string_crc32 (const char *s);
-  u32 update_crc32 (const void *buf, unint len, u32 crc);
+	u32 crc32 (const void *buf, unint len);
+	u32 hash_unicode_32 (const u16 *t);
+	u32 hash_string_32 (const char *t);
+	u32 string_crc32 (const char *s);
+	u32 update_crc32 (const void *buf, unint len, u32 crc);
 
 #endif

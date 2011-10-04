@@ -25,22 +25,21 @@
 extern "C" {
 #endif
 
-#define xprintk(L, fmt, ...) \
-  printk(L "tau: " "%s<%d>: " fmt "\n", __FUNCTION__, __LINE__, ## __VA_ARGS__)
+#define xprintk(L, fmt, ...)	\
+	printk(L "tau: " "%s<%d>: " fmt "\n", __FUNCTION__, __LINE__, ## __VA_ARGS__)
 
 #define iprintk(fmt, ...) xprintk(KERN_INFO, fmt, ## __VA_ARGS__)
 
 #ifdef F
-#define MYFILE F
+#define MYFILE	F
 #else
-#define MYFILE __FILE__
+#define MYFILE	__FILE__
 #endif
 
-#define fatal(fmt, ...) pr_fatal  (MYFILE, __FUNCTION__, __LINE__, fmt, ## __VA_ARGS__)
-#define warn(fmt, ...) pr_warn   (MYFILE, __FUNCTION__, __LINE__, fmt, ## __VA_ARGS__)
+#define fatal(fmt, ...)		pr_fatal  (MYFILE, __FUNCTION__, __LINE__, fmt, ## __VA_ARGS__)
+#define warn(fmt, ...)		pr_warn   (MYFILE, __FUNCTION__, __LINE__, fmt, ## __VA_ARGS__)
 // Has a name clash. I think with ncurses
-//#define display(fmt, ...) pr_display(MYFILE, __FUNCTION__, __LINE__, \
-//fmt, ## __VA_ARGS__)
+//#define display(fmt, ...)	pr_display(MYFILE, __FUNCTION__, __LINE__, fmt, ## __VA_ARGS__)
 
 void pr_fatal  (const char *file, const char *func, int line, const char *fmt, ...);
 void pr_warn   (const char *file, const char *func, int line, const char *fmt, ...);
@@ -59,7 +58,7 @@ const char *getprogname (void);
 #if __linux__
 #endif
 
-#define NELEMS(a) (sizeof(a) / sizeof(a[0]))
+#define	NELEMS(a)	(sizeof(a) / sizeof(a[0]))
 
 #ifdef __cplusplus
 }

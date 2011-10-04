@@ -19,12 +19,13 @@
 #include <myio.h>
 #include <eprintf.h>
 
-void io_error (const char *what, const char *who) {
-  if (what && who) {
-    eprintf("%s: %s:", what, who);
-  } else if (what) {
-    eprintf("%s:", what);
-  } else {
-    eprintf(":");
-  }
+void io_error (const char *what, const char *who)
+{
+	if (what && who) {
+		eprintf("%s: %s:", what, who);
+	} else if (what) {
+		eprintf("%s:", what);
+	} else {
+		eprintf(":");
+	}
 }

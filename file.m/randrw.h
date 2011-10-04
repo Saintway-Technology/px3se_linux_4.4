@@ -21,9 +21,9 @@
 enum { NUM_LONGS = 3157, NUM_BUFS = (1<<17) };
 
 typedef struct Buf_s {
-  long seed;
-  u32 crc;
-  long data[NUM_LONGS];
+	long	seed;
+	u32	crc;
+	long	data[NUM_LONGS];
 } Buf_s;
 
 #endif

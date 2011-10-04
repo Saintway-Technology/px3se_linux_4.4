@@ -239,94 +239,99 @@
 #include <mystdlib.h>
 
 enum {
-  SECS_PER_MIN  = 60,
-  SECS_PER_HR   = SECS_PER_MIN * 60,
-  SECS_PER_DAY  = SECS_PER_HR * 24,
-  SECS_PER_YEAR = SECS_PER_DAY * 365,
-  SECS_PER_LEAP = SECS_PER_YEAR + SECS_PER_DAY,
-  SECS_PER_4YR  = (3 * SECS_PER_YEAR) + SECS_PER_LEAP
+	SECS_PER_MIN  = 60,
+	SECS_PER_HR   = SECS_PER_MIN * 60,
+	SECS_PER_DAY  = SECS_PER_HR * 24,
+	SECS_PER_YEAR = SECS_PER_DAY * 365,
+	SECS_PER_LEAP = SECS_PER_YEAR + SECS_PER_DAY,
+	SECS_PER_4YR  = (3 * SECS_PER_YEAR) + SECS_PER_LEAP
 };
 
-char FileTypes[] = { '0', 'p', 'c', '3', 'd', '5', 'b', '7',
-       '-', '9', 'l', 'B', 's', 'D', 'E', 'F' };
+char FileTypes[] = {	'0', 'p', 'c', '3', 'd', '5', 'b', '7',
+			 '-', '9', 'l', 'B', 's', 'D', 'E', 'F' };
 
-void pr_date (char *s, time_t time) {
-  printf("%s:%s\n", s, date(time));
+void pr_date (char *s, time_t time)
+{
+	printf("%s:%s\n", s, date(time));
 }
 
-void prStatNice (char *name, struct stat *sb) {
-  printf("%c%.3o %9llu %s\n",
-    FileTypes[(sb->st_mode >> 12) & 017],
-    sb->st_mode & 0777, /* inode protection mode */
-    (u64)sb->st_size, /* file size, in bytes */
-    name);
-  pr_date("\ta", sb->st_atime);
-  pr_date("\tm", sb->st_mtime);
-  pr_date("\tc", sb->st_ctime);
+void prStatNice (char *name, struct stat *sb)
+{
+	printf("%c%.3o %9llu %s\n",
+		FileTypes[(sb->st_mode >> 12) & 017],
+		sb->st_mode & 0777,	/* inode protection mode */
+		(u64)sb->st_size,	/* file size, in bytes */
+		name);
+	pr_date("\ta", sb->st_atime);
+	pr_date("\tm", sb->st_mtime);
+	pr_date("\tc", sb->st_ctime);
 }
 
-void prStat (char *name, struct stat *sb) {
-  printf("dev=%lld ino=%lld mode=%llo nlink=%lld uid=%lld gid=%lld"
-    " rdev=%lld size=%lld blocks=%lld blksize=%lld"
-    " atime=%llu mtime=%llu ctime=%llu %s\n",
-    (u64)sb->st_dev, /* device inode resides on */
-    (u64)sb->st_ino, /* inode's number */
-    (u64)sb->st_mode, /* inode protection mode */
-    (u64)sb->st_nlink, /* number or hard links to the file */
-    (u64)sb->st_uid, /* user-id of owner */
-    (u64)sb->st_gid, /* group-id of owner */
-    (u64)sb->st_rdev, /* device type, for special file */
-    (u64)sb->st_size, /* file size, in bytes */
-    (u64)sb->st_blocks, /* blocks allocated for file */
-    (u64)sb->st_blksize, /* optimal file sys I/O ops blocksize */
-    (u64)sb->st_atime, /* time of last access */
-    (u64)sb->st_mtime, /* time of last data modification */
-    (u64)sb->st_ctime, /* time of last file status change */
-    //sb->st_flags, /* user defined flags for file */
-    //sb->st_gen /* file generation number */
-    name
-  );
+void prStat (char *name, struct stat *sb)
+{
+	printf("dev=%lld ino=%lld mode=%llo nlink=%lld uid=%lld gid=%lld"
+		" rdev=%lld size=%lld blocks=%lld blksize=%lld"
+		" atime=%llu mtime=%llu ctime=%llu %s\n",
+		(u64)sb->st_dev,	/* device inode resides on */
+		(u64)sb->st_ino,	/* inode's number */
+		(u64)sb->st_mode,	/* inode protection mode */
+		(u64)sb->st_nlink,	/* number or hard links to the file */
+		(u64)sb->st_uid,	/* user-id of owner */
+		(u64)sb->st_gid,	/* group-id of owner */
+		(u64)sb->st_rdev,	/* device type,	for special file */
+		(u64)sb->st_size,	/* file size, in bytes */
+		(u64)sb->st_blocks,	/* blocks allocated for file */
+		(u64)sb->st_blksize,	/* optimal file sys I/O ops blocksize */
+		(u64)sb->st_atime,	/* time of last access */
+		(u64)sb->st_mtime,	/* time of last data modification */
+		(u64)sb->st_ctime,	/* time of last file status change */
+		//sb->st_flags,	/* user defined flags for file */
+		//sb->st_gen	/* file generation number */
+		name
+	);
 }
 
-void prStatSizes (struct stat *sb) {
-  printf("dev=%d ino=%d mode=%d nlink=%d uid=%d gid=%d rdev=%d"
-    " size=%d blocks=%d blksize=%d atime=%d mtime=%d ctime=%d\n",
-    (u32)sizeof(sb->st_dev),
-    (u32)sizeof(sb->st_ino),
-    (u32)sizeof(sb->st_mode),
-    (u32)sizeof(sb->st_nlink),
-    (u32)sizeof(sb->st_uid),
-    (u32)sizeof(sb->st_gid),
-    (u32)sizeof(sb->st_rdev),
-    (u32)sizeof(sb->st_size),
-    (u32)sizeof(sb->st_blocks),
-    (u32)sizeof(sb->st_blksize),
-    (u32)sizeof(sb->st_atime),
-    (u32)sizeof(sb->st_mtime),
-    (u32)sizeof(sb->st_ctime)
-  );
+void prStatSizes (struct stat *sb)
+{
+	printf("dev=%d ino=%d mode=%d nlink=%d uid=%d gid=%d rdev=%d"
+		" size=%d blocks=%d blksize=%d atime=%d mtime=%d ctime=%d\n",
+		(u32)sizeof(sb->st_dev),
+		(u32)sizeof(sb->st_ino),
+		(u32)sizeof(sb->st_mode),
+		(u32)sizeof(sb->st_nlink),
+		(u32)sizeof(sb->st_uid),
+		(u32)sizeof(sb->st_gid),
+		(u32)sizeof(sb->st_rdev),
+		(u32)sizeof(sb->st_size),
+		(u32)sizeof(sb->st_blocks),
+		(u32)sizeof(sb->st_blksize),
+		(u32)sizeof(sb->st_atime),
+		(u32)sizeof(sb->st_mtime),
+		(u32)sizeof(sb->st_ctime)
+	);
 }
 
-int main (int argc, char *argv[]) {
-  struct stat sb;
-  char *name;
-  int fd;
-  int i;
+int main (int argc, char *argv[])
+{
+	struct stat	sb;
+	char		*name;
+	int		fd;
+	int		i;
 
-  if (argc < 2) {
-    prStatSizes( &sb);
-    return 0;
-  }
-  for (i = 1; i < argc; i++) {
-    name = argv[i];
-    if (!name) continue;
-    fd = stat(name, &sb);
-    if (fd == -1) {
-      perror(name);
-      continue;
-    }
-    prStatNice(name, &sb);
-// prStat(name, &sb);
-  }
-  return 0;
+	if (argc < 2) {
+		prStatSizes( &sb);
+		return 0;
+	}
+	for (i = 1; i < argc; i++) {
+		name = argv[i];
+		if (!name) continue;
+		fd = stat(name, &sb);
+		if (fd == -1) {
+			perror(name);
+			continue;
+		}
+		prStatNice(name, &sb);
+//		prStat(name, &sb);
+	}
+	return 0;
 }

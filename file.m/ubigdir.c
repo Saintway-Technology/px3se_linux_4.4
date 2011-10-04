@@ -29,45 +29,48 @@
 #include <puny.h>
 #include <eprintf.h>
 
-void usage (void) {
-  pr_usage("-d<directory> -k<files_per_iteration> -i<num_iterations>");
+void usage (void)
+{
+	pr_usage("-d<directory> -k<files_per_iteration> -i<num_iterations>");
 }
 
 int Numfiles = 1000;
 
-bool myopt (int c) {
-  switch (c) {
-  case 'k':
-    Numfiles = strtoll(optarg, NULL, 0);
-    break;
-  default:
-    return FALSE;
-  }
-  return TRUE;
+bool myopt (int c)
+{
+	switch (c) {
+	case 'k':
+		Numfiles = strtoll(optarg, NULL, 0);
+		break;
+	default:
+		return FALSE;
+	}
+	return TRUE;
 }
 
-int main (int argc, char *argv[]) {
-  char *directory;
-  char name[256];
-  unsigned i, j;
-  unsigned n;
-  int fd;
+int main (int argc, char *argv[])
+{
+	char		*directory;
+	char		name[256];
+	unsigned	i, j;
+	unsigned	n;
+	int		fd;
 
-  punyopt(argc, argv, myopt, "k:");
-  directory = Option.dir;
-  n = Numfiles;
-  mkdirq(directory);
-  chdirq(directory);
-  for (j = 0; j < Option.iterations; ++j) {
-    startTimer();
-    for (i = 0; i < n; ++i) {
-      sprintf(name, "f_%d_%d", j, i);
-      fd = openq(name, O_RDWR | O_CREAT | O_TRUNC);
-      closeq(fd);
-    }
-    stopTimer();
-    prTimer();
-    printf(" j=%d n=%d\n", j, n);
-  }
-  return 0;
+	punyopt(argc, argv, myopt, "k:");
+	directory = Option.dir;
+	n = Numfiles;
+	mkdirq(directory);
+	chdirq(directory);
+	for (j = 0; j < Option.iterations; ++j) {
+		startTimer();
+		for (i = 0; i < n; ++i) {
+			sprintf(name, "f_%d_%d", j, i);
+			fd = openq(name, O_RDWR | O_CREAT | O_TRUNC);
+			closeq(fd);
+		}
+		stopTimer();
+		prTimer();
+		printf(" j=%d n=%d\n", j, n);
+	}
+	return 0;
 }

@@ -28,40 +28,42 @@
 #include <puny.h>
 #include <eprintf.h>
 
-void usage (void) {
-  pr_usage("-f<file_name> -i<num_iterations> -l<loops>");
+void usage (void)
+{
+	pr_usage("-f<file_name> -i<num_iterations> -l<loops>");
 }
 
-int main (int argc, char *argv[]) {
-  struct stat sb;
-  char *name;
-  int fd;
-  int rc;
-  unsigned i;
-  unsigned n;
-  u64 l;
+int main (int argc, char *argv[])
+{
+	struct stat	sb;
+	char		*name;
+	int		fd;
+	int		rc;
+	unsigned	i;
+	unsigned	n;
+	u64		l;
 
-  punyopt(argc, argv, NULL, NULL);
-  name = Option.file;
-  n = Option.iterations;
-  fd = open(name, O_RDONLY);
-  if (fd == -1) {
-    perror("open");
-    exit(1);
-  }
-  for (l = 0; l < Option.loops; l++) {
-    startTimer();
-    for (i = 0; i < n; ++i) {
-      rc = stat(name, &sb);
-      if (rc == -1) {
-        perror("stat");
-        exit(1);
-      }
-    }
-    stopTimer();
-    prTimer();
-    printf("\n");
-  }
-  close(fd);
-  return 0;
+	punyopt(argc, argv, NULL, NULL);
+	name = Option.file;
+	n = Option.iterations;
+	fd = open(name, O_RDONLY);
+	if (fd == -1) {
+		perror("open");
+		exit(1);
+	}
+	for (l = 0; l < Option.loops; l++) {
+		startTimer();
+		for (i = 0; i < n; ++i) {
+			rc = stat(name, &sb);
+			if (rc == -1) {
+				perror("stat");
+				exit(1);
+			}
+		}
+		stopTimer();
+		prTimer();
+		printf("\n");
+	}
+	close(fd);
+	return 0;
 }

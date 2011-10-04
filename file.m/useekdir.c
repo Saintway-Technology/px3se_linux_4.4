@@ -74,95 +74,102 @@
 #include <eprintf.h>
 
 typedef struct Vector_v {
-  unsigned v_size;
-  void **v_data;
+	unsigned	v_size;
+	void		**v_data;
 } Vector_v;
 
-inline void *vget (Vector_v *v, unsigned i) {
-  if (i >= v->v_size) return NULL;
-  return v->v_data[i];
+inline void *vget (Vector_v *v, unsigned i)
+{
+	if (i >= v->v_size) return NULL;
+	return v->v_data[i];
 }
 
-void vgrow (Vector_v *v) {
-  void **array;
+void vgrow (Vector_v *v)
+{
+	void	**array;
 
-  array = realloc(v->v_data, v->v_size * 2);
-  if (array == NULL) {
-    perror("realloc");
-    exit(1);
-  }
-  v->v_size *= 2;
-  v->v_data = array;
+	array = realloc(v->v_data, v->v_size * 2);
+	if (array == NULL) {
+		perror("realloc");
+		exit(1);
+	}
+	v->v_size *= 2;
+	v->v_data = array;
 }
 
-inline void vput (Vector_v *v, void *value, unsigned i) {
-  while (i >= v->v_size) {
-    vgrow(v);
-  }
-  v->v_data[i] = value;
+inline void vput (Vector_v *v, void *value, unsigned i)
+{
+	while (i >= v->v_size) {
+		vgrow(v);
+	}
+	v->v_data[i] = value;
 }
 
 
-void create_files (unsigned n) {
-  unsigned i;
-  char name[NAME_MAX+1];
-  int fd;
+void create_files (unsigned n)
+{
+	unsigned	i;
+	char		name[NAME_MAX+1];
+	int		fd;
 
-  for (i = 0; i < n; ++i) {
-    sprintf(name, "f%x", i);
-    fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
-    if (fd == -1) {
-      perror(name);
-      exit(1);
-    }
-    close(fd);
-  }
+	for (i = 0; i < n; ++i) {
+		sprintf(name, "f%x", i);
+		fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
+		if (fd == -1) {
+			perror(name);
+			exit(1);
+		}
+		close(fd);
+	}
 }
 
-void usage (void) {
-  pr_usage("-d<directory> -k<num_files> -l<loops>");
+void usage (void)
+{
+	pr_usage("-d<directory> -k<num_files> -l<loops>");
 }
 
 int Numfiles = 10000;
 
-bool myopt (int c) {
-  switch (c) {
-  case 'k':
-    Numfiles = strtoll(optarg, NULL, 0);
-    break;
-  default:
-    return FALSE;
-  }
-  return TRUE;
+bool myopt (int c)
+{
+	switch (c) {
+	case 'k':
+		Numfiles = strtoll(optarg, NULL, 0);
+		break;
+	default:
+		return FALSE;
+	}
+	return TRUE;
 }
 
-int main (int argc, char *argv[]) {
-  struct dirent *de;
-  DIR *dir;
-  unint i;
-  u64 l;
+int main (int argc, char *argv[])
+{
+	struct dirent	*de;
+	DIR	*dir;
+	unint	i;
+	u64	l;
 
-  punyopt(argc, argv, myopt, "k:");
-  seed_random();
+	punyopt(argc, argv, myopt, "k:");
+	seed_random();
 
-  mkdir(Option.dir, 0777);
-  chdirq(Option.dir);
-  create_files(Numfiles);
-  for (l = 0; l < Option.loops; l++) {
-    dir = opendir(".");
-    if (!dir) {
-      perror(".");
-      exit(1);
-    }
-    startTimer();
-    for (i = 0;; ++i) {
-      de = readdir(dir);
-      if (!de) break;
-    }
-    stopTimer();
-    prTimer();
-    printf(" i=%ld\n", i);
-    closedir(dir);
-  }
-  return 0;
+	mkdir(Option.dir, 0777);
+	chdirq(Option.dir);
+	create_files(Numfiles);
+	for (l = 0; l < Option.loops; l++) {
+		dir = opendir(".");
+		if (!dir) {
+			perror(".");
+			exit(1);
+		}
+		startTimer();
+		for (i = 0;; ++i) {
+			de = readdir(dir);
+			if (!de) break;
+		}
+		stopTimer();
+		prTimer();
+		printf(" i=%ld\n", i);
+		closedir(dir);
+	}
+	return 0;
 }

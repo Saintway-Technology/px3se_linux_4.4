@@ -76,42 +76,46 @@
 #include <eprintf.h>
 #include <puny.h>
 
-void pr_dirent (struct dirent *d) {
+void pr_dirent (struct dirent *d)
+{
 #if 0
-  printf("%10llx\n", d->d_off);
-  printf("%10llx %10llx %2x %s\n",
-    d->d_ino, d->d_off, d->d_type, d->d_name);
+	printf("%10llx\n", d->d_off);
+	printf("%10llx %10llx %2x %s\n",
+		d->d_ino, d->d_off, d->d_type, d->d_name);
 #endif
-  printf("%10lld\n", (s64)d->d_off);
+	printf("%10lld\n", (s64)d->d_off);
 }
 
-void do_readdir (char *name) {
-  DIR *dir;
-  struct dirent *d;
+void do_readdir (char *name)
+{
+	DIR		*dir;
+	struct dirent	*d;
 
-  dir = opendir(name);
-  if (!dir) {
-    eprintf("failed to open file %s :", name);
-  }
-  for (;;) {
-    d = readdir(dir);
-    if (!d) break;
-    pr_dirent(d);
-  }
+	dir = opendir(name);
+	if (!dir) {
+		eprintf("failed to open file %s :", name);
+	}
+	for (;;) {
+		d = readdir(dir);
+		if (!d) break;
+		pr_dirent(d);
+	}
 }
 
-void usage (void) {
-  pr_usage("[<directory>]*");
+void usage (void)
+{
+	pr_usage("[<directory>]*");
 }
 
-int main (int argc, char *argv[]) {
-  int i;
+int main (int argc, char *argv[])
+{
+	int	i;
 
-  punyopt(argc, argv, NULL, NULL);
-  if (argc == optind) {
-    do_readdir(Option.dir);
-  } else for (i = optind; i < argc; ++i) {
-    do_readdir(argv[i]);
-  }
-  return 0;
+	punyopt(argc, argv, NULL, NULL);
+	if (argc == optind) {
+		do_readdir(Option.dir);
+	} else for (i = optind; i < argc; ++i) {
+		do_readdir(argv[i]);
+	}
+	return 0;
 }

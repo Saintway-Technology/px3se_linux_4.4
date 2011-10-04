@@ -31,66 +31,69 @@
 #include <eprintf.h>
 
 struct {
-  char *prefix;
-  unsigned start;
+	char		*prefix;
+	unsigned	start;
 } Myopt = {
-  .prefix = "",
-  .start  = 0 };
+	.prefix = "",
+	.start  = 0 };
 
-void usage (void) {
-  pr_usage("-d<directory> -i<num_iterations> -q<prefix> -k<start>");
+void usage (void)
+{
+	pr_usage("-d<directory> -i<num_iterations> -q<prefix> -k<start>");
 }
 
-bool myopt (int c) {
-  switch (c) {
-  case 'q':
-    Myopt.prefix = optarg;
-    break;
-  case 'k':
-    Myopt.start = strtoll(optarg, NULL, 0);
-    break;
-  default:
-    return FALSE;
-  }
-  return TRUE;
+bool myopt (int c)
+{
+	switch (c) {
+	case 'q':
+		Myopt.prefix = optarg;
+		break;
+	case 'k':
+		Myopt.start = strtoll(optarg, NULL, 0);
+		break;
+	default:
+		return FALSE;
+	}
+	return TRUE;
 }
 
-int main (int argc, char *argv[]) {
-  char *directory = "";
-  char *prefix = "";
-  char name[256];
-  int fd;
-  unsigned i, j;
-  unsigned start = 0;
-  unsigned n = 1000;
+int main (int argc, char *argv[])
+{
+	char		*directory = "";
+	char		*prefix = "";
+	char		name[256];
+	int		fd;
+	unsigned	i, j;
+	unsigned	start = 0;
+	unsigned	n = 1000;
 
-  punyopt(argc, argv, myopt, "q:k:");
-  directory = Option.dir;
-  n = Option.iterations;
-  prefix = Myopt.prefix;
-  start  = Myopt.start;
-  seed_random();
+	punyopt(argc, argv, myopt, "q:k:");
+	directory = Option.dir;
+	n = Option.iterations;
+	prefix = Myopt.prefix;
+	start  = Myopt.start;
+	seed_random();
 
-  mkdir(directory, 0777);
-  chdirq(directory);
-  for (j = 0; j < Option.loops; j++) {
-    startTimer();
-    for (i = 0; i < n; i++) {
-      if (start) {
-        sprintf(name, "%s%x", prefix, ++start);
-      } else {
-        sprintf(name, "%s%lx", prefix, random());
-      }
-      fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
-      if (fd == -1) {
-        perror(name);
-        exit(1);
-      }
-      close(fd);
-    }
-    stopTimer();
-    prTimer();
-    printf(" n=%d\n", n);
-  }
-  return 0;
+	mkdir(directory, 0777);
+	chdirq(directory);
+	for (j = 0; j < Option.loops; j++) {
+		startTimer();
+		for (i = 0; i < n; i++) {
+			if (start) {
+				sprintf(name, "%s%x", prefix, ++start);
+			} else {
+				sprintf(name, "%s%lx", prefix, random());
+			}
+			fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
+			if (fd == -1) {
+				perror(name);
+				exit(1);
+			}
+			close(fd);
+		}
+		stopTimer();
+		prTimer();
+		printf(" n=%d\n", n);
+	}
+	return 0;
 }

@@ -20,21 +20,21 @@ extern "C" {
 
 #include <style.h>
 
-typedef unsigned long long tick_t;
+typedef unsigned long long	tick_t;
 
 enum { NUM_SLOTS = 16, NUM_WHEELS = 16 };
 
 typedef struct slot_s {
-  tick_t s_delta;
-  tick_t s_avg;
+	tick_t	s_delta;
+	tick_t	s_avg;
 } slot_s;
 
 typedef struct wheel_s {
-  unsigned wh_next;
-  slot_s wh_slot[NUM_SLOTS];
+	unsigned	wh_next;
+	slot_s		wh_slot[NUM_SLOTS];
 } wheel_s;
 
-typedef wheel_s cascade_s[NUM_WHEELS];
+typedef wheel_s	cascade_s[NUM_WHEELS];
 
 void cascade (cascade_s wheel, tick_t delta);
 void pr_cascade (const char *label, cascade_s wheel);
@@ -43,22 +43,24 @@ void pr_cascade (const char *label, cascade_s wheel);
 
 #include <sys/time.h>
 
-static inline tick_t cputicks (void) {
-  struct timeval time;
-  tick_t ticks;
+static inline tick_t cputicks (void)
+{
+	struct timeval	time;
+	tick_t		ticks;
 
-  gettimeofday( &time, NULL);
-  ticks = time.tv_sec * 1000000ULL + time.tv_usec;
-  return ticks;
+	gettimeofday( &time, NULL);
+	ticks = time.tv_sec * 1000000ULL + time.tv_usec;
+	return ticks;
 }
 
-static inline tick_t nsecs (void) {
-  struct timeval time;
-  tick_t ticks;
+static inline tick_t nsecs (void)
+{
+	struct timeval	time;
+	tick_t		ticks;
 
-  gettimeofday( &time, NULL);
-  ticks = time.tv_sec * 1000000ULL + time.tv_usec;
-  return ticks * 1000;
+	gettimeofday( &time, NULL);
+	ticks = time.tv_sec * 1000000ULL + time.tv_usec;
+	return ticks * 1000;
 }
 
 #else
@@ -70,30 +72,31 @@ static inline tick_t nsecs (void) {
  * architecture
  */
 #ifdef __x86_64__
-#define DECLARE_ARGS(val, low, high) unsigned low, high
-#define EAX_EDX_VAL(val, low, high) ((low) | ((u64)(high) << 32))
-#define EAX_EDX_ARGS(val, low, high) "a" (low), "d" (high)
-#define EAX_EDX_RET(val, low, high) "=a" (low), "=d" (high)
+#define DECLARE_ARGS(val, low, high)	unsigned low, high
+#define EAX_EDX_VAL(val, low, high)	((low) | ((u64)(high) << 32))
+#define EAX_EDX_ARGS(val, low, high)	"a" (low), "d" (high)
+#define EAX_EDX_RET(val, low, high)	"=a" (low), "=d" (high)
 #endif
 
 #ifdef __i386__
-#define DECLARE_ARGS(val, low, high) unsigned long long val
-#define EAX_EDX_VAL(val, low, high) (val)
-#define EAX_EDX_ARGS(val, low, high) "A" (val)
-#define EAX_EDX_RET(val, low, high) "=A" (val)
+#define DECLARE_ARGS(val, low, high)	unsigned long long val
+#define EAX_EDX_VAL(val, low, high)	(val)
+#define EAX_EDX_ARGS(val, low, high)	"A" (val)
+#define EAX_EDX_RET(val, low, high)	"=A" (val)
 #endif
 
 // DON'T USE keeping here for future reference.
 #if 0
-static __always_inline unsigned long long cputicks (void) {
-  DECLARE_ARGS(val, low, high);
+static __always_inline unsigned long long cputicks (void)
+{
+	DECLARE_ARGS(val, low, high);
 
-  // Really need barrier's but is very processor specific
-  //rdtsc_barrier();
-  asm volatile("rdtsc" : EAX_EDX_RET(val, low, high));
-  //rdtsc_barrier();
+	// Really need barrier's but is very processor specific
+	//rdtsc_barrier();
+	asm volatile("rdtsc" : EAX_EDX_RET(val, low, high));
+	//rdtsc_barrier();
 
-  return EAX_EDX_VAL(val, low, high);
+	return EAX_EDX_VAL(val, low, high);
 }
 #endif
 
@@ -103,24 +106,25 @@ static __always_inline unsigned long long cputicks (void) {
 
 /* Link with -lrt */
 
-static inline u64 nsecs (void) {
-  struct timespec t;
+static inline u64 nsecs (void)
+{
+	struct timespec	t;
 
-  clock_gettime(CLOCK_REALTIME, &t);
+	clock_gettime(CLOCK_REALTIME, &t);
 
-  return (u64)t.tv_sec * 1000000000ULL + t.tv_nsec;
+	return (u64)t.tv_sec * 1000000000ULL + t.tv_nsec;
 }
 
 #endif
 
-#define TIME(_c, _x) { \
-  u64 start; \
-  u64 end; \
-        \
-  start = nsecs(); \
-  _x; \
-  end = nsecs(); \
-  cascade(_c, end-start); \
+#define TIME(_c, _x)	{	\
+	u64	start;		\
+	u64	end;		\
+				\
+	start = nsecs();	\
+	_x;			\
+	end = nsecs();	\
+	cascade(_c, end-start);	\
 }
 
 #endif

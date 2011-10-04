@@ -64,13 +64,14 @@
 #include <puny.h>
 #include <eprintf.h>
 
-int main (int argc, char *argv[]) {
-  int rc;
+int main (int argc, char *argv[])
+{
+	int	rc;
 
-  punyopt(argc, argv, NULL, NULL);
-  rc = rename(Option.file, Option.dest);
-  if (rc == -1) {
-    fatal("rename %s to %s:", Option.file, Option.dir);
-  }
-  return 0;
+	punyopt(argc, argv, NULL, NULL);
+	rc = rename(Option.file, Option.dest);
+	if (rc == -1) {
+		fatal("rename %s to %s:", Option.file, Option.dir);
+	}
+	return 0;
 }

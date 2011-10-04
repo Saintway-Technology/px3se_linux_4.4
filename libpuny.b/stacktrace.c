@@ -7,36 +7,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void stacktrace(void) {
-  enum { MAX_DEPTH = 20 };
-  void *trace[MAX_DEPTH];
-  char **messages = (char **)NULL;
-  int trace_size = 0;
-  int i;
+void stacktrace(void)
+{
+	enum { MAX_DEPTH = 20 };
+	void	*trace[MAX_DEPTH];
+	char	**messages = (char **)NULL;
+	int	trace_size = 0;
+	int	i;
 
-  trace_size = backtrace(trace, MAX_DEPTH);
-  messages = backtrace_symbols(trace, trace_size);
-  printf("Stack back trace:\n");
-  for (i = 0; i < trace_size; i++) {
-    printf("\t%s\n", messages[i]);
-  }
-  printf("\n");
-  free(messages);
+	trace_size = backtrace(trace, MAX_DEPTH);
+	messages = backtrace_symbols(trace, trace_size);
+	printf("Stack back trace:\n");
+	for (i = 0; i < trace_size; i++) {
+		printf("\t%s\n", messages[i]);
+	}
+	printf("\n");
+	free(messages);
 }
 
-void stacktrace_err(void) {
-  enum { MAX_DEPTH = 20 };
-  void *trace[MAX_DEPTH];
-  char **messages = (char **)NULL;
-  int trace_size = 0;
-  int i;
+void stacktrace_err(void)
+{
+	enum { MAX_DEPTH = 20 };
+	void	*trace[MAX_DEPTH];
+	char	**messages = (char **)NULL;
+	int	trace_size = 0;
+	int	i;
 
-  trace_size = backtrace(trace, MAX_DEPTH);
-  messages = backtrace_symbols(trace, trace_size);
-  fprintf(stderr, "Stack back trace:\n");
-  for (i = 0; i < trace_size; i++) {
-    fprintf(stderr, "\t%s\n", messages[i]);
-  }
-  fprintf(stderr, "\n");
-  free(messages);
+	trace_size = backtrace(trace, MAX_DEPTH);
+	messages = backtrace_symbols(trace, trace_size);
+	fprintf(stderr, "Stack back trace:\n");
+	for (i = 0; i < trace_size; i++) {
+		fprintf(stderr, "\t%s\n", messages[i]);
+	}
+	fprintf(stderr, "\n");
+	free(messages);
 }

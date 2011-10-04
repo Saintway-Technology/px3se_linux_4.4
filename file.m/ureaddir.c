@@ -75,77 +75,81 @@
 
 u64 Numfiles = 10000;
 
-void create_files (unsigned n) {
-  unsigned i;
-  char name[NAME_MAX+1];
-  int fd;
+void create_files (unsigned n)
+{
+	unsigned	i;
+	char		name[NAME_MAX+1];
+	int		fd;
 
-  for (i = 0; i < n; ++i) {
-    sprintf(name, "f%x", i);
-    fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
-    if (fd == -1) {
-      perror(name);
-      exit(1);
-    }
-    close(fd);
-  }
+	for (i = 0; i < n; ++i) {
+		sprintf(name, "f%x", i);
+		fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
+		if (fd == -1) {
+			perror(name);
+			exit(1);
+		}
+		close(fd);
+	}
 }
 
-bool myopt (int c) {
-  switch (c) {
-  case 'k':
-    Numfiles = strtoll(optarg, NULL, 0);
-    break;
-  default:
-    return FALSE;
-  }
-  return TRUE;
+bool myopt (int c)
+{
+	switch (c) {
+	case 'k':
+		Numfiles = strtoll(optarg, NULL, 0);
+		break;
+	default:
+		return FALSE;
+	}
+	return TRUE;
 }
 
-void usage (void) {
-  pr_usage("-d<directory> -k<num_files> -i<num_iterations> -l<loops>");
+void usage (void)
+{
+	pr_usage("-d<directory> -k<num_files> -i<num_iterations> -l<loops>");
 }
 
-int main (int argc, char *argv[]) {
-  struct dirent *de;
-  DIR *dir;
-  unsigned i, j;
-  unsigned n;
-  u64 l;
+int main (int argc, char *argv[])
+{
+	struct dirent	*de;
+	DIR		*dir;
+	unsigned	i, j;
+	unsigned	n;
+	u64		l;
 
-  punyopt(argc, argv, myopt, "k:");
-  n = Option.iterations;
-  mkdir(Option.dir, 0777);
-  chdirq(Option.dir);
-  create_files(Numfiles);
-  for (l = 0; l < Option.loops; l++) {
-    startTimer();
-    for (j = 0; j < n; ++j) {
-      dir = opendir(".");
-      if (!dir) {
-        perror(".");
-        exit(1);
-      }
-      for (i = 0;; ++i) {
-        de = readdir(dir);
-        if (!de) break;
-      }
-      closedir(dir);
-    }
-    stopTimer();
-    prTimer();
-    printf(" n=%d l=%lld\n", n, l);
-  }
-  return 0;
+	punyopt(argc, argv, myopt, "k:");
+	n = Option.iterations;
+	mkdir(Option.dir, 0777);
+	chdirq(Option.dir);
+	create_files(Numfiles);
+	for (l = 0; l < Option.loops; l++) {
+		startTimer();
+		for (j = 0; j < n; ++j) {
+			dir = opendir(".");
+			if (!dir) {
+				perror(".");
+				exit(1);
+			}
+			for (i = 0;; ++i) {
+				de = readdir(dir);
+				if (!de) break;
+			}
+			closedir(dir);
+		}
+		stopTimer();
+		prTimer();
+		printf(" n=%d l=%lld\n", n, l);
+	}
+	return 0;
 }
 
 /*
 printf("d_ino=%d d_off=%d d_reclen=%d d_type=%d d_name=%d off_t=%d\n",
-  sizeof(de->d_ino), sizeof(de->d_off), sizeof(de->d_reclen),
-  sizeof(de->d_type), sizeof(de->d_name), sizeof(off_t));
+	sizeof(de->d_ino), sizeof(de->d_off), sizeof(de->d_reclen),
+	sizeof(de->d_type), sizeof(de->d_name), sizeof(off_t));
 
 printf("d_ino=%llx d_off=%llx d_reclen=%d d_type=%x d_name=%s\n",
-  de->d_ino, de->d_off, de->d_reclen,
-  de->d_type, de->d_name);
+	de->d_ino, de->d_off, de->d_reclen,
+	de->d_type, de->d_name);
 printf("telldir=%lx\n", telldir(dir));
 */

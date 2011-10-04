@@ -65,40 +65,42 @@
 char BigChar[] = { 0xe0, 0x80, 0x80 };
 
 
-void usage (void) {
-  pr_usage("-f<file_name> -i<num_iterations> -l<loops>");
+void usage (void)
+{
+	pr_usage("-f<file_name> -i<num_iterations> -l<loops>");
 }
 
-int main (int argc, char *argv[]) {
-  char *name;
-  int fd;
-  int rc;
-  unsigned i;
-  unsigned n = 1000;
-  u64 l;
+int main (int argc, char *argv[])
+{
+	char		*name;
+	int		fd;
+	int		rc;
+	unsigned	i;
+	unsigned	n = 1000;
+	u64		l;
 
-  punyopt(argc, argv, NULL, NULL);
-  n = Option.iterations;
-  name = Option.file;
-  for (l = 0; l < Option.loops; l++) {
-    startTimer();
-    for (i = 0; i < n; ++i) {
-      fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
-      if (fd == -1) {
-        perror("open");
-        exit(1);
-      }
-      close(fd);
-      rc = unlink(name);
-      if (rc == -1) {
-        perror("unlink");
-        exit(1);
-      }
-    }
-    stopTimer();
-    prTimer();
-    printf("\n");
-  }
-  return 0;
+	punyopt(argc, argv, NULL, NULL);
+	n = Option.iterations;
+	name = Option.file;
+	for (l = 0; l < Option.loops; l++) {
+		startTimer();
+		for (i = 0; i < n; ++i) {
+			fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
+			if (fd == -1) {
+				perror("open");
+				exit(1);
+			}
+			close(fd);
+			rc = unlink(name);
+			if (rc == -1) {
+				perror("unlink");
+				exit(1);
+			}
+		}
+		stopTimer();
+		prTimer();
+		printf("\n");
+	}
+	return 0;
 }
 

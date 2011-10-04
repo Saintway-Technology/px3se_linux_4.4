@@ -21,21 +21,22 @@
 #include <puny.h>
 
 /* Quick test for monster seek followed by a write */
-int main (int argc, char *argv[]) {
-  int fd;
-  int rc;
+int main (int argc, char *argv[])
+{
+	int	fd;
+	int	rc;
 
-  punyopt(argc, argv, NULL, NULL);
-  fd = open(Option.file, O_RDWR | O_CREAT | O_TRUNC, 0666);
-  rc = lseek(fd, 0x1000000000LL, 0);
-  if (rc == -1) {
-    perror("lseek");
-    exit(2);
-  }
-  rc = write(fd, "hi", 2);
-  if (rc == -1) {
-    perror("write");
-    exit(2);
-  }
-  return 0;
+	punyopt(argc, argv, NULL, NULL);
+	fd = open(Option.file, O_RDWR | O_CREAT | O_TRUNC, 0666);
+	rc = lseek(fd, 0x1000000000LL, 0);
+	if (rc == -1) {
+		perror("lseek");
+		exit(2);
+	}
+	rc = write(fd, "hi", 2);
+	if (rc == -1) {
+		perror("write");
+		exit(2);
+	}
+	return 0;
 }

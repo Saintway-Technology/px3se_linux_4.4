@@ -161,17 +161,18 @@
 #include <unistd.h>
 #include <puny.h>
 
-int main (int argc, char *argv[], char *envp[]) {
-  int rc;
+int main (int argc, char *argv[], char *envp[])
+{
+	int	rc;
 
-  punyopt(argc, argv, NULL, NULL);
-  rc = execve(Option.file, argv, envp);
-  if (rc != 0)
-  {
-    perror("execve");
-    printf("execve=%d\n", rc);
-    exit(1);
-  }
-  return 0;
+	punyopt(argc, argv, NULL, NULL);
+	rc = execve(Option.file, argv, envp);
+	if (rc != 0)
+	{
+		perror("execve");
+		printf("execve=%d\n", rc);
+		exit(1);
+	}
+	return 0;
 }
 
