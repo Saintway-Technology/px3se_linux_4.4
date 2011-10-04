@@ -27,36 +27,34 @@
 #include <mystdlib.h>
 #include <puny.h>
 
-void usage (void)
-{
-	pr_usage("-f<file path> -i<num_iterations> -l<loops>");
+void usage (void) {
+  pr_usage("-f<file path> -i<num_iterations> -l<loops>");
 }
 
-int main (int argc, char *argv[])
-{
-	int		fd;
-	unsigned	i;
-	unsigned	n;
-	u64		l;
+int main (int argc, char *argv[]) {
+  int fd;
+  unsigned i;
+  unsigned n;
+  u64 l;
 
-	punyopt(argc, argv, NULL, NULL);
-	n = Option.iterations;
-	fd = creat(Option.file, 0760);
-	if (fd == -1) fatal(Option.file);
+  punyopt(argc, argv, NULL, NULL);
+  n = Option.iterations;
+  fd = creat(Option.file, 0760);
+  if (fd == -1) fatal(Option.file);
 
-	for (l = 0; l < Option.loops; l++) {
-		startTimer();
-		for (i = 0; i < n; ++i) {
-			fd = open(Option.file, O_RDONLY);
-			if (fd == -1) {
-				perror("open");
-				exit(1);
-			}
-			close(fd);
-		}
-		stopTimer();
-		prTimer();
-		printf("\n");
-	}
-	return 0;
+  for (l = 0; l < Option.loops; l++) {
+    startTimer();
+    for (i = 0; i < n; ++i) {
+      fd = open(Option.file, O_RDONLY);
+      if (fd == -1) {
+        perror("open");
+        exit(1);
+      }
+      close(fd);
+    }
+    stopTimer();
+    prTimer();
+    printf("\n");
+  }
+  return 0;
 }

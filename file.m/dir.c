@@ -174,71 +174,67 @@
 
 bool Wait = FALSE;
 
-void prDirentry (struct dirent *d)
-{
-	printf("\t%10llu %s\n", (u64)d->d_ino, d->d_name);
-	if (Wait) getchar();
+void prDirentry (struct dirent *d) {
+  printf("\t%10llu %s\n", (u64)d->d_ino, d->d_name);
+  if (Wait) getchar();
 }
 
-int doDirectory (char *name)
-{
-	DIR		*dir;
-	int		rc;
-	unsigned	i;
-	off_t		pos;
-	struct dirent	*d;
+int doDirectory (char *name) {
+  DIR *dir;
+  int rc;
+  unsigned i;
+  off_t pos;
+  struct dirent *d;
 
-	printf("%s:\n", name);
+  printf("%s:\n", name);
 
-	for (pos = 0;;) {
-		dir = opendir(name);
-		if (!dir) {
-			rc = errno;
-			fprintf(stderr,
-				"opendir:%s %s\n", name, strerror(errno));
-			return rc;
-		}
-		seekdir(dir, pos);
-		for (i = 0; i < 1; ++i) {
-			d = readdir(dir);
-			if (!d) {
-				closedir(dir);
-				return 0;
-			}
-			prDirentry(d);
-		}
-		pos = telldir(dir);
-		closedir(dir);
-	}
-	closedir(dir);
-	return 0;
+  for (pos = 0;;) {
+    dir = opendir(name);
+    if (!dir) {
+      rc = errno;
+      fprintf(stderr,
+        "opendir:%s %s\n", name, strerror(errno));
+      return rc;
+    }
+    seekdir(dir, pos);
+    for (i = 0; i < 1; ++i) {
+      d = readdir(dir);
+      if (!d) {
+        closedir(dir);
+        return 0;
+      }
+      prDirentry(d);
+    }
+    pos = telldir(dir);
+    closedir(dir);
+  }
+  closedir(dir);
+  return 0;
 }
 
-bool myopt (int c)
-{
-	switch (c) {
-	case 'w':
-		Wait = TRUE;
-		break;
-	default:
-		return FALSE;
-	}
-	return TRUE;
+bool myopt (int c) {
+  switch (c) {
+  case 'w':
+    Wait = TRUE;
+    break;
+  default:
+    return FALSE;
+  }
+  return TRUE;
 }
 
-int main (int argc, char *argv[])
-{
-	int	i;
-	int	rc;
+int main (int argc, char *argv[]) {
+  int i;
+  int rc;
 
-	punyopt(argc, argv, myopt, "w");
-	if (argc == optind) {
-		rc = doDirectory(Option.dir);
-		return rc;
-	}
-	for (i = optind; i < argc; ++i) {
-		rc = doDirectory(argv[i]);
-		if (rc != 0) return rc;
-	}
-	return 0;
+  punyopt(argc, argv, myopt, "w");
+  if (argc == optind) {
+    rc = doDirectory(Option.dir);
+    return rc;
+  }
+  for (i = optind; i < argc; ++i) {
+    rc = doDirectory(argv[i]);
+    if (rc != 0) return rc;
+  }
+  return 0;
 }

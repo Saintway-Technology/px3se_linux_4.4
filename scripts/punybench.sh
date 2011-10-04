@@ -28,8 +28,8 @@ loop=3
 
 
 af -f$file <<- HERE
-	a
-	HERE
+  a
+  HERE
 
 bigfile -f$file
 ##bigwrite -f$file
@@ -61,8 +61,8 @@ readdir -d$dir
 rename -f$file -e$dest
 rmtree -d$dir
 rw -f$file <<- HERE
-	12345
-	HERE
+  12345
+  HERE
 seek -f$file
 sparse -f$file
 bin/stat -f$file

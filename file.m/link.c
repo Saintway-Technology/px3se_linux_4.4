@@ -106,20 +106,19 @@
 
 #include <puny.h>
 
-int main (int argc, char *argv[])
-{
-	int	rc;
-	char	*src;
-	char	*dst;
+int main (int argc, char *argv[]) {
+  int rc;
+  char *src;
+  char *dst;
 
-	punyopt(argc, argv, NULL, NULL);
-	src = Option.file;
-	dst = Option.dest;
+  punyopt(argc, argv, NULL, NULL);
+  src = Option.file;
+  dst = Option.dest;
 
-	rc = link(src, dst);
-	if (rc == -1) {
-		perror(src);
-		exit(1);
-	}
-	return 0;
+  rc = link(src, dst);
+  if (rc == -1) {
+    perror(src);
+    exit(1);
+  }
+  return 0;
 }

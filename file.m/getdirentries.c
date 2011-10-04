@@ -62,63 +62,61 @@
 
 enum { BUF_SZ = 40 };
 
-void prDirentries (char *buf, int numBytes)
-{
-	struct dirent	*d;
-	int	i;
+void prDirentries (char *buf, int numBytes) {
+  struct dirent *d;
+  int i;
 
-	for (i = 0; i < numBytes; i += d->d_reclen) {
-		d = (struct dirent *)&buf[i];
-		printf("\t%10qu %s\n", (u64)d->d_ino, d->d_name);
-	}
+  for (i = 0; i < numBytes; i += d->d_reclen) {
+    d = (struct dirent *)&buf[i];
+    printf("\t%10qu %s\n", (u64)d->d_ino, d->d_name);
+  }
 }
 
-int doGetdirentries (char *name)	// Need to test getdirentries too.
+int doGetdirentries (char *name) // Need to test getdirentries too.
 {
-	int	fd;
-	int	rc;
-	char	buf[BUF_SZ];
-	off_t	base = 0;
+  int fd;
+  int rc;
+  char buf[BUF_SZ];
+  off_t base = 0;
 
-	printf("%s:\n", name);
+  printf("%s:\n", name);
 
-	fd = open(name, O_RDONLY);
-	if (fd == -1) {
-		rc = errno;
-		fprintf(stderr, "open:%s %s\n", name, strerror(errno));
-		return rc;
-	}
-	for (;;) {
-		lseek(fd, base, 0);
-		rc = getdirentries(fd, buf, BUF_SZ, &base);
-		base = lseek(fd, 0, 1);
-		if (rc == 0) break;
-		if (rc == -1) {
-			rc = errno;
-			fprintf(stderr, "getdirentries:%s %s\n",
-				name, strerror(errno));
-			close(fd);
-			return rc;
-		}
-		prDirentries(buf, rc);
-	}
-	close(fd);
-	return 0;
+  fd = open(name, O_RDONLY);
+  if (fd == -1) {
+    rc = errno;
+    fprintf(stderr, "open:%s %s\n", name, strerror(errno));
+    return rc;
+  }
+  for (;;) {
+    lseek(fd, base, 0);
+    rc = getdirentries(fd, buf, BUF_SZ, &base);
+    base = lseek(fd, 0, 1);
+    if (rc == 0) break;
+    if (rc == -1) {
+      rc = errno;
+      fprintf(stderr, "getdirentries:%s %s\n",
+        name, strerror(errno));
+      close(fd);
+      return rc;
+    }
+    prDirentries(buf, rc);
+  }
+  close(fd);
+  return 0;
 }
 
-int main (int argc, char *argv[])
-{
-	int		i;
-	int		rc;
+int main (int argc, char *argv[]) {
+  int i;
+  int rc;
 
-	punyopt(argc, argv, NULL, NULL);
-	if (argc == optind) {
-		rc = doGetdirentries(Option.dir);
-		return rc;
-	}
-	for (i = optind; i < argc; ++i) {
-		rc = doGetdirentries(argv[i]);
-		if (rc != 0) return rc;
-	}
-	return 0;
+  punyopt(argc, argv, NULL, NULL);
+  if (argc == optind) {
+    rc = doGetdirentries(Option.dir);
+    return rc;
+  }
+  for (i = optind; i < argc; ++i) {
+    rc = doGetdirentries(argv[i]);
+    if (rc != 0) return rc;
+  }
+  return 0;
 }

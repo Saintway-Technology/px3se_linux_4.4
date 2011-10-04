@@ -46,21 +46,20 @@
 
 #include <puny.h>
 
-int main (int argc, char *argv[])
-{
-	int		rc;
+int main (int argc, char *argv[]) {
+  int rc;
 
-	punyopt(argc, argv, NULL, NULL);
-	if (argc != 2) {
-		fprintf(stderr, "unlink file\n");
-		return 1;
-	}
-	rc = unlink(Option.file);
-	if (rc == -1) {
-		rc = errno;
-		fprintf(stderr, "unlink %s: %s\n",
-				Option.file, strerror(errno));
-		return rc;
-	}
-	return 0;
+  punyopt(argc, argv, NULL, NULL);
+  if (argc != 2) {
+    fprintf(stderr, "unlink file\n");
+    return 1;
+  }
+  rc = unlink(Option.file);
+  if (rc == -1) {
+    rc = errno;
+    fprintf(stderr, "unlink %s: %s\n",
+        Option.file, strerror(errno));
+    return rc;
+  }
+  return 0;
 }

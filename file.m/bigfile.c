@@ -20,39 +20,38 @@
 
 #include <puny.h>
 
-#define BUF_SIZE	(1<<16)
+#define BUF_SIZE (1<<16)
 
-int	Buf[BUF_SIZE];
+int Buf[BUF_SIZE];
 
-#define NUM_BUFS	(((1<<30) + (1<<29)) / sizeof(Buf))
+#define NUM_BUFS (((1<<30) + (1<<29)) / sizeof(Buf))
 
-int main (int argc, char *argv[])
-{
-	int	fd;
-	ssize_t	bytes;
-	long	i;
+int main (int argc, char *argv[]) {
+  int fd;
+  ssize_t bytes;
+  long i;
 
-	punyopt(argc, argv, NULL, NULL);
-	for (i = 0; i < BUF_SIZE; ++i)
-	{
-		Buf[i] = random();
-	}
-	fd = open(Option.file, O_RDWR | O_CREAT | O_TRUNC, 0666);
-	if (fd == -1)
-	{
-		perror("open");
-		exit(1);
-	}
-	for (i = 0; i < NUM_BUFS; ++i)
-	{
-		bytes = write(fd, Buf, sizeof(Buf));
-		if (bytes == -1)
-		{
-			perror("write");
-			fprintf(stderr, "buffers written %ld\n", i);
-			exit(1);
-		}
-	}
-	close(fd);
-	return 0;
+  punyopt(argc, argv, NULL, NULL);
+  for (i = 0; i < BUF_SIZE; ++i)
+  {
+    Buf[i] = random();
+  }
+  fd = open(Option.file, O_RDWR | O_CREAT | O_TRUNC, 0666);
+  if (fd == -1)
+  {
+    perror("open");
+    exit(1);
+  }
+  for (i = 0; i < NUM_BUFS; ++i)
+  {
+    bytes = write(fd, Buf, sizeof(Buf));
+    if (bytes == -1)
+    {
+      perror("write");
+      fprintf(stderr, "buffers written %ld\n", i);
+      exit(1);
+    }
+  }
+  close(fd);
+  return 0;
 }

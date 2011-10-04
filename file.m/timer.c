@@ -22,117 +22,110 @@ enum { NUM_TIMERS = 2048 };
 
 typedef struct Timer_s
 {
-	void	*key;
-	struct timeval	start;
-	struct timeval	delta;
+  void *key;
+  struct timeval start;
+  struct timeval delta;
 } Timer_s;
 
-Timer_s		Timers[NUM_TIMERS];
-Timer_s		*NextTimer = Timers;
-unsigned	TimerNotFound;
+Timer_s Timers[NUM_TIMERS];
+Timer_s *NextTimer = Timers;
+unsigned TimerNotFound;
 
-void startTimer (void *key)
-{
-	Timer_s	*timer;
+void startTimer (void *key) {
+  Timer_s *timer;
 
-	timer = NextTimer++;
-	if (NextTimer == &Timers[NUM_TIMERS])
-	{
-		NextTimer = Timers;
-	}
-	timer->key = key;
-	gettimeofday( &timer->start, NULL);
+  timer = NextTimer++;
+  if (NextTimer == &Timers[NUM_TIMERS])
+  {
+    NextTimer = Timers;
+  }
+  timer->key = key;
+  gettimeofday( &timer->start, NULL);
 }
 
-void endTimer (void *key)
-{
-	struct timeval	end;
-	Timer_s			*timer;
+void endTimer (void *key) {
+  struct timeval end;
+  Timer_s *timer;
 
-	gettimeofday( &end, NULL);
-	for (timer = NextTimer - 1; timer >= Timers; --timer)
-	{
-		if (timer->key == key)
-		{
-			goto found;
-		}
-	}
-	for (timer = &Timers[NUM_TIMERS - 1]; timer != NextTimer; --timer)
-	{
-		if (timer->key == key)
-		{
-			goto found;
-		}
-	}
-	printf("Timer not found for key = %p\n", key);
-	++TimerNotFound;
-	return;
+  gettimeofday( &end, NULL);
+  for (timer = NextTimer - 1; timer >= Timers; --timer)
+  {
+    if (timer->key == key)
+    {
+      goto found;
+    }
+  }
+  for (timer = &Timers[NUM_TIMERS - 1]; timer != NextTimer; --timer)
+  {
+    if (timer->key == key)
+    {
+      goto found;
+    }
+  }
+  printf("Timer not found for key = %p\n", key);
+  ++TimerNotFound;
+  return;
 
 found:
-	if (end.tv_usec < timer->start.tv_usec)
-	{
-			--end.tv_sec;
-			end.tv_usec += 1000000;
-	}
-	timer->delta.tv_sec  = end.tv_sec - timer->start.tv_sec;
-	timer->delta.tv_usec = end.tv_usec - timer->start.tv_usec;
+  if (end.tv_usec < timer->start.tv_usec)
+  {
+      --end.tv_sec;
+      end.tv_usec += 1000000;
+  }
+  timer->delta.tv_sec  = end.tv_sec - timer->start.tv_sec;
+  timer->delta.tv_usec = end.tv_usec - timer->start.tv_usec;
 }
 
-static void printTimer (Timer_s *timer)
-{
-	if (timer->key == 0) return;
-	printf("%8p: start=%ld.%.6ld delta=%ld.%.6ld\n", timer->key,
-				timer->start.tv_sec, timer->start.tv_usec,
-				timer->delta.tv_sec, timer->delta.tv_usec);
+static void printTimer (Timer_s *timer) {
+  if (timer->key == 0) return;
+  printf("%8p: start=%ld.%.6ld delta=%ld.%.6ld\n", timer->key,
+        timer->start.tv_sec, timer->start.tv_usec,
+        timer->delta.tv_sec, timer->delta.tv_usec);
 }
 
-void dumpTimersReverse (void)
-{
-	Timer_s			*timer;
+void dumpTimersReverse (void) {
+  Timer_s *timer;
 
-	for (timer = NextTimer - 1; timer >= Timers; --timer)
-	{
-		printTimer(timer);
-	}
-	for (timer = &Timers[NUM_TIMERS - 1]; timer != NextTimer; --timer)
-	{
-		printTimer(timer);
-	}
+  for (timer = NextTimer - 1; timer >= Timers; --timer)
+  {
+    printTimer(timer);
+  }
+  for (timer = &Timers[NUM_TIMERS - 1]; timer != NextTimer; --timer)
+  {
+    printTimer(timer);
+  }
 }
 
-void dumpTimers (void)
-{
-	Timer_s			*timer;
+void dumpTimers (void) {
+  Timer_s *timer;
 
-	for (timer = NextTimer; timer < &Timers[NUM_TIMERS]; ++timer)
-	{
-		printTimer(timer);
-	}
-	for (timer = Timers; timer != NextTimer; ++timer)
-	{
-		printTimer(timer);
-	}
+  for (timer = NextTimer; timer < &Timers[NUM_TIMERS]; ++timer)
+  {
+    printTimer(timer);
+  }
+  for (timer = Timers; timer != NextTimer; ++timer)
+  {
+    printTimer(timer);
+  }
 }
 
-unsigned long urand (unsigned long upper)
-{
-	return upper ? (random() % upper) : 0;
+unsigned long urand (unsigned long upper) {
+  return upper ? (random() % upper) : 0;
 }
 
-int main (int argc, char *argv[])
-{
-	void	*key;
-	int	i;
+int main (int argc, char *argv[]) {
+  void *key;
+  int i;
 
-	punyopt(argc, argv, NULL, NULL);
-	for (i = 0; i < 10; ++i)
-	{
-		key = (void *)urand(200000);
+  punyopt(argc, argv, NULL, NULL);
+  for (i = 0; i < 10; ++i)
+  {
+    key = (void *)urand(200000);
 
-		startTimer(key);
-		usleep((long)key);
-		endTimer(key);
-	}
-	dumpTimers();
-	return 0;
+    startTimer(key);
+    usleep((long)key);
+    endTimer(key);
+  }
+  dumpTimers();
+  return 0;
 }

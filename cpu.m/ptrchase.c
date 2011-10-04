@@ -82,8 +82,7 @@ static void **init_seq_pointers (void **p, u64 num_pointers) {
   return head;
 }
 
-void chase (const char *label, void **head, u64 num_pointers, u64 iter)
-{
+void chase (const char *label, void **head, u64 num_pointers, u64 iter) {
   int i;
   u64 start;
   u64 finish;
@@ -147,8 +146,7 @@ void *RunTest (void *arg) {
   return NULL;
 }
 
-void StartThreads (void)
-{
+void StartThreads (void) {
   pthread_t *thread;
   unsigned i;
   int rc;

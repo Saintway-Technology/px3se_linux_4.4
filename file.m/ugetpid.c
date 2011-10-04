@@ -28,33 +28,31 @@
 #include <eprintf.h>
 #include <puny.h>
 
-void usage (void)
-{
-	pr_usage("-i<num_iterations> -l<loops>");
+void usage (void) {
+  pr_usage("-i<num_iterations> -l<loops>");
 }
 
-int main (int argc, char *argv[])
-{
-	unsigned	i;
-	unsigned	n;
-	pid_t		pid;
-	u64		l;
+int main (int argc, char *argv[]) {
+  unsigned i;
+  unsigned n;
+  pid_t pid;
+  u64 l;
 
-	punyopt(argc, argv, NULL, NULL);
-	n = Option.iterations;
-	for (l = 0; l < Option.loops; l++) {
-		startTimer();
-		for (i = 0; i < n; ++i) {
-			pid = getpid();
-			if (!pid) {
-				fprintf(stderr, "getpid is zero\n");
-				exit(1);
-			}
-		}
-		stopTimer();
-		printf("n=%d ", n);
-		prTimer();
-		printf("\n");
-	}
-	return 0;
+  punyopt(argc, argv, NULL, NULL);
+  n = Option.iterations;
+  for (l = 0; l < Option.loops; l++) {
+    startTimer();
+    for (i = 0; i < n; ++i) {
+      pid = getpid();
+      if (!pid) {
+        fprintf(stderr, "getpid is zero\n");
+        exit(1);
+      }
+    }
+    stopTimer();
+    printf("n=%d ", n);
+    prTimer();
+    printf("\n");
+  }
+  return 0;
 }

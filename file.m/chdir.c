@@ -103,17 +103,16 @@
  * Linux                           2007-07-26                          CHDIR(2)
  */
 
-int main (int argc, char *argv[])
-{
-	int		rc;
+int main (int argc, char *argv[]) {
+  int rc;
 
-	punyopt(argc, argv, NULL, NULL);
-	rc = chdir(Option.dir);
-	if (rc == -1) {
-		rc = errno;
-		fprintf(stderr, "chdir %s: %s\n",
-				argv[1], strerror(errno));
-		return rc;
-	}
-	return 0;
+  punyopt(argc, argv, NULL, NULL);
+  rc = chdir(Option.dir);
+  if (rc == -1) {
+    rc = errno;
+    fprintf(stderr, "chdir %s: %s\n",
+        argv[1], strerror(errno));
+    return rc;
+  }
+  return 0;
 }

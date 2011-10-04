@@ -23,48 +23,46 @@
 #include <eprintf.h>
 #include <puny.h>
 
-char	Data[] = "This is a test";
-char	Buf[sizeof(Data)];
+char Data[] = "This is a test";
+char Buf[sizeof(Data)];
 
-void prompt (char *m)
-{
-	printf("%s", m);
-	getchar();
+void prompt (char *m) {
+  printf("%s", m);
+  getchar();
 }
 
-int main (int argc, char *argv[])
-{
-	int	fd;
-	int	rc;
-	char	*name;
-	ssize_t	bytes;
+int main (int argc, char *argv[]) {
+  int fd;
+  int rc;
+  char *name;
+  ssize_t bytes;
 
-	punyopt(argc, argv, NULL, NULL);
-	name = Option.file;
+  punyopt(argc, argv, NULL, NULL);
+  name = Option.file;
 
-	prompt("open");
-	fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
-	if (fd == -1) eprintf("open %s:", name);
+  prompt("open");
+  fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
+  if (fd == -1) eprintf("open %s:", name);
 
-	prompt("write");
-	bytes = write(fd, Data, sizeof(Data));
-	if (bytes == -1) eprintf("write %s:", name);
+  prompt("write");
+  bytes = write(fd, Data, sizeof(Data));
+  if (bytes == -1) eprintf("write %s:", name);
 
-	prompt("lseek");
-	rc = lseek(fd, 0, 0);
-	if (rc == -1) eprintf("lseek %s:", name);
+  prompt("lseek");
+  rc = lseek(fd, 0, 0);
+  if (rc == -1) eprintf("lseek %s:", name);
 
-	prompt("read");
-	bytes = read(fd, Buf, sizeof(Buf));
-	if (bytes == -1) eprintf("read %s:", name);
+  prompt("read");
+  bytes = read(fd, Buf, sizeof(Buf));
+  if (bytes == -1) eprintf("read %s:", name);
 
-	if (bytes != sizeof(Buf)) eprintf("only read %d bytes of %d",
-						bytes, sizeof(Buf));
+  if (bytes != sizeof(Buf)) eprintf("only read %d bytes of %d",
+            bytes, sizeof(Buf));
 
-	if (strcmp(Data, Buf) != 0) eprintf("didn't read what I wrote %s!=%s",
-						Data, Buf);
+  if (strcmp(Data, Buf) != 0) eprintf("didn't read what I wrote %s!=%s",
+            Data, Buf);
 
-	prompt("close");
-	close(fd);
-	return 0;
+  prompt("close");
+  close(fd);
+  return 0;
 }

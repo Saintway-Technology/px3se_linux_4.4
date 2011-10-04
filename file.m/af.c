@@ -20,20 +20,19 @@
 #include <eprintf.h>
 #include <puny.h>
 
-int main (int argc, char *argv[])
-{
-	int	fd;
-	int	rc;
+int main (int argc, char *argv[]) {
+  int fd;
+  int rc;
 
-	punyopt(argc, argv, NULL, NULL);
-	fd = open(Option.file, O_RDWR | O_CREAT | O_TRUNC, 0666);
-	if (fd == -1) {
-		eprintf("Couldn't create %s:", Option.file);
-	}
-	rc = fcntl(fd, F_SETLEASE, F_WRLCK);
-	if (rc == -1) {
-		eprintf("parent fcntl:");
-	}
-	getchar();
-	return 0;
+  punyopt(argc, argv, NULL, NULL);
+  fd = open(Option.file, O_RDWR | O_CREAT | O_TRUNC, 0666);
+  if (fd == -1) {
+    eprintf("Couldn't create %s:", Option.file);
+  }
+  rc = fcntl(fd, F_SETLEASE, F_WRLCK);
+  if (rc == -1) {
+    eprintf("parent fcntl:");
+  }
+  getchar();
+  return 0;
 }

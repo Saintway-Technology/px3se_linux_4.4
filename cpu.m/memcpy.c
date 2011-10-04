@@ -162,8 +162,7 @@ void *RunTest (void *arg) {
   return NULL;
 }
 
-void StartThreads (void)
-{
+void StartThreads (void) {
   pthread_t *thread;
   unsigned i;
   int rc;

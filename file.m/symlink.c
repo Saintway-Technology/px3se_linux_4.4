@@ -109,35 +109,33 @@
 #include <mystdlib.h>
 #include <puny.h>
 
-char *gen_name (int len)
-{
-	static char file_name_char[] =  "abcdefghijklmnopqrstuvwxyz"
-					"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-					"_0123456789";
-	unsigned	i;
-	char		*c;
+char *gen_name (int len) {
+  static char file_name_char[] =  "abcdefghijklmnopqrstuvwxyz"
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+          "_0123456789";
+  unsigned i;
+  char *c;
 
-	c = ezalloc(len);
+  c = ezalloc(len);
 
-	for (i = 0; i < len - 1; i++) {
-		c[i] = file_name_char[urand(sizeof(file_name_char)-1)];
-	}
-	c[i] = '\0';
+  for (i = 0; i < len - 1; i++) {
+    c[i] = file_name_char[urand(sizeof(file_name_char)-1)];
+  }
+  c[i] = '\0';
 
-	return c;
+  return c;
 }
 
-int main (int argc, char *argv[])
-{
-	int	rc;
-	char	*oldpath;
-	char	*newpath;
+int main (int argc, char *argv[]) {
+  int rc;
+  char *oldpath;
+  char *newpath;
 
-	punyopt(argc, argv, NULL, NULL);
-	newpath = Option.dest;
-	oldpath = gen_name(Option.name_size);
-	rc = symlink(oldpath, newpath);
-	if (rc) eprintf("symlink %s -> %s failed:", oldpath, newpath);
+  punyopt(argc, argv, NULL, NULL);
+  newpath = Option.dest;
+  oldpath = gen_name(Option.name_size);
+  rc = symlink(oldpath, newpath);
+  if (rc) eprintf("symlink %s -> %s failed:", oldpath, newpath);
 
-	return 0;
+  return 0;
 }

@@ -276,16 +276,15 @@
  * Linux                       1999-06-03                    OPEN(2)
  */
 
-int main (int argc, char *argv[])
-{
-	int	fd;
+int main (int argc, char *argv[]) {
+  int fd;
 
-	punyopt(argc, argv, NULL, NULL);
-	fd = creat(Option.file, 0666);
-	if (fd == -1) {
-		perror(Option.file);
-		exit(1);
-	}
-	close(fd);
-	return 0;
+  punyopt(argc, argv, NULL, NULL);
+  fd = creat(Option.file, 0666);
+  if (fd == -1) {
+    perror(Option.file);
+    exit(1);
+  }
+  close(fd);
+  return 0;
 }

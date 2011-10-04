@@ -24,87 +24,83 @@
 #include <eprintf.h>
 
 struct {
-	u64	num_files;
+  u64 num_files;
 } Inst;
 
-char	Buf[4096];
+char Buf[4096];
 
-static void init_buf (void)
-{
-	static char	rnd_char[] = "abcdefghijklmnopqrstuvwxyz\n";
-	int		i;
+static void init_buf (void) {
+  static char rnd_char[] = "abcdefghijklmnopqrstuvwxyz\n";
+  int i;
 
-	for (i = 0; i <  sizeof(Buf); i++) {
-		Buf[i] = rnd_char[urand(sizeof(rnd_char)-1)];
-	}
+  for (i = 0; i <  sizeof(Buf); i++) {
+    Buf[i] = rnd_char[urand(sizeof(rnd_char)-1)];
+  }
 }
 
-static int fill (int fd, u64 size)
-{
-	int	n;
-	int	rc;
+static int fill (int fd, u64 size) {
+  int n;
+  int rc;
 
-	for (n = sizeof(Buf); size; size -= n) {
-		if (n > size) {
-			n = size;
-		}
-		rc = write(fd, Buf, n);
-		if (rc == -1) {
-			if (errno == ENOSPC) {
-				return errno;
-			}
-			return -1;
-		}
-	}
-	return 0;
+  for (n = sizeof(Buf); size; size -= n) {
+    if (n > size) {
+      n = size;
+    }
+    rc = write(fd, Buf, n);
+    if (rc == -1) {
+      if (errno == ENOSPC) {
+        return errno;
+      }
+      return -1;
+    }
+  }
+  return 0;
 }
 
-static int create_file (char *name, u64 size)
-{
-	int	fd;
-	int	rc;
+static int create_file (char *name, u64 size) {
+  int fd;
+  int rc;
 
-	fd = creat(name, 0666);
-	if (fd == -1) {
-		if (errno == ENOSPC) {
-			return errno;
-		}
-		eprintf("creat \"%s\" :", name);
-		return -1;
-	}
-	++Inst.num_files;
-	rc = fill(fd, size);
-	if (rc) {
-		if (errno == ENOSPC) {
-			return errno;
-		}
-		eprintf("fill \"%s\" :", name);
-	}
-	close(fd);
-	return 0;
+  fd = creat(name, 0666);
+  if (fd == -1) {
+    if (errno == ENOSPC) {
+      return errno;
+    }
+    eprintf("creat \"%s\" :", name);
+    return -1;
+  }
+  ++Inst.num_files;
+  rc = fill(fd, size);
+  if (rc) {
+    if (errno == ENOSPC) {
+      return errno;
+    }
+    eprintf("fill \"%s\" :", name);
+  }
+  close(fd);
+  return 0;
 }
 
-int main (int argc, char *argv[])
-{
-	char	name[16];
-	int	i;
-	int	rc;
+int main (int argc, char *argv[]) {
+  char name[16];
+  int i;
+  int rc;
 
-	init_buf();
+  init_buf();
 
-	for (i = 0; ; i++) {
-		snprintf(name, sizeof(name)-1, "%u", i);
-		rc = create_file(name, 1);
-		if (rc) break;
-	}
-	if (rc != ENOSPC) {
-		perror("Didn't run out of space");
-		return 2;
-	}
-	for (i = 0; ; i += 2) {
-		snprintf(name, sizeof(name)-1, "%u", i);
-		rc = unlink(name);
-		if (rc) break;
-	}
-	return 0;
+  for (i = 0; ; i++) {
+    snprintf(name, sizeof(name)-1, "%u", i);
+    rc = create_file(name, 1);
+    if (rc) break;
+  }
+  if (rc != ENOSPC) {
+    perror("Didn't run out of space");
+    return 2;
+  }
+  for (i = 0; ; i += 2) {
+    snprintf(name, sizeof(name)-1, "%u", i);
+    rc = unlink(name);
+    if (rc) break;
+  }
+  return 0;
 }

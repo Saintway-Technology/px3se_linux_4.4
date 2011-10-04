@@ -16,16 +16,16 @@
  */
 
 typedef struct {
-	volatile unsigned int slock;
+  volatile unsigned int slock;
 } raw_spinlock_t;
 
-#define __RAW_SPIN_LOCK_UNLOCKED	{ 1 }
+#define __RAW_SPIN_LOCK_UNLOCKED { 1 }
 
 typedef struct {
-	volatile unsigned int lock;
+  volatile unsigned int lock;
 } raw_rwlock_t;
 
-#define __RAW_RW_LOCK_UNLOCKED		{ RW_LOCK_BIAS }
+#define __RAW_RW_LOCK_UNLOCKED { RW_LOCK_BIAS }
 
 /*********************/
 
@@ -49,54 +49,51 @@ typedef struct {
 /*********************/
 
 #define __raw_spin_is_locked(x) \
-		(*(volatile signed int *)(&(x)->slock) <= 0)
+    (*(volatile signed int *)(&(x)->slock) <= 0)
 
 #define __raw_spin_lock_string \
-	"\n1:\t" \
-	"lock ; decl %0\n\t" \
-	"js 2f\n" \
-	LOCK_SECTION_START("") \
-	"2:\t" \
-	"rep;nop\n\t" \
-	"cmpl $0,%0\n\t" \
-	"jle 2b\n\t" \
-	"jmp 1b\n" \
-	LOCK_SECTION_END
+  "\n1:\t" \
+  "lock ; decl %0\n\t" \
+  "js 2f\n" \
+  LOCK_SECTION_START("") \
+  "2:\t" \
+  "rep;nop\n\t" \
+  "cmpl $0,%0\n\t" \
+  "jle 2b\n\t" \
+  "jmp 1b\n" \
+  LOCK_SECTION_END
 
 #define __raw_spin_unlock_string \
-	"movl $1,%0" \
-		:"=m" (lock->slock) : : "memory"
+  "movl $1,%0" \
+    :"=m" (lock->slock) : : "memory"
 
-static inline void __raw_spin_lock(raw_spinlock_t *lock)
-{
-	__asm__ __volatile__(
-		__raw_spin_lock_string
-		:"=m" (lock->slock) : : "memory");
+static inline void __raw_spin_lock(raw_spinlock_t *lock) {
+  __asm__ __volatile__(
+    __raw_spin_lock_string
+    :"=m" (lock->slock) : : "memory");
 }
 
 #define __raw_spin_lock_flags(lock, flags) __raw_spin_lock(lock)
 
-static inline int __raw_spin_trylock(raw_spinlock_t *lock)
-{
-	int oldval;
+static inline int __raw_spin_trylock(raw_spinlock_t *lock) {
+  int oldval;
 
-	__asm__ __volatile__(
-		"xchgl %0,%1"
-		:"=q" (oldval), "=m" (lock->slock)
-		:"0" (0) : "memory");
+  __asm__ __volatile__(
+    "xchgl %0,%1"
+    :"=q" (oldval), "=m" (lock->slock)
+    :"0" (0) : "memory");
 
-	return oldval > 0;
+  return oldval > 0;
 }
 
-static inline void __raw_spin_unlock(raw_spinlock_t *lock)
-{
-	__asm__ __volatile__(
-		__raw_spin_unlock_string
-	);
+static inline void __raw_spin_unlock(raw_spinlock_t *lock) {
+  __asm__ __volatile__(
+    __raw_spin_unlock_string
+  );
 }
 
 #define __raw_spin_unlock_wait(lock) \
-	do { while (__raw_spin_is_locked(lock)) cpu_relax(); } while (0)
+  do { while (__raw_spin_is_locked(lock)) cpu_relax(); } while (0)
 
 /*
  * Read-write spinlocks, allowing multiple readers
@@ -119,51 +116,45 @@ static inline void __raw_spin_unlock(raw_spinlock_t *lock)
  * the helpers are in arch/i386/kernel/semaphore.c
  */
 
-#define __raw_read_can_lock(x)		((int)(x)->lock > 0)
-#define __raw_write_can_lock(x)		((x)->lock == RW_LOCK_BIAS)
+#define __raw_read_can_lock(x) ((int)(x)->lock > 0)
+#define __raw_write_can_lock(x) ((x)->lock == RW_LOCK_BIAS)
 
-static inline void __raw_read_lock(raw_rwlock_t *rw)
-{
-	__build_read_lock(rw, "__read_lock_failed");
+static inline void __raw_read_lock(raw_rwlock_t *rw) {
+  __build_read_lock(rw, "__read_lock_failed");
 }
 
-static inline void __raw_write_lock(raw_rwlock_t *rw)
-{
-	__build_write_lock(rw, "__write_lock_failed");
+static inline void __raw_write_lock(raw_rwlock_t *rw) {
+  __build_write_lock(rw, "__write_lock_failed");
 }
 
-static inline int __raw_read_trylock(raw_rwlock_t *lock)
-{
-	atomic_t *count = (atomic_t *)lock;
-	atomic_dec(count);
-	if (atomic_read(count) >= 0)
-		return 1;
-	atomic_inc(count);
-	return 0;
+static inline int __raw_read_trylock(raw_rwlock_t *lock) {
+  atomic_t *count = (atomic_t *)lock;
+  atomic_dec(count);
+  if (atomic_read(count) >= 0)
+    return 1;
+  atomic_inc(count);
+  return 0;
 }
 
-static inline int __raw_write_trylock(raw_rwlock_t *lock)
-{
-	atomic_t *count = (atomic_t *)lock;
-	if (atomic_sub_and_test(RW_LOCK_BIAS, count))
-		return 1;
-	atomic_add(RW_LOCK_BIAS, count);
-	return 0;
+static inline int __raw_write_trylock(raw_rwlock_t *lock) {
+  atomic_t *count = (atomic_t *)lock;
+  if (atomic_sub_and_test(RW_LOCK_BIAS, count))
+    return 1;
+  atomic_add(RW_LOCK_BIAS, count);
+  return 0;
 }
 
-static inline void __raw_read_unlock(raw_rwlock_t *rw)
-{
-	asm volatile("lock ; incl %0" :"=m" (rw->lock) : : "memory");
+static inline void __raw_read_unlock(raw_rwlock_t *rw) {
+  asm volatile("lock ; incl %0" :"=m" (rw->lock) : : "memory");
 }
 
-static inline void __raw_write_unlock(raw_rwlock_t *rw)
-{
-	asm volatile("lock ; addl $" RW_LOCK_BIAS_STR ",%0"
-				: "=m" (rw->lock) : : "memory");
+static inline void __raw_write_unlock(raw_rwlock_t *rw) {
+  asm volatile("lock ; addl $" RW_LOCK_BIAS_STR ",%0"
+        : "=m" (rw->lock) : : "memory");
 }
 
-#define _raw_spin_relax(lock)	cpu_relax()
-#define _raw_read_relax(lock)	cpu_relax()
-#define _raw_write_relax(lock)	cpu_relax()
+#define _raw_spin_relax(lock) cpu_relax()
+#define _raw_read_relax(lock) cpu_relax()
+#define _raw_write_relax(lock) cpu_relax()
 
 #endif /* __ASM_SPINLOCK_H */

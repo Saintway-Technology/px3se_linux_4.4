@@ -17,20 +17,19 @@
 
 #include <puny.h>
 
-int main (int argc, char *argv[])
-{
-	int	i;
-	long	x;
-	u64	l;
+int main (int argc, char *argv[]) {
+  int i;
+  long x;
+  u64 l;
 
-	punyopt(argc, argv, NULL, NULL);
-	for (l = 0; l < Option.loops; l++) {
-		for (i = 0; i < Option.iterations; ++i) {
-			x = exp_dist(1<<10);
-			q_sum(x);
-		}
-		pr_sum("exp dist");
-		printf("\n");
-	}
-	return 0;
+  punyopt(argc, argv, NULL, NULL);
+  for (l = 0; l < Option.loops; l++) {
+    for (i = 0; i < Option.iterations; ++i) {
+      x = exp_dist(1<<10);
+      q_sum(x);
+    }
+    pr_sum("exp dist");
+    printf("\n");
+  }
+  return 0;
 }

@@ -110,49 +110,46 @@
 #include <eprintf.h>
 #include <puny.h>
 
-void dump_list (char *list, ssize_t size)
-{
-	int	c;
-	int	i;
-	int	first = 1;
+void dump_list (char *list, ssize_t size) {
+  int c;
+  int i;
+  int first = 1;
 
-	for (i = 0; i < size; i++) {
-		c = list[i];
+  for (i = 0; i < size; i++) {
+    c = list[i];
 
-		if (c) {
-			if (first) {
-				putchar('\t');
-				first = 0;
-			}
-			putchar(c);
-		} else {
-			putchar('\n');
-			first = 1;
-		}
-	}
+    if (c) {
+      if (first) {
+        putchar('\t');
+        first = 0;
+      }
+      putchar(c);
+    } else {
+      putchar('\n');
+      first = 1;
+    }
+  }
 }
 
-void usage (void)
-{
-	pr_usage("-f<file>");
+void usage (void) {
+  pr_usage("-f<file>");
 }
 
-char	List[1<<17];
+char List[1<<17];
 
-int main (int argc, char *argv[])
-{
-	ssize_t	size;
+int main (int argc, char *argv[]) {
+  ssize_t size;
 
-	punyopt(argc, argv, NULL, NULL);
+  punyopt(argc, argv, NULL, NULL);
 
-	size = listxattr(Option.file, List, sizeof(List));
-	if (size == -1) {
-		perror(Option.file);
-		exit(2);
-	}
+  size = listxattr(Option.file, List, sizeof(List));
+  if (size == -1) {
+    perror(Option.file);
+    exit(2);
+  }
 
-	printf("xattrs for %s:\n", Option.file);
-	dump_list(List, size);
+  printf("xattrs for %s:\n", Option.file);
+  dump_list(List, size);
 
-	return 0;
+  return 0;
 }

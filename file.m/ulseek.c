@@ -28,37 +28,35 @@
 #include <eprintf.h>
 #include <puny.h>
 
-void usage (void)
-{
-	pr_usage("-f<file_name> -i<num_iterations> -l<loops>");
+void usage (void) {
+  pr_usage("-f<file_name> -i<num_iterations> -l<loops>");
 }
 
-int main (int argc, char *argv[])
-{
-	int		fd;
-	unsigned	i;
-	unsigned	n;
-	off_t		rc;
-	u64		l;
+int main (int argc, char *argv[]) {
+  int fd;
+  unsigned i;
+  unsigned n;
+  off_t rc;
+  u64 l;
 
-	punyopt(argc, argv, NULL, NULL);
-	n = Option.iterations;
-	fd = open(Option.file, O_RDWR | O_CREAT | O_TRUNC, 0666);
-	for (l = 0; l < Option.loops; l++) {
-		startTimer();
-		for (i = 0; i < n; ++i) {
-			rc = lseek(fd, i, 0);
-			if (rc != i) {
-				fprintf(stderr, "lseek offset=%d rc=%lld\n",
-					i, (s64)rc);
-				exit(1);
-			}
-		}
-		stopTimer();
-		printf("n=%d ", n);
-		prTimer();
-		printf("\n");
-	}
-	close(fd);
-	return 0;
+  punyopt(argc, argv, NULL, NULL);
+  n = Option.iterations;
+  fd = open(Option.file, O_RDWR | O_CREAT | O_TRUNC, 0666);
+  for (l = 0; l < Option.loops; l++) {
+    startTimer();
+    for (i = 0; i < n; ++i) {
+      rc = lseek(fd, i, 0);
+      if (rc != i) {
+        fprintf(stderr, "lseek offset=%d rc=%lld\n",
+          i, (s64)rc);
+        exit(1);
+      }
+    }
+    stopTimer();
+    printf("n=%d ", n);
+    prTimer();
+    printf("\n");
+  }
+  close(fd);
+  return 0;
 }

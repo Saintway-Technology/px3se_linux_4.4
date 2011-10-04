@@ -328,34 +328,31 @@
 int Flags = O_CREAT | O_TRUNC | O_WRONLY;
 int Mode = 0660;
 
-bool myopt (int c)
-{
-	switch (c) {
-	case 'g':
-		Flags = strtoll(optarg, NULL, 0);
-		break;
-	case 'm':
-		Mode = strtoll(optarg, NULL, 0);
-		break;
-	default:
-		return FALSE;
-	}
-	return TRUE;
+bool myopt (int c) {
+  switch (c) {
+  case 'g':
+    Flags = strtoll(optarg, NULL, 0);
+    break;
+  case 'm':
+    Mode = strtoll(optarg, NULL, 0);
+    break;
+  default:
+    return FALSE;
+  }
+  return TRUE;
 }
 
-void usage (void)
-{
-	pr_usage("-f<file> -g<flags> -m<mode>");
+void usage (void) {
+  pr_usage("-f<file> -g<flags> -m<mode>");
 }
 
-int main (int argc, char *argv[])
-{
-	int	fd;
+int main (int argc, char *argv[]) {
+  int fd;
 
-	punyopt(argc, argv, myopt, "g:m:");
-	fd = open(Option.file, Flags, Mode);
-	if (fd == -1) fatal("open %s:", Option.file);
-	close(fd);
+  punyopt(argc, argv, myopt, "g:m:");
+  fd = open(Option.file, Flags, Mode);
+  if (fd == -1) fatal("open %s:", Option.file);
+  close(fd);
 
-	return 0;
+  return 0;
 }

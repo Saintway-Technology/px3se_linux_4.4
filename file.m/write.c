@@ -133,33 +133,32 @@
 enum { MAX_BUF = 1 };
 char Buf[MAX_BUF] = { 'a' };
 
-int main (int argc, char *argv[])
-{
-	char	*name;
-	int	fd;
-	int	rc;
+int main (int argc, char *argv[]) {
+  char *name;
+  int fd;
+  int rc;
 
-	if (argc > 1) {
-		name = argv[1];
-	} else {
-		name = "/mnt/tau/xyzzy";
-	}
+  if (argc > 1) {
+    name = argv[1];
+  } else {
+    name = "/mnt/tau/xyzzy";
+  }
 
-	fd = creat(name, 0666);
-	if (fd == -1) {
-		perror(name);
-		exit(1);
-	}
-	rc = write(fd, Buf, sizeof(Buf));
-	if (rc == -1) {
-		perror(name);
-		exit(1);
-	}
-	if (rc != sizeof(Buf)) {
-		fprintf(stderr, "Asked to write %zu bytes but only wrote %d bytes\n",
-			sizeof(Buf), rc);
-		exit(1);
-	}
-	close(fd);
-	return 0;
+  fd = creat(name, 0666);
+  if (fd == -1) {
+    perror(name);
+    exit(1);
+  }
+  rc = write(fd, Buf, sizeof(Buf));
+  if (rc == -1) {
+    perror(name);
+    exit(1);
+  }
+  if (rc != sizeof(Buf)) {
+    fprintf(stderr, "Asked to write %zu bytes but only wrote %d bytes\n",
+      sizeof(Buf), rc);
+    exit(1);
+  }
+  close(fd);
+  return 0;
 }

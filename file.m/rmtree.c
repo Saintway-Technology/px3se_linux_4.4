@@ -28,71 +28,66 @@
 #include <puny.h>
 #include <eprintf.h>
 
-static void error (const char *what, const char *who)
-{
-	if (what && who) {
-		fprintf(stderr, "ERROR: %s: %s: %s\n",
-			what, who, strerror(errno));
-	} else if (what) {
-		fprintf(stderr, "ERROR: %s: %s\n", what, strerror(errno));
-	} else {
-		fprintf(stderr, "ERROR: %s\n", strerror(errno));
-	}
-	exit(1);
+static void error (const char *what, const char *who) {
+  if (what && who) {
+    fprintf(stderr, "ERROR: %s: %s: %s\n",
+      what, who, strerror(errno));
+  } else if (what) {
+    fprintf(stderr, "ERROR: %s: %s\n", what, strerror(errno));
+  } else {
+    fprintf(stderr, "ERROR: %s\n", strerror(errno));
+  }
+  exit(1);
 }
 
-void rmlevel (void)
-{
-	DIR		*dir;
-	struct dirent	*entry;
+void rmlevel (void) {
+  DIR *dir;
+  struct dirent *entry;
 
-	dir = opendir(".");
-	if (!dir) {
-		error("opendir", ".");
-	}
-	for (;;) {
-		entry = readdir(dir);
-		if (entry == NULL) {
-			break;
-		}
-		if (strcmp(entry->d_name, ".") == 0) {
-			continue;
-		}
-		if (strcmp(entry->d_name, "..") == 0) {
-			continue;
-		}
-		if (chdir(entry->d_name) == -1) {
-			unlinkq(entry->d_name);
-		} else {
-			rmlevel();
-			chdirq("..");
-			rmdirq(entry->d_name);
-		}
-	}
-	closedir(dir);
+  dir = opendir(".");
+  if (!dir) {
+    error("opendir", ".");
+  }
+  for (;;) {
+    entry = readdir(dir);
+    if (entry == NULL) {
+      break;
+    }
+    if (strcmp(entry->d_name, ".") == 0) {
+      continue;
+    }
+    if (strcmp(entry->d_name, "..") == 0) {
+      continue;
+    }
+    if (chdir(entry->d_name) == -1) {
+      unlinkq(entry->d_name);
+    } else {
+      rmlevel();
+      chdirq("..");
+      rmdirq(entry->d_name);
+    }
+  }
+  closedir(dir);
 }
 
-void rmtreeq (const char *path)
-{
-	int	current;
+void rmtreeq (const char *path) {
+  int current;
 
-	current = openq(".", O_RDONLY);
-	if (chdir(path)) perror("chdir");
+  current = openq(".", O_RDONLY);
+  if (chdir(path)) perror("chdir");
 
-	rmlevel();
+  rmlevel();
 
-	if (fchdir(current)) perror("fchdir");
-	rmdirq(path);
+  if (fchdir(current)) perror("fchdir");
+  rmdirq(path);
 }
 
-void usage (void)
-{
-	pr_usage("-d<directory>");
+void usage (void) {
+  pr_usage("-d<directory>");
 }
 
-int main (int argc, char *argv[])
-{
-	punyopt(argc, argv, NULL, NULL);
-	rmtreeq(Option.dir);
-	return 0;
+int main (int argc, char *argv[]) {
+  punyopt(argc, argv, NULL, NULL);
+  rmtreeq(Option.dir);
+  return 0;
 }
