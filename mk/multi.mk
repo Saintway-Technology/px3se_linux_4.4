@@ -47,7 +47,7 @@ all: $(objects)
 $(objdir)/% : %.c $(headers)
 	@ mkdir -p $(objdir)
 	echo $(LIBS)
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
 
 install:
 	@ mkdir -p $(bin)
