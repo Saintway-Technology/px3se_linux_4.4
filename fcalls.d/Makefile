@@ -6,4 +6,3 @@
 #
 
 include ../mk/default.mk
-LIBS += ../libpuny.b/$(objdir)/libpuny -lrt

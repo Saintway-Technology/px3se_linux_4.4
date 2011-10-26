@@ -21,6 +21,7 @@ else
   TARGET = $(BOARD)
 endif
 
+os      := $(shell uname)
 optdir  := /opt/punybench
 name    := $(basename $(notdir $(PWD)))
 target  := $(TARGET)
@@ -43,6 +44,13 @@ CFLAGS += -g -O -Wall -Wstrict-prototypes -Werror \
 	-D_F=\"$(basename $(notdir $(<)))\" \
 	-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 \
 	$(.INCLUDES) $(INC) \
+
+LIBS   += ../libpuny.b/$(objdir)/libpuny
+
+ifeq ($(os),Linux)
+	LIBS   += -lrt
+endif
+
 
 $(objdir)/%.o : %.c Makefile $(headers)
 	@ mkdir -p $(objdir)

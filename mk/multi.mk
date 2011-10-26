@@ -21,6 +21,7 @@ else
   TARGET = $(BOARD)
 endif
 
+os      := $(shell uname)
 optdir  := /opt/punybench
 target  := $(TARGET)
 objdir  :=.$(target)
@@ -40,13 +41,16 @@ CFLAGS += -g -O -Wall -Wstrict-prototypes -Werror \
 	-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 \
 	$(.INCLUDES) $(INC) \
 
-LIBS   += ../libpuny.b/$(objdir)/libpuny 
+LIBS   += ../libpuny.b/$(objdir)/libpuny
+
+ifeq ($(os),Linux)
+	LIBS   += -lrt
+endif
 
 all: $(objects)
 
 $(objdir)/% : %.c $(headers)
 	@ mkdir -p $(objdir)
-	echo $(LIBS)
 	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
 
 install:

@@ -13,4 +13,4 @@
 ############################################################################
 
 include ../mk/multi.mk
-LIBS += ../libpuny.b/$(objdir)/libpuny -lrt -lm -lpthread
+LIBS += -lm -lpthread
