@@ -148,18 +148,37 @@ void cd (char *dir)
 	}
 }
 
-void init (char *dir)
-{
-	int rc = mkdir(dir, 0700);
-	if (rc) fatal("mkdir %s:", dir);
-	cd(dir);
-}
-
 void cleanup (char *dir)
 {
 	cd("..");
 	int rc = rmdir(dir);
 	if (rc) fatal("rmdir %s:", dir);
+}
+
+void fatal_cleanup (void)
+{
+	static bool	cleaning_up = FALSE;
+
+	char	cmd[1024];
+	int	rc;
+
+	if (!Option.cleanup || cleaning_up) return;
+	cleaning_up = TRUE;
+	cd("..");
+	rc = snprintf(cmd, sizeof(cmd), "rm -fr %s", Option.dir);
+	if (rc > sizeof(cmd) - 2) return;	/* shouldn't be that big */
+	rc = system(cmd);
+	if (rc) {
+		fatal("'%s' failed %d:", cmd, rc);
+	}
+}
+
+void init (char *dir)
+{
+	int rc = mkdir(dir, 0700);
+	if (rc) fatal("mkdir %s:", dir);
+	cd(dir);
+	set_cleanup(fatal_cleanup);
 }
 
 int open_file (char *name)

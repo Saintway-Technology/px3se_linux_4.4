@@ -36,6 +36,8 @@ extern "C" {
 #define MYFILE	__FILE__
 #endif
 
+typedef void (*Cleanup_f)(void);
+
 #define fatal(fmt, ...)		pr_fatal  (MYFILE, __FUNCTION__, __LINE__, fmt, ## __VA_ARGS__)
 #define warn(fmt, ...)		pr_warn   (MYFILE, __FUNCTION__, __LINE__, fmt, ## __VA_ARGS__)
 // Has a name clash. I think with ncurses
@@ -55,10 +57,9 @@ char *estrdup  (const char *);
 
 void setprogname (const char *);
 const char *getprogname (void);
-#if __linux__
-#endif
 
-#define	NELEMS(a)	(sizeof(a) / sizeof(a[0]))
+void set_cleanup(Cleanup_f cleanup);
+void clear_cleanup(void);
 
 #ifdef __cplusplus
 }

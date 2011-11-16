@@ -15,6 +15,7 @@
 /* Excerpted from 'The Practice of Programming' */
 /* by Brian W. Kernighan and Rob Pike */
 
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -26,6 +27,15 @@
 #include <style.h>
 
 bool Stacktrace = TRUE;
+static Cleanup_f Cleanup = NULL;
+
+static void call_cleanup (void)
+{
+	Cleanup_f cleanup = Cleanup;
+
+	Cleanup = NULL;		/* Prevent recursive loop of cleanup */
+	if (cleanup) cleanup();
+}
 
 /* pr_display: print debug message */
 void pr_display (const char *file, const char *func, int line, const char *fmt, ...)
@@ -71,6 +81,7 @@ void pr_fatal (const char *file, const char *func, int line, const char *fmt, ..
 	}
 	fprintf(stderr, "\n");
 	if (Stacktrace) stacktrace_err();
+	call_cleanup();
 	exit(2); /* conventional value for failed execution */
 }
 
@@ -134,6 +145,7 @@ void eprintf (const char *fmt, ...)
 			fprintf(stderr, " %s<%d>", strerror(errno), errno);
 	}
 	fprintf(stderr, "\n");
+	call_cleanup();
 	exit(2); /* conventional value for failed execution */
 }
 
@@ -233,3 +245,36 @@ void setprogname (const char *str)
 	name = estrdup(str);
 }
 #endif
+
+static void caught_signal (int sig)
+{
+	call_cleanup();
+}
+
+static void catch_signals (void)
+{
+	signal(SIGHUP,	caught_signal);
+	signal(SIGINT,	caught_signal);
+	signal(SIGQUIT,	caught_signal);
+	signal(SIGILL,	caught_signal);
+	signal(SIGTRAP,	caught_signal);
+	signal(SIGABRT,	caught_signal);
+	signal(SIGBUS,	caught_signal);
+	signal(SIGFPE,	caught_signal);
+	signal(SIGKILL,	caught_signal);
+	signal(SIGSEGV,	caught_signal);
+	signal(SIGPIPE,	caught_signal);
+	signal(SIGSTOP,	caught_signal);
+	signal(SIGTSTP,	caught_signal);
+}
+
+void set_cleanup (Cleanup_f cleanup)
+{
+	Cleanup = cleanup;
+	catch_signals();
+}
+
+void clear_cleanup (void)
+{
+	Cleanup = NULL;
+}
