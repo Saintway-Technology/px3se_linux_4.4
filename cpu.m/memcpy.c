@@ -19,9 +19,18 @@
 #include <puny.h>
 #include <style.h>
 #include <timer.h>
+#include <twister.h>
 
+typedef void (*test_loop_f)(int j, u8 *a, u8 *b, int n, void *function);
 typedef void *(*memcpy_f)(void *dst, const void *src, size_t count);
+typedef void *(*memset_f)(void *dst, int c, size_t count);
+typedef int (*memsum_f)(const void *src, size_t count);
 
+/* Some tests report in powers of 10 others in powers of 2.
+ * Meg provides for conversion from bytes and nanoseconds
+ * to megabytes per second in either powers of 10 or powers
+ * of 2.
+ */
 struct {
 	double scale;
 	char *units;
@@ -61,6 +70,20 @@ void PrUsage (struct rusage *r)
 #endif
 }
 
+enum { ALIGNMENT = 4096 };
+
+void *alloc_aligned (size_t nbytes)
+{
+	void	*p;
+	int	rc;
+
+	rc = posix_memalign(&p, ALIGNMENT, nbytes);
+	if (rc) {
+		fatal("posix_memalign %d:", rc);
+	}
+	return p;
+}
+
 void *memcpyGlibc (void *dst, const void *src, size_t n)
 {
 	return memcpy(dst, src, n);
@@ -92,53 +115,162 @@ void *memcpy64 (void *dst, const void *src, size_t n)
 	return dst;
 }
 
-/* Sets to pseudo random values and insures each page is mapped */
-void initMem (u8 *mem, int n)
+void *memsetGlibc (void *dst, int c, size_t n)
 {
-	u8 a = rand();
+	return memset(dst, c, n);
+}
+
+void *memset8 (void *dst, int c, size_t n)
+{
+	u8	*d = dst;
+
+	while (n--) *d++ = c;
+	return dst;
+}
+
+void *memset32 (void *dst, int c, size_t n)
+{
+	u32	*d = dst;
+
+	n /= sizeof(*d);
+	while (n--) *d++ = c;
+	return dst;
+}
+
+void *memset64 (void *dst, int c, size_t n)
+{
+	u64	*d = dst;
+	u64	v = (((u64)c) << 32) | (u32)c;
+
+	n /= sizeof(*d);
+	while (n--) *d++ = v;
+	return dst;
+}
+
+int memsum8 (const void *src, size_t n)
+{
+	const u8	*s = src;
+	int		sum = 0;
+
+	while (n--) sum += *s++;
+	return sum;
+}
+
+int memsum32 (const void *src, size_t n)
+{
+	const u32	*s = src;
+	int		sum = 0;
+
+	n /= sizeof(*s);
+	while (n--) sum += *s++;
+	return sum;
+}
+
+int memsum64 (const void *src, size_t n)
+{
+	const u64	*s = src;
+	int		sum = 0;
+
+	n /= sizeof(*s);
+	while (n--) sum += *s++;
+	return sum;
+}
+
+
+/* Sets to pseudo random values and insures each page is mapped */
+void initMem (void *mem, int n)
+{
+	u64	*m = mem;
+	u64	a = twister_random();
+
+	n /= sizeof(u64);
 	while (n-- != 0) {
-		*mem++ = a++;
+		*m++ = a++;
 	}
 }
 
-void memcpyTest (char *test_name, memcpy_f f)
+void memcpy_loop (int j, u8 *a, u8 *b, int n, void *function)
 {
-	struct rusage before;
-	struct rusage after;
-	u64 start;
-	u64 finish;
-	u8 *a;
-	u8 *b;
-	int n;
-	int i;
-	int j;
+	memcpy_f	f = function;
+	u64		start;
+	u64		finish;
+	int		i;
+
+	start = nsecs();
+	for (i = Option.iterations; i > 0; i--) {
+		f(a, b, n);
+		if (bidirectional) f(b, a, n);
+	}
+	finish = nsecs();
+	if (bidirectional) {
+		printf("%d. %g %s/sec\n", j,
+			2.0 * meg.scale * (n * (u64)Option.iterations) /
+				(double)(finish - start),
+			meg.units);
+	} else {
+		printf("%d. %g %s/sec\n", j,
+			meg.scale * (n * (u64)Option.iterations) /
+				(double)(finish - start),
+			meg.units);
+	}
+}
+
+void memset_loop (int j, u8 *a, u8 *b, int n, void *function)
+{
+	memset_f	f = function;
+	u64		start;
+	u64		finish;
+	int		i;
+
+	start = nsecs();
+	for (i = Option.iterations; i > 0; i--) {
+		f(a, 0, n);
+	}
+	finish = nsecs();
+	printf("%d. %g %s/sec\n", j,
+		meg.scale * (n * (u64)Option.iterations) /
+			(double)(finish - start),
+		meg.units);
+}
+
+void memsum_loop (int j, u8 *a, u8 *b, int n, void *function)
+{
+	memsum_f	f = function;
+	u64		start;
+	u64		finish;
+	int		i;
+
+	start = nsecs();
+	for (i = Option.iterations; i > 0; i--) {
+		f(a, n);
+	}
+	finish = nsecs();
+	printf("%d. %g %s/sec\n", j,
+		meg.scale * (n * (u64)Option.iterations) /
+			(double)(finish - start),
+		meg.units);
+}
+
+void test (char *test_name, test_loop_f test_loop, void *function)
+{
+	struct rusage	before;
+	struct rusage	after;
+	u8		*a;
+	u8		*b;
+	int		n;
+	int		j;
+
 	printf("%s (%s)\n", test_name, meg.legend);
 	n = Option.file_size;
-	a = emalloc(n);
-	b = emalloc(n);
+	a = alloc_aligned(n);
+	b = alloc_aligned(n);
 	if (init_buffers) {
 		initMem(a, n);
 		initMem(b, n);
 	}
 	for (j = 0; j < Option.loops; j++) {
 		getrusage(RUSAGE_SELF, &before);
-		start = nsecs();
-		for (i = Option.iterations; i > 0; i--) {
-			f(a, b, n);
-			if (bidirectional) f(b, a, n);
-		}
-		finish = nsecs();
-		if (bidirectional) {
-			printf("%d. %g %s/sec\n", j,
-				2.0 * meg.scale * (n * (u64)Option.iterations) /
-					(double)(finish - start),
-				meg.units);
-		} else {
-			printf("%d. %g %s/sec\n", j,
-				meg.scale * (n * (u64)Option.iterations) /
-					(double)(finish - start),
-				meg.units);
-		}
+		test_loop(j, a, b, n, function);
 		getrusage(RUSAGE_SELF, &after);
 		PrUsage(&before);
 		PrUsage(&after);
@@ -163,11 +295,25 @@ static void Ready (void)
 void *RunTest (void *arg)
 {
 	Ready();
-	memcpyTest("memcpy", memcpy);
-	memcpyTest("simple", memcpySimple);
-	memcpyTest("glibc", memcpyGlibc);
-	memcpyTest("32bit", memcpy32);
-	memcpyTest("64bit", memcpy64);
+
+	printf("memcpy tests:\n");
+	test("memcpy", memcpy_loop, memcpy);
+	test("simple", memcpy_loop, memcpySimple);
+	test("glibc",  memcpy_loop, memcpyGlibc);
+	test("32bit",  memcpy_loop, memcpy32);
+	test("64bit",  memcpy_loop, memcpy64);
+
+	printf("\nmemset tests:\n");
+	test("memset", memset_loop, memset);
+	test("8bit",   memset_loop, memset8);
+	test("glibc",  memset_loop, memsetGlibc);
+	test("32bit",  memset_loop, memset32);
+	test("64bit",  memset_loop, memset64);
+
+	printf("\nmemsum tests:\n");
+	test("8bit",  memsum_loop, memsum8);
+	test("32bit", memsum_loop, memsum32);
+	test("64bit", memsum_loop, memsum64);
 	return NULL;
 }
 
@@ -239,9 +385,9 @@ void usage (void)
 
 int main (int argc, char *argv[])
 {
-	Option.iterations = 10;
+	Option.iterations = 2;
 	Option.loops = 4;
-	Option.file_size = (1<<26);
+	Option.file_size = (1<<24);
 	Option.numthreads = 1;
 	punyopt(argc, argv, myopt, "bmnu");
 	StartThreads();
