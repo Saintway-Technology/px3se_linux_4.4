@@ -12,13 +12,17 @@
  +-------------------------------------------------------------------------*/
 
 /*
- * write microbenchmark
+ * Random write microbenchmark. Use synchronous writes because writes
+ * could be reordered if just written to a buffer. This will be more
+ * like database updates.
  */
 
-#include <stdlib.h>
+#define _XOPEN_SOURCE 600
+
 #include <stdio.h>
-#include <unistd.h>
+#include <stdlib.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -52,62 +56,51 @@ int main (int argc, char *argv[])
 {
 	u8		*buf;
 	int		fd;
-	ssize_t		written;
-	size_t		toWrite;
 	unsigned	i;
 	unsigned	bufsize;
 	unsigned	n;
 	u64		size;
-	u64		rest;
+	u64		numbufs;
+	u64		offset;
 	u64		l;
+	ssize_t		rc;
 
 	punyopt(argc, argv, myopt, "b:");
 	n = Option.iterations;
 	size = Option.file_size;
 	bufsize = 1 << Bufsize_log2;
-
 	buf = emalloc(bufsize);
+	numbufs = size / bufsize;
+
+	fd = open(Option.file, O_RDWR | O_CREAT | O_TRUNC | O_SYNC, 0666);
 	for (i = 0; i < bufsize; ++i) {
 		buf[i] = random();
 	}
 	for (l = 0; l < Option.loops; l++) {
 		startTimer();
-		for (i = 0; i < n; i++) {
-			/* Because eCryptfs has to decrypt a page before
-			 * overwriting it, recreating the file on each
-			 * iteration gives a more realistic value.
-			 */
-			fd = open(Option.file,
-				O_RDWR | O_CREAT | O_TRUNC, 0666);
-			if (fd == -1) fatal("open %s:", Option.file);
-			for (rest = size; rest; rest -= written) {
-				if (rest > bufsize) {
-					toWrite = bufsize;
-				} else {
-					toWrite = rest;
-				}
-				written = write(fd, buf, toWrite);
-				if (written != toWrite) {
-					if (written == -1) {
-						perror("write");
-						exit(1);
-					}
-					fprintf(stderr,
-						"toWrite=%lu != written=%ld\n",
-						(unint)toWrite, (snint)written);
-					exit(1);
-				}
-				/* Make next buffer unique */
-				buf[urand(bufsize)] = random();
+		for (i = 0; i < n; ++i) {
+			offset = urand(numbufs) * bufsize;
+			/* Make buffer unique */
+			buf[urand(bufsize)] = random();
+			rc = pwrite(fd, buf, bufsize, offset);
+			if (rc != bufsize) {
+				if (rc == -1) fatal("pwrite:");
+				fatal("pwrite rc=%d offset=%lld", rc, offset);
 			}
-			fsync(fd);
-			close(fd);
 		}
 		stopTimer();
 		printf("size=%lld n=%d ", size, n);
 		prTimer();
+
+		printf("\t%6.4g MiB/s",
+			(double)(n * bufsize) / get_avg() / MEBI);
+
+		printf("\t%6.4g IOPs/sec",
+			(double)(n) / get_avg());
+
 		printf("\n");
 	}
+	close(fd);
 	unlink(Option.file);
 	return 0;
 }
