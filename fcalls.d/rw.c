@@ -45,6 +45,8 @@ static void Simple (void)
 /* Normal read/lseek tests */
 static void rdseek (void)
 {
+	/* SEEK_DATA and SEEK_HOLE were added in 3.1 */
+	enum { SEEK_INVALID = 99999 };	/* Invalid value for whence for seek */
 	u8 buf[Local_option.block_size];
 	int fd;
 	s64 offset;
@@ -94,7 +96,7 @@ static void rdseek (void)
 	readCheckSize(fd, buf, Local_option.block_size, 0);
 
 	/* Seek bad whence */
-	lseekErr(EINVAL, fd, 0, 4);
+	lseekErr(EINVAL, fd, 0, SEEK_INVALID);
 
 	/* Seek negative offset */
 	lseekErr(EINVAL, fd, -3, SEEK_SET);
