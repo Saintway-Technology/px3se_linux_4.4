@@ -12,7 +12,7 @@
 #  GNU General Public License for more details.
 ############################################################################
 
-makedir := $(dir $(lastword $(MAKEFILE_LIST)))
+makedir := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 include $(makedir)/gnu.mk
 
 ifeq ($(BOARD),)
@@ -30,12 +30,13 @@ sources := $(wildcard *.c)
 objects := $(addprefix $(objdir)/, $(sources:.c=.o))
 libdir  := $(DESTDIR)$(optdir)/lib
 
-include $(makedir)/$(target).mk
+$(if $(wildcard $(makedir)/$(target).mk),include $(makedir)/$(target).mk)
 
 #CC=/usr/local/bin/gcc
 INC+=-I. -I../include -I../../include
 
 # -pg -O -g -DUNOPT -DNDEBUG
+CFLAGS += -std=gnu99
 CFLAGS += -rdynamic
 CFLAGS += -g -O -pg -Wall -Wstrict-prototypes -Werror \
 	-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 \

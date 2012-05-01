@@ -12,7 +12,7 @@
 #  GNU General Public License for more details.
 ############################################################################
 
-makedir := $(dir $(lastword $(MAKEFILE_LIST)))
+makedir := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 include $(makedir)/gnu.mk
 
 ifeq ($(BOARD),)
@@ -32,7 +32,7 @@ objects := $(addprefix $(objdir)/, $(sources:.c=.o))
 opus    := $(objdir)/$(name)
 bin     := $(DESTDIR)$(optdir)/bin
 
-include $(makedir)/$(target).mk
+$(if $(wildcard $(makedir)/$(target).mk),include $(makedir)/$(target).mk)
 
 INC+=-I. -I../include -I../../include
 
