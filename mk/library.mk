@@ -30,7 +30,7 @@ sources := $(wildcard *.c)
 objects := $(addprefix $(objdir)/, $(sources:.c=.o))
 libdir  := $(DESTDIR)$(optdir)/lib
 
-$(if $(wildcard $(makedir)/$(target).mk),include $(makedir)/$(target).mk)
+-include $(makedir)/$(target).mk
 
 #CC=/usr/local/bin/gcc
 INC+=-I. -I../include -I../../include

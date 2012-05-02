@@ -31,7 +31,7 @@ objects := $(addprefix $(objdir)/, $(sources:.c=))
 opuses  := $(sources:.c=)
 bin      = $(DESTDIR)$(optdir)/bin
 
-$(if $(wildcard $(makedir)/$(target).mk),include $(makedir)/$(target).mk)
+-include $(makedir)/$(target).mk
 
 INC    += -I. -I../include -I../../include
 
