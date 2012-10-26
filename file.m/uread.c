@@ -12,7 +12,7 @@
  +-------------------------------------------------------------------------*/
 
 /*
- * read microbenchmark
+ * sequential read microbenchmark
  */
 
 #include <stdlib.h>
@@ -23,10 +23,16 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#include <style.h>
-#include <mystdlib.h>
 #include <eprintf.h>
+#include <hogmem.h>
+#include <mystdlib.h>
 #include <puny.h>
+#include <style.h>
+
+enum {	/* Fraction of total memory to use for file size (1/n) */
+	FRACTION_OF_MEMORY = 4,
+	/* Fraction of file size for how much memory to leave free (1/n) */
+	FRACTION_OF_FILE_SIZE = 8 };
 
 u64 Bufsize_log2 = 12;
 
@@ -95,12 +101,17 @@ int main (int argc, char *argv[])
 	u64		rest;
 	u64		l;
 
+	drop_caches();
+	Option.file_size = 0;
 	punyopt(argc, argv, myopt, "b:");
 	n = Option.iterations;
-	size = Option.file_size;
 	bufsize = 1 << Bufsize_log2;
 	buf = emalloc(bufsize);
-
+	size = Option.file_size;
+	if (!size) {
+		size = memtotal() / FRACTION_OF_MEMORY;
+	}
+	hog_leave_memory(size / FRACTION_OF_FILE_SIZE);
 	fd = open(Option.file, O_RDWR | O_CREAT | O_TRUNC, 0666);
 	fill_file(fd, size);
 	for (l = 0; l < Option.loops; l++) {
