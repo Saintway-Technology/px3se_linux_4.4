@@ -23,14 +23,16 @@
 #include <eprintf.h>
 #include <puny.h>
 
-enum { FILE_SIZE_MEG = (1<<12) };
+enum {	FILE_SIZE_MEG = 1 << 12,
+	BUF_SIZE = 1 << 12,
+	WINDOW_SIZE = 20 };
 
-u8	Buf[1<<12];
+u8	Buf[BUF_SIZE];
 unint	Bufs_written;
 bool	Done = FALSE;
 bool	Keep = FALSE;
 
-void pr_human_bytes(u64 x)
+void pr_human(double x)
 {
 	char *suffix;
 	u64 y;
@@ -57,7 +59,7 @@ void pr_human_bytes(u64 x)
 		suffix = "B";
 		y = 1;
 	}
-	printf("%6.1f %s", (double)x / y, suffix);
+	printf("%7.1f %s/sec", x / y, suffix);
 }
 
 void *writer(void *arg)
@@ -93,6 +95,41 @@ void *writer(void *arg)
 	return NULL;
 }
 
+void pr_bytes_per_sec (double bytes_per_sec)
+{
+	static double window[WINDOW_SIZE] = { 0 };
+	static double *next = window;
+	static double num_windows = 0;
+	static double window_total = 0;
+	static double num = 0;
+	static double total = 0;
+	double window_avg;
+	double avg;
+
+	++num;
+	total += bytes_per_sec;
+	avg = total / num;
+	if (next == &window[WINDOW_SIZE]) {
+		next = window;
+	}
+	if (num_windows != WINDOW_SIZE) {
+		++num_windows;
+	}
+	/*
+	 * Subtract the oldest window entry from the total
+	 * before overwriting it with the new bytes_per_sec.
+	 */
+	window_total -= *next;
+	window_total += bytes_per_sec;
+	*next++ = bytes_per_sec;
+
+	window_avg = window_total / num_windows;
+
+	pr_human(bytes_per_sec);
+	pr_human(window_avg);
+	pr_human(avg);
+}
+
 void *timer(void *arg)
 {
 	struct timespec sleep = { Option.sleep_secs, 0 * ONE_MILLION };
@@ -100,29 +137,30 @@ void *timer(void *arg)
 	u64 delta;
 	u64 i;
 
+	printf("secs      bytes/sec    window avg(%2d)      avg\n", WINDOW_SIZE);
 	for (i = 0; !Done; i++) {
 		old_bufs_written = Bufs_written;
 		nanosleep(&sleep, NULL);
 		delta = Bufs_written - old_bufs_written;
 		printf("%4llu. ", i);
-		pr_human_bytes((delta * sizeof(Buf) + Option.sleep_secs / 2) /
-				Option.sleep_secs);
-		printf("/sec\n");
+		pr_bytes_per_sec((double)(delta * sizeof(Buf)) /
+		                 Option.sleep_secs);
+		printf("\n");
 	}
 	return NULL;
 }
 
 void usage(void)
 {
-	pr_usage("-k -f<file> -s<secs to sleep>\n"
-		"hammer writes continuously to a large file\n"
-		"It does an fsync when it reaches the specified\n"
-		"size then starts over. It displays the write rate\n"
-		"in seconds\n"
+	pr_usage("-k -f<file> -s<secs to sleep> -z<size in MiBs>\n"
+		"  hammer writes continuously to a large file\n"
+		"  It does an fsync when it reaches the specified\n"
+		"  size then starts over. It displays the write rate\n"
+		"  in seconds\n"
 		"\tk - keep file used to hammer the disk\n"
 		"\tf - file path to hammer the disk\n"
 		"\ts - seconds to sleep between reports\n"
-		"\tz - size in Mibs of file to hammer system");
+		"\tz - size in MiBs of file to hammer system");
 }
 
 bool myopt(int c)
