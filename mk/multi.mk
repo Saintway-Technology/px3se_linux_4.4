@@ -35,7 +35,7 @@ bin      = $(DESTDIR)$(optdir)/bin
 
 INC    += -I. -I../include -I../../include
 
-CFLAGS += -rdynamic
+CFLAGS += -rdynamic -fPIC
 CFLAGS += -g -O -Wall -Wstrict-prototypes -Werror \
 	-D_F=\"$(basename $(notdir $(<)))\" \
 	-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 \
