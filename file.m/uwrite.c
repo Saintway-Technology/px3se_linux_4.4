@@ -92,11 +92,9 @@ int main (int argc, char *argv[])
 	if (!size) {
 		size = memtotal() / FRACTION_OF_MEMORY;
 	}
-	printf("memfree %lld\n", memfree());
 	if (Hog_memory) {
 		hog_leave_memory(size / FRACTION_OF_FILE_SIZE);
 	}
-	printf("memfree %lld\n", memfree());
 	for (l = 0; l < Option.loops; l++) {
 		startTimer();
 		for (i = 0; i < n; i++) {
@@ -141,10 +139,7 @@ int main (int argc, char *argv[])
 
 		printf("\t%6.4g MiB/s\n",
 			(double)(n * size) / get_avg() / MEBI);
-
-		printf("memfree %lld\n", memfree());
 	}
 	unlink(Option.file);
-	printf("memfree %lld\n", memfree());
 	return 0;
 }
