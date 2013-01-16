@@ -16,32 +16,42 @@
  * blocks form the file. The file should be large enough that most
  * of it does not fit in cache so there is a high probablity of a
  * buffer cache miss.
- * -z <file_size> should be much larger that buffer cache
+ * -z <file_size> should be much larger than buffer cache
  * -b <bufsize_log2> block size that will be used to read file
  *	typically 12 which is 4096
  */
 
 #define _XOPEN_SOURCE 600
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-#include <style.h>
-#include <mystdlib.h>
 #include <eprintf.h>
+#include <hogmem.h>
+#include <mystdlib.h>
 #include <puny.h>
+#include <style.h>
+
+enum {	/* Fraction of total memory to use for file size (1/n) */
+	FRACTION_OF_MEMORY = 4,
+	/* Fraction of file size for how much memory to leave free (1/n) */
+	FRACTION_OF_FILE_SIZE = 8 };
 
 u64 Bufsize_log2 = 12;
 
 void usage (void)
 {
 	pr_usage("-f<file_name> -z<file_size> -i<num_iterations>"
-		" -b<bufsize_log2> -l<loops>");
+		" -b<bufsize_log2> -l<loops>\n"
+		"  -f - path name of file\n"
+		"  -z - file size in bytes\n"
+		"  -b - buffer size - base 2 - 12->4096\n"
+		"  -i - number of inner iterations for one test\n"
+		"  -l - number of times to rerun test - results are averaged");
 }
 
 void fill_file (int fd, u64 size)
@@ -103,9 +113,13 @@ int main (int argc, char *argv[])
 	u64		l;
 	ssize_t		rc;
 
+	Option.file_size = memtotal() / FRACTION_OF_MEMORY;
+	Option.iterations = 10000;
+	Option.loops = 2;
 	punyopt(argc, argv, myopt, "b:");
 	n = Option.iterations;
 	size = Option.file_size;
+	hog_leave_memory(size / FRACTION_OF_FILE_SIZE);
 	bufsize = 1 << Bufsize_log2;
 	buf = emalloc(bufsize);
 	numbufs = size / bufsize;

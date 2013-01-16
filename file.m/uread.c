@@ -15,13 +15,12 @@
  * sequential read microbenchmark
  */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 #include <eprintf.h>
 #include <hogmem.h>
@@ -35,11 +34,18 @@ enum {	/* Fraction of total memory to use for file size (1/n) */
 	FRACTION_OF_FILE_SIZE = 8 };
 
 u64 Bufsize_log2 = 12;
+bool Hog_memory = TRUE;
 
 void usage (void)
 {
-	pr_usage("-f<file_name> -z<file_size> -i<num_iterations>"
-		" -b<bufsize_log2> -l<loops>");
+	pr_usage("-m -f<file_name> -z<file_size> -i<num_iterations>"
+		" -b<bufsize_log2> -l<loops>\n"
+		"  -m - turns off memory hog\n"
+		"  -f - path name of file\n"
+		"  -z - file size in bytes\n"
+		"  -b - buffer size - base 2 - 12->4096\n"
+		"  -i - number of inner iterations for one test\n"
+		"  -l - number of times to rerun test - results are averaged");
 }
 
 void fill_file (int fd, u64 size)
@@ -82,6 +88,9 @@ bool myopt (int c)
 	case 'b':
 		Bufsize_log2 = strtoll(optarg, NULL, 0);
 		break;
+	case 'm':
+		Hog_memory = FALSE;
+		break;
 	default:
 		return FALSE;
 	}
@@ -103,6 +112,8 @@ int main (int argc, char *argv[])
 
 	drop_caches();
 	Option.file_size = 0;
+	Option.iterations = 1;
+	Option.loops = 1;
 	punyopt(argc, argv, myopt, "b:");
 	n = Option.iterations;
 	bufsize = 1 << Bufsize_log2;
@@ -111,7 +122,9 @@ int main (int argc, char *argv[])
 	if (!size) {
 		size = memtotal() / FRACTION_OF_MEMORY;
 	}
-	hog_leave_memory(size / FRACTION_OF_FILE_SIZE);
+	if (Hog_memory) {
+		hog_leave_memory(size / FRACTION_OF_FILE_SIZE);
+	}
 	fd = open(Option.file, O_RDWR | O_CREAT | O_TRUNC, 0666);
 	fill_file(fd, size);
 	for (l = 0; l < Option.loops; l++) {
@@ -141,10 +154,8 @@ int main (int argc, char *argv[])
 		printf("size=%lld n=%d ", size, n);
 		prTimer();
 
-		printf("\t%6.4g MiB/s",
+		printf("\t%6.4g MiB/s\n",
 			(double)(n * size) / get_avg() / MEBI);
-
-		printf("\n");
 	}
 	close(fd);
 	unlink(Option.file);
