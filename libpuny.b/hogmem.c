@@ -10,6 +10,7 @@
 
 #include <debug.h>
 #include <eprintf.h>
+#include <hogmem.h>
 #include <style.h>
 #include <twister.h>
 

@@ -31,7 +31,7 @@
 enum {	/* Fraction of total memory to use for file size (1/n) */
 	FRACTION_OF_MEMORY = 4,
 	/* Fraction of file size for how much memory to leave free (1/n) */
-	FRACTION_OF_FILE_SIZE = 4 };
+	FRACTION_OF_FILE_SIZE = 2 };
 
 u64 Bufsize_log2 = 12;
 bool Hog_memory = TRUE;
