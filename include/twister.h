@@ -57,6 +57,7 @@
 #define _TWISTER_H_ 1
 
 #include <style.h>
+#include <stdlib.h>
 
 /*
  * Interfaces to Mersenne Twister pseudorandom number generator.
