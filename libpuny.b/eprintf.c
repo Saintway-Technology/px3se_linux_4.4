@@ -229,6 +229,19 @@ char *estrdup (const char *s)
 	return t;
 }
 
+/* esystem: execute a shell command, exit on error */
+void esystem(const char *command)
+{
+	int rc = system(command);
+
+	if (rc == -1) {
+		fatal("system: %s:", command);
+	}
+	if (rc != 0) {
+		fatal("system: %s exit=%d", command, rc);
+	}
+}
+
 #if __linux__ || __WINDOWS__
 static char *name = NULL;  /* program name for messages */
 

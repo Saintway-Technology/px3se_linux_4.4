@@ -53,6 +53,7 @@ void *emalloc  (size_t);
 void *ezalloc  (size_t);
 void *erealloc (void *, size_t);
 void *eallocpages (size_t npages, size_t size);
+void esystem(const char *command);
 char *estrdup  (const char *);
 
 void setprogname (const char *);

@@ -26,9 +26,16 @@ void eclose(int fd)
 		fatal("close:");
 }
 
+void echdir(const char *pathname)
+{
+	int rc = chdir(pathname);
+	if (rc == -1)
+		fatal("chdir %s:", pathname);
+}
+
 int ecreat(const char *pathname)
 {
-	int fd = creat(pathname, 0666);
+	int fd = creat(pathname, 0600);
 	if (fd == -1)
 		fatal("creat %s:", pathname);
 	return fd;
@@ -48,9 +55,16 @@ void efdatasync(int fd)
 		fatal("fdatasync:");
 }
 
+void emkdir(const char *pathname)
+{
+	int rc = mkdir(pathname, 0700);
+	if (rc == -1)
+		fatal("mkdir %s:", pathname);
+}
+
 int eopen(const char *pathname, int flags)
 {
-	int fd = open(pathname, flags, 0666);
+	int fd = open(pathname, flags, 0600);
 	if (fd == -1)
 		fatal("open %s:", pathname);
 	return fd;
