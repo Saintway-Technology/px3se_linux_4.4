@@ -130,7 +130,7 @@ static void time_sync(const char *label, int n)
 	start = nsecs();
 	esync();
 	finish = nsecs();
-	printf("%10s %8d. %g ms\n",
+	printf("%10s %8d. %10.2f ms\n",
 		label, n, (double)(finish - start)/1000000.0);
 	prompt("sync done");
 }
