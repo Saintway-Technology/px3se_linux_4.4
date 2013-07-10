@@ -262,6 +262,7 @@ void setprogname (const char *str)
 static void caught_signal (int sig)
 {
 	call_cleanup();
+	exit(2);
 }
 
 static void catch_signals (void)
