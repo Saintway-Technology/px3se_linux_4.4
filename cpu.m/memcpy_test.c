@@ -45,6 +45,7 @@ struct {
 } meg = { 1024.0 * 1024.0, "MiB", "2**20 or 1,048,576 bytes" };
 
 uint8_t run_correctness = TRUE;
+uint8_t run_trivial = TRUE;
 
 void *memcpy_trivial(void *d, const void *s, size_t count)
 {
@@ -74,7 +75,9 @@ int run_correctness_test(void)
 		size = (rand() % 2) ? (rand() % (CORRECTNESS_TEST_BUFFER_SIZE / 2))
 				    : (rand() % 64);
 
-		memcpy_trivial(testbuffer8_1w + offs1, testbuffer8_1r + offs2, size);
+		if (run_trivial)
+			memcpy_trivial(testbuffer8_1w + offs1,
+				       testbuffer8_1r + offs2, size);
 #if 0
 		memcpy_neon(testbuffer8_2w + offs1, testbuffer8_2r + offs2, size);
 #endif
@@ -163,8 +166,9 @@ void run_bench_for_for_size(int size)
 		size, memcpy_arm);
 #endif
 	/* insert a call to benchmark your own implementation here */
-	run_bench("memcpy_trivial: ", testbuffer8_1w, testbuffer8_2w,
-		size, memcpy_trivial);
+	if (run_trivial)
+		run_bench("memcpy_trivial: ", testbuffer8_1w, testbuffer8_2w,
+			  size, memcpy_trivial);
 	run_bench("memcpy        : ", testbuffer8_1w, testbuffer8_2w,
 		size, memcpy);
 }
@@ -216,6 +220,9 @@ bool myopt (int c)
 		meg.legend = "1,000,000 bytes";
 		meg.units  = "MB";
 		break;
+	case 't':
+		run_trivial = FALSE;
+		break;
 	default:
 		return FALSE;
 	}
@@ -224,10 +231,11 @@ bool myopt (int c)
 
 void usage(void)
 {
-	pr_usage("-bhm\n"
+	pr_usage("-bhmt\n"
 		"\tb - only run benchmark, don't include correctness test\n"
 		"\th - help\n"
-		"\tm - Use Meg = 1,000,000; default is 2**20 or 1,048,576\n");
+		"\tm - Use Meg = 1,000,000; default is 2**20 or 1,048,576\n"
+		"\tt - skip the trivial tests\n");
 }
 
 int main(int argc, char *argv[])
@@ -242,7 +250,7 @@ int main(int argc, char *argv[])
 	testbuffer8_2w = p + 2 * BUFFER_SIZE;
 	testbuffer8_2r = p + 3 * BUFFER_SIZE;
 
-	punyopt(argc, argv, myopt, "bm");
+	punyopt(argc, argv, myopt, "bmt");
 	if (run_correctness)
 		run_correctness_test();
 	run_performance_tests();
