@@ -9,6 +9,7 @@
 
 
 #include <fcntl.h>
+#include <string.h>
 
 #include <esys.h>
 #include <twister.h>
@@ -33,12 +34,19 @@ void gen_name(char *name, int len)
 
 /*
  * crash crashes the system by causing a panic:
+ * echo PANIC >/sys/kernel/debug/provoke-crash/DIRECT
  * echo panic >/proc/breakme
  */
 
 void crash(void)
 {
-	static char panic[] = "panic";
-	int fd = eopen("/proc/breakme", O_WRONLY);
-	ewrite(fd, panic, sizeof(panic));
+	char *panic = "PANIC";
+	int fd = open("/sys/kernel/debug/provoke-crash/DIRECT", O_WRONLY);
+
+	if (fd == -1) {
+		fd = eopen("/proc/breakme", O_WRONLY);
+		panic = "panic";
+	}
+	ewrite(fd, panic, strlen(panic));
+	eclose(fd);
 }
