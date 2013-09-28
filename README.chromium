@@ -1,7 +1,7 @@
 DESCRIPTION="punybench - file system micro benchmarks"
 HOMEPAGE="None"
 UPSTREAM_REPO="None"
-LOCAL_GIT_REPO="git://git.chromium.org/punybench"
+LOCAL_GIT_REPO="https://chromium.googlesource.com/chromiumos/platform/punybench"
 UPSTREAM_BUGSDB="None"
 LOCAL_BUGSDB="http://code.google.com/p/chromium/issues/list"
 LICENSE="GPLv2"
