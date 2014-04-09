@@ -12,6 +12,8 @@
  +-------------------------------------------------------------------------*/
 
 #include <sys/time.h>
+#include <inttypes.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -81,9 +83,17 @@ found:
 static void printTimer (Timer_s *timer)
 {
 	if (timer->key == 0) return;
-	printf("%8p: start=%ld.%.6ld delta=%ld.%.6ld\n", timer->key,
-				timer->start.tv_sec, (long)timer->start.tv_usec,
-				timer->delta.tv_sec, (long)timer->delta.tv_usec);
+	/* We cannot use 'long' as some 32bit systems define time_t as
+	 * as 64bit value.  Others define it as a 32bit value.  So we
+	 * have to explicitly cast it ourselves to get a stable printf
+	 * format string.
+	 */
+	printf("%8p: start=%"PRIu64".%.6"PRIu64" delta=%"PRIu64".%.6"PRIu64"\n",
+				timer->key,
+				(uint64_t)timer->start.tv_sec,
+				(uint64_t)timer->start.tv_usec,
+				(uint64_t)timer->delta.tv_sec,
+				(uint64_t)timer->delta.tv_usec);
 }
 
 void dumpTimersReverse (void)

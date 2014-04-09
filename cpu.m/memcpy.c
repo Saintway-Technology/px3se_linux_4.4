@@ -9,7 +9,9 @@
 
 #include <sys/resource.h>
 #include <sys/time.h>
+#include <inttypes.h>
 #include <pthread.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -44,11 +46,17 @@ u8 init_buffers = TRUE;
 void PrUsage (struct rusage *r)
 {
 	if (!resource_usage) return;
-	printf("utime = %ld.%06ld stime = %ld.%06ld minflt = %ld\n",
-		 r->ru_utime.tv_sec,
-		 (long)r->ru_utime.tv_usec,
-		 r->ru_stime.tv_sec,
-		 (long)r->ru_stime.tv_usec,
+	/* We cannot use 'long' as some 32bit systems define time_t as
+	 * as 64bit value.  Others define it as a 32bit value.  So we
+	 * have to explicitly cast it ourselves to get a stable printf
+	 * format string.
+	 */
+	printf("utime = %"PRIu64".%06"PRIu64" stime = %"PRIu64".%06"PRIu64" "
+		 "minflt = %ld\n",
+		 (uint64_t)r->ru_utime.tv_sec,
+		 (uint64_t)r->ru_utime.tv_usec,
+		 (uint64_t)r->ru_stime.tv_sec,
+		 (uint64_t)r->ru_stime.tv_usec,
 		 r->ru_minflt);
 #if 0
 		 struct timeval ru_utime; /* user time used */

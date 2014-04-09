@@ -107,13 +107,7 @@ ssize_t writeq (int fd, const void *buf, size_t nbytes)
 		io_error("write", NULL);
 	}
 	if (rc != nbytes) {
-#ifdef __APPLE__
-		fprintf(stderr, "ERROR: write: wrote only %ld bytes of %ld\n",
-#elif __x86_64__
-		fprintf(stderr, "ERROR: write: wrote only %ld bytes of %ld\n",
-#else
-		fprintf(stderr, "ERROR: write: wrote only %d bytes of %d\n",
-#endif
+		fprintf(stderr, "ERROR: write: wrote only %zi bytes of %zu\n",
 			rc, nbytes);
 		exit(1);
 	}
