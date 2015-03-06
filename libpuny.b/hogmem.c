@@ -102,8 +102,16 @@ u64 memfree(void)
 void hog_memory(u64 numbytes)
 {
 	int rc;
+	u64 original_numbytes = numbytes;
 
-	Hog = malloc(numbytes);
+	do {
+		Hog = malloc(numbytes);
+		if (!Hog) {
+			warn("Couldn't allocate %llu bytes, reducing by %u\n",
+			     numbytes, MEBI);
+			numbytes -= MEBI;
+		}
+	} while (numbytes > (original_numbytes / 2) && !Hog);
 	if (!Hog)
 		fatal("Couldn't hog %llu bytes of memory", numbytes);
 	Numbytes = numbytes;
