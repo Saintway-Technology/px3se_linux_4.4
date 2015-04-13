@@ -35,12 +35,14 @@ enum {	/* Fraction of total memory to use for file size (1/n) */
 
 u64 Bufsize_log2 = 12;
 bool Hog_memory = TRUE;
+bool Direct = FALSE;
 
 void usage (void)
 {
 	pr_usage("-m -f<file_name> -z<file_size> -i<num_iterations>"
 		" -b<bufsize_log2> -l<loops>\n"
 		"  -m - turns off memory hog\n"
+		"  -d - use O_DIRECT access (disables memory Hog)\n"
 		"  -f - path name of file\n"
 		"  -z - file size in bytes\n"
 		"  -b - buffer size - base 2 - 12->4096\n"
@@ -88,6 +90,10 @@ bool myopt (int c)
 	case 'b':
 		Bufsize_log2 = strtoll(optarg, NULL, 0);
 		break;
+	case 'd':
+		Direct = TRUE;
+		Hog_memory = FALSE;
+		break;
 	case 'm':
 		Hog_memory = FALSE;
 		break;
@@ -101,6 +107,7 @@ int main (int argc, char *argv[])
 {
 	u8		*buf;
 	int		fd;
+	int             flags;
 	ssize_t		haveRead;
 	size_t		toRead;
 	unsigned	i;
@@ -114,7 +121,7 @@ int main (int argc, char *argv[])
 	Option.file_size = 0;
 	Option.iterations = 1;
 	Option.loops = 1;
-	punyopt(argc, argv, myopt, "b:");
+	punyopt(argc, argv, myopt, "db:");
 	n = Option.iterations;
 	bufsize = 1 << Bufsize_log2;
 	buf = emalloc(bufsize);
@@ -125,7 +132,11 @@ int main (int argc, char *argv[])
 	if (Hog_memory) {
 		hog_leave_memory(size / FRACTION_OF_FILE_SIZE);
 	}
-	fd = open(Option.file, O_RDWR | O_CREAT | O_TRUNC, 0666);
+	flags = O_RDWR | O_CREAT | O_TRUNC;
+	if (Direct) {
+		flags |= O_DIRECT;
+	}
+	fd = open(Option.file, flags, 0666);
 	fill_file(fd, size);
 	for (l = 0; l < Option.loops; l++) {
 		startTimer();

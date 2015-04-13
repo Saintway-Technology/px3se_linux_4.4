@@ -15,6 +15,8 @@
  * sequential write microbenchmark
  */
 
+/* #define _GNU_SOURCE */
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -35,12 +37,14 @@ enum {	/* Fraction of total memory to use for file size (1/n) */
 
 u64 Bufsize_log2 = 12;
 bool Hog_memory = TRUE;
+bool Direct = FALSE;
 
 void usage (void)
 {
 	pr_usage("-m -f<file_name> -z<file_size> -i<num_iterations>"
 		" -b<bufsize_log2> -l<loops>\n"
 		"  -m - turns off memory hog\n"
+		"  -d - use O_DIRECT access (disables memory Hog)\n"
 		"  -f - path name of file\n"
 		"  -z - file size in bytes\n"
 		"  -b - buffer size - base 2 - 12->4096\n"
@@ -53,6 +57,10 @@ bool myopt (int c)
 	switch (c) {
 	case 'b':
 		Bufsize_log2 = strtoll(optarg, NULL, 0);
+		break;
+	case 'd':
+		Direct = TRUE;
+		Hog_memory = FALSE;
 		break;
 	case 'm':
 		Hog_memory = FALSE;
@@ -80,7 +88,7 @@ int main (int argc, char *argv[])
 	Option.file_size = 0;
 	Option.iterations = 1;
 	Option.loops = 1;
-	punyopt(argc, argv, myopt, "mb:");
+	punyopt(argc, argv, myopt, "mdb:");
 
 	n = Option.iterations;
 	bufsize = 1 << Bufsize_log2;
@@ -103,8 +111,11 @@ int main (int argc, char *argv[])
 			 * overwriting it, recreating the file on each
 			 * iteration gives a more realistic value.
 			 */
+			int flags = O_RDWR | O_CREAT | O_TRUNC;
+			if (Direct)
+				flags |= O_DIRECT;
 			fd = open(Option.file,
-				O_RDWR | O_CREAT | O_TRUNC, 0666);
+				  flags, 0666);
 			if (fd == -1) fatal("open %s:", Option.file);
 			for (rest = size; rest; rest -= written) {
 				if (rest > bufsize) {
