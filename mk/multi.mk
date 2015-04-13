@@ -39,6 +39,7 @@ CFLAGS += -rdynamic -fPIC
 CFLAGS += -g -O -Wall -Wstrict-prototypes -Werror \
 	-D_F=\"$(basename $(notdir $(<)))\" \
 	-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 \
+	-D_GNU_SOURCE \
 	$(.INCLUDES) $(INC) \
 
 LIBS   += ../libpuny.b/$(objdir)/libpuny

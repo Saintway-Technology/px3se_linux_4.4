@@ -13,8 +13,6 @@
  * the time (in microseconds) taken by each write operation.
  */
 
-#define _GNU_SOURCE          /* for O_DIRECT (ought to be unnecessary) */
-
 #include <errno.h>
 #include <fcntl.h>
 #include <stdarg.h>
