@@ -92,7 +92,12 @@ int main (int argc, char *argv[])
 
 	n = Option.iterations;
 	bufsize = 1 << Bufsize_log2;
-	buf = emalloc(bufsize);
+	/* align to bufsize in case of O_DIRECT */
+	buf = aligned_alloc(bufsize, bufsize);
+	if (!buf) {
+		fprintf(stderr, "unable to allocate aligned memory\n");
+		exit(1);
+	}
 	for (i = 0; i < bufsize; ++i) {
 		buf[i] = random();
 	}
@@ -151,6 +156,7 @@ int main (int argc, char *argv[])
 		printf("\t%6.4g MiB/s\n",
 			(double)(n * size) / get_avg() / MEBI);
 	}
+	free(buf);
 	unlink(Option.file);
 	return 0;
 }

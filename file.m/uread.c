@@ -56,15 +56,21 @@ void fill_file (int fd, u64 size)
 	size_t		toWrite;
 	unsigned	i;
 	u64		rest;
-	u8		buf[1<<12];
+	u8              *buf;
 
-	for (i = 0; i < sizeof(buf); ++i)
+	/* align the buffer in case we are using O_DIRECT */
+	buf = aligned_alloc(4096, 4096);
+	if (!buf) {
+		fprintf(stderr, "unable to allocate aligned memory\n");
+		exit(1);
+	}
+	for (i = 0; i < 4096; ++i)
 	{
 		buf[i] = random();
 	}
 	for (rest = size; rest; rest -= written) {
-		if (rest > sizeof(buf)) {
-			toWrite = sizeof(buf);
+		if (rest > 4096) {
+			toWrite = 4096;
 		} else {
 			toWrite = rest;
 		}
@@ -80,6 +86,7 @@ void fill_file (int fd, u64 size)
 			exit(1);
 		}
 	}
+	free(buf);
 	fsync(fd);
 	lseek(fd, 0, 0);
 }
@@ -124,7 +131,12 @@ int main (int argc, char *argv[])
 	punyopt(argc, argv, myopt, "db:");
 	n = Option.iterations;
 	bufsize = 1 << Bufsize_log2;
-	buf = emalloc(bufsize);
+	/* align to bufsize in case of O_DIRECT */
+	buf = aligned_alloc(bufsize, bufsize);
+	if (!buf) {
+		fprintf(stderr, "unable to allocate aligned memory\n");
+		exit(1);
+	}
 	size = Option.file_size;
 	if (!size) {
 		size = memtotal() / FRACTION_OF_MEMORY;
@@ -168,6 +180,7 @@ int main (int argc, char *argv[])
 		printf("\t%6.4g MiB/s\n",
 			(double)(n * size) / get_avg() / MEBI);
 	}
+	free(buf);
 	close(fd);
 	unlink(Option.file);
 	return 0;
