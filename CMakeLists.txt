@@ -1,4 +1,6 @@
-project(libcutils)
+cmake_minimum_required(VERSION 2.8.11)
+
+project(cutils)
 
 enable_language(ASM)
 
@@ -51,9 +53,15 @@ if (BUILD_LIBLOG)
 	target_link_libraries(cutils log)
 endif()
 
-install(TARGETS cutils DESTINATION lib)
-install(DIRECTORY cutils DESTINATION include)
+include_directories(${cutils_SOURCE_DIR}/include ${cutils_SOURCE_DIR})
 
-target_include_directories(cutils
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
-)
+# If the CMake version supports it, attach header directory information
+# to the targets for when we are part of a parent build (ie being pulled
+# in via add_subdirectory() rather than being a standalone build).
+if (DEFINED CMAKE_VERSION AND NOT "${CMAKE_VERSION}" VERSION_LESS "2.8.11")
+	target_include_directories(cutils INTERFACE "${cutils_SOURCE_DIR}/include")
+endif()
+
+install(TARGETS cutils DESTINATION lib)
+install(DIRECTORY ${cutils_SOURCE_DIR}/include/cutils DESTINATION include)
+install(DIRECTORY ${cutils_SOURCE_DIR}/include/linux DESTINATION include)
