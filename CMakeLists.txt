@@ -2,7 +2,14 @@ project(libcutils)
 
 enable_language(ASM)
 
+option(BUILD_LIBLOG "Use liblog porting from android or not" OFF)
+
+if (${BUILD_LIBLOG})
+	add_definitions(-DHAVE_ANDROID_LOG)
+endif()
+
 add_definitions(-DANDROID_SMP=1 -DHAVE_PTHREADS -DHAVE_SYS_SOCKET_H)
+add_definitions(-DHAVE_SYS_UIO_H)
 
 set(LIBCUTILS_SRC_FILES
     hashmap.c
@@ -39,6 +46,11 @@ set(LIBCUTILS_SRC_FILES
 )
 
 add_library(cutils SHARED ${LIBCUTILS_SRC_FILES})
+
+if (BUILD_LIBLOG)
+	target_link_libraries(cutils log)
+endif()
+
 install(TARGETS cutils DESTINATION lib)
 install(DIRECTORY cutils DESTINATION include)
 
