@@ -49,7 +49,7 @@ set(LIBCUTILS_SRC_FILES
 
 add_library(cutils SHARED ${LIBCUTILS_SRC_FILES})
 
-if (BUILD_LIBLOG)
+if (${BUILD_LIBLOG})
 	target_link_libraries(cutils log)
 endif()
 
