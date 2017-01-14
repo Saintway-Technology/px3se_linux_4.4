@@ -4,7 +4,7 @@ project(cutils)
 
 enable_language(ASM)
 
-option(BUILD_LIBLOG "Use liblog porting from android or not" OFF)
+option(BUILD_LIBLOG "Use liblog porting from android or not" ON)
 
 if (${BUILD_LIBLOG})
 	add_definitions(-DHAVE_ANDROID_LOG)
