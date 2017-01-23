@@ -47,7 +47,8 @@ set(LIBCUTILS_SRC_FILES
     arch-arm/memset32.S
 )
 
-add_library(cutils SHARED ${LIBCUTILS_SRC_FILES})
+#add_library(cutils SHARED ${LIBCUTILS_SRC_FILES})
+add_library(cutils STATIC ${LIBCUTILS_SRC_FILES})
 
 if (${BUILD_LIBLOG})
 	target_link_libraries(cutils log)
@@ -62,6 +63,7 @@ if (DEFINED CMAKE_VERSION AND NOT "${CMAKE_VERSION}" VERSION_LESS "2.8.11")
 	target_include_directories(cutils INTERFACE "${cutils_SOURCE_DIR}/include")
 endif()
 
-install(TARGETS cutils DESTINATION lib)
+#install(TARGETS cutils DESTINATION lib)
+install(TARGETS cutils ARCHIVE DESTINATION lib)
 install(DIRECTORY ${cutils_SOURCE_DIR}/include/cutils DESTINATION include)
 install(DIRECTORY ${cutils_SOURCE_DIR}/include/linux DESTINATION include)
