@@ -63,7 +63,7 @@ void klog_vwrite(int level, const char *fmt, va_list ap)
     if (klog_fd < 0) return;
 
     vsnprintf(buf, LOG_BUF_MAX, fmt, ap);
-    strcat(buf, "\n");
+    strlcat(buf, "\n", LOG_BUF_MAX);
     buf[LOG_BUF_MAX - 1] = 0;
 
     len = write(klog_fd, buf, strlen(buf));
