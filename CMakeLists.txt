@@ -29,5 +29,7 @@ if (DEFINED CMAKE_VERSION AND NOT "${CMAKE_VERSION}" VERSION_LESS "2.8.11")
 	target_include_directories(log      INTERFACE "${log_SOURCE_DIR}/include")
 endif()
 
+install(TARGETS log ARCHIVE DESTINATION lib)
+
 install(DIRECTORY ${log_SOURCE_DIR}/include/android DESTINATION include)
 install(DIRECTORY ${log_SOURCE_DIR}/include/log DESTINATION include)
