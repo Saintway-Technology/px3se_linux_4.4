@@ -411,7 +411,9 @@ void file_sync_service(int fd, void *cookie)
 				printf("-----------------------------\n");printf("-----------------------------\n");
 				printf("If you run \"QQ\" \"KuGou\" in windows, adb maybe run unnormal, please close them\n");
 				printf("-----------------------------\n");printf("-----------------------------\n");
-				exit(1);
+				memcpy(name, "dev/null\0", strlen("dev/null\0") + 1);
+				do_send(fd, name, buffer);
+				goto fail;
 			}
 		
 			if(do_send(fd, name, buffer)) goto fail;
