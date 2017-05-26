@@ -146,7 +146,7 @@
  *
  *     The result of mounting a filesystem nosuid  vary  between  Linux  kernel
  *     versions:  some will refuse execution of SUID/SGID executables when this
- *     would give the user powers she did not have already (and return  EPERM),
+ *     would give the user powers they did not have already (and return  EPERM),
  *     some will just ignore the SUID/SGID bits and exec successfully.
  *
  *     A maximum line length of 127 characters is allowed for the first line in
