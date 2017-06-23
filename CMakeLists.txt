@@ -1,3 +1,4 @@
+cmake_minimum_required(VERSION 2.8.11)
 project(adbd)
 
 set(ADB_SRC_FILES
