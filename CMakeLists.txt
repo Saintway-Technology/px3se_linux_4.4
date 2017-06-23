@@ -55,6 +55,7 @@ if (${BUILD_LIBLOG})
 endif()
 
 include_directories(${cutils_SOURCE_DIR}/include ${cutils_SOURCE_DIR})
+# include_directories(${cutils_SOURCE_DIR}/include ${cutils_SOURCE_DIR} ${CMAKE_INSTALL_PREFIX}/include)
 
 # If the CMake version supports it, attach header directory information
 # to the targets for when we are part of a parent build (ie being pulled
