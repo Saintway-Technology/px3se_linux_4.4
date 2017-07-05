@@ -4,4 +4,6 @@
 #
 ################################################################################
 
+LIBLOG_TARGET_FILES = $(LIBLOG_BUILDDIR)/liblog.a
+
 $(eval $(rv-generic-cmake))
