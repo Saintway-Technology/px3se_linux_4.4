@@ -61,7 +61,8 @@ HEADERS  += mainwindow.h \
 
 FORMS = networkconfig.ui \
         btscanner.ui \
-    brightness/brightness.ui
+    brightness/brightness.ui \
+    calendar/widget.ui
 
 RESOURCES += \
     res_main.qrc \

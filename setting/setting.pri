@@ -16,4 +16,5 @@ include (wpa_supplicant/wpa_supplicant.pri)
 INCLUDEPATH +=$$PWD brightness
 include (../brightness/brightness.pri)
 
-
+INCLUDEPATH +=$$PWD calendar
+include (../calendar/calendar.pri)

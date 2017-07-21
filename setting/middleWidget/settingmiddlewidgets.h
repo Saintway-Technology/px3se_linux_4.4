@@ -6,6 +6,7 @@
 #include "rightstackedwidgets0.h"
 #include "rightstackedwidgets1.h"
 #include "rightstackedwidgets2.h"
+#include "rightstackedwidgets3.h"
 
 #include <QStackedWidget>
 
@@ -23,6 +24,7 @@ private:
     rightStackedWidgets0 *m_wifiWid;
     rightStackedWidgets1 *m_otherWid;
     rightStackedWidgets2 *m_brightnessWid;
+    rightStackedWidgets3 *m_calendarWid;
 private slots:
     void slot_currentWidgetChanged(int index);
 signals:
