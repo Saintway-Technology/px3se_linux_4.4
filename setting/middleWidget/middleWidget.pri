@@ -6,7 +6,8 @@ HEADERS += \
     $$PWD/wlanlisttable.h \
     $$PWD/rightstackedwidgets1.h \
     $$PWD/netconfigdialog.h \
-    $$PWD/bluetoothscannerwidget.h
+    $$PWD/bluetoothscannerwidget.h \
+    $$PWD/rightstackedwidgets2.h
 
 SOURCES += \
     $$PWD/settingmiddlewidgets.cpp \
@@ -16,4 +17,5 @@ SOURCES += \
     $$PWD/wlanlisttable.cpp \
     $$PWD/rightstackedwidgets1.cpp \
     $$PWD/netconfigdialog.cpp \
-    $$PWD/bluetoothscannerwidget.cpp
+    $$PWD/bluetoothscannerwidget.cpp \
+    $$PWD/rightstackedwidgets2.cpp

@@ -60,7 +60,8 @@ HEADERS  += mainwindow.h \
 
 
 FORMS = networkconfig.ui \
-        btscanner.ui
+        btscanner.ui \
+    brightness/brightness.ui
 
 RESOURCES += \
     res_main.qrc \

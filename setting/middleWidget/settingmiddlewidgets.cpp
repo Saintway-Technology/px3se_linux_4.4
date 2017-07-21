@@ -16,12 +16,14 @@ void settingMiddleWidgets::initLayout()
 
     m_wifiWid = new rightStackedWidgets0(m_stackedWid);
     m_otherWid = new rightStackedWidgets1(m_stackedWid);
+    m_brightnessWid = new rightStackedWidgets2(m_stackedWid);
 
     m_stackedWid->addWidget(m_wifiWid);
     m_stackedWid->addWidget(m_otherWid);
+    m_stackedWid->addWidget(m_brightnessWid);
 
     hmainlyout->addWidget(m_leftWid,1);
-    hmainlyout->addWidget(m_stackedWid,4);
+    hmainlyout->addWidget(m_stackedWid,4);    
 
     hmainlyout->setContentsMargins(0,0,0,0);
     hmainlyout->setSpacing(0);
@@ -40,6 +42,12 @@ void settingMiddleWidgets::slot_currentWidgetChanged(int index)
     switch(index){
     case 0:
         m_stackedWid->setCurrentIndex(0);
+        break;
+    case 1:
+        m_stackedWid->setCurrentIndex(1);
+        break;
+    case 2:
+        m_stackedWid->setCurrentIndex(2);
         break;
     default:
         m_stackedWid->setCurrentIndex(1);

@@ -99,7 +99,7 @@ const QString str_videoTime_minite= "min";
 // setting
 const QString str_net_manager= "Wlan";
 const QString str_bt_manager= "BlueTooth";
-const QString str_common_setting= "General";
+const QString str_brightness_setting= "Brightness";
 const QString str_system_setting= "System";
 const QString str_open_wifi= "WLAN";
 const QString str_wifi_adapter= "adapter";

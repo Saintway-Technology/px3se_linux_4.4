@@ -12,3 +12,8 @@ include(middleWidget/middleWidget.pri)
 
 INCLUDEPATH +=$$PWD wpa_supplicant
 include (wpa_supplicant/wpa_supplicant.pri)
+
+INCLUDEPATH +=$$PWD brightness
+include (../brightness/brightness.pri)
+
+

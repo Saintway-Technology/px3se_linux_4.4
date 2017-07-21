@@ -15,5 +15,11 @@
         <file>image/setting/ic_wifi_signal_3_dark.png</file>
         <file>image/setting/ic_wifi_signal_4_dark.png</file>
         <file>image/setting/ic_wifi_unlocked.png</file>
+        <file>image/setting/bightness-down.png</file>
+        <file>image/setting/bightness-up.png</file>
+        <file>image/setting/clock.png</file>
+        <file>image/setting/volume-down.png</file>
+        <file>image/setting/volume-up.png</file>
+        <file>image/setting/brightness.png</file>
     </qresource>
 </RCC>
