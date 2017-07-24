@@ -19,12 +19,14 @@ void settingMiddleWidgets::initLayout()
     m_brightnessWid = new rightStackedWidgets2(m_stackedWid);
     m_calendarWid = new rightStackedWidgets3(m_stackedWid);
     m_volumnWid = new rightStackedWidgets4(m_stackedWid);
+    m_updaterWid = new rightStackedWidgets5(m_stackedWid);
 
     m_stackedWid->addWidget(m_wifiWid);
     m_stackedWid->addWidget(m_otherWid);
     m_stackedWid->addWidget(m_brightnessWid);
     m_stackedWid->addWidget(m_calendarWid);
     m_stackedWid->addWidget(m_volumnWid);
+    m_stackedWid->addWidget(m_updaterWid);
 
     hmainlyout->addWidget(m_leftWid,1);
     hmainlyout->addWidget(m_stackedWid,4);    
@@ -58,6 +60,9 @@ void settingMiddleWidgets::slot_currentWidgetChanged(int index)
         break;
     case 4:
         m_stackedWid->setCurrentIndex(4);
+        break;
+    case 5:
+        m_stackedWid->setCurrentIndex(5);
         break;
     default:
         m_stackedWid->setCurrentIndex(1);

@@ -63,7 +63,8 @@ FORMS = networkconfig.ui \
         btscanner.ui \
     brightness/brightness.ui \
     calendar/widget.ui \
-    volumn/volumnwidget.ui
+    volumn/volumnwidget.ui \
+    updater/updaterwidget.ui
 
 RESOURCES += \
     res_main.qrc \

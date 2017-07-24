@@ -23,5 +23,6 @@
         <file>image/setting/brightness.png</file>
         <file>image/setting/calendar.png</file>
         <file>image/setting/speaker.png</file>
+        <file>image/setting/update.png</file>
     </qresource>
 </RCC>

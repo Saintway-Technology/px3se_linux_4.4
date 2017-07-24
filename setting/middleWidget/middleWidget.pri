@@ -9,7 +9,8 @@ HEADERS += \
     $$PWD/bluetoothscannerwidget.h \
     $$PWD/rightstackedwidgets2.h \
     $$PWD/rightstackedwidgets3.h \
-    $$PWD/rightstackedwidgets4.h
+    $$PWD/rightstackedwidgets4.h \
+    $$PWD/rightstackedwidgets5.h
 
 SOURCES += \
     $$PWD/settingmiddlewidgets.cpp \
@@ -22,4 +23,5 @@ SOURCES += \
     $$PWD/bluetoothscannerwidget.cpp \
     $$PWD/rightstackedwidgets2.cpp \
     $$PWD/rightstackedwidgets3.cpp \
-    $$PWD/rightstackedwidgets4.cpp
+    $$PWD/rightstackedwidgets4.cpp \
+    $$PWD/rightstackedwidgets5.cpp

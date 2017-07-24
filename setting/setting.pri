@@ -21,3 +21,6 @@ include (../calendar/calendar.pri)
 
 INCLUDEPATH +=$$PWD volumn
 include (../volumn/volumn.pri)
+
+INCLUDEPATH +=$$PWD updater
+include (../updater/updater.pri)
