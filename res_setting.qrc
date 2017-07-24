@@ -22,5 +22,6 @@
         <file>image/setting/volume-up.png</file>
         <file>image/setting/brightness.png</file>
         <file>image/setting/calendar.png</file>
+        <file>image/setting/speaker.png</file>
     </qresource>
 </RCC>

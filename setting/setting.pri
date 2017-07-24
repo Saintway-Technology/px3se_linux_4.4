@@ -18,3 +18,6 @@ include (../brightness/brightness.pri)
 
 INCLUDEPATH +=$$PWD calendar
 include (../calendar/calendar.pri)
+
+INCLUDEPATH +=$$PWD volumn
+include (../volumn/volumn.pri)
