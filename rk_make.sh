@@ -1,6 +1,4 @@
 #! /bin/sh
-if [[ $enable_settings =~ "yes" ]];then
-echo "start build settings app"
 
 QT_PROJECT_FILE=settings.pro
 TOP_DIR=$(pwd)
@@ -11,6 +9,23 @@ QMAKE=$(pwd)/../../buildroot/output/host/usr/bin/qmake
 STRIP=$(pwd)/../../buildroot/output/host/usr/bin/arm-linux-strip
 PRODUCT_NAME=`ls ../../device/rockchip/`
 TARGET_EXECUTABLE=""
+
+package_config=$(pwd)/../../device/rockchip/$PRODUCT_NAME/package_config.sh
+if [ -f $package_config ];then
+	source $package_config
+	if [[ $enable_settings =~ "no" ]];then
+		echo "disabled settings app"
+		return
+	fi
+fi
+
+#define build err exit function
+check_err_exit(){
+  if [ $1 -ne "0" ]; then
+     echo -e $MSG_ERR
+     exit 2
+  fi
+}
 
 if [ "$PRODUCT_NAME"x = "px3-se"x ];then
 sed -i '/DEVICE_EVB/s/^/#&/' $QT_PROJECT_FILE 
@@ -60,7 +75,6 @@ done
 
 make clean
 
-
 #call just for buid_all.sh
 if [ "$1" = "cleanthen" ] || [ "$2" = "cleanthen" ];then
         make clean
@@ -69,6 +83,4 @@ fi
 #we should restore the modifcation which is made on this script above.
 if [ "$PRODUCT_NAME"x = "px3-se"x ];then
 sed -i '/DEVICE_EVB/s/^.//' $QT_PROJECT_FILE 
-fi
-
 fi
