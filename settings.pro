@@ -15,11 +15,13 @@ TEMPLATE = app
 CONFIG+= qt warn_on release
 
 
-
 DEFINES += CONFIG_CTRL_IFACE
 
 # 3399Linux、Big DPI
 DEFINES += DEVICE_EVB
+
+LIBS += -lasound
+QMAKE_CXXFLAGS = -fpermissive
 
 win32 {
   LIBS += -lws2_32 -static

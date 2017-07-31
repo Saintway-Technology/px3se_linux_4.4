@@ -21,6 +21,10 @@ private slots:
     void on_m_VolumnDownPushButton_clicked();
 
     void on_m_VolumnUpPushButton_clicked();
+    void on_m_VolumnHorizontalSlider_sliderMoved(int position);
+
+    void on_m_VolumnHorizontalSlider_valueChanged(int value);
+
 private:
     void onVolumnChange(int volumn);
     void saveVolumn(int volumn);
