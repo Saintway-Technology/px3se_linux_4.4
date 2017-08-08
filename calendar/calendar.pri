@@ -1,9 +1,11 @@
 
 SOURCES += $$PWD/widget.cpp \
-    $$PWD/lunar.cpp
+    $$PWD/lunar.cpp \
+    $$PWD/calendarwidgets.cpp
 
 HEADERS  += $$PWD/widget.h \
-    $$PWD/lunar.h
+    $$PWD/lunar.h \
+    $$PWD/calendarwidgets.h
 
 RESOURCES += \
     $$PWD/Resource.qrc

@@ -1,7 +1,9 @@
+HEADERS += \
+    $$PWD/brightness.h \
+    $$PWD/brightnesswidgets.h \
 
+SOURCES +=  \
+    $$PWD/brightness.cpp \
+    $$PWD/brightnesswidgets.cpp \
 
-SOURCES +=  $$PWD/brightness.cpp
-
-HEADERS  += $$PWD/brightness.h
-
-FORMS    += $$PWD/brightness.ui
+FORMS  += $$PWD/brightness.ui

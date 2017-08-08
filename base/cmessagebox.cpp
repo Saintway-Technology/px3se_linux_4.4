@@ -93,7 +93,7 @@ void CMessageBox::slot_onCancelClicked()
     close();
 }
 
-void CMessageBox::closeEvent(QCloseEvent *event)
+void CMessageBox::closeEvent(QCloseEvent*)
 {
     if (m_eventLoop != NULL)
     {

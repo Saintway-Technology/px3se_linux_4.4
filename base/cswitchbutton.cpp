@@ -3,16 +3,13 @@
 CSwitchButton::CSwitchButton(QWidget *parent): QWidget(parent)
 {
     setMouseTracking(true);
-    //OFF背景色
+    // Initial color and state constant.
     m_offbkcolor1       = QColor(227, 227, 227);
     m_offbkcolor2       = QColor(227, 227, 227);
-    //ON背景色
     m_onbkcolor1        = QColor(85, 180, 238);
     m_onbkcolor2        = QColor(30,125,183);
-    //滑块背景色
     m_slidecolor1       = QColor(252, 252, 252);
     m_slidecolor2       = QColor(224, 224, 224);
-    //开关状态
     m_state             = false;
     m_mouseDown         = false;
     m_mouseMove         = false;
@@ -42,7 +39,7 @@ void CSwitchButton::mouseMoveEvent(QMouseEvent * event)
     if(m_mouseDown)
     {
         m_mouseMove = true;
-        lastPoint = event->pos(); //获取当前光标的位置
+        lastPoint = event->pos();
         repaint();
     }
 }
@@ -76,14 +73,15 @@ void CSwitchButton::mouseReleaseEvent(QMouseEvent * event)
 void CSwitchButton::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing, true); //抗锯齿
+    painter.setRenderHint(QPainter::Antialiasing, true);
     drawPressBackground(&painter);
     if(m_mouseMove) {
         QRect sliderect;
         int left;
-        int diff = lastPoint.x()-firstPoint.x(); //计算移动差值
+        int diff = lastPoint.x()-firstPoint.x();
         if(m_state) {
-            //(width() -  height() + 4 - 2) --- 表示滑块右边界值
+            // ==Represents the right boundary value of the slider
+            // (width() -  height() + 4 - 2)
             left = (width() -  height() + 4 - 2) + diff;
             if(left < 2) {
                 sliderect.setLeft(2);
@@ -120,7 +118,7 @@ void CSwitchButton::paintEvent(QPaintEvent *)
 
         QRect rrect = sliderect.intersected(rect());
         painter.drawEllipse(rrect);
-        //画边框
+
         painter.setBrush(Qt::NoBrush);
         painter.setPen(QColor(173, 173, 173, 160));
         painter.drawEllipse(rrect);
@@ -129,7 +127,7 @@ void CSwitchButton::paintEvent(QPaintEvent *)
         drawPressSlide(&painter);
     }
 }
-//画背景
+
 void CSwitchButton::drawPressBackground(QPainter *painter)
 {
     QPainterPath path;
@@ -156,13 +154,12 @@ void CSwitchButton::drawPressBackground(QPainter *painter)
     linGrad.setSpread(QGradient::PadSpread);
     painter->setBrush(linGrad);
     painter->drawPath(interpath);
-    //画边框
+
     painter->setBrush(Qt::NoBrush);
     painter->setPen(QColor(173, 173, 173, 255));
     painter->drawPath(interpath);
 }
 
-//画滑块
 void CSwitchButton::drawPressSlide(QPainter *painter)
 {
     QRect sliderect;
@@ -179,7 +176,7 @@ void CSwitchButton::drawPressSlide(QPainter *painter)
     painter->setBrush(linGrad);
     QRect rrect = sliderect.intersected(rect());
     painter->drawEllipse(rrect);
-    //画边框
+
     painter->setBrush(Qt::NoBrush);
     painter->setPen(QColor(173, 173, 173, 160));
     painter->drawEllipse(rrect);

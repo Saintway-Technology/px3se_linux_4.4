@@ -4,21 +4,18 @@
 #
 #-------------------------------------------------
 
-QT       += core gui bluetooth network sql
-
+QT += bluetooth network sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = settings
-
 TEMPLATE = app
 
 CONFIG+= qt warn_on release
 
-
 DEFINES += CONFIG_CTRL_IFACE
 
 # 3399Linux、Big DPI
-DEFINES += DEVICE_EVB
+##########DEFINES += DEVICE_EVB
 
 LIBS += -lasound
 QMAKE_CXXFLAGS = -fpermissive
@@ -26,47 +23,59 @@ QMAKE_CXXFLAGS = -fpermissive
 win32 {
   LIBS += -lws2_32 -static
   DEFINES += CONFIG_NATIVE_WINDOWS CONFIG_CTRL_IFACE_NAMED_PIPE
-  SOURCES += setting/wpa_supplicant/src/utils/os_win32.c
+  SOURCES += wifi/wpa_supplicant/src/utils/os_win32.c
 } else:win32-g++ {
-  # cross compilation to win32
+  # Cross compilation to win32
   LIBS += -lws2_32 -static -mwindows
   DEFINES += CONFIG_NATIVE_WINDOWS CONFIG_CTRL_IFACE_NAMED_PIPE
-  SOURCES += setting/wpa_supplicant/src/utils/os_win32.c
+  SOURCES += wifi/wpa_supplicant/src/utils/os_win32.c
 } else:win32-x-g++ {
-  # cross compilation to win32
+  # Cross compilation to win32
   LIBS += -lws2_32 -static -mwindows
   DEFINES += CONFIG_NATIVE_WINDOWS CONFIG_CTRL_IFACE_NAMED_PIPE
   DEFINES += _X86_
-  SOURCES += setting/wpa_supplicant/src/utils/os_win32.c
+  SOURCES += wifi/wpa_supplicant/src/utils/os_win32.c
 } else {
   DEFINES += CONFIG_CTRL_IFACE_UNIX
-  SOURCES += setting/wpa_supplicant/src/utils/os_unix.c
+  SOURCES += wifi/wpa_supplicant/src/utils/os_unix.c
 }
 
-
+INCLUDEPATH +=$$PWD main
+include(main/main.pri)
 
 INCLUDEPATH +=$$PWD base
 include(base/base.pri)
 
-INCLUDEPATH +=$$PWD setting
-include(setting/setting.pri)
+INCLUDEPATH +=$$PWD top
+include(top/top.pri)
 
+INCLUDEPATH +=$$PWD middle
+include(middle/middle.pri)
 
+INCLUDEPATH +=$$PWD wifi
+include(wifi/wifi.pri)
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
-    global_value.cpp
+INCLUDEPATH +=$$PWD bluetooth
+include(bluetooth/bluetooth.pri)
 
-HEADERS  += mainwindow.h \
-    global_value.h
+INCLUDEPATH +=$$PWD brightness
+include(brightness/brightness.pri)
 
+INCLUDEPATH +=$$PWD calendar
+include (calendar/calendar.pri)
 
-FORMS = networkconfig.ui \
-        btscanner.ui \
-    brightness/brightness.ui \
-    calendar/widget.ui \
-    volumn/volumnwidget.ui \
-    updater/updaterwidget.ui
+INCLUDEPATH +=$$PWD volume
+include (volume/volume.pri)
+
+INCLUDEPATH +=$$PWD updater
+include (updater/updater.pri)
+
+FORMS = wifi/networkconfig.ui \
+        bluetooth/btscanner.ui \
+        brightness/brightness.ui \
+        calendar/widget.ui \
+        volume/volumnwidget.ui \
+        updater/updaterwidget.ui
 
 RESOURCES += \
     res_main.qrc \
