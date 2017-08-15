@@ -35,6 +35,5 @@ void VolumeWidgets::initLayout()
 
 VolumeWidgets::~VolumeWidgets()
 {
-    delete m_volumnWidget;
 }
 

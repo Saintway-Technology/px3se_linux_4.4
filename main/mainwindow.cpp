@@ -12,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :BaseWindow(parent)
 
 MainWindow::~MainWindow()
 {
-    delete m_setttingsWid;
 }
 
 void MainWindow::initLayout(){

@@ -35,6 +35,5 @@ void CalendarWidgets::initLayout()
 
 CalendarWidgets::~CalendarWidgets()
 {
-    delete m_calendarWidget;
 }
 

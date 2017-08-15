@@ -25,6 +25,4 @@ void SettingWidgets::initLayout()
 
 SettingWidgets::~SettingWidgets()
 {
-    delete m_topWid;
-    delete m_middleWid;
 }

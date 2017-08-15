@@ -507,11 +507,4 @@ void NetThread::run()
 
 WifiWidgets::~WifiWidgets()
 {
-    delete m_wifiSwitch;
-    delete m_tab;
-    delete m_tabCurrentStatus;
-    delete m_tabScanResult;
-    delete m_hostAPName;
-    delete m_hostAPPassword;
-    delete m_hostAPSwitch;
 }

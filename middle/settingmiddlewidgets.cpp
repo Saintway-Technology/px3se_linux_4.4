@@ -74,11 +74,4 @@ void SettingMiddleWidgets::slot_currentWidgetChanged(int index)
 
 SettingMiddleWidgets::~SettingMiddleWidgets()
 {
-    delete m_leftWid;
-    delete m_wifiWid;
-    delete m_bluetoothWid;
-    delete m_brightnessWid;
-    delete m_calendarWid;
-    delete m_volumnWid;
-    delete m_updaterWid;
 }

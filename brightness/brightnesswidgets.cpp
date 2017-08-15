@@ -35,7 +35,6 @@ void BrightnessWidgets::initLayout()
 
 BrightnessWidgets::~BrightnessWidgets()
 {
-    delete m_brightnessWidget;
 }
 
 

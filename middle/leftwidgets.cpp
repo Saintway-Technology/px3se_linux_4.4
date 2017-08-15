@@ -56,5 +56,4 @@ void LeftWidgets::initLayout()
 
 LeftWidgets::~LeftWidgets()
 {
-    delete m_funtionlist;
 }

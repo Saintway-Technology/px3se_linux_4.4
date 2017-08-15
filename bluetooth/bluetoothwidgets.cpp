@@ -33,6 +33,5 @@ void BluetoothWidgets::initLayout()
 }
 
 BluetoothWidgets::~BluetoothWidgets(){
-   delete m_scannerWidget;
 }
 

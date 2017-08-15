@@ -47,7 +47,6 @@ netConfigDialog::netConfigDialog(QWidget *parent):QDialog(parent)
     connect(removeButton,SIGNAL(clicked(bool)),this,SLOT(removeNetwork()));
 
     new_network = false;
-    pskEdit->setText("123456789");
 }
 
 void netConfigDialog::resizeEvent(QResizeEvent *)

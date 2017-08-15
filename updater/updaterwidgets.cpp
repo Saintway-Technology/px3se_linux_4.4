@@ -35,6 +35,5 @@ void UpdaterWidgets::initLayout()
 
 UpdaterWidgets::~UpdaterWidgets()
 {
-    delete m_updaterWidget;
 }
 
