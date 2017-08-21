@@ -6,11 +6,13 @@
 
 #ifdef DEVICE_EVB
 int wlan_item_height = 50;
+int next_step_move_distance = 100;
 #else
 int wlan_item_height = 30;
+int next_step_move_distance = 30;
 #endif
 
-WlanListTable::WlanListTable(QWidget *parent):QTableWidget(parent)
+WlanListTable::WlanListTable(QWidget *parent):BaseTableWidget(parent,next_step_move_distance)
 {
     init();
     initConnection();
@@ -21,44 +23,13 @@ void WlanListTable::init()
     m_previousFousedRow = -1;
     m_playingItemRow = -1;
 
-    setMouseTracking(true);
-    setFrameShadow(QFrame::Plain);
-    setFrameShape(QFrame::NoFrame);
-    setFocusPolicy(Qt::NoFocus);
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //   setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::Expanding);
-    setShowGrid(false);
-    this->horizontalHeader()->setVisible(false);
-    this->verticalHeader()->setVisible(false);
-    setEditTriggers(QTableWidget::NoEditTriggers);
-    setSelectionBehavior (QAbstractItemView::SelectRows);
-    setSelectionMode (QAbstractItemView::SingleSelection);
-    setContextMenuPolicy(Qt::CustomContextMenu);
-    setAcceptDrops(true);
-
     insertColumn(0);
     insertColumn(1);
     insertColumn(2);
     insertColumn(3);
 
-    horizontalHeader()->setVisible(false);
-    verticalHeader()->setVisible(false);
-
     // Set item height.
     verticalHeader()->setDefaultSectionSize(wlan_item_height);
-
-    verticalScrollBar()->setStyleSheet("QScrollBar{background:transparent; width: 10px;margin: 0px 2px 0px 0px;}"
-                                       "QScrollBar::handle{background:rgb(217,217,217);border-radius:4px;}"
-                                       "QScrollBar::handle:hover{background: rgb(191,191,191);}"
-                                       "QScrollBar::add-line:vertical{border:1px rgb(230,230,230);height: 1px;}"
-                                       "QScrollBar::sub-line:vertical{border:1px rgb(230,230,230);height: 1px;}"
-                                       "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {background:transparent;}");
-
-    setStyleSheet("QTableWidget{background:rgb(27,29,36)}"
-                  "QTableWidget{color:rgb(255,255,255);}"
-                  "QTableWidget::item:selected{background:rgb(27,29,36);}"
-                  "QTableWidget::item{selection-color:rgb(255,255,255);}");
 
 #ifdef DEVICE_EVB
     QFont font = this->font();
@@ -102,15 +73,6 @@ void WlanListTable::leaveEvent(QEvent *event)
 {
     QTableWidget::leaveEvent(event);
     slot_cellEnter(-1, -1);
-}
-
-void WlanListTable::mouseMoveEvent(QMouseEvent *event)
-{
-    QTableWidget::mouseMoveEvent(event);
-    if(itemAt(mapFromGlobal(QCursor::pos()))==Q_NULLPTR)
-    {
-        slot_cellEnter(-1,-1);
-    }
 }
 
 void WlanListTable::resizeEvent(QResizeEvent *event)

@@ -2,9 +2,9 @@
 #define WLANLISTTABLE_H
 
 #include <QObject>
-#include <QTableWidget>
+#include "base/basetablewidget.h"
 
-class WlanListTable:public QTableWidget
+class WlanListTable:public BaseTableWidget
 {
     Q_OBJECT
 public:
@@ -19,7 +19,6 @@ private:
     void setRowTextColor(int row,const QColor &color)const;
 protected:
     void leaveEvent(QEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
     void resizeEvent(QResizeEvent*);
 
 private slots:

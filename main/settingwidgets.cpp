@@ -4,6 +4,7 @@
 
 SettingWidgets::SettingWidgets(QWidget *parent):BaseWidget(parent)
 {
+    setStyleSheet("QLabel{color:white;}");
     initLayout();
 }
 

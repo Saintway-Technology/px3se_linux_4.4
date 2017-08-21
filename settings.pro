@@ -15,7 +15,7 @@ CONFIG+= qt warn_on release
 DEFINES += CONFIG_CTRL_IFACE
 
 # 3399Linux、Big DPI
-##########DEFINES += DEVICE_EVB
+DEFINES += DEVICE_EVB
 
 LIBS += -lasound
 QMAKE_CXXFLAGS = -fpermissive

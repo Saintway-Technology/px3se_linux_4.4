@@ -119,15 +119,19 @@ void WifiWidgets::initLayout()
     vmainlyout->addLayout(apPasswordLayout);
     vmainlyout->addWidget(m_hostAPSwitch);
 
-    vmainlyout->addSpacing(50);
-    vmainlyout->addStretch(0);
+#ifdef DEVICE_EVB
+    vmainlyout->addSpacing(300);
+#else
+    vmainlyout->addSpacing(30);
+#endif
+
     vmainlyout->setContentsMargins(0,0,0,0);
-    vmainlyout->setSpacing(12);
+    vmainlyout->setSpacing(10);
 
     // Set the layout in the middle.
     QHBoxLayout *hmainlyout = new QHBoxLayout;
     hmainlyout->addStretch(1);
-    hmainlyout->addLayout(vmainlyout,4);
+    hmainlyout->addLayout(vmainlyout,6);
     hmainlyout->addStretch(1);
     setLayout(hmainlyout);
 }
@@ -389,8 +393,6 @@ TabScanResult::TabScanResult(QWidget *parent):BaseWidget(parent)
 {
     QVBoxLayout *vmainlyout = new QVBoxLayout;
 
-    QLabel *tipLabel = new QLabel("the scan result:",this);
-
     m_table = new WlanListTable(this);
 
     QHBoxLayout *lyout1 = new QHBoxLayout;
@@ -401,10 +403,9 @@ TabScanResult::TabScanResult(QWidget *parent):BaseWidget(parent)
     lyout1->addWidget(scanButton);
     lyout1->addStretch(0);
 
-    vmainlyout->addWidget(tipLabel);
     vmainlyout->addSpacing(5);
     vmainlyout->addWidget(m_table);
-    vmainlyout->addSpacing(15);
+    vmainlyout->addSpacing(10);
     vmainlyout->addLayout(lyout1);
     vmainlyout->setContentsMargins(10,10,5,5);
     vmainlyout->setSpacing(5);

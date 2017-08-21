@@ -31,8 +31,13 @@ void SettingMiddleWidgets::initLayout()
     m_stackedWid->addWidget(m_volumnWid);
     m_stackedWid->addWidget(m_updaterWid);
 
+#ifdef DEVICE_EVB
     hmainlyout->addWidget(m_leftWid,1);
-    hmainlyout->addWidget(m_stackedWid,4);    
+    hmainlyout->addWidget(m_stackedWid,3);
+#else
+    hmainlyout->addWidget(m_leftWid,1);
+    hmainlyout->addWidget(m_stackedWid,4);
+#endif
 
     hmainlyout->setContentsMargins(0,0,0,0);
     hmainlyout->setSpacing(0);
