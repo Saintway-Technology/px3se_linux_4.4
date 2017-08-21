@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QFileInfo>
 
+#include "updater_recovery_start.h"
+
 namespace Ui {
 class UpdaterWidget;
 }
@@ -17,13 +19,12 @@ public:
     ~UpdaterWidget();
 
 private slots:
-    void on_m_selectFilePushButton_clicked();
-
     void on_m_updatePushButton_clicked();
 
 private:
     Ui::UpdaterWidget *ui;
     QFileInfo *file;
+    UpdaterInfo fwinfo;
 };
 
 #endif // UPDATERWIDGET_H

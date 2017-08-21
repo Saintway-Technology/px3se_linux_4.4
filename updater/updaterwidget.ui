@@ -19,17 +19,14 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>image:</string>
+        <string>update_version:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="m_fileLineEdit"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="m_selectFilePushButton">
-       <property name="text">
-        <string>select file</string>
+      <widget class="QLineEdit" name="m_update_version_LineEdit">
+       <property name="enabled">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
