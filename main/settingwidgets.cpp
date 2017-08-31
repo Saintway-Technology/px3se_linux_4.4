@@ -6,6 +6,7 @@ SettingWidgets::SettingWidgets(QWidget *parent):BaseWidget(parent)
 {
     setStyleSheet("QLabel{color:white;}");
     initLayout();
+    initConnection();
 }
 
 
@@ -22,6 +23,11 @@ void SettingWidgets::initLayout()
     vmainlyout->setSpacing(0);
 
     setLayout(vmainlyout);
+}
+
+void SettingWidgets::initConnection()
+{
+    connect(m_topWid,SIGNAL(returnClicked()),mainWindow,SLOT(slot_appQuit()));
 }
 
 SettingWidgets::~SettingWidgets()

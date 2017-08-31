@@ -185,6 +185,7 @@ void AbsFrameLessAutoSize::mouseMoveRect(const QPoint& p)
         }
     }
 }
+
 void AbsFrameLessAutoSize::mousePressEvent(QMouseEvent *event)
 {
     m_state.PressedSize=this->size();
@@ -194,6 +195,7 @@ void AbsFrameLessAutoSize::mousePressEvent(QMouseEvent *event)
     {
     }
 }
+
 void AbsFrameLessAutoSize::mouseMoveEvent(QMouseEvent *event)
 {
     mouseMoveRect(mapFromGlobal(event->globalPos()));
@@ -202,6 +204,7 @@ void AbsFrameLessAutoSize::mouseMoveEvent(QMouseEvent *event)
         this->move(m_state.WindowPos + (event->globalPos() - m_state.MousePos));
     }
 }
+
 void AbsFrameLessAutoSize::mouseReleaseEvent(QMouseEvent *event)
 {
     m_state.IsPressBorder=false;

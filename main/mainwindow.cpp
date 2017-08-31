@@ -1,17 +1,17 @@
 #include "mainwindow.h"
 #include "global_value.h"
+#include <QVBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent) :BaseWindow(parent)
 {
-    // Init global main class of 'MainWindow' for other widgets invokes.
-    mainWindow = this;
-
+    initData();
     initLayout();
-    initConnection();
 }
 
-MainWindow::~MainWindow()
+void MainWindow::initData()
 {
+    // Initialize global main class of 'MainWindow' for other widgets invokes.
+    mainWindow = this;
 }
 
 void MainWindow::initLayout(){
@@ -25,11 +25,16 @@ void MainWindow::initLayout(){
     setLayout(mainLayout);
 }
 
-void MainWindow::initConnection()
+void MainWindow::disableApplication()
 {
-    connect(m_setttingsWid->m_topWid->m_btnmini,SIGNAL(clicked(bool)),this,SLOT(showMinimized()));
-    connect(m_setttingsWid->m_topWid->m_btnexit,SIGNAL(clicked(bool)),this,SLOT(slot_appQuit()));
-    connect(m_setttingsWid->m_topWid->m_btnreturn,SIGNAL(clicked(bool)),this,SLOT(slot_appQuit()));
+    qDebug("disable settting application");
+    this->setVisible(false);
+}
+
+void MainWindow::enableApplication()
+{
+    qDebug("enable setting application");
+    this->setVisible(true);
 }
 
 void MainWindow::slot_appQuit()

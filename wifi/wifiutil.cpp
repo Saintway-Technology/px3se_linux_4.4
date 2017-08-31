@@ -22,7 +22,7 @@
 
 #define DEBUG_ERR(M, ...) qDebug("DEBUG %d: " M, __LINE__, ##__VA_ARGS__)
 
-static const char WPA_SUPPLICANT_CONF_DIR[]  = "/tmp/wpa_supplicant.conf";
+static const char WPA_SUPPLICANT_CONF_DIR[]  = "/etc/wpa_supplicant.conf";
 static const char HOSTAPD_CONF_DIR[] = "/tmp/hostapd.conf";
 
 bool WifiUtil::console_run(const char *cmdline) {
@@ -139,7 +139,7 @@ int WifiUtil::wifi_start_supplicant()
     if (is_supplicant_running()) {
         return 0;
     }
-    console_run("/usr/sbin/wpa_supplicant -Dnl80211 -iwlan0 -c /tmp/wpa_supplicant.conf &");
+    console_run("/usr/sbin/wpa_supplicant -Dnl80211 -iwlan0 -c /etc/wpa_supplicant.conf &");
     return 0;
 }
 

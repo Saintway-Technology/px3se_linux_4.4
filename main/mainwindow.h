@@ -14,18 +14,21 @@ class MainWindow : public BaseWindow
     Q_OBJECT
 public:
     explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    ~MainWindow(){}
 protected:
     void keyPressEvent(QKeyEvent *event);
+    // Used for disable or enable application when car-reverse event comes.
+    void disableApplication();
+    void enableApplication();
 private:
     SettingWidgets *m_setttingsWid;
 
+    void initData();
     void initLayout();
-    void initConnection();
-
 private slots:
-    void slot_appQuit();
     void slot_standby();
+public slots:
+    void slot_appQuit();
 };
 
 

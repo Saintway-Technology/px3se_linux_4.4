@@ -25,6 +25,7 @@ public:
     SettingMiddleWidgets *m_middleWid;
 private:
     void initLayout();
+    void initConnection();
 };
 
 #endif // SETTINGWIDGETS_H

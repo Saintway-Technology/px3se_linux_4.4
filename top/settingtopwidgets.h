@@ -9,18 +9,18 @@
 
 class SettingTopWidgets:public BaseWidget
 {
+    Q_OBJECT
 public:
     SettingTopWidgets(QWidget *parent=0);
     ~SettingTopWidgets();
-public:
-    FourStateButton *m_btnreturn;
-    FlatButton *m_btnicon;
-    FlatButton *m_btnmobile;
-    FlatButton *m_btnsetting;
-    FlatButton *m_btnmini;
-    FlatButton *m_btnexit;
 private:
     void initLayout();
+    void initConnection();
+
+    FourStateButton *m_btnReturn;
+    FlatButton *m_btnIcon;
+signals:
+    void returnClicked();
 };
 
 #endif // SETTINGTOPWIDGETS_H

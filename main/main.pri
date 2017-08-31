@@ -3,7 +3,6 @@ HEADERS += \
     $$PWD/mainwindow.h \
     $$PWD/settingwidgets.h \
 
-
 SOURCES += \
     $$PWD/main.cpp \
     $$PWD/global_value.cpp \
