@@ -33,6 +33,9 @@
     </layout>
    </item>
    <item>
+    <widget class="QTextBrowser" name="m_textBrowser"/>
+   </item>
+   <item>
     <widget class="QPushButton" name="m_updatePushButton">
      <property name="text">
       <string>update</string>

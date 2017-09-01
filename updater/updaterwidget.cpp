@@ -172,9 +172,12 @@ void UpdaterWidget::on_m_updatePushButton_clicked()
         theFile.close();
         qDebug()<<"Found img:"<<file->absoluteFilePath()<<" md5:" << ba.toHex().constData();
 
+        ui->m_textBrowser->append("Found img:"+file->absoluteFilePath());
+        ui->m_textBrowser->append("md5:" + QString(QLatin1String((ba.toHex().constData()))));
     }else{
         qDebug()<<file->absoluteFilePath()<<"not found";
         file= new QFileInfo("/mnt/udisk/Firmware.img");
+         ui->m_textBrowser->append(file->absoluteFilePath()+"not found");
     }
 
     if(file&&file->exists()){
@@ -185,8 +188,11 @@ void UpdaterWidget::on_m_updatePushButton_clicked()
         theFile.close();
         qDebug() << ba.toHex().constData();
         qDebug()<<"Found img:"<<file->absoluteFilePath() << ba.toHex().constData();
+        ui->m_textBrowser->append("Found img:"+file->absoluteFilePath());
+        ui->m_textBrowser->append("md5:" + QString(QLatin1String((ba.toHex().constData()))));
     }else{
         qDebug()<<file->absoluteFilePath()<<"not found";
+        ui->m_textBrowser->append(file->absoluteFilePath()+"not found");
         return;
     }
 
@@ -194,15 +200,19 @@ void UpdaterWidget::on_m_updatePushButton_clicked()
     int ret = fw_flag_check(path);
     if(ret){
         qDebug()<<"fw_flag_check faild";
+        ui->m_textBrowser->append("fw_flag_check faild");
         return ;
     }else{
         qDebug()<<"fw_flag_check ok";
+        ui->m_textBrowser->append("fw_flag_check ok");
     }
     ret = fw_md5_check();
     if(ret){
         qDebug()<<"fw_md5_check faild";
+        ui->m_textBrowser->append("fw_md5_check faild");
     }else{
         qDebug()<<"fw_md5_check ok";
+        ui->m_textBrowser->append("fw_md5_check ok");
     }
 
     printf("Current Path is %s\n", fwinfo.update_path);
@@ -216,11 +226,14 @@ void UpdaterWidget::on_m_updatePushButton_clicked()
 
     if(ret){
         qDebug()<<"vendor_storage_write faild";
+        ui->m_textBrowser->append("vendor_storage_write faild");
     }else{
         qDebug()<<"vendor_storage_write ok";
+        ui->m_textBrowser->append("vendor_storage_write ok");
         qDebug()<<"update_version:"<<fwinfo.update_version<<" update_mode:"<<fwinfo.update_mode
                <<" update_path:"<<fwinfo.update_path;
         qDebug()<<"begin reboot";
+        ui->m_textBrowser->append("begin reboot");
         QProcess::execute("reboot");
     }
 }
