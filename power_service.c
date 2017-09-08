@@ -5,10 +5,13 @@
 #include <fcntl.h>
 #include <pthread.h>
 #include <linux/input.h>
+#include "PowerManager.h"
 
-
-//#define DEV_PATH "/dev/input/event2"   //difference is possible
+#ifdef PLATFORM_WAYLAND
+#define DEV_PATH "/dev/input/event2"   //difference is possible
+#else
 #define DEV_PATH "/dev/input/event0"   //difference is possible
+#endif
 
 #define KEY_POWER            116
 
@@ -33,7 +36,17 @@ static void* key_event_handler(void *arg)
                 if( t.value==1 && t.code==KEY_POWER)
                 {
                 	printf("[PowerManager] key_event_handler key Power\n");
-                    //system("echo mem > /sys/power/state");
+                    if(SCREEN_ON == get_screen_status())
+				    {
+				        printf("[PowerManager] key value is PowerKey, screen off \n");
+				        screenOff();
+				        system_suspend_immediately();
+				    }
+				    else
+				    {
+				        printf("[PowerManager] key value is PowerKey, screen ON \n");
+				        screenOn();
+				    }
                 }
         }
     }

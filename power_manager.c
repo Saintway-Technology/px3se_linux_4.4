@@ -109,6 +109,12 @@ int systemResume(void)
 	return set_power_state(POWER_STATE_ON);
 }
 
+int system_suspend_immediately(void)
+{
+	system("echo mem > /sys/power/state");
+	return 0;
+}
+
 static int get_def_backlight_level(void)
 {
 	int fd = 0;
@@ -215,8 +221,9 @@ int screenOff(void)
 	int ret = 0;
 	int fd = 0;
 
-	fd = open(DISP_DEV, O_RDWR);
+	printf("[PowerManager]  screenOff \n");
 
+	fd = open(DISP_DEV, O_RDWR);
 	ret = 0;
 	backlightOff();
 	retval = ioctl(fd, FBIOBLANK, FB_BLANK_POWERDOWN);
@@ -236,6 +243,7 @@ int screenOn(void)
 	int ret = 0;
 	int fd = 0;
 
+	printf("[PowerManager]  ScreenOn \n");
 	fd = open(DISP_DEV, O_RDWR);
 	ret = 0;
 	retval = ioctl(fd, FBIOBLANK, FB_BLANK_UNBLANK);
@@ -494,7 +502,7 @@ static void uevent_event(void)
 	msg[n+1] = '\0';
 	cp = msg;
 
-	printf("[PowerManager]: uevent: %s\n", cp);
+	//printf("[PowerManager]: uevent: %s\n", cp);
 	while (*cp) {
 		pm_thermal_uevent_check(cp);
 

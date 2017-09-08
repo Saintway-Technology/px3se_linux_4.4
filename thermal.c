@@ -258,7 +258,7 @@ void pm_thermal_uevent_check(char *msg)
 {
 	struct pm_zone_t *zone = NULL;
 
-	printf("[PowerManager] pm_thermal_uevent_check \n");
+	//printf("[PowerManager] pm_thermal_uevent_check \n");
 	if (nl_list_empty(&g_pm_zone_list))
 		return;
 	nl_list_for_each_entry(zone, &g_pm_zone_list, list) {

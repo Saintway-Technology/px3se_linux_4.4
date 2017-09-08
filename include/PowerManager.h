@@ -40,8 +40,8 @@
 		(pos) = nl_list_entry((pos)->member.prev, typeof(*(pos)), member))
 
 enum {
-	SCREEN_ON = 0,
-	SCREEN_OFF
+	SCREEN_OFF = 0,
+	SCREEN_ON
 };
 
 enum sleep_in_priority {
@@ -123,5 +123,8 @@ int pm_sleep(void);
 int pm_wakeup(void);
 void pm_reboot(void);
 void pm_poweroff(void);
+int system_suspend_immediately(void);
+int get_screen_status(void);
+
 
 #endif
