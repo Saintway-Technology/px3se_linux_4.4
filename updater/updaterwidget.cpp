@@ -153,7 +153,9 @@ UpdaterWidget::UpdaterWidget(QWidget *parent) :
 
     qDebug()<<"update_version:"<<fwinfo.update_version<<" update_mode:"<<fwinfo.update_mode
            <<" update_path:"<<fwinfo.update_path;
-    ui->m_update_version_LineEdit->setText(QString::number(fwinfo.update_version));
+    char version[255]={0};
+    sprintf(version,"%d.%d.%d\n",fwinfo.update_version>>24&0xFF,fwinfo.update_version>>16&0xFF,fwinfo.update_version&0xFF);
+    ui->m_update_version_LineEdit->setText(QString(version));
 }
 
 UpdaterWidget::~UpdaterWidget()
@@ -175,25 +177,24 @@ void UpdaterWidget::on_m_updatePushButton_clicked()
         ui->m_textBrowser->append("Found img:"+file->absoluteFilePath());
         ui->m_textBrowser->append("md5:" + QString(QLatin1String((ba.toHex().constData()))));
     }else{
-        qDebug()<<file->absoluteFilePath()<<"not found";
+        qDebug()<<file->absoluteFilePath()<<" not found";
+        ui->m_textBrowser->append(file->absoluteFilePath()+" not found");
         file= new QFileInfo("/mnt/udisk/Firmware.img");
-         ui->m_textBrowser->append(file->absoluteFilePath()+"not found");
-    }
-
-    if(file&&file->exists()){
-        qDebug()<< file->absoluteFilePath();
-        QFile theFile(file->absoluteFilePath());
-        theFile.open(QIODevice::ReadOnly);
-        QByteArray ba = QCryptographicHash::hash(theFile.readAll(), QCryptographicHash::Md5);
-        theFile.close();
-        qDebug() << ba.toHex().constData();
-        qDebug()<<"Found img:"<<file->absoluteFilePath() << ba.toHex().constData();
-        ui->m_textBrowser->append("Found img:"+file->absoluteFilePath());
-        ui->m_textBrowser->append("md5:" + QString(QLatin1String((ba.toHex().constData()))));
-    }else{
-        qDebug()<<file->absoluteFilePath()<<"not found";
-        ui->m_textBrowser->append(file->absoluteFilePath()+"not found");
-        return;
+        if(file&&file->exists()){
+            qDebug()<< file->absoluteFilePath();
+            QFile theFile(file->absoluteFilePath());
+            theFile.open(QIODevice::ReadOnly);
+            QByteArray ba = QCryptographicHash::hash(theFile.readAll(), QCryptographicHash::Md5);
+            theFile.close();
+            qDebug() << ba.toHex().constData();
+            qDebug()<<"Found img:"<<file->absoluteFilePath() << ba.toHex().constData();
+            ui->m_textBrowser->append("Found img:"+file->absoluteFilePath());
+            ui->m_textBrowser->append("md5:" + QString(QLatin1String((ba.toHex().constData()))));
+        }else{
+            qDebug()<<file->absoluteFilePath()<<" not found";
+            ui->m_textBrowser->append(file->absoluteFilePath()+" not found");
+            return;
+        }
     }
 
     char* path= file->absoluteFilePath().toLatin1().data();
