@@ -35,6 +35,11 @@ void Widget::SetUI()
     InitComboBox();
     m_timer = new QTimer(this);
     m_timer->start(1000);
+
+    m_ZodiacButton->setVisible(false);
+    m_StarButton->setVisible(false);
+    QDateTime datetime = QDateTime::currentDateTime();
+    m_ShowTimeLabel->setText(datetime.time().toString());
 }
 
 void Widget::SetUpContextMenu()
@@ -111,6 +116,11 @@ void Widget::SetCurrentTime()
         format.setBackground(Qt::yellow);
         m_Calendar->setDateTextFormat(m_Today,format);
     }
+    setDateShow(datetime.date().year(),datetime.date().month(),datetime.date().day());
+}
+void Widget::setDateShow(int year,int month,int day)
+{
+    m_ShowDateLabel->setText(QString::number(year)+"年"+QString::number(month)+"月"+QString::number(day)+"日");
 }
 
 void Widget::SetConnect()
@@ -191,7 +201,7 @@ void Widget::DateChanged()
     int lunaryear=0,lunarmonth=0,lunarday=0;
     QString lunarstring = GetLunarStringX(year,month,day,lunaryear,lunarmonth,lunarday);
 
-    SetLunarShow(lunaryear,lunarstring);
+    //SetLunarShow(lunaryear,lunarstring);
     SetZodiac(lunaryear);
     SetStar(month,day);
     if(m_YearComboBox->currentIndex()+BEGIN_YEAR==year && m_MonthComboBox->currentIndex()+1==month

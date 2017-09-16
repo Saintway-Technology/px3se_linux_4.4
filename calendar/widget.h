@@ -47,6 +47,7 @@ private:
     void SetZodiac(int);
     void SetStar(int,int);
     void SetConnect();
+    void setDateShow(int year,int month,int day);
     void SetLunarShow(int,QString);
     void InitComboBox();
     void SetUpContextMenu();
