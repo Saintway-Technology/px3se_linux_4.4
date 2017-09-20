@@ -25,8 +25,10 @@ private slots:
 
     void on_m_VolumnHorizontalSlider_valueChanged(int value);
 
+    void on_m_VolumnHorizontalSlider_sliderReleased();
+
 private:
-    void onVolumnChange(int volumn);
+    static void onVolumnChange(int volumn);
     void saveVolumn(int volumn);
 private:
     Ui::VolumnWidget *ui;

@@ -3,12 +3,13 @@
 #include <QDebug>
 #include <QFile>
 #include <QDir>
+#include <QtConcurrent/QtConcurrent>
 
 Brightness::Brightness(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Brightness)
 {
-    ui->setupUi(this);    
+    ui->setupUi(this);
 
 
     QFile brightnessPath("/sys/class/backlight/rk28_bl/brightness");
@@ -19,6 +20,29 @@ Brightness::Brightness(QWidget *parent) :
     qDebug()<<"read brightness from sys:"<<brightnessInt;
     saveBrightness(brightnessInt);
     ui->m_BrightnessHorizontalSlider->setValue(brightnessInt);
+    ui->m_BrightnessHorizontalSlider->setStyleSheet("  \
+                                                    QSlider{\
+                                                    border-color: #bcbcbc;\
+                                                    }\
+                                                    QSlider::groove:horizontal {\
+                                                         border: 1px solid #999999;\
+                                                         height: 20px;\
+                                                        margin: 0px 0;\
+                                                         left: 5px; right: 5px;\
+                                                     }\
+                                                    QSlider::handle:horizontal {\
+                                                         border: 0px ;\
+                                                         border-image:url(:/image/setting/slider.png);\
+                                                         width: 60px;\
+                                                         margin: -30px -13px -30px -13px;\
+                                                    }\
+                                                    QSlider::add-page:horizontal{\
+                                                    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #bcbcbc, stop:0.25 #bcbcbc, stop:0.5 #bcbcbc, stop:1 #bcbcbc);\
+                                                    }\
+                                                    QSlider::sub-page:horizontal{\
+                                                     background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #439cf3, stop:0.25 #439cf3, stop:0.5 #439cf3, stop:1 #439cf3);\
+                                                    }\
+                    ");
 
 }
 
@@ -29,12 +53,12 @@ Brightness::~Brightness()
 
 void Brightness::on_m_BrightnessHorizontalSlider_sliderMoved(int position)
 {
-    onBrightnessChange(position);
+       QtConcurrent::run(onBrightnessChange,position);
 }
 
 void Brightness::on_m_BrightnessHorizontalSlider_valueChanged(int value)
 {
-    onBrightnessChange(value);
+    QtConcurrent::run(onBrightnessChange,value);
 }
 
 void Brightness::on_m_BrightnessHorizontalSlider_actionTriggered(int action)
@@ -50,7 +74,6 @@ void Brightness::onBrightnessChange(int brightness){
     QString cmd= QString("echo %1 > %2").arg(brightness).arg("/sys/class/backlight/rk28_bl/brightness");
 #endif
     system(cmd.toLatin1().data());
-    saveBrightness(brightness);
 }
 
 void Brightness::saveBrightness(int brightness){
@@ -76,4 +99,9 @@ void Brightness::on_m_BrightnessDownPushButton_clicked()
 void Brightness::on_m_BrightnessUpPushButton_clicked()
 {
     ui->m_BrightnessHorizontalSlider->setValue(ui->m_BrightnessHorizontalSlider->value()+ui->m_BrightnessHorizontalSlider->pageStep());
+}
+
+void Brightness::on_m_BrightnessHorizontalSlider_sliderReleased()
+{
+    saveBrightness(ui->m_BrightnessHorizontalSlider->value());
 }

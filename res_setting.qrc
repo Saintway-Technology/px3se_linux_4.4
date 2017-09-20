@@ -24,5 +24,6 @@
         <file>image/setting/calendar.png</file>
         <file>image/setting/speaker.png</file>
         <file>image/setting/update.png</file>
+        <file>image/setting/slider.png</file>
     </qresource>
 </RCC>

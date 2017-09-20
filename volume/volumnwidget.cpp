@@ -1,7 +1,7 @@
 #include "volumnwidget.h"
 #include "ui_volumnwidget.h"
 #include <QDebug>
-
+#include <QtConcurrent/QtConcurrent>
 #include <stdio.h>
 #include <alsa/asoundlib.h>
 
@@ -128,6 +128,29 @@ VolumnWidget::VolumnWidget(QWidget *parent) :
     qDebug()<<"read volumnInt from sys:"<<volumnInt;
     audio_volume(AUDIO_VOLUME_SET, &volumnInt);
     ui->m_VolumnHorizontalSlider->setValue(volumnInt);
+    ui->m_VolumnHorizontalSlider->setStyleSheet("  \
+                                            QSlider{\
+                                            border-color: #bcbcbc;\
+                                            }\
+                                            QSlider::groove:horizontal {\
+                                                 border: 1px solid #999999;\
+                                                 height: 20px;\
+                                                margin: 0px 0;\
+                                                 left: 5px; right: 5px;\
+                                             }\
+                                            QSlider::handle:horizontal {\
+                                                 border: 0px ;\
+                                                 border-image:url(:/image/setting/slider.png);\
+                                                 width: 60px;\
+                                                 margin: -30px -13px -30px -13px;\
+                                            }\
+                                            QSlider::add-page:horizontal{\
+                                            background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #bcbcbc, stop:0.25 #bcbcbc, stop:0.5 #bcbcbc, stop:1 #bcbcbc);\
+                                            }\
+                                            QSlider::sub-page:horizontal{\
+                                             background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #439cf3, stop:0.25 #439cf3, stop:0.5 #439cf3, stop:1 #439cf3);\
+                                            }\
+            ");
 
 }
 
@@ -141,7 +164,6 @@ void VolumnWidget::onVolumnChange(int volumn){
     qDebug()<< "volumn:" << volumn;
     long int vol=volumn;
     audio_volume(AUDIO_VOLUME_SET, &vol);
-    saveVolumn(volumn);
 }
 
 void VolumnWidget::on_m_VolumnDownPushButton_clicked()
@@ -172,11 +194,16 @@ void VolumnWidget::saveVolumn(int volumn){
 
 void VolumnWidget::on_m_VolumnHorizontalSlider_sliderMoved(int position)
 {
-    onVolumnChange(position);
+    QtConcurrent::run(onVolumnChange,position);
 }
 
 
 void VolumnWidget::on_m_VolumnHorizontalSlider_valueChanged(int value)
 {
-    onVolumnChange(value);
+    QtConcurrent::run(onVolumnChange,value);
+}
+
+void VolumnWidget::on_m_VolumnHorizontalSlider_sliderReleased()
+{
+    saveVolumn( ui->m_VolumnHorizontalSlider->value());
 }

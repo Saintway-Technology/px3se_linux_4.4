@@ -17,7 +17,7 @@ public:
     explicit Brightness(QWidget *parent = 0);
     ~Brightness();
 private:
-    void onBrightnessChange(int brightness);
+    static void onBrightnessChange(int brightness);
     void saveBrightness(int brightness);
 private slots:
     void on_m_BrightnessHorizontalSlider_sliderMoved(int position);
@@ -29,6 +29,8 @@ private slots:
     void on_m_BrightnessDownPushButton_clicked();
 
     void on_m_BrightnessUpPushButton_clicked();
+
+    void on_m_BrightnessHorizontalSlider_sliderReleased();
 
 private:
     Ui::Brightness *ui;
