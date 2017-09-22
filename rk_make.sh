@@ -2,9 +2,11 @@
 
 EXT_PROJECT_FILE=audioservice
 TOP_DIR=$(pwd)
+BUILD_DIR=$(pwd)/build
 #EXT_DIR_NAME=$(basename $TOP_DIR)
 BUILDROOT_TARGET_PATH=$(pwd)/../../buildroot/output/target/
-CC=$(pwd)/../../buildroot/output/host/usr/bin/arm-rockchip-linux-gnueabihf-gcc
+TARGET_BIN_PATH=$BUILDROOT_TARGET_PATH/usr/bin/
+TOOLCHAIN_FILE=$(pwd)/../../buildroot/output/host/usr/share/buildroot/toolchainfile.cmake
 STRIP=$(pwd)/../../buildroot/output/host/usr/bin/arm-rockchip-linux-gnueabihf-strip
 PRODUCT_NAME=`ls ../../device/rockchip/px3-se`
 TARGET_EXECUTABLE=""
@@ -33,6 +35,9 @@ else
 	mulcore_cmd=-j4
 fi
 
+# build executable bin.
+cd $BUILD_DIR
+cmake -D CMAKE_TOOLCHAIN_FILE="$TOOLCHAIN_FILE" ..
 make $mulcore_cmd
 check_err_exit $?
 
@@ -46,8 +51,9 @@ do
 	then
 		TARGET_EXECUTABLE=$(basename "$file")
 		echo "found executable file $TARGET_EXECUTABLE"
-		$STRIP $TOP_DIR/$TARGET_EXECUTABLE
-		echo "$TARGET_EXECUTABLE audioservice is ready."
+		$STRIP $BUILD_DIR/$TARGET_EXECUTABLE
+		cp $BUILD_DIR/$TARGET_EXECUTABLE $TARGET_BIN_PATH
+		echo "audioservice is ready in /usr/bin/audioservice."
 	fi
     fi
 done
