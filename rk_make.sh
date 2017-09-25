@@ -36,6 +36,7 @@ else
 fi
 
 # build executable bin.
+mkdir build
 cd $BUILD_DIR
 cmake -D CMAKE_TOOLCHAIN_FILE="$TOOLCHAIN_FILE" ..
 make $mulcore_cmd
@@ -59,7 +60,7 @@ do
 done
 
 make clean
-
+rm -rf $BUILD_DIR
 
 #call just for buid_all.sh
 if [ "$1" = "cleanthen" ] || [ "$2" = "cleanthen" ];then
