@@ -23,7 +23,7 @@
 #define DEBUG_ERR(M, ...) qDebug("DEBUG %d: " M, __LINE__, ##__VA_ARGS__)
 
 static const char WPA_SUPPLICANT_CONF_DIR[]  = "/etc/wpa_supplicant.conf";
-static const char HOSTAPD_CONF_DIR[] = "/tmp/hostapd.conf";
+static const char HOSTAPD_CONF_DIR[] = "/etc/hostapd.conf";
 
 bool WifiUtil::console_run(const char *cmdline) {
     DEBUG_INFO("cmdline = %s\n",cmdline);
@@ -102,36 +102,33 @@ int WifiUtil::creat_supplicant_file()
 
 int WifiUtil::creat_hostapd_file(const char* name, const char* password)
 {
-    if (access(HOSTAPD_CONF_DIR, F_OK) < 0) {
-        FILE* fp;
-        fp = fopen(HOSTAPD_CONF_DIR, "wt+");
+    FILE* fp;
+    fp = fopen(HOSTAPD_CONF_DIR, "wt+");
 
-        if (fp != 0) {
-            fputs("interface=wlan0\n", fp);
-            fputs("driver=nl80211\n", fp);
-            fputs("ssid=", fp);
-            fputs(name, fp);
-            fputs("\n", fp);
-            fputs("channel=6\n", fp);
-            fputs("hw_mode=g\n", fp);
-            fputs("ieee80211n=1\n", fp);
-            fputs("ht_capab=[SHORT-GI-20]\n", fp);
-            fputs("ignore_broadcast_ssid=0\n", fp);
-            fputs("auth_algs=1\n", fp);
-            fputs("wpa=3\n", fp);
-            fputs("wpa_passphrase=", fp);
-            fputs(password, fp);
-            fputs("\n", fp);
-            fputs("wpa_key_mgmt=WPA-PSK\n", fp);
-            fputs("wpa_pairwise=TKIP\n", fp);
-            fputs("rsn_pairwise=CCMP", fp);
+    if (fp != 0) {
+        fputs("interface=wlan0\n", fp);
+        fputs("driver=nl80211\n", fp);
+        fputs("ssid=", fp);
+        fputs(name, fp);
+        fputs("\n", fp);
+        fputs("channel=6\n", fp);
+        fputs("hw_mode=g\n", fp);
+        fputs("ieee80211n=1\n", fp);
+        fputs("ht_capab=[SHORT-GI-20]\n", fp);
+        fputs("ignore_broadcast_ssid=0\n", fp);
+        fputs("auth_algs=1\n", fp);
+        fputs("wpa=3\n", fp);
+        fputs("wpa_passphrase=", fp);
+        fputs(password, fp);
+        fputs("\n", fp);
+        fputs("wpa_key_mgmt=WPA-PSK\n", fp);
+        fputs("wpa_pairwise=TKIP\n", fp);
+        fputs("rsn_pairwise=CCMP", fp);
 
-            fclose(fp);
-            return 0;
-        }
-        return -1;
+        fclose(fp);
+        return 0;
     }
-    return 0;
+    return -1;
 }
 
 int WifiUtil::wifi_start_supplicant()
@@ -163,6 +160,8 @@ int WifiUtil::wifi_stop_supplicant()
 
 int WifiUtil::wifi_start_hostapd()
 {
+    char cmd[256];
+
     if (is_hostapd_running()) {
         return 0;
     }
@@ -175,7 +174,9 @@ int WifiUtil::wifi_start_hostapd()
     console_run("iptables --table nat --delete-chain");
     console_run("iptables --table nat --append POSTROUTING --out-interface eth0 -j MASQUERADE");
     console_run("iptables --append FORWARD --in-interface wlan0 -j ACCEPT");
-    console_run("/usr/sbin/hostapd /tmp/hostapd.conf -B");
+    memset(cmd,0,sizeof(cmd));
+    sprintf(cmd,"/usr/sbin/hostapd %s -B",HOSTAPD_CONF_DIR);
+    console_run(cmd);
 
     return 0;
 }
