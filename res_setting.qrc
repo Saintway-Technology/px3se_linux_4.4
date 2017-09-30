@@ -25,5 +25,7 @@
         <file>image/setting/speaker.png</file>
         <file>image/setting/update.png</file>
         <file>image/setting/slider.png</file>
+        <file>image/setting/bluetooth_item_icon.png</file>
+        <file>image/setting/bluetooth_scan.png</file>
     </qresource>
 </RCC>

@@ -3,20 +3,19 @@
 #include "global_value.h"
 
 #ifdef DEVICE_EVB
-int cbox_width = 400;
-int cbox_height = 250;
+int button_width = 150;
+int button_height = 60;
+int box_margin = 50;
 #else
-int cbox_width = 250;
-int cbox_height = 150;
-
+int button_width = 90;
+int button_height = 30;
+int box_margin = 30;
 #endif
 
 CMessageBox::CMessageBox(QWidget *parent):QDialog(parent)
   , m_eventLoop(NULL)
   , m_chooseResult(RESULT_CANCEL)
 {
-    this->setFixedSize(cbox_width,cbox_height);
-
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
     setStyleSheet("QDialog{border:1.5px solid rgb(0,120,215);background:rgb(43,43,43)}"
                   "QLabel{color:white}");
@@ -29,25 +28,26 @@ void CMessageBox::initLayout()
     QVBoxLayout *mainLayout = new QVBoxLayout;
 
     m_labelContent = new QLabel("",this);
-    QFont font = m_labelContent->font();
-    font.setPixelSize(font_size_big);
-    font.setBold(true);
-    m_labelContent->setFont(font);
     m_labelContent->setAlignment(Qt::AlignLeft|Qt::AlignTop);
 
     // button layout
     QHBoxLayout *buttonlayout = new QHBoxLayout;
     m_btnConfirm = new CPushButton("",this);
     m_btnCancel = new CPushButton("",this);
+    m_btnConfirm->setFixedHeight(button_height);
+    m_btnCancel->setFixedHeight(button_height);
+    m_btnConfirm->setMinimumWidth(button_width);
+    m_btnCancel->setMinimumWidth(button_width);
 
     buttonlayout->addWidget(m_btnConfirm);
     buttonlayout->addWidget(m_btnCancel);
-    buttonlayout->setSpacing(5);
+    buttonlayout->setSpacing(box_margin);
 
     mainLayout->addWidget(m_labelContent);
+    mainLayout->addSpacing(box_margin);
     mainLayout->addLayout(buttonlayout);
-    mainLayout->setSpacing(50);
-    mainLayout->setMargin(20);
+    mainLayout->setSpacing(10);
+    mainLayout->setMargin(box_margin);
     setLayout(mainLayout);
 }
 

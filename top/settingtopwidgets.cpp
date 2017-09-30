@@ -23,9 +23,6 @@ void SettingTopWidgets::initLayout()
     m_btnIcon->setStyleSheet("QPushButton{background:transparent;border-image:url(:/image/setting/setting_icon.png)}");
 
     QLabel *titleText=new QLabel("Setting",this);
-    QFont font = titleText->font();
-    font.setPixelSize(font_size_big);
-    titleText->setFont(font);
     titleText->setAlignment(Qt::AlignCenter);
 
     QHBoxLayout *lyout1 = new QHBoxLayout;

@@ -7,7 +7,8 @@ HEADERS += \
     $$PWD/cmessagebox.h \
     $$PWD/cpushbutton.h \
     $$PWD/cswitchbutton.h\
-    $$PWD/basetablewidget.h
+    $$PWD/basetablewidget.h \
+    $$PWD/switchbutton.h
 
 SOURCES += \
     $$PWD/basewidget.cpp \
@@ -18,4 +19,5 @@ SOURCES += \
     $$PWD/cmessagebox.cpp \
     $$PWD/cpushbutton.cpp \
     $$PWD/cswitchbutton.cpp \
-    $$PWD/basetablewidget.cpp
+    $$PWD/basetablewidget.cpp \
+    $$PWD/switchbutton.cpp

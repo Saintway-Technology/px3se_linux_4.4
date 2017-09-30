@@ -2,7 +2,7 @@
 #define RIGHTSTACKEDWIDGETS1_H
 
 #include <basewidget.h>
-#include "bluetoothscannerwidget.h"
+#include "bluetoothscannerwidgets.h"
 
 class BluetoothWidgets:public BaseWidget
 {
@@ -11,7 +11,7 @@ public:
     BluetoothWidgets(QWidget *parent);
     ~BluetoothWidgets();
 private:
-    BluetoothScannerWidget *m_scannerWidget;
+    BluetoothScannerWidgets *m_scannerWidget;
 
     void initData();
     void initLayout();

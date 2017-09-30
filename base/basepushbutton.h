@@ -11,6 +11,33 @@
 #include <QPainter>
 #include <QRect>
 
+class RotatableButton:public QPushButton
+{
+    Q_OBJECT
+public:
+    RotatableButton(const QString &icon,QWidget *parent);
+
+    bool isAnimated () const;
+
+public slots:
+    void startAnimation();
+    void stopAnimation();
+
+protected:
+    virtual void timerEvent(QTimerEvent * event);
+    virtual void paintEvent(QPaintEvent * event);
+
+private:
+    unsigned int angle_;
+    int timerId_;
+    int delay_;
+    bool displayedWhenStopped_;
+    QColor color_;
+    short progress_;
+    QPixmap currentPix_;
+
+};
+
 class FlatButton : public QPushButton
 {
     Q_OBJECT
