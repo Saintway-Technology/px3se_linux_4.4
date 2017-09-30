@@ -63,7 +63,7 @@ void MessageHandler::sendMessageToClient(long int msgType,long long value){
 
 bool MessageHandler::recvReqFromClient(control_message *message){
     //memset(&message,0,sizeof(message));
-    if(msgrcv(recv_queueId,(void*)message,MSG_BUFF_LEN + sizeof(long long),0,IPC_NOWAIT) != -1){
+    if(msgrcv(recv_queueId,(void*)message,MSG_BUFF_LEN + sizeof(long long),0,0) != -1){
         return true;
     }
     return false;
