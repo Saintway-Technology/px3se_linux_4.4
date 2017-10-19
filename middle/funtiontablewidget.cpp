@@ -30,6 +30,55 @@ Funtiontablewidget:: Funtiontablewidget(QWidget *parent) : QTableWidget(parent)
     // Init QTableWidget's connection
     connect(this, SIGNAL(cellEntered(int,int)), this,SLOT(listCellEntered(int,int)));
     connect(this, SIGNAL(cellClicked(int,int)), SLOT(listCellClicked(int,int)));
+    connect(mainWindow,SIGNAL(retranslateUi()),this,SLOT(retranslateUi()));
+}
+
+void Funtiontablewidget::retranslateUi(){
+    for(int i=0; i<rowCount(); ++i)
+    {
+        reflushItemName(i);
+    }
+}
+
+void Funtiontablewidget::reflushItemName(int i){
+    QTableWidgetItem *item = NULL;
+    item = new QTableWidgetItem();
+    item->setTextColor(QColor(255, 255, 255));
+    item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
+    switch (i) {
+    case 0:
+
+        item->setText(tr("Wifi"));
+        break;
+    case 1:
+
+        item->setText(tr("BlueTooth"));
+        break;
+    case 2:
+
+        item->setText(tr("Brightness"));
+        break;
+    case 3:
+
+        item->setText(tr("Time&Calendar"));
+        break;
+    case 4:
+
+        item->setText(tr("Volumn"));
+        break;
+    case 5:
+
+        item->setText(tr("Updater"));
+        break;
+    case 6:
+
+        item->setText(tr("Language"));
+        break;
+    default:
+        break;
+    }
+    setItem(i, 2, item);
 }
 
 void Funtiontablewidget::addFunctionItems(QStringList &normalicon, QStringList &selectedicon, QStringList &name)
@@ -44,12 +93,9 @@ void Funtiontablewidget::addFunctionItems(QStringList &normalicon, QStringList &
         item = new QTableWidgetItem(QIcon(m_normalicon[i]), QString());
         item->setTextAlignment(Qt::AlignCenter);
         setItem(i, 1, item);
-        item = new QTableWidgetItem(name[i]);
-        item->setTextColor(QColor(255, 255, 255));
-        item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-        setItem(i, 2, item);
+        reflushItemName(i);
         setRowHeight(i,table_item_height);
-    }
+    }    
 }
 
 void Funtiontablewidget::listCellEntered(int row, int column)

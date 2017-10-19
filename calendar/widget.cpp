@@ -1,5 +1,6 @@
 #include "widget.h"
 #include "lunar.h"
+#include "global_value.h"
 
 #include <ctime>
 #include <QDebug>
@@ -120,7 +121,7 @@ void Widget::SetCurrentTime()
 }
 void Widget::setDateShow(int year,int month,int day)
 {
-    m_ShowDateLabel->setText(QString::number(year)+"年"+QString::number(month)+"月"+QString::number(day)+"日");
+    m_ShowDateLabel->setText(QString::number(year)+"-"+QString::number(month)+"-"+QString::number(day)+"");
 }
 
 void Widget::SetConnect()
@@ -142,7 +143,13 @@ void Widget::SetConnect()
 
     QTimer::singleShot(0,this,SLOT(SetCurrentTime()));
     QTimer::singleShot(0,this,SLOT(DateChanged()));
+
+    connect(mainWindow,SIGNAL(retranslateUi()),this,SLOT(retranslateUi()));
 }
+void Widget::retranslateUi(){
+    Ui_Widget::retranslateUi(this);    
+}
+
 void Widget::ToNextDay()
 {
     QDate today= m_Calendar->selectedDate();

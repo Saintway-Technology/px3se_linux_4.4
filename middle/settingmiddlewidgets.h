@@ -11,6 +11,7 @@
 #include "calendar/calendarwidgets.h"
 #include "volume/volumewidgets.h"
 #include "updater/updaterwidgets.h"
+#include "language/languagewidgets.h"
 
 class WifiWidgets;
 
@@ -37,6 +38,7 @@ private:
     CalendarWidgets *m_calendarWid;
     VolumeWidgets *m_volumnWid;
     UpdaterWidgets *m_updaterWid;
+    LanguageWidgets *m_languageWid;
 
     void initLayout();
     void initConnection();

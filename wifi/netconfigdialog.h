@@ -34,6 +34,7 @@ public slots:
     virtual void encrChanged(const QString &sel);
     virtual void removeNetwork();
     virtual void writeWepKey(int network_id, QLineEdit *edit, int id);
+    void reflushUI();
 
 };
 

@@ -10,6 +10,7 @@ class SwitchWidget:public BaseWidget
 public:
     SwitchWidget(QWidget *parent,QString text);
     CSwitchButton* getSwitchButton(){return m_btnSwitch;}
+    void setText(QString text);
 private:
     QLabel *m_lblState;
     CSwitchButton *m_btnSwitch;

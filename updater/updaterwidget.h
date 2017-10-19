@@ -20,7 +20,7 @@ public:
 
 private slots:
     void on_m_updatePushButton_clicked();
-
+    void retranslateUi();
 private:
     Ui::UpdaterWidget *ui;
     QFileInfo *file;

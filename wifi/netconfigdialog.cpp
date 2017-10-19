@@ -45,8 +45,13 @@ netConfigDialog::netConfigDialog(QWidget *parent):QDialog(parent)
     connect(eapSelect, SIGNAL(activated(int)), this,SLOT(eapChanged(int)));
     connect(closeButton,SIGNAL(clicked(bool)),this,SLOT(close()));
     connect(removeButton,SIGNAL(clicked(bool)),this,SLOT(removeNetwork()));
-
+    connect(mainWindow,SIGNAL(retranslateUi()),this,SLOT(reflushUI()));
     new_network = false;
+}
+void netConfigDialog::reflushUI(){
+    qDebug()<<"netConfigDialog::reflushUI()";
+    retranslateUi(this);
+    closeButton->setText(QApplication::translate("NetworkConfig", "Close", Q_NULLPTR));
 }
 
 void netConfigDialog::resizeEvent(QResizeEvent *)

@@ -15,6 +15,8 @@
 
 #include "bluez5/bluez5helper.h"
 
+#include <QLabel>
+
 class BluetoothScannerWidgets:public BaseWidget
 {
     Q_OBJECT
@@ -35,6 +37,9 @@ private:
 
     Bluez5Helper *m_bluez5Helper;
 
+    QLabel *switchTitle;
+    QLabel *availableTitle;
+
     void initData();
     void initLayout();
     void initConnection();
@@ -52,6 +57,7 @@ private slots:
     void slot_onDeviceDisconnected(QBluetoothAddress);
     void slot_onTableItemClicked(int,int);
     void slot_onTableItemlongPressed(int);
+    void retranslateUi();
 
 };
 

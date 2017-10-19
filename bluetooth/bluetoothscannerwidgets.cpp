@@ -49,8 +49,8 @@ void BluetoothScannerWidgets::initLayout()
     QVBoxLayout *layout = new QVBoxLayout;
 
     // 1. bluetooth switch.
-    QLabel *switchTitle = new QLabel(this);
-    switchTitle->setText("Bluetooth(" + m_localDevice->name() + ")");
+    switchTitle = new QLabel(this);
+    switchTitle->setText(tr("Bluetooth(%1)").arg( m_localDevice->name()));
     switchTitle->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
 
     m_bluetoothSwitch = new SwitchButton(this);
@@ -68,8 +68,8 @@ void BluetoothScannerWidgets::initLayout()
     switchLayout->setContentsMargins(10,0,10,0);
 
     // 2.bluetooth device list
-    QLabel *availableTitle = new QLabel(this);
-    availableTitle->setText("Available Devices");
+    availableTitle = new QLabel(this);
+    availableTitle->setText(tr("Available Devices"));
     m_table = new BluetoothDeviceTable(this);
 
     m_refreshButton = new RotatableButton(":/image/setting/bluetooth_scan.png",this);
@@ -112,6 +112,13 @@ void BluetoothScannerWidgets::initConnection()
     connect(m_refreshButton,SIGNAL(clicked(bool)),this,SLOT(slot_reScan()));
     connect(m_table,SIGNAL(cellClicked(int,int)),this,SLOT(slot_onTableItemClicked(int,int)));
     connect(m_table,SIGNAL(longPressedEvent(int)),this,SLOT(slot_onTableItemlongPressed(int)));
+
+    connect(mainWindow,SIGNAL(retranslateUi()),this,SLOT(retranslateUi()));
+}
+
+void BluetoothScannerWidgets::retranslateUi(){
+    availableTitle->setText(tr("Available Devices"));
+    switchTitle->setText(tr("Bluetooth(%1)").arg( m_localDevice->name()));
 }
 
 void BluetoothScannerWidgets::slot_onBluetoothSwitchCheckChanged(bool checked)

@@ -14,8 +14,8 @@
 #include <unistd.h>        /* System V */
 #include <sys/ioctl.h>    /* BSD and Linux */
 #include <stropts.h>    /* XSI STREAMS */
-
-
+#include "global_value.h"
+#include "language/language.h"
 
 
 int vendor_storage_write(int buf_size, uint8 *buf, uint16 vendor_id)
@@ -144,7 +144,7 @@ UpdaterWidget::UpdaterWidget(QWidget *parent) :
     ui(new Ui::UpdaterWidget)
 {
     ui->setupUi(this);
-
+    connect(mainWindow,SIGNAL(retranslateUi()),this,SLOT(retranslateUi()));
     //read fwinfo
     int ret = vendor_storage_read(sizeof(UpdaterInfo), (char*)&fwinfo, VENDOR_UPDATER_ID);
     if(ret){
@@ -156,6 +156,20 @@ UpdaterWidget::UpdaterWidget(QWidget *parent) :
     char version[255]={0};
     sprintf(version,"%d.%d.%d\n",fwinfo.update_version>>24&0xFF,fwinfo.update_version>>16&0xFF,fwinfo.update_version&0xFF);
     ui->m_update_version_LineEdit->setText(QString(version));
+}
+void UpdaterWidget::retranslateUi(){
+
+//    QStringList qmFiles =  Language::instance()->findQmFiles();
+//    for (int i = 0; i < qmFiles.size(); ++i) {
+//        qDebug()<< " lang file :"<<qmFiles[i];
+//        if (Language::instance()->languageMatch(QLocale::system().name(), qmFiles[i])){
+//            qDebug()<< " current lang:"<<qmFiles[i];
+//            QLocale locale =new QLocale("zh_CN");
+//            QLocale::setDefault()
+//        }
+//    }
+
+    this->ui->retranslateUi(this);
 }
 
 UpdaterWidget::~UpdaterWidget()

@@ -19,7 +19,7 @@ void LeftWidgets::initLayout()
     /* Add setting tab item here.
        You nend change 'RowCount'、append title list and icon list */
     m_funtionlist = new Funtiontablewidget(this);
-    m_funtionlist->setRowCount(6);
+    m_funtionlist->setRowCount(7);
 
     QStringList normaliconlist,selectediconlist,namelist;
 
@@ -29,20 +29,17 @@ void LeftWidgets::initLayout()
     normaliconlist.append(":/image/setting/calendar.png");
     normaliconlist.append(":/image/setting/speaker.png");
     normaliconlist.append(":/image/setting/update.png");
+    normaliconlist.append(":/image/setting/language.png");
 
     selectediconlist.append(":/image/setting/wifi_seleted.png");
     selectediconlist.append(":/image/setting/bt_seleted.png");
     selectediconlist.append(":/image/setting/brightness.png");
     selectediconlist.append(":/image/setting/calendar.png");
     selectediconlist.append(":/image/setting/speaker.png");
-    selectediconlist.append(":/image/setting/update.png");
+    selectediconlist.append(":/image/setting/update.png");    
+    selectediconlist.append(":/image/setting/language.png");
 
-    namelist.append(str_net_manager);
-    namelist.append(str_bt_manager);
-    namelist.append(str_brightness_setting);
-    namelist.append(str_calendar_setting);
-    namelist.append(str_volumn_setting);
-    namelist.append(str_updater_setting);
+
 
     m_funtionlist->addFunctionItems(normaliconlist,selectediconlist,namelist);
 
@@ -52,8 +49,14 @@ void LeftWidgets::initLayout()
     vmainlyout->setSpacing(0);
 
     setLayout(vmainlyout);
+
+
 }
 
 LeftWidgets::~LeftWidgets()
 {
+}
+void LeftWidgets::retranslateUi(){
+
+
 }

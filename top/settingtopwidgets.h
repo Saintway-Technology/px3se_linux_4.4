@@ -19,8 +19,11 @@ private:
 
     FourStateButton *m_btnReturn;
     FlatButton *m_btnIcon;
+    QLabel *titleText;
 signals:
     void returnClicked();
+private slots:
+    void retranslateUi();
 };
 
 #endif // SETTINGTOPWIDGETS_H

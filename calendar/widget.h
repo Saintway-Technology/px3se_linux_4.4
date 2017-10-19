@@ -72,6 +72,7 @@ private slots:
     void on_m_DateSavePlushButton_clicked();
     void on_m_ExitPushButton_clicked();
     void on_m_TimePushButton_clicked();
+    void retranslateUi();
 };
 
 #endif // WIDGET_H

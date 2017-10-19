@@ -28,3 +28,6 @@ SwitchWidget::SwitchWidget(QWidget *parent,QString text):BaseWidget(parent)
 
     setLayout(mainlyout);
 }
+void SwitchWidget::setText(QString text){
+    m_lblState->setText((text));
+}

@@ -25,6 +25,8 @@ private:
 
     void initData();
     void initLayout();
+signals:
+    void retranslateUi();
 private slots:
     void slot_standby();
 public slots:

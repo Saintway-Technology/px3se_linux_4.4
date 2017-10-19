@@ -27,5 +27,6 @@
         <file>image/setting/slider.png</file>
         <file>image/setting/bluetooth_item_icon.png</file>
         <file>image/setting/bluetooth_scan.png</file>
+        <file>image/setting/language.png</file>
     </qresource>
 </RCC>

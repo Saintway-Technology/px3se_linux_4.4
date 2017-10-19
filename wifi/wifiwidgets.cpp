@@ -22,7 +22,7 @@ WifiWidgets::WifiWidgets(QWidget *parent):BaseWidget(parent)
 {
     // Set background color.
     setObjectName("WifiWidgets");
-    setStyleSheet("#WifiWidgets{background:rgb(33,36,43)}");
+    setStyleSheet("WifiWidgets{background:rgb(33,36,43)}");
 
     initLayout();
     initData();
@@ -53,31 +53,43 @@ void WifiWidgets::initData()
 
 void WifiWidgets::initLayout()
 {
-    m_wifiSwitch = new SwitchWidget(this,"OPEN WIFI");
+    m_wifiSwitch = new SwitchWidget(this,tr("OPEN WIFI"));
 
     // Include 'scan result' and 'current status'.
     m_tab = new QTabWidget(this);
-    m_tab->setObjectName("m_tab");
-    m_tab->setStyleSheet("#m_tab{background:rgb(33,36,43)}");
-    m_tabCurrentStatus = new TabCurrentStatus(this);
-    m_tabScanResult = new TabScanResult(this);
-    m_tabNetworkManager = new TabNetworkManager(this);
 
-    m_tab->addTab(m_tabScanResult,QString("Scan Result"));
-    m_tab->addTab(m_tabCurrentStatus,QString("Current Status"));
-    m_tab->addTab(m_tabNetworkManager,QString("Network Manager"));
+    m_tab->setStyleSheet("QTabWidget{background:rgb(33,36,43)}");
+    m_tabCurrentStatus = new TabCurrentStatus(this);
+    m_tabCurrentStatus->connectButton->setText(tr("Connect"));
+    m_tabCurrentStatus->disconnectButton->setText(tr("Disconnect"));
+
+    m_tabCurrentStatus->lastMessageLabel->setText(tr("Last message:"));
+    m_tabCurrentStatus->authenticationLabel->setText(tr("Authentication:"));
+    m_tabCurrentStatus->encryptionLabel->setText(tr("EncryptionLabel:"));
+    m_tabCurrentStatus->ssidLabel->setText(tr("SSID:"));
+    m_tabCurrentStatus->bssidLabel->setText(tr("BSSID:"));
+    m_tabCurrentStatus->ipAddressLabel->setText(tr("IP Address:"));
+
+    m_tabScanResult = new TabScanResult(this);
+    m_tabScanResult->scanButton->setText(tr("Scan"));
+    m_tabNetworkManager = new TabNetworkManager(this);
+    m_tabNetworkManager ->removeButton->setText(tr("remove"));
+    m_tabNetworkManager ->editButton->setText(tr("edit"));
+    m_tab->addTab(m_tabScanResult,tr("Scan Result"));
+    m_tab->addTab(m_tabCurrentStatus,tr("Current Status"));
+    m_tab->addTab(m_tabNetworkManager,tr("Network Manager"));
     m_tab->setCurrentWidget(m_tabScanResult);
 
     // Related to HOST AP.
-    m_hostAPSwitch = new SwitchWidget(this,"START HOSTAP");
+    m_hostAPSwitch = new SwitchWidget(this,tr("START HOSTAP"));
 
     QFrame *bottomLine = new QFrame(this);
     bottomLine->setFixedHeight(2);
     bottomLine->setStyleSheet("QFrame{border:1px solid rgb(100,100,100,255);}");
     bottomLine->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
 
-    QLabel *apNameLabel = new QLabel(this);
-    apNameLabel->setText("HotSpot Name:");
+    apNameLabel = new QLabel(this);
+    apNameLabel->setText(tr("HotSpot Name:"));
 
     m_hostAPName = new QLineEdit("RK_HOSTAP_TEST",this);
     m_hostAPName->setFixedSize(wifi_button_width + 200,wifi_button_height);
@@ -87,8 +99,8 @@ void WifiWidgets::initLayout()
     apNameLayout->addWidget(apNameLabel);
     apNameLayout->addWidget(m_hostAPName);
 
-    QLabel *apPasswordLabel = new QLabel(this);
-    apPasswordLabel->setText("HotSpot Password:");
+    apPasswordLabel= new QLabel(this);
+    apPasswordLabel->setText(tr("HotSpot Password:"));
 
     m_hostAPPassword = new QLineEdit("987654321",this);
     m_hostAPPassword->setFixedSize(wifi_button_width + 200,wifi_button_height);
@@ -100,8 +112,8 @@ void WifiWidgets::initLayout()
 
 
     QHBoxLayout *layoutStatus = new QHBoxLayout;
-    QLabel *statusLabel = new QLabel(this);
-    statusLabel->setText("Status:");
+    statusLabel = new QLabel(this);
+    statusLabel->setText(tr("Status:"));
     textStatus = new QLabel(this);
     textStatus->setAlignment(Qt::AlignRight);
 
@@ -134,6 +146,9 @@ void WifiWidgets::initLayout()
     hmainlyout->addLayout(vmainlyout,6);
     hmainlyout->addStretch(1);
     setLayout(hmainlyout);
+
+    showdialog = new netConfigDialog(this);
+    editdialog = new netConfigDialog();
 }
 
 void WifiWidgets::initConnection()
@@ -147,6 +162,33 @@ void WifiWidgets::initConnection()
     connect(m_tabScanResult->m_table,SIGNAL(cellClicked(int,int)),this,SLOT(slot_showItemDetail(int,int)));
     connect(m_wifiSwitch->getSwitchButton(),SIGNAL(checkStateChanged(bool)),this,SLOT(slot_onWifiToggled(bool)));
     connect(m_hostAPSwitch->getSwitchButton(),SIGNAL(checkStateChanged(bool)),this,SLOT(slot_onHostapdToggled(bool)));
+
+    connect(mainWindow,SIGNAL(retranslateUi()),this,SLOT(retranslateUi()));
+}
+void WifiWidgets::retranslateUi(){
+    m_wifiSwitch->setText(tr("OPEN WIFI"));
+    m_hostAPSwitch->setText(tr("START HOSTAP"));
+
+    apNameLabel->setText(tr("HotSpot Name:"));
+    apPasswordLabel->setText(tr("HotSpot Password:"));
+    statusLabel->setText(tr("Status:"));
+
+    m_tab->setTabText(0,tr("Scan Result"));
+    m_tab->setTabText(1,tr("Current Status"));
+    m_tab->setTabText(2,tr("Network Manager"));
+
+    m_tabScanResult->scanButton->setText(tr("Scan"));
+    m_tabNetworkManager ->removeButton->setText(tr("remove"));
+    m_tabNetworkManager ->editButton->setText(tr("edit"));
+    m_tabCurrentStatus->connectButton->setText(tr("Connect"));
+    m_tabCurrentStatus->disconnectButton->setText(tr("Disconnect"));
+
+    m_tabCurrentStatus->lastMessageLabel->setText(tr("Last message:"));
+    m_tabCurrentStatus->authenticationLabel->setText(tr("Authentication:"));
+    m_tabCurrentStatus->encryptionLabel->setText(tr("EncryptionLabel:"));
+    m_tabCurrentStatus->ssidLabel->setText(tr("SSID:"));
+    m_tabCurrentStatus->bssidLabel->setText(tr("BSSID:"));
+    m_tabCurrentStatus->ipAddressLabel->setText(tr("IP Address:"));
 }
 
 void WifiWidgets::slot_editListedNetwork()
@@ -163,14 +205,14 @@ void WifiWidgets::slot_editListedNetwork()
         id = cmd.toInt();
     }
 
-    netConfigDialog *dialog = new netConfigDialog();
-    if (dialog == NULL)
+
+    if (editdialog == NULL)
         return;
 
     if (id >= 0){
-        dialog->paramsFromConfig(id);
-        dialog->show();
-        dialog->exec();
+        editdialog->paramsFromConfig(id);
+        editdialog->show();
+        editdialog->exec();
     }
 }
 
@@ -185,19 +227,19 @@ void WifiWidgets::slot_removeListedNetwork()
 
 void WifiWidgets::slot_showItemDetail(int row,int)
 {
-    netConfigDialog *dialog = new netConfigDialog(this);
-    if (dialog == NULL)
+
+    if (showdialog == NULL)
         return;
-    dialog->paramsFromScanResults(m_tabScanResult->m_netWorks[row]);
-    dialog->show();
-    dialog->exec();
+    showdialog->paramsFromScanResults(m_tabScanResult->m_netWorks[row]);
+    showdialog->show();
+    showdialog->exec();
 }
 
 void WifiWidgets::slot_onWifiToggled(bool isChecked)
 {
     if(isChecked){
         if(WifiUtil::is_hostapd_running()){
-            CMessageBox::showCMessageBox(this,"Close hostap first.","Confirm","Cancel");
+            CMessageBox::showCMessageBox(this,tr("Close hostap first."),tr("Confirm"),tr("Cancel"));
             QTimer::singleShot(10,this,SLOT(setWifiUnchecked()));
         }else{
             wifiStationOpen();
@@ -210,10 +252,10 @@ void WifiWidgets::slot_onWifiToggled(bool isChecked)
 void WifiWidgets::slot_onHostapdToggled(bool isChecked){
     if(isChecked){
         if(m_hostAPName->text()== NULL || m_hostAPPassword->text().size() < 8){
-            QMessageBox::warning(this,"Warning","Name can't be null,and password can't be less 8!",QMessageBox::Ok);
+            QMessageBox::warning(this,tr("Warning"),tr("Name can't be null,and password can't be less 8!"),QMessageBox::Ok);
             QTimer::singleShot(10,this,SLOT(setHostapdUnchcked()));
         }else if(WifiUtil::is_supplicant_running()){
-            CMessageBox::showCMessageBox(this,"Close wifi first.","Confirm","Cancel");
+            CMessageBox::showCMessageBox(this,tr("Close wifi first."),tr("Confirm"),tr("Cancel"));
             QTimer::singleShot(10,this,SLOT(setHostapdUnchcked()));
         }else {
             WifiUtil::creat_hostapd_file(m_hostAPName->text().toLatin1().data(),m_hostAPPassword->text().toLatin1().data());
@@ -298,105 +340,16 @@ void WifiWidgets::slot_checkLanConnection()
     }
 }
 
-TabCurrentStatus::TabCurrentStatus(QWidget *parent):BaseWidget(parent)
-{
-    QVBoxLayout *vmainlyout = new QVBoxLayout;
-
-    // LastMessage
-    QHBoxLayout *lyout2 = new QHBoxLayout;
-    QLabel *lastMessageLabel = new QLabel(this);
-    lastMessageLabel->setText("Last message:");
-
-    textLastMsg = new QLabel(this);
-    textLastMsg->setText(QString());
-    lyout2->addWidget(lastMessageLabel,1);
-    lyout2->addWidget(textLastMsg,2);
-
-    // Authenticant
-    QHBoxLayout *lyout3 = new QHBoxLayout;
-    QLabel *authenticationLabel = new QLabel(this);
-    authenticationLabel->setText("Authentication:");
-
-    textAuthentication = new QLabel(this);
-    textAuthentication->setText(QString("None"));
-    lyout3->addWidget(authenticationLabel,1);
-    lyout3->addWidget(textAuthentication,2);
-
-    // Encryption
-    QHBoxLayout *lyout4 = new QHBoxLayout;
-    QLabel *encryptionLabel = new QLabel(this);
-    encryptionLabel->setText("EncryptionLabel:");
-
-    textEncryption = new QLabel(this);
-    textEncryption->setText(QString("None"));
-    lyout4->addWidget(encryptionLabel,1);
-    lyout4->addWidget(textEncryption,2);
-
-    // SSID
-    QHBoxLayout *lyout5 = new QHBoxLayout;
-    QLabel *ssidLabel = new QLabel(this);
-    ssidLabel->setText("SSID:");
-
-    textSSID = new QLabel(this);
-    textSSID->setText(QString("None"));
-    lyout5->addWidget(ssidLabel,1);
-    lyout5->addWidget(textSSID,2);
-
-    // BSSID
-    QHBoxLayout *lyout6 = new QHBoxLayout;
-    QLabel *bssidLabel = new QLabel(this);
-    bssidLabel->setText("BSSID:");
-
-    textBSSID = new QLabel(this);
-    textBSSID->setText(QString("None"));
-    lyout6->addWidget(bssidLabel,1);
-    lyout6->addWidget(textBSSID,2);
-
-    // IP address
-    QHBoxLayout *lyout7 = new QHBoxLayout;
-    QLabel *ipAddressLabel = new QLabel(this);
-    ipAddressLabel->setText("IP Address:");
-
-    textIPAddress = new QLabel(this);
-    textIPAddress->setText(QString("None"));
-    lyout7->addWidget(ipAddressLabel,1);
-    lyout7->addWidget(textIPAddress,2);
-
-    // Connect and Disconnect button
-    QHBoxLayout *lyout8 = new QHBoxLayout;
-    connectButton = new QPushButton("Connect",this);
-    connectButton->setFixedSize(wifi_button_width,wifi_button_height);
-
-    disconnectButton = new QPushButton("Disconnect",this);
-    disconnectButton->setFixedSize(wifi_button_width,wifi_button_height);
-    lyout8->addStretch(0);
-    lyout8->addWidget(connectButton);
-    lyout8->addSpacing(30);
-    lyout8->addWidget(disconnectButton);
-    lyout8->addStretch(0);
-
-    vmainlyout->addLayout(lyout2);
-    vmainlyout->addLayout(lyout3);
-    vmainlyout->addLayout(lyout4);
-    vmainlyout->addLayout(lyout5);
-    vmainlyout->addLayout(lyout6);
-    vmainlyout->addLayout(lyout7);
-    vmainlyout->addSpacing(40);
-    vmainlyout->addLayout(lyout8);
-    vmainlyout->addStretch(0);
-    vmainlyout->setContentsMargins(10,10,10,10);
-
-    setLayout(vmainlyout);
-}
 
 TabScanResult::TabScanResult(QWidget *parent):BaseWidget(parent)
 {
-    QVBoxLayout *vmainlyout = new QVBoxLayout;
+    vmainlyout = new QVBoxLayout;
 
     m_table = new WlanListTable(this);
 
-    QHBoxLayout *lyout1 = new QHBoxLayout;
-    scanButton = new QPushButton("reScan",this);
+    lyout1 = new QHBoxLayout;
+    scanButton = new QPushButton(this);
+
     scanButton->setFixedSize(wifi_button_width,wifi_button_height);
 
     lyout1->addStretch(0);
@@ -410,6 +363,9 @@ TabScanResult::TabScanResult(QWidget *parent):BaseWidget(parent)
     vmainlyout->setContentsMargins(10,10,5,5);
     vmainlyout->setSpacing(5);
     setLayout(vmainlyout);
+}
+void TabScanResult::setText(QString text){
+    scanButton->setText(text);
 }
 
 void TabScanResult::clearTable()
@@ -478,13 +434,12 @@ TabNetworkManager::TabNetworkManager(QWidget *parent):BaseWidget(parent)
     QVBoxLayout *vmainlyout = new QVBoxLayout;
 
     m_networkList = new NetworkList(this);
-
     QHBoxLayout *lyout1 = new QHBoxLayout;
 
-    removeButton = new QPushButton("remove",this);
+    removeButton = new QPushButton(this);    
     removeButton->setFixedSize(wifi_button_width,wifi_button_height);
 
-    editButton = new QPushButton("edit",this);
+    editButton = new QPushButton(this);    
     editButton->setFixedSize(wifi_button_width,wifi_button_height);
 
     lyout1->addStretch(0);

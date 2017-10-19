@@ -45,13 +45,9 @@ const QString str_listheader_net_video = "Net Video";
 const QString str_video_playing = "Playing";
 const QString str_videoName_default = "videoPlayer";
 const QString str_videoTime_minite= "min";
-// setting
-const QString str_net_manager= "Wlan";
-const QString str_bt_manager= "BlueTooth";
-const QString str_brightness_setting= "Brightness";
-const QString str_calendar_setting= "Time&Calendar";
-const QString str_volumn_setting= "Volumn";
-const QString str_updater_setting= "Updater";
+
+
+
 
 
 const QString str_common_setting= "General";

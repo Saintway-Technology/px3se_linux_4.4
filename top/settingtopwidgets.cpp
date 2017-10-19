@@ -22,7 +22,7 @@ void SettingTopWidgets::initLayout()
     m_btnIcon->setFixedSize(top_icon_size,top_icon_size);
     m_btnIcon->setStyleSheet("QPushButton{background:transparent;border-image:url(:/image/setting/setting_icon.png)}");
 
-    QLabel *titleText=new QLabel("Setting",this);
+    titleText=new QLabel(tr("Setting"),this);
     titleText->setAlignment(Qt::AlignCenter);
 
     QHBoxLayout *lyout1 = new QHBoxLayout;
@@ -41,6 +41,10 @@ void SettingTopWidgets::initLayout()
 void SettingTopWidgets::initConnection()
 {
     connect(m_btnReturn,SIGNAL(clicked(bool)),this,SIGNAL(returnClicked()));
+    connect(mainWindow,SIGNAL(retranslateUi()),this,SLOT(retranslateUi()));
+}
+void SettingTopWidgets::retranslateUi(){
+    titleText->setText(tr("Setting"));
 }
 
 SettingTopWidgets::~SettingTopWidgets()

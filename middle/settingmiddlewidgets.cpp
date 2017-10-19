@@ -23,6 +23,7 @@ void SettingMiddleWidgets::initLayout()
     m_calendarWid = new CalendarWidgets(m_stackedWid);
     m_volumnWid = new VolumeWidgets(m_stackedWid);
     m_updaterWid = new UpdaterWidgets(m_stackedWid);
+    m_languageWid = new LanguageWidgets(m_stackedWid);
 
     m_stackedWid->addWidget(m_wifiWid);
     m_stackedWid->addWidget(m_bluetoothWid);
@@ -30,6 +31,7 @@ void SettingMiddleWidgets::initLayout()
     m_stackedWid->addWidget(m_calendarWid);
     m_stackedWid->addWidget(m_volumnWid);
     m_stackedWid->addWidget(m_updaterWid);
+    m_stackedWid->addWidget(m_languageWid);
 
 #ifdef DEVICE_EVB
     hmainlyout->addWidget(m_leftWid,1);
@@ -70,6 +72,9 @@ void SettingMiddleWidgets::slot_currentWidgetChanged(int index)
         break;
     case 5:
         m_stackedWid->setCurrentWidget(m_updaterWid);
+        break;
+    case 6:
+        m_stackedWid->setCurrentWidget(m_languageWid);
         break;
     default:
         m_stackedWid->setCurrentWidget(m_wifiWid);

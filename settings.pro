@@ -75,9 +75,24 @@ FORMS = wifi/networkconfig.ui \
         brightness/brightness.ui \
         calendar/widget.ui \
         volume/volumnwidget.ui \
-        updater/updaterwidget.ui
+        updater/updaterwidget.ui \
+    language/languageform.ui
 
 RESOURCES += \
     res_main.qrc \
-    res_setting.qrc
+    res_setting.qrc \
+    i18n.qrc
 
+HEADERS += \
+    language/languageform.h \
+    language/languagewidgets.h \
+    language/language.h
+
+SOURCES += \
+    language/languageform.cpp \
+    language/languagewidgets.cpp \
+    language/language.cpp
+
+
+TRANSLATIONS += translations/i18n_en.ts \
+                translations/i18n_zh.ts

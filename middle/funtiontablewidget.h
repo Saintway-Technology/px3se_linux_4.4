@@ -17,9 +17,10 @@ private:
     QColor m_defaultBkColor;
     QStringList m_normalicon;
     QStringList m_selectedicon;
+
 protected:
     void resizeEvent(QResizeEvent*);
-
+    void reflushItemName(int i);
 public:
     void addFunctionItems(QStringList &normalicon, QStringList &selectedicon, QStringList &name);
     void changeIcon(int currentrow);
@@ -34,6 +35,7 @@ signals:
 public slots:
     void listCellEntered(int row, int column);
     void listCellClicked(int row, int column);
+    void retranslateUi();
 
 };
 #endif // FUNTIONTABLEWIDGET_H

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>816</width>
-    <height>400</height>
+    <height>429</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -71,7 +71,7 @@
             <bool>false</bool>
            </property>
            <property name="text">
-            <string>年</string>
+            <string>Year</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -84,7 +84,7 @@
          <item>
           <widget class="QLabel" name="m_MonthLabel">
            <property name="text">
-            <string>月</string>
+            <string>Month</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -97,7 +97,7 @@
          <item>
           <widget class="QLabel" name="m_DayLabel">
            <property name="text">
-            <string>日</string>
+            <string>Day</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -121,7 +121,7 @@
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="text">
-            <string>时</string>
+            <string>Hour</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -134,7 +134,7 @@
          <item>
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>分</string>
+            <string>Minute</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -147,7 +147,7 @@
          <item>
           <widget class="QLabel" name="label_3">
            <property name="text">
-            <string>秒</string>
+            <string>Second</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -284,7 +284,7 @@
           </size>
          </property>
          <property name="text">
-          <string>设置日期</string>
+          <string>SetDate</string>
          </property>
         </widget>
        </item>
@@ -297,7 +297,7 @@
           </size>
          </property>
          <property name="text">
-          <string>设置时间</string>
+          <string>SetTime</string>
          </property>
         </widget>
        </item>

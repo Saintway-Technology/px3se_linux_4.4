@@ -16,11 +16,12 @@
 #include "basepushbutton.h"
 #include "netconfigdialog.h"
 #include "global_value.h"
+#include "tabcurrentstatus.h"
 
-class TabCurrentStatus;
 class TabScanResult;
 class TabNetworkManager;
 class NetThread;
+class netConfigDialog;
 
 struct netWork
 {
@@ -56,6 +57,12 @@ private:
     QLineEdit *m_hostAPPassword;
 
     QLabel *textStatus;
+    QLabel *apNameLabel;
+    QLabel *apPasswordLabel;
+    QLabel *statusLabel;
+
+    netConfigDialog *editdialog;
+    netConfigDialog *showdialog;
 public:
     TabCurrentStatus *m_tabCurrentStatus;
     TabScanResult *m_tabScanResult;
@@ -91,31 +98,21 @@ public slots:
     void setWifiUnchecked();
 
     void slot_checkLanConnection();
+
+    void retranslateUi();
 signals:
 
 };
 
-class TabCurrentStatus:public BaseWidget
-{
-public:
-    TabCurrentStatus(QWidget *parent);
 
-public:
-    QLabel *textLastMsg;
-    QLabel *textAuthentication;
-    QLabel *textEncryption;
-    QLabel *textSSID;
-    QLabel *textBSSID;
-    QLabel *textIPAddress;
-    QPushButton *connectButton;
-    QPushButton *disconnectButton;
-};
 
 class TabScanResult:public BaseWidget
 {
 public:
     TabScanResult(QWidget *parent);
 
+    QVBoxLayout *vmainlyout;
+    QHBoxLayout *lyout1;
     WlanListTable *m_table;
     QPushButton *scanButton;
 
@@ -123,6 +120,7 @@ public:
 
     void clearTable();
     void insertIntoTable(QString name,QString lock,QString siganl,QString detail);
+    void setText(QString text);
 };
 
 /**

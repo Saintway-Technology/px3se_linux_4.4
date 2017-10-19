@@ -4,7 +4,8 @@ HEADERS += \
     $$PWD/netconfigdialog.h \
     $$PWD/switchwidget.h \
     $$PWD/wifiutil.h \
-    $$PWD/networklist.h
+    $$PWD/networklist.h \
+    $$PWD/tabcurrentstatus.h
 
 SOURCES += \
     $$PWD/wifiwidgets.cpp \
@@ -12,7 +13,8 @@ SOURCES += \
     $$PWD/netconfigdialog.cpp \
     $$PWD/switchwidget.cpp \
     $$PWD/wifiutil.cpp \
-    $$PWD/networklist.cpp
+    $$PWD/networklist.cpp \
+    $$PWD/tabcurrentstatus.cpp
 
 INCLUDEPATH +=$$PWD wpa_supplicant
 include (wpa_supplicant/wpa_supplicant.pri)
