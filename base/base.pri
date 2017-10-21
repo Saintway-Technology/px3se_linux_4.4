@@ -3,10 +3,8 @@ HEADERS += \
     $$PWD/basewindow.h \
     $$PWD/absframelessautosize.h \
     $$PWD/basepushbutton.h \
-    $$PWD/brightnessmapper.h \
     $$PWD/cmessagebox.h \
     $$PWD/cpushbutton.h \
-    $$PWD/cswitchbutton.h\
     $$PWD/basetablewidget.h \
     $$PWD/switchbutton.h
 
@@ -15,9 +13,7 @@ SOURCES += \
     $$PWD/basewindow.cpp \
     $$PWD/absframelessautosize.cpp \
     $$PWD/basepushbutton.cpp \
-    $$PWD/brightnessmapper.cpp \
     $$PWD/cmessagebox.cpp \
     $$PWD/cpushbutton.cpp \
-    $$PWD/cswitchbutton.cpp \
     $$PWD/basetablewidget.cpp \
     $$PWD/switchbutton.cpp

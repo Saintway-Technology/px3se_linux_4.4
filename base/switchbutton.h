@@ -124,7 +124,6 @@ public:
     }
 
 public slots:
-
     void setChecked(bool checked);
     void setButtonStyle(ButtonStyle buttonStyle);
 

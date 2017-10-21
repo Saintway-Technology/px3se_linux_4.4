@@ -19,10 +19,6 @@
      <property name="text">
       <string/>
      </property>
-     <property name="icon">
-      <iconset resource="../res_setting.qrc">
-       <normaloff>:/image/setting/volume-down.png</normaloff>:/image/setting/volume-down.png</iconset>
-     </property>
      <property name="iconSize">
       <size>
        <width>60</width>
@@ -52,10 +48,6 @@
      <property name="text">
       <string/>
      </property>
-     <property name="icon">
-      <iconset resource="../res_setting.qrc">
-       <normaloff>:/image/setting/volume-up.png</normaloff>:/image/setting/volume-up.png</iconset>
-     </property>
      <property name="iconSize">
       <size>
        <width>60</width>
@@ -67,8 +59,6 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="../res_setting.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

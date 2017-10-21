@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QMouseEvent>
 
-enum CursorPos{Default,Right,Left,Bottom,Top,TopRight,TopLeft,BottomRight,BottomLeft};
+enum CursorPos{Default, Right, Left, Bottom, Top, TopRight, TopLeft, BottomRight, BottomLeft};
 struct pressWindowsState
 {
     bool MousePressed;

@@ -2,25 +2,25 @@
 
 #include <QHBoxLayout>
 
+#include "retranslatemanager.h"
+
 #ifdef DEVICE_EVB
+int paired_information_button_width = 150;
 int paired_information_button_height = 60;
 int paired_information_title_width = 120;
 int paired_information_laytout_margin = 40;
 #else
+int paired_information_button_width = 90;
 int paired_information_button_height = 30;
 int paired_information_title_width = 80;
 int paired_information_laytout_margin = 30;
 #endif
 
-PairedInformationDialog::PairedInformationDialog(QWidget *parent):QDialog(parent)
+PairedInformationDialog::PairedInformationDialog(QWidget *parent) : QDialog(parent)
 {
-    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
+    setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
     setStyleSheet("QDialog{border:1.5px solid rgb(0,120,215);background:rgb(43,43,43)}"
                   "QLabel{color:white}");
-    // set bold font.
-    QFont font = this->font();
-    font.setBold(true);
-    setFont(font);
 
     initLayout();
     initConnection();
@@ -30,20 +30,22 @@ void PairedInformationDialog::initLayout()
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
 
-    QLabel *nameTitle = new QLabel("name: ",this);
+    QLabel *nameTitle = new QLabel(str_bluetooth_name, this);
     nameTitle->setAlignment(Qt::AlignRight);
     nameTitle->setFixedWidth(paired_information_title_width);
-    m_nameLabel = new QLabel(":",this);
+
+    m_nameLabel = new QLabel(this);
     m_nameLabel->setAlignment(Qt::AlignLeft);
 
     QHBoxLayout *nameLayout = new QHBoxLayout;
     nameLayout->addWidget(nameTitle);
     nameLayout->addWidget(m_nameLabel);
 
-    QLabel *addressTitle = new QLabel("address: ",this);
+    QLabel *addressTitle = new QLabel(str_bluetooth_address, this);
     addressTitle->setAlignment(Qt::AlignRight);
     addressTitle->setFixedWidth(paired_information_title_width);
-    m_addressLabel = new QLabel("",this);
+
+    m_addressLabel = new QLabel(this);
     m_addressLabel->setAlignment(Qt::AlignLeft);
 
     QHBoxLayout *addressLayout = new QHBoxLayout;
@@ -52,10 +54,10 @@ void PairedInformationDialog::initLayout()
 
     // button layout
     QHBoxLayout *buttonlayout = new QHBoxLayout;
-    m_btnConfirm = new CPushButton("Confirm",this);
-    m_btnCancelSave = new CPushButton("Cancel save",this);
-    m_btnConfirm->setFixedHeight(paired_information_button_height);
-    m_btnCancelSave->setFixedHeight(paired_information_button_height);
+    m_btnConfirm = new CPushButton(str_bluetooth_confirm, this);
+    m_btnCancelSave = new CPushButton(str_bluetooth_cancel_save, this);
+    m_btnConfirm->setFixedSize(paired_information_button_width, paired_information_button_height);
+    m_btnCancelSave->setFixedSize(paired_information_button_width, paired_information_button_height);
 
     buttonlayout->addWidget(m_btnCancelSave);
     buttonlayout->addWidget(m_btnConfirm);
@@ -76,10 +78,10 @@ void PairedInformationDialog::initConnection()
     connect(m_btnCancelSave, SIGNAL(clicked()), this, SLOT(slot_onCancelSaveClicked()));
 }
 
-int PairedInformationDialog::showInformationDialog(QWidget *parent,QString name,QString address)
+int PairedInformationDialog::showInformationDialog(QWidget *parent, QString name, QString address)
 {
     PairedInformationDialog *dialog = new PairedInformationDialog(parent);
-    dialog->setInformationText(name,address);
+    dialog->setInformationText(name, address);
 
     return dialog->exec();
 }
@@ -113,8 +115,6 @@ void PairedInformationDialog::slot_onCancelSaveClicked()
 
 void PairedInformationDialog::closeEvent(QCloseEvent*)
 {
-    if(m_eventLoop != NULL){
+    if (m_eventLoop != NULL)
         m_eventLoop->exit();
-    }
-    //event->accept();
 }

@@ -5,15 +5,14 @@
 
 #include "basewidget.h"
 #include "leftwidgets.h"
-#include "wifi/wifiwidgets.h"
-#include "bluetooth/bluetoothwidgets.h"
+#include "wlan/wlanmainwidget.h"
+#include "hotspot/hotspotmainwidget.h"
+#include "bluetooth/bluetoothscannerwidgets.h"
 #include "brightness/brightnesswidgets.h"
 #include "calendar/calendarwidgets.h"
 #include "volume/volumewidgets.h"
 #include "updater/updaterwidgets.h"
 #include "language/languagewidgets.h"
-
-class WifiWidgets;
 
 /**
  * On behalf of middle part of settings application.
@@ -27,13 +26,15 @@ class SettingMiddleWidgets:public BaseWidget
 public:
     SettingMiddleWidgets(QWidget *parent);
     ~SettingMiddleWidgets();
+
 private:
-    /* Right stacked widgets */
+    /* right stacked widget */
     QStackedWidget *m_stackedWid;
     LeftWidgets *m_leftWid;
 
-    WifiWidgets *m_wifiWid;
-    BluetoothWidgets *m_bluetoothWid;
+    WlanMainWidget *m_wifiWid;
+    HotspotMainWidget *m_hotspotWid;
+    BluetoothScannerWidgets *m_bluetoothWid;
     BrightnessWidgets *m_brightnessWid;
     CalendarWidgets *m_calendarWid;
     VolumeWidgets *m_volumnWid;
@@ -42,6 +43,7 @@ private:
 
     void initLayout();
     void initConnection();
+
 private slots:
     void slot_currentWidgetChanged(int index);
 };

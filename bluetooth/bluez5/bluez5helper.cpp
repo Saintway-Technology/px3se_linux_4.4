@@ -65,7 +65,7 @@ QString findAdapterForAddress(const QBluetoothAddress &wantedAddress, bool *ok =
     return QString(); // nothing matching found
 }
 
-Bluez5Helper::Bluez5Helper(QObject *parent):QObject(parent),
+Bluez5Helper::Bluez5Helper(QObject *parent) : QObject(parent),
     device1Target(0),
     adapterBluez5(0),
     managerBluez5(0)
@@ -103,27 +103,26 @@ void Bluez5Helper::initializeAdapterBluez5()
 
 void Bluez5Helper::disconnectDevice(const QBluetoothAddress &targetAddress)
 {
-    qDebug("disconnectDevice device %s",targetAddress.toString().toLatin1().data());
-    changeConnectState(targetAddress,false);
+    qDebug("disconnectDevice device %s", targetAddress.toString().toLatin1().data());
+    changeConnectState(targetAddress, false);
 }
 
 void Bluez5Helper::connectDevice(const QBluetoothAddress &targetAddress)
 {
-    qDebug("connect device %s",targetAddress.toString().toLatin1().data());
-    changeConnectState(targetAddress,true);
+    qDebug("connect device %s", targetAddress.toString().toLatin1().data());
+    changeConnectState(targetAddress, true);
 }
 
 void Bluez5Helper::changeConnectState(const QBluetoothAddress &targetAddress,bool connectIntent)
 {
-    if(device1Target){
+    if (device1Target) {
         delete device1Target;
         device1Target = 0;
     }
 
     QDBusPendingReply<ManagedObjectList> reply = managerBluez5->GetManagedObjects();
-    if (reply.isError()) {
+    if (reply.isError())
         return;
-    }
 
     ManagedObjectList managedObjectList = reply.value();
     for (ManagedObjectList::const_iterator it = managedObjectList.constBegin(); it != managedObjectList.constEnd(); ++it) {
@@ -140,11 +139,11 @@ void Bluez5Helper::changeConnectState(const QBluetoothAddress &targetAddress,boo
                 if (targetAddress == QBluetoothAddress(device.address())) {
                     device1Target = new OrgBluezDevice1Interface(QStringLiteral("org.bluez"), path.path(),
                                                                  QDBusConnection::systemBus(), this);
-                    if(connectIntent){
+                    if (connectIntent)
                         device1Target->Connect();
-                    }else{
+                    else
                         device1Target->Disconnect();
-                    }
+
                     return;
                 }
             }
@@ -194,15 +193,14 @@ void Bluez5Helper::removeUnpairedDevice(const QBluetoothAddress &targetAddress)
 
 bool Bluez5Helper::isDeviceConnected(const QBluetoothAddress &targetAddress)
 {
-    if(device1Target){
+    if (device1Target) {
         delete device1Target;
         device1Target = 0;
     }
 
     QDBusPendingReply<ManagedObjectList> reply = managerBluez5->GetManagedObjects();
-    if (reply.isError()) {
+    if (reply.isError())
         return false;
-    }
 
     ManagedObjectList managedObjectList = reply.value();
     for (ManagedObjectList::const_iterator it = managedObjectList.constBegin(); it != managedObjectList.constEnd(); ++it) {

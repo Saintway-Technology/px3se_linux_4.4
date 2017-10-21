@@ -1,6 +1,6 @@
 #include "funtiontablewidget.h"
 #include <QDebug>
-#include "global_value.h"
+#include "constant.h"
 
 #ifdef DEVICE_EVB
 int table_item_height = 80;
@@ -9,7 +9,8 @@ int table_item_height = 50;
 #endif
 
 Funtiontablewidget:: Funtiontablewidget(QWidget *parent) : QTableWidget(parent)
-  ,m_previousColorRow(-1),m_defaultBkColor(QColor(32,38,51))
+  , m_previousColorRow(-1)
+  , m_defaultBkColor(QColor(32, 38, 51))
 {
     setStyleSheet("QTableView{background:transparent;}"
                   "QTableView::item:selected{color:white;background:rgb(32, 85, 130);}");
@@ -27,17 +28,16 @@ Funtiontablewidget:: Funtiontablewidget(QWidget *parent) : QTableWidget(parent)
     setFocusPolicy(Qt::NoFocus);
     setCursor(Qt::PointingHandCursor);
 
-    // Init QTableWidget's connection
     connect(this, SIGNAL(cellEntered(int,int)), this,SLOT(listCellEntered(int,int)));
     connect(this, SIGNAL(cellClicked(int,int)), SLOT(listCellClicked(int,int)));
-    connect(mainWindow,SIGNAL(retranslateUi()),this,SLOT(retranslateUi()));
+    connect(mainWindow, SIGNAL(retranslateUi()), this, SLOT(retranslateUi()));
+
+    setIconSize(QSize(25, 25));
 }
 
 void Funtiontablewidget::retranslateUi(){
-    for(int i=0; i<rowCount(); ++i)
-    {
+    for (int i = 0; i < rowCount(); ++i)
         reflushItemName(i);
-    }
 }
 
 void Funtiontablewidget::reflushItemName(int i){
@@ -48,69 +48,62 @@ void Funtiontablewidget::reflushItemName(int i){
 
     switch (i) {
     case 0:
-
         item->setText(tr("Wifi"));
         break;
     case 1:
-
-        item->setText(tr("BlueTooth"));
+        item->setText(tr("Hotspot"));
         break;
     case 2:
-
-        item->setText(tr("Brightness"));
+        item->setText(tr("BlueTooth"));
         break;
     case 3:
-
-        item->setText(tr("Time&Calendar"));
+        item->setText(tr("Brightness"));
         break;
     case 4:
-
-        item->setText(tr("Volumn"));
+        item->setText(tr("Time&Calendar"));
         break;
     case 5:
-
-        item->setText(tr("Updater"));
+        item->setText(tr("Volumn"));
         break;
     case 6:
-
+        item->setText(tr("Updater"));
+        break;
+    case 7:
         item->setText(tr("Language"));
         break;
     default:
         break;
     }
+
     setItem(i, 2, item);
 }
 
-void Funtiontablewidget::addFunctionItems(QStringList &normalicon, QStringList &selectedicon, QStringList &name)
+void Funtiontablewidget::addFunctionItems(QStringList &normalicon, QStringList &selectedicon, QStringList &)
 {
     m_normalicon = normalicon;
     m_selectedicon = selectedicon;
 
-    for(int i=0; i<rowCount(); ++i)
-    {
+    for (int i = 0; i < rowCount(); ++i) {
         QTableWidgetItem *item = NULL;
         setItem(i, 0, item = new QTableWidgetItem());
-        item = new QTableWidgetItem(QIcon(m_normalicon[i]), QString());
+        item = new QTableWidgetItem(QIcon(QPixmap(m_normalicon[i])), QString());
         item->setTextAlignment(Qt::AlignCenter);
         setItem(i, 1, item);
         reflushItemName(i);
-        setRowHeight(i,table_item_height);
-    }    
+        setRowHeight(i, table_item_height);
+    }
 }
 
 void Funtiontablewidget::listCellEntered(int row, int column)
 {
     QTableWidgetItem *it = item(m_previousColorRow, 0);
-    if(it != NULL)
-    {
+    if (it != NULL)
         setRowColor(m_previousColorRow, m_defaultBkColor);
-    }
 
     it = item(row, column);
-    if(it != NULL)
-    {
-        setRowColor(row, QColor(45,53,66));
-    }
+    if (it != NULL)
+        setRowColor(row, QColor(45, 53, 66));
+
     m_previousColorRow = row;
 }
 
@@ -124,20 +117,18 @@ void Funtiontablewidget::listCellClicked(int row, int column)
 
 void Funtiontablewidget::changeIcon(int currentrow)
 {
-    for(int row=0; row<rowCount(); row++)
-    {
+    for (int row = 0; row < rowCount(); row++) {
         QTableWidgetItem *it = item(row, 1);
-        if(row == currentrow)
-            it->setIcon(QIcon(m_selectedicon[row]));
+        if (row == currentrow)
+            it->setIcon(QIcon(QPixmap(m_selectedicon[row])));
         else
-            it->setIcon(QIcon(m_normalicon[row]));
+            it->setIcon(QIcon(QPixmap(m_normalicon[row])));
     }
 }
 
 void Funtiontablewidget::setRowColor(int row, const QColor &color) const
 {
-    for(int col=0; col<columnCount(); col++)
-    {
+    for (int col = 0; col < columnCount(); col++) {
         QTableWidgetItem *it = item(row, col);
         it->setBackgroundColor(color);
     }
@@ -156,12 +147,12 @@ void Funtiontablewidget::resizeEvent(QResizeEvent*)
     headerview->setVisible(false);
     headerview->resizeSection(0, 40);
     headerview->resizeSection(1, 70);
-    headerview->resizeSection(2, width()-110);
+    headerview->resizeSection(2, width() - 110);
 #else
     QHeaderView *headerview = horizontalHeader();
     headerview->setVisible(false);
-    headerview->resizeSection(0, 20);
-    headerview->resizeSection(1, 40);
-    headerview->resizeSection(2, width()-60);
+    headerview->resizeSection(0, 25);
+    headerview->resizeSection(1, 45);
+    headerview->resizeSection(2, width() - 70);
 #endif
 }

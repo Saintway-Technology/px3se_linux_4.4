@@ -5,13 +5,13 @@
 #include <QHeaderView>
 #include <QStyledItemDelegate>
 #include <QPainter>
-#include <QEvent>
 
 class Funtiontablewidget : public QTableWidget
 {
     Q_OBJECT
 public:
     Funtiontablewidget(QWidget *parent = 0);
+
 private:
     int m_previousColorRow;
     QColor m_defaultBkColor;
@@ -21,6 +21,7 @@ private:
 protected:
     void resizeEvent(QResizeEvent*);
     void reflushItemName(int i);
+
 public:
     void addFunctionItems(QStringList &normalicon, QStringList &selectedicon, QStringList &name);
     void changeIcon(int currentrow);
@@ -36,6 +37,6 @@ public slots:
     void listCellEntered(int row, int column);
     void listCellClicked(int row, int column);
     void retranslateUi();
-
 };
+
 #endif // FUNTIONTABLEWIDGET_H

@@ -10,13 +10,12 @@ class VolumeWidgets:public BaseWidget
 public:
     VolumeWidgets(QWidget *parent);
     ~VolumeWidgets();
+
 private:
     VolumnWidget *m_volumnWidget;
 
     void initData();
     void initLayout();
 };
-
-
 
 #endif // RIGHTSTACKEDWIDGETS4_H

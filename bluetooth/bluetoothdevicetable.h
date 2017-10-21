@@ -3,25 +3,36 @@
 
 #include "base/basetablewidget.h"
 
-class BluetoothStateItem:public QTableWidgetItem
+enum BtState {
+    BT_STATE_NULL = 0,
+    BT_STATE_PAIRING,
+    BT_STATE_PAIRED,
+    BT_STATE_CONNECTED,
+};
+
+class BluetoothStateItem : public QTableWidgetItem
 {
 public:
     BluetoothStateItem(const QString &text);
+
 protected:
     virtual bool operator<(const QTableWidgetItem &other) const;
 };
 
-class BluetoothDeviceTable:public BaseTableWidget
+class BluetoothDeviceTable : public BaseTableWidget
 {
+    Q_OBJECT
 public:
     BluetoothDeviceTable(QWidget *parent);
 
-    void insertIntoTable(const QString &name,const QString &address,const QString &state);
+    void insertIntoTable(const QString &name, const QString &address, BtState state);
     void clearTable();
     void sortTable();
-    void updateItemState(int row,const QString& state);
+    void retranslateTable();
+
     QString getItemName(int row);
     QString getItemAddress(int row);
+    void setItemState(int itemRow, BtState state);
 
 private:
     void init();

@@ -13,14 +13,14 @@ class UpdaterWidget;
 class UpdaterWidget : public QWidget
 {
     Q_OBJECT
-
 public:
     explicit UpdaterWidget(QWidget *parent = 0);
     ~UpdaterWidget();
 
-private slots:
+public slots:
     void on_m_updatePushButton_clicked();
     void retranslateUi();
+
 private:
     Ui::UpdaterWidget *ui;
     QFileInfo *file;

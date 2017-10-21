@@ -1,5 +1,8 @@
 #include "lunar.h"
-#include <QString>
+
+#include <time.h>
+#include <stdio.h>
+#include <string.h>
 
 unsigned int LunarCalendarTable[202] =
 {
@@ -26,86 +29,87 @@ unsigned int LunarCalendarTable[202] =
     0x0D5252,0x0DAA47,0x66B53B,0x056D4F,0x04AE45,0x4A4EB9,0x0A4D4C,0x0D1541,0x2D92B5,          /*2091-2099*/
     0xD5249
 };
-const int BEGIN_YEAR = 1900;
-int MonthAdd[12] = {0,31,59,90,120,151,181,212,243,273,304,334};
-const char *ChDay[] = {"*","初一","初二","初三","初四","初五",
-                       "初六","初七","初八","初九","初十",
-                       "十一","十二","十三","十四","十五",
-                       "十六","十七","十八","十九","二十",
-                       "廿一","廿二","廿三","廿四","廿五",
-                       "廿六","廿七","廿八","廿九","三十"
-                      };
-const char *ChMonth[] = {"*","正","二","三","四","五","六","七","八","九","十","十一","腊"};
 
-int LunarCalendarX(int year,int month,int day,int & lunaryear,int & lunarmonth,int & lunarday,unsigned int & LunarCalendarDay)
+const int BEGIN_YEAR = 1900;
+int MonthAdd[12] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
+const char *ChDay[] = {"*", "初一", "初二", "初三", "初四", "初五",
+                       "初六", "初七", "初八", "初九", "初十",
+                       "十一", "十二", "十三", "十四", "十五",
+                       "十六", "十七", "十八", "十九", "二十",
+                       "廿一", "廿二", "廿三", "廿四", "廿五",
+                       "廿六", "廿七", "廿八", "廿九", "三十"};
+const char *ChMonth[] = {"*", "正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "腊"};
+
+int LunarCalendarX(int year, int month, int day, int &lunaryear, int &lunarmonth,
+                   int &lunarday, unsigned int &LunarCalendarDay)
 {
-    int Spring_NY,Sun_NY,StaticDayCount;
-    int index,flag;
+    int Spring_NY, Sun_NY, StaticDayCount;
+    int index, flag;
     //Spring_NY 记录春节离当年元旦的天数。
     //Sun_NY 记录阳历日离当年元旦的天数。
-    if ( ((LunarCalendarTable[year-BEGIN_YEAR] & 0x0060) >> 5) == 1)
+    if (((LunarCalendarTable[year-BEGIN_YEAR] & 0x0060) >> 5) == 1)
         Spring_NY = (LunarCalendarTable[year-BEGIN_YEAR] & 0x001F) - 1;
     else
         Spring_NY = (LunarCalendarTable[year-BEGIN_YEAR] & 0x001F) - 1 + 31;
+
     Sun_NY = MonthAdd[month-1] + day - 1;
-    if ( ((year%4==0 && year%100!=0) || year%400==0) && (month > 2) )
+    if (((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) && (month > 2))
         Sun_NY++;
     //StaticDayCount记录大小月的天数 29 或30
     //index 记录从哪个月开始来计算。
     //flag 是用来对闰月的特殊处理。
     //判断阳历日在春节前还是春节后
-    if (Sun_NY >= Spring_NY)//阳历日在春节后（含春节那天）
-    {
+
+    //阳历日在春节后（含春节那天）
+    if (Sun_NY >= Spring_NY) {
         Sun_NY -= Spring_NY;
         month = 1;
         index = 1;
         flag = 0;
-        if ( ( LunarCalendarTable[year - BEGIN_YEAR] & (0x80000 >> (index-1)) ) ==0)
+        if ((LunarCalendarTable[year - BEGIN_YEAR] & (0x80000 >> (index - 1))) == 0)
             StaticDayCount = 29;
         else
             StaticDayCount = 30;
-        while (Sun_NY >= StaticDayCount)
-        {
+
+        while (Sun_NY >= StaticDayCount) {
             Sun_NY -= StaticDayCount;
             index++;
-            if ((unsigned)month == ((LunarCalendarTable[year - BEGIN_YEAR] & 0xF00000) >> 20) )
-            {
+            if ((unsigned)month == ((LunarCalendarTable[year - BEGIN_YEAR] & 0xF00000) >> 20)) {
                 flag = ~flag;
                 if (flag == 0)
                     month++;
-            }
-            else
+            } else
                 month++;
-            if ( ( LunarCalendarTable[year - BEGIN_YEAR] & (0x80000 >> (index-1)) ) ==0)
-                StaticDayCount=29;
+
+            if ((LunarCalendarTable[year - BEGIN_YEAR] & (0x80000 >> (index - 1))) ==0)
+                StaticDayCount = 29;
             else
-                StaticDayCount=30;
+                StaticDayCount = 30;
         }
         day = Sun_NY + 1;
-    }
-    else //阳历日在春节前
-    {
+    } else { //阳历日在春节前
         Spring_NY -= Sun_NY;
         year--;
         month = 12;
-        if ( ((LunarCalendarTable[year - BEGIN_YEAR] & 0xF00000) >> 20) == 0)
+        if (((LunarCalendarTable[year - BEGIN_YEAR] & 0xF00000) >> 20) == 0)
             index = 12;
         else
             index = 13;
+
         flag = 0;
-        if ( ( LunarCalendarTable[year - BEGIN_YEAR] & (0x80000 >> (index-1)) ) ==0)
+        if ((LunarCalendarTable[year - BEGIN_YEAR] & (0x80000 >> (index - 1))) == 0)
             StaticDayCount = 29;
         else
             StaticDayCount = 30;
-        while (Spring_NY > StaticDayCount)
-        {
+
+        while (Spring_NY > StaticDayCount) {
             Spring_NY -= StaticDayCount;
             index--;
             if (flag == 0)
                 month--;
             if ((unsigned)month == ((LunarCalendarTable[year - BEGIN_YEAR] & 0xF00000) >> 20))
                 flag = ~flag;
-            if ( ( LunarCalendarTable[year - BEGIN_YEAR] & (0x80000 >> (index-1)) ) ==0)
+            if ((LunarCalendarTable[year - BEGIN_YEAR] & (0x80000 >> (index - 1))) == 0)
                 StaticDayCount = 29;
             else
                 StaticDayCount = 30;
@@ -124,21 +128,18 @@ int LunarCalendarX(int year,int month,int day,int & lunaryear,int & lunarmonth,i
     else
         return 0;
 }
-QString GetLunarStringX(int year,int month,int day,int & lunaryear,int & lunarmonth,int & lunarday)
+
+QString GetLunarStringX(int year, int month, int day, int &lunaryear, int &lunarmonth, int &lunarday)
 {
     char str[30] = "";
     unsigned int LunarCalendarDay = 0;
-    if (LunarCalendarX(year,month,day,lunaryear,lunarmonth,lunarday,LunarCalendarDay))
-    {
-        strcat(str,"闰");
-        strcat(str,ChMonth[(LunarCalendarDay & 0x3C0) >> 6]);
+    if (LunarCalendarX(year, month, day, lunaryear, lunarmonth, lunarday, LunarCalendarDay)) {
+        strcat(str, "闰");
+        strcat(str, ChMonth[(LunarCalendarDay & 0x3C0) >> 6]);
+    } else {
+        strcat(str, ChMonth[(LunarCalendarDay & 0x3C0) >> 6]);
     }
-    else
-    {
-        strcat(str,ChMonth[(LunarCalendarDay & 0x3C0) >> 6]);
-    }
-    strcat(str,"月");
-    strcat(str,ChDay[LunarCalendarDay & 0x3F]);
+    strcat(str, "月");
+    strcat(str, ChDay[LunarCalendarDay & 0x3F]);
     return QString(str);
 }
-

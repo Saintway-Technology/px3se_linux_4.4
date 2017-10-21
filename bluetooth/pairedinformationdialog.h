@@ -7,7 +7,7 @@
 #include <cpushbutton.h>
 #include <QEventLoop>
 
-class PairedInformationDialog:public QDialog
+class PairedInformationDialog : public QDialog
 {
     Q_OBJECT
 public:
@@ -19,8 +19,8 @@ public:
         RESULT_CANCELSAVE
     };
 
-    int static showInformationDialog(QWidget *parent,QString name,QString address);
-    void setInformationText(QString name,QString address);
+    int static showInformationDialog(QWidget *parent, QString name, QString address);
+    void setInformationText(QString name, QString address);
 
 protected:
     void closeEvent(QCloseEvent *event);

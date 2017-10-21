@@ -1,24 +1,25 @@
 #include "cmessagebox.h"
 #include <QHBoxLayout>
-#include "global_value.h"
+#include "constant.h"
 
 #ifdef DEVICE_EVB
 int button_width = 150;
 int button_height = 60;
 int box_margin = 50;
 #else
-int button_width = 90;
+int button_width = 95;
 int button_height = 30;
 int box_margin = 30;
 #endif
 
-CMessageBox::CMessageBox(QWidget *parent):QDialog(parent)
+CMessageBox::CMessageBox(QWidget *parent) : QDialog(parent)
   , m_eventLoop(NULL)
   , m_chooseResult(RESULT_CANCEL)
 {
-    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
+    setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
     setStyleSheet("QDialog{border:1.5px solid rgb(0,120,215);background:rgb(43,43,43)}"
                   "QLabel{color:white}");
+
     initLayout();
     initConnection();
 }
@@ -27,13 +28,13 @@ void CMessageBox::initLayout()
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
 
-    m_labelContent = new QLabel("",this);
-    m_labelContent->setAlignment(Qt::AlignLeft|Qt::AlignTop);
+    m_labelContent = new QLabel(this);
+    m_labelContent->setAlignment(Qt::AlignLeft | Qt::AlignTop);
 
     // button layout
     QHBoxLayout *buttonlayout = new QHBoxLayout;
-    m_btnConfirm = new CPushButton("",this);
-    m_btnCancel = new CPushButton("",this);
+    m_btnConfirm = new CPushButton("", this);
+    m_btnCancel = new CPushButton("", this);
     m_btnConfirm->setFixedHeight(button_height);
     m_btnCancel->setFixedHeight(button_height);
     m_btnConfirm->setMinimumWidth(button_width);
@@ -57,10 +58,11 @@ void CMessageBox::initConnection()
     connect(m_btnCancel, SIGNAL(clicked()), this, SLOT(slot_onCancelClicked()));
 }
 
-int CMessageBox::showCMessageBox(QWidget *parent,QString contentText, QString confirmText, QString cancelText)
+int CMessageBox::showCMessageBox(QWidget *parent, QString contentText,
+                                 QString confirmText, QString cancelText)
 {
     CMessageBox *messageBox = new CMessageBox(parent);
-    messageBox->setBoxText(contentText,confirmText,cancelText);
+    messageBox->setBoxText(contentText, confirmText, cancelText);
 
     return messageBox->exec();
 }
@@ -96,8 +98,5 @@ void CMessageBox::slot_onCancelClicked()
 void CMessageBox::closeEvent(QCloseEvent*)
 {
     if (m_eventLoop != NULL)
-    {
         m_eventLoop->exit();
-    }
-    //event->accept();
 }

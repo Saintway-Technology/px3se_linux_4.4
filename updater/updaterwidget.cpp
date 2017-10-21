@@ -11,12 +11,11 @@
 #include <errno.h>
 #include <linux/watchdog.h>
 
-#include <unistd.h>        /* System V */
-#include <sys/ioctl.h>    /* BSD and Linux */
-#include <stropts.h>    /* XSI STREAMS */
-#include "global_value.h"
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <stropts.h>
+#include "constant.h"
 #include "language/language.h"
-
 
 int vendor_storage_write(int buf_size, uint8 *buf, uint16 vendor_id)
 {
@@ -34,7 +33,7 @@ int vendor_storage_write(int buf_size, uint8 *buf, uint16 vendor_id)
     req.len = buf_size > VENDOR_DATA_SIZE ? VENDOR_DATA_SIZE : buf_size;
     memcpy(req.data, buf, req.len);
     ret = ioctl(fd, VENDOR_WRITE_IO, &req);
-    if(ret){
+    if (ret) {
         printf("vendor write error, ret = %d\n", ret);
         close(fd);
         return -1;
@@ -78,16 +77,14 @@ int fw_flag_check(char* path)
     STRUCT_PART_INFO partition;
 
     fdfile = open(path, O_RDONLY);
-    if(fdfile <= 0)
-    {
+    if (fdfile <= 0) {
         printf("fw_flag_check open %s failed! \n", path);
         perror("open");
         return -1;
     }
 
     ret = read(fdfile, &partition, sizeof(STRUCT_PART_INFO));
-    if(ret <= 0)
-    {
+    if (ret <= 0) {
         close(fdfile);
         printf("fw_flag_check read %s failed! \n", path);
         perror("read");
@@ -95,8 +92,7 @@ int fw_flag_check(char* path)
     }
     close(fdfile);
 
-    if(partition.hdr.uiFwTag != RK_PARTITION_TAG)
-    {
+    if (partition.hdr.uiFwTag != RK_PARTITION_TAG) {
         printf("ERROR: Your firmware(%s) is invalid!\n", path);
         return -1;
     }
@@ -104,12 +100,10 @@ int fw_flag_check(char* path)
     return 0;
 }
 
-/* +++++++++++++++ 待扩展 ++++++++++++ */
 int fw_md5_check()
 {
     return 0;
 }
-
 
 int updater_recovery_start(char* path)
 {
@@ -125,7 +119,7 @@ int updater_recovery_start(char* path)
         return ret;
 
     //read fwinfo
-    ret = vendor_storage_read(sizeof(UpdaterInfo), (char*)&fwinfo, VENDOR_UPDATER_ID);
+    ret = vendor_storage_read(sizeof(UpdaterInfo), (unsigned char*)&fwinfo, VENDOR_UPDATER_ID);
     if(ret)
         return ret;
 
@@ -136,7 +130,7 @@ int updater_recovery_start(char* path)
     fwinfo.update_mode = MODE_UPDATER;
     memcpy(fwinfo.update_path, path, strlen(path));
 
-    return vendor_storage_write(sizeof(UpdaterInfo), (char*)&fwinfo, VENDOR_UPDATER_ID);
+    return vendor_storage_write(sizeof(UpdaterInfo), (unsigned char*)&fwinfo, VENDOR_UPDATER_ID);
 }
 
 UpdaterWidget::UpdaterWidget(QWidget *parent) :
@@ -144,32 +138,23 @@ UpdaterWidget::UpdaterWidget(QWidget *parent) :
     ui(new Ui::UpdaterWidget)
 {
     ui->setupUi(this);
-    connect(mainWindow,SIGNAL(retranslateUi()),this,SLOT(retranslateUi()));
-    //read fwinfo
-    int ret = vendor_storage_read(sizeof(UpdaterInfo), (char*)&fwinfo, VENDOR_UPDATER_ID);
-    if(ret){
-        return ;
-    }
 
-    qDebug()<<"update_version:"<<fwinfo.update_version<<" update_mode:"<<fwinfo.update_mode
-           <<" update_path:"<<fwinfo.update_path;
-    char version[255]={0};
-    sprintf(version,"%d.%d.%d\n",fwinfo.update_version>>24&0xFF,fwinfo.update_version>>16&0xFF,fwinfo.update_version&0xFF);
+    connect(mainWindow, SIGNAL(retranslateUi()), this, SLOT(retranslateUi()));
+
+    //read fwinfo
+    int ret = vendor_storage_read(sizeof(UpdaterInfo), (unsigned char*)&fwinfo, VENDOR_UPDATER_ID);
+    if (ret)
+        return;
+
+    char version[255] = {0};
+    sprintf(version,"%d.%d.%d\n", fwinfo.update_version >> 24 & 0xFF,
+            fwinfo.update_version >> 16 & 0xFF, fwinfo.update_version & 0xFF);
     ui->m_update_version_LineEdit->setText(QString(version));
 }
-void UpdaterWidget::retranslateUi(){
 
-//    QStringList qmFiles =  Language::instance()->findQmFiles();
-//    for (int i = 0; i < qmFiles.size(); ++i) {
-//        qDebug()<< " lang file :"<<qmFiles[i];
-//        if (Language::instance()->languageMatch(QLocale::system().name(), qmFiles[i])){
-//            qDebug()<< " current lang:"<<qmFiles[i];
-//            QLocale locale =new QLocale("zh_CN");
-//            QLocale::setDefault()
-//        }
-//    }
-
-    this->ui->retranslateUi(this);
+void UpdaterWidget::retranslateUi()
+{
+    ui->retranslateUi(this);
 }
 
 UpdaterWidget::~UpdaterWidget()
@@ -179,53 +164,56 @@ UpdaterWidget::~UpdaterWidget()
 
 void UpdaterWidget::on_m_updatePushButton_clicked()
 {
-    file= new QFileInfo("/mnt/sdcard/Firmware.img");
-    if(file&&file->exists()){
+    qDebug("======== click click");
+    file = new QFileInfo("/mnt/sdcard/Firmware.img");
+    if (file->exists()) {
         qDebug()<< file->absoluteFilePath();
         QFile theFile(file->absoluteFilePath());
         theFile.open(QIODevice::ReadOnly);
         QByteArray ba = QCryptographicHash::hash(theFile.readAll(), QCryptographicHash::Md5);
         theFile.close();
-        qDebug()<<"Found img:"<<file->absoluteFilePath()<<" md5:" << ba.toHex().constData();
+        qDebug()<<"Found img:" << file->absoluteFilePath() << " md5:" << ba.toHex().constData();
 
-        ui->m_textBrowser->append("Found img:"+file->absoluteFilePath());
+        ui->m_textBrowser->append("Found img:" + file->absoluteFilePath());
         ui->m_textBrowser->append("md5:" + QString(QLatin1String((ba.toHex().constData()))));
-    }else{
-        qDebug()<<file->absoluteFilePath()<<" not found";
-        ui->m_textBrowser->append(file->absoluteFilePath()+" not found");
-        file= new QFileInfo("/mnt/udisk/Firmware.img");
-        if(file&&file->exists()){
-            qDebug()<< file->absoluteFilePath();
+    } else {
+        qDebug() << file->absoluteFilePath() << " not found";
+        ui->m_textBrowser->append(file->absoluteFilePath() + " not found");
+        file = new QFileInfo("/mnt/udisk/Firmware.img");
+        if (file->exists()) {
+            qDebug() << file->absoluteFilePath();
             QFile theFile(file->absoluteFilePath());
             theFile.open(QIODevice::ReadOnly);
             QByteArray ba = QCryptographicHash::hash(theFile.readAll(), QCryptographicHash::Md5);
             theFile.close();
             qDebug() << ba.toHex().constData();
-            qDebug()<<"Found img:"<<file->absoluteFilePath() << ba.toHex().constData();
-            ui->m_textBrowser->append("Found img:"+file->absoluteFilePath());
+            qDebug() << "Found img:" << file->absoluteFilePath() << ba.toHex().constData();
+
+            ui->m_textBrowser->append("Found img:" + file->absoluteFilePath());
             ui->m_textBrowser->append("md5:" + QString(QLatin1String((ba.toHex().constData()))));
-        }else{
-            qDebug()<<file->absoluteFilePath()<<" not found";
-            ui->m_textBrowser->append(file->absoluteFilePath()+" not found");
+        } else {
+            qDebug() << file->absoluteFilePath() << " not found";
+            ui->m_textBrowser->append(file->absoluteFilePath() + " not found");
             return;
         }
     }
 
-    char* path= file->absoluteFilePath().toLatin1().data();
+    char *path = file->absoluteFilePath().toLatin1().data();
     int ret = fw_flag_check(path);
-    if(ret){
-        qDebug()<<"fw_flag_check faild";
+    if (ret) {
+        qDebug() << "fw_flag_check faild";
         ui->m_textBrowser->append("fw_flag_check faild");
-        return ;
-    }else{
+        return;
+    } else {
         qDebug()<<"fw_flag_check ok";
         ui->m_textBrowser->append("fw_flag_check ok");
     }
+
     ret = fw_md5_check();
-    if(ret){
-        qDebug()<<"fw_md5_check faild";
+    if (ret) {
+        qDebug() << "fw_md5_check faild";
         ui->m_textBrowser->append("fw_md5_check faild");
-    }else{
+    } else {
         qDebug()<<"fw_md5_check ok";
         ui->m_textBrowser->append("fw_md5_check ok");
     }
@@ -237,17 +225,17 @@ void UpdaterWidget::on_m_updatePushButton_clicked()
     fwinfo.update_mode = MODE_UPDATER;
     memcpy(fwinfo.update_path, path, strlen(path));
 
-    ret =vendor_storage_write(sizeof(UpdaterInfo), (char*)&fwinfo, VENDOR_UPDATER_ID);
+    ret = vendor_storage_write(sizeof(UpdaterInfo), (unsigned char*)&fwinfo, VENDOR_UPDATER_ID);
 
-    if(ret){
-        qDebug()<<"vendor_storage_write faild";
+    if (ret) {
+        qDebug() << "vendor_storage_write faild";
         ui->m_textBrowser->append("vendor_storage_write faild");
-    }else{
-        qDebug()<<"vendor_storage_write ok";
+    } else {
+        qDebug() << "vendor_storage_write ok";
         ui->m_textBrowser->append("vendor_storage_write ok");
-        qDebug()<<"update_version:"<<fwinfo.update_version<<" update_mode:"<<fwinfo.update_mode
-               <<" update_path:"<<fwinfo.update_path;
-        qDebug()<<"begin reboot";
+        qDebug() << "update_version:" << fwinfo.update_version << " update_mode:" << fwinfo.update_mode
+                 << " update_path:" << fwinfo.update_path;
+        qDebug() << "begin reboot";
         ui->m_textBrowser->append("begin reboot");
         QProcess::execute("reboot");
     }

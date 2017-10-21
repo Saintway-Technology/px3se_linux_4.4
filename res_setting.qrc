@@ -28,5 +28,8 @@
         <file>image/setting/bluetooth_item_icon.png</file>
         <file>image/setting/bluetooth_scan.png</file>
         <file>image/setting/language.png</file>
+        <file>image/setting/hotspot.png</file>
+        <file>image/setting/return.png</file>
+        <file>image/setting/return_big.png</file>
     </qresource>
 </RCC>

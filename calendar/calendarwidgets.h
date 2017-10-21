@@ -10,13 +10,12 @@ class CalendarWidgets:public BaseWidget
 public:
     CalendarWidgets(QWidget *parent);
     ~CalendarWidgets();
+
 private:
     Widget *m_calendarWidget;
 
     void initData();
     void initLayout();
 };
-
-
 
 #endif // RIGHTSTACKEDWIDGETS3_H

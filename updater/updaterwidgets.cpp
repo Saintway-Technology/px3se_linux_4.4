@@ -36,4 +36,3 @@ void UpdaterWidgets::initLayout()
 UpdaterWidgets::~UpdaterWidgets()
 {
 }
-

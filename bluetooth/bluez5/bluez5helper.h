@@ -7,7 +7,7 @@
 #include "orgbluezadapter1interface.h"
 #include "orgfreedesktopdbusobjectmanagerinterface.h"
 
-class Bluez5Helper:public QObject
+class Bluez5Helper : public QObject
 {
 public:
     Bluez5Helper(QObject *parent);
@@ -24,8 +24,7 @@ private:
 
     void registerQBluetoothLocalDeviceMetaType();
     void initializeAdapterBluez5();
-    void changeConnectState(const QBluetoothAddress &targetAddress,bool connectIntent);
-
+    void changeConnectState(const QBluetoothAddress &targetAddress, bool connectIntent);
 };
 
 #endif // BLUEZ5HELPER_H

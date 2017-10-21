@@ -2,18 +2,103 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
-    <name>BluetoothScannerWidgets</name>
+    <name>BluetoothDeviceTable</name>
     <message>
-        <location filename="../bluetooth/bluetoothscannerwidgets.cpp" line="53"/>
-        <location filename="../bluetooth/bluetoothscannerwidgets.cpp" line="121"/>
-        <source>Bluetooth(%1)</source>
-        <translation type="unfinished">蓝牙(%1)</translation>
+        <source>Connected</source>
+        <translation type="obsolete">已连接</translation>
     </message>
     <message>
-        <location filename="../bluetooth/bluetoothscannerwidgets.cpp" line="72"/>
-        <location filename="../bluetooth/bluetoothscannerwidgets.cpp" line="120"/>
+        <source>Pairing..</source>
+        <translation type="obsolete">正在配对..</translation>
+    </message>
+    <message>
+        <source>Paired</source>
+        <translation type="obsolete">已配对</translation>
+    </message>
+    <message>
+        <source> </source>
+        <translation type="obsolete"> </translation>
+    </message>
+</context>
+<context>
+    <name>BluetoothScannerWidgets</name>
+    <message>
+        <source>Bluetooth(%1)</source>
+        <translation type="obsolete">蓝牙(%1)</translation>
+    </message>
+    <message>
+        <source>Connected</source>
+        <translation type="obsolete">已连接</translation>
+    </message>
+    <message>
+        <source>Paired</source>
+        <translation type="obsolete">已配对</translation>
+    </message>
+    <message>
+        <source>Connect with </source>
+        <translation type="obsolete">与以下设备进行连接 </translation>
+    </message>
+    <message>
+        <source>Connect</source>
+        <translation type="obsolete">连接</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="obsolete">取消</translation>
+    </message>
+    <message>
+        <source>Disconnect with </source>
+        <translation type="obsolete">与以下设备取消连接 </translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation type="obsolete">断开</translation>
+    </message>
+    <message>
+        <source>Pair with </source>
+        <translation type="obsolete">与以下设备进行配对 </translation>
+    </message>
+    <message>
+        <source>Pair</source>
+        <translation type="obsolete">配对</translation>
+    </message>
+    <message>
+        <source>Pairing..</source>
+        <translation type="obsolete">正在配对..</translation>
+    </message>
+    <message>
         <source>Available Devices</source>
-        <translation type="unfinished">可选蓝牙设备</translation>
+        <translation type="obsolete">可选蓝牙设备</translation>
+    </message>
+</context>
+<context>
+    <name>BluetoothStateItem</name>
+    <message>
+        <source>Connected</source>
+        <translation type="obsolete">已连接</translation>
+    </message>
+    <message>
+        <source>Paired</source>
+        <translation type="obsolete">已配对</translation>
+    </message>
+</context>
+<context>
+    <name>BluetoothSwitchHeader</name>
+    <message>
+        <source>Bluetooth(%1)</source>
+        <translation type="obsolete">蓝牙(%1)</translation>
+    </message>
+    <message>
+        <source>Bluetooth-</source>
+        <translation type="obsolete">蓝牙-</translation>
+    </message>
+    <message>
+        <source>Available Devices</source>
+        <translation type="obsolete">可选蓝牙设备</translation>
+    </message>
+    <message>
+        <source>Available Devices1</source>
+        <translation type="obsolete">你妈逼</translation>
     </message>
 </context>
 <context>
@@ -27,47 +112,28 @@
 <context>
     <name>DeviceDiscovery</name>
     <message>
-        <location filename="../bluetooth/btscanner.ui" line="14"/>
-        <source>Bluetooth Scanner</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../bluetooth/btscanner.ui" line="23"/>
         <source>Local Device</source>
-        <translation type="unfinished">设备</translation>
+        <translation type="obsolete">设备</translation>
     </message>
     <message>
-        <location filename="../bluetooth/btscanner.ui" line="29"/>
         <source>Bluetooth Powered On</source>
-        <translation type="unfinished">电源</translation>
+        <translation type="obsolete">电源</translation>
     </message>
     <message>
-        <location filename="../bluetooth/btscanner.ui" line="39"/>
         <source>Discoverable</source>
-        <translation type="unfinished">可被发现</translation>
+        <translation type="obsolete">可被发现</translation>
     </message>
     <message>
-        <location filename="../bluetooth/btscanner.ui" line="52"/>
         <source>General Unlimited Inquiry</source>
-        <translation type="unfinished">自动扫描</translation>
+        <translation type="obsolete">自动扫描</translation>
     </message>
     <message>
-        <location filename="../bluetooth/btscanner.ui" line="64"/>
         <source>Scan</source>
-        <translation type="unfinished">扫描</translation>
+        <translation type="obsolete">扫描</translation>
     </message>
     <message>
-        <location filename="../bluetooth/btscanner.ui" line="71"/>
         <source>Clear</source>
-        <translation type="unfinished">清除</translation>
-    </message>
-</context>
-<context>
-    <name>ErrorMsg</name>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1382"/>
-        <source>wpa_gui error</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">清除</translation>
     </message>
 </context>
 <context>
@@ -81,12 +147,17 @@
         <translation type="obsolete">无线</translation>
     </message>
     <message>
-        <location filename="../middle/funtiontablewidget.cpp" line="52"/>
+        <location filename="../middle/funtiontablewidget.cpp" line="51"/>
         <source>Wifi</source>
         <translation type="unfinished">无线</translation>
     </message>
     <message>
-        <location filename="../middle/funtiontablewidget.cpp" line="56"/>
+        <location filename="../middle/funtiontablewidget.cpp" line="54"/>
+        <source>Hotspot</source>
+        <translation type="unfinished">热点</translation>
+    </message>
+    <message>
+        <location filename="../middle/funtiontablewidget.cpp" line="57"/>
         <source>BlueTooth</source>
         <translation type="unfinished">蓝牙</translation>
     </message>
@@ -96,24 +167,43 @@
         <translation type="unfinished">亮度</translation>
     </message>
     <message>
-        <location filename="../middle/funtiontablewidget.cpp" line="64"/>
+        <location filename="../middle/funtiontablewidget.cpp" line="63"/>
         <source>Time&amp;Calendar</source>
         <translation type="unfinished">时间&amp;日期</translation>
     </message>
     <message>
-        <location filename="../middle/funtiontablewidget.cpp" line="68"/>
+        <location filename="../middle/funtiontablewidget.cpp" line="66"/>
         <source>Volumn</source>
         <translation type="unfinished">音量</translation>
     </message>
     <message>
-        <location filename="../middle/funtiontablewidget.cpp" line="72"/>
+        <location filename="../middle/funtiontablewidget.cpp" line="69"/>
         <source>Updater</source>
         <translation type="unfinished">更新</translation>
     </message>
     <message>
-        <location filename="../middle/funtiontablewidget.cpp" line="76"/>
+        <location filename="../middle/funtiontablewidget.cpp" line="72"/>
         <source>Language</source>
         <translation type="unfinished">语言</translation>
+    </message>
+</context>
+<context>
+    <name>HotspotMainWidget</name>
+    <message>
+        <source>name</source>
+        <translation type="obsolete">热点名</translation>
+    </message>
+    <message>
+        <source>password</source>
+        <translation type="obsolete">密码</translation>
+    </message>
+    <message>
+        <source>warning</source>
+        <translation type="obsolete">警告</translation>
+    </message>
+    <message>
+        <source>name or password is not available.</source>
+        <translation type="obsolete">热点名或密码不符合要求.</translation>
     </message>
 </context>
 <context>
@@ -153,210 +243,404 @@
     </message>
 </context>
 <context>
-    <name>NetworkConfig</name>
+    <name>NetConfigDialog</name>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="28"/>
-        <source>NetworkConfig</source>
-        <translation type="unfinished">网络设置</translation>
+        <source>Connect</source>
+        <translation type="obsolete">连接</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="34"/>
+        <source>Cancel</source>
+        <translation type="obsolete">取消</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation type="obsolete">取消保存</translation>
+    </message>
+</context>
+<context>
+    <name>NetConnectDialog</name>
+    <message>
+        <source>&lt;u&gt;password&lt;/u&gt;</source>
+        <translation type="obsolete">&lt;u&gt;密码&lt;/u&gt;</translation>
+    </message>
+    <message>
+        <source>Connect</source>
+        <translation type="obsolete">连接</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="obsolete">取消</translation>
+    </message>
+</context>
+<context>
+    <name>NetConnectedInfoDialog</name>
+    <message>
+        <location filename="../wlan/netconnectedinfodialog.cpp" line="61"/>
+        <source>State</source>
+        <translation type="unfinished">状态</translation>
+    </message>
+    <message>
+        <location filename="../wlan/netconnectedinfodialog.cpp" line="61"/>
+        <source>Connected</source>
+        <translation type="unfinished">已连接</translation>
+    </message>
+    <message>
+        <location filename="../wlan/netconnectedinfodialog.cpp" line="62"/>
+        <source>Signal Strength</source>
+        <translation type="unfinished">信号强度</translation>
+    </message>
+    <message>
+        <location filename="../wlan/netconnectedinfodialog.cpp" line="63"/>
+        <source>Frequency</source>
+        <translation type="unfinished">频率</translation>
+    </message>
+    <message>
+        <location filename="../wlan/netconnectedinfodialog.cpp" line="67"/>
+        <source>Forget</source>
+        <translation type="unfinished">取消保存</translation>
+    </message>
+    <message>
+        <location filename="../wlan/netconnectedinfodialog.cpp" line="68"/>
+        <source>Complete</source>
+        <translation type="unfinished">确定</translation>
+    </message>
+</context>
+<context>
+    <name>NetworkConfig</name>
+    <message>
+        <source>NetworkConfig</source>
+        <translation type="obsolete">网络设置</translation>
+    </message>
+    <message>
         <source>Close</source>
+        <translation type="obsolete">关闭</translation>
+    </message>
+    <message>
+        <source>SSID</source>
+        <translation type="obsolete">SSID</translation>
+    </message>
+    <message>
+        <source>Authentication</source>
+        <translation type="obsolete">身份认证</translation>
+    </message>
+    <message>
+        <source>Encryption</source>
+        <translation type="obsolete">加密</translation>
+    </message>
+    <message>
+        <source>PSK</source>
+        <translation type="obsolete">预共享秘钥</translation>
+    </message>
+    <message>
+        <source>EAP method</source>
+        <translation type="obsolete">EAP方式</translation>
+    </message>
+    <message>
+        <source>Identity</source>
+        <translation type="obsolete">身份</translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation type="obsolete">密码</translation>
+    </message>
+    <message>
+        <source>CA certificate</source>
+        <translation type="obsolete">发行者凭证</translation>
+    </message>
+    <message>
+        <source>WEP keys</source>
+        <translation type="obsolete">WEP 秘钥</translation>
+    </message>
+    <message>
+        <source>key 0</source>
+        <translation type="obsolete">秘钥  0</translation>
+    </message>
+    <message>
+        <source>key 1</source>
+        <translation type="obsolete">秘钥  1</translation>
+    </message>
+    <message>
+        <source>key 3</source>
+        <translation type="obsolete">秘钥  3</translation>
+    </message>
+    <message>
+        <source>key 2</source>
+        <translation type="obsolete">秘钥  2</translation>
+    </message>
+    <message>
+        <source>Optional Settings</source>
+        <translation type="obsolete">可选设置</translation>
+    </message>
+    <message>
+        <source>Priority</source>
+        <translation type="obsolete">优先级</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="obsolete">删除</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="obsolete">添加</translation>
+    </message>
+</context>
+<context>
+    <name>PairedInformationDialog</name>
+    <message>
+        <source>name: </source>
+        <translation type="obsolete">名字： </translation>
+    </message>
+    <message>
+        <source>address: </source>
+        <translation type="obsolete">地址： </translation>
+    </message>
+    <message>
+        <source>Confirm</source>
+        <translation type="obsolete">确定</translation>
+    </message>
+    <message>
+        <source>Cancel save</source>
+        <translation type="obsolete">取消保存</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Connected</source>
+        <translation type="obsolete">已连接</translation>
+    </message>
+    <message>
+        <source>Connecting</source>
+        <translation type="obsolete">正在连接</translation>
+    </message>
+    <message>
+        <source>Saved</source>
+        <translation type="obsolete">已保存</translation>
+    </message>
+    <message>
+        <source>Auth Failed</source>
+        <translation type="obsolete">密码错误</translation>
+    </message>
+    <message>
+        <source> </source>
+        <translation type="obsolete"> </translation>
+    </message>
+</context>
+<context>
+    <name>RetranslateManager</name>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="63"/>
+        <source>Bluetooth(%1)</source>
+        <translation type="unfinished">蓝牙(%1)</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="64"/>
+        <source>Available Devices</source>
+        <translation type="unfinished">可选蓝牙设备</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="65"/>
+        <source>Connect with </source>
+        <translation type="unfinished">与以下设备进行连接 </translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="66"/>
+        <source>Disconnect with </source>
+        <translation type="unfinished">与以下设备取消连接 </translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="67"/>
+        <source>Pair with </source>
+        <translation type="unfinished">与以下设备进行配对 </translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="68"/>
+        <location filename="../main/retranslatemanager.cpp" line="96"/>
+        <source>Connect</source>
+        <translation type="unfinished">连接</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="69"/>
+        <source>Disconnect</source>
+        <translation type="unfinished">断开</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="70"/>
+        <source>Pair</source>
+        <translation type="unfinished">配对</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="71"/>
+        <location filename="../main/retranslatemanager.cpp" line="97"/>
+        <source>Cancel</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="72"/>
+        <source>name:</source>
+        <translation type="unfinished">名字：</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="73"/>
+        <source>address:</source>
+        <translation type="unfinished">地址：</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="81"/>
+        <source>name</source>
+        <translation type="unfinished">热点名</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="83"/>
+        <source>warning</source>
+        <translation type="unfinished">警告</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="84"/>
+        <source>name or password is not available.</source>
+        <translation type="unfinished">热点名或密码不符合要求.</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="86"/>
+        <source>OPEN</source>
+        <translation type="unfinished">打开</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="87"/>
+        <source>CLOSE</source>
         <translation type="unfinished">关闭</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="53"/>
-        <source>SSID</source>
-        <translation type="unfinished">SSID</translation>
+        <location filename="../main/retranslatemanager.cpp" line="88"/>
+        <source>Saved</source>
+        <translation type="unfinished">已保存</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="60"/>
-        <source>Network name (Service Set IDentifier)</source>
-        <translation type="unfinished"></translation>
+        <location filename="../main/retranslatemanager.cpp" line="89"/>
+        <source>Auth Failed</source>
+        <translation type="unfinished">密码错误</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="70"/>
-        <source>Authentication</source>
-        <translation type="unfinished">身份认证</translation>
+        <location filename="../main/retranslatemanager.cpp" line="90"/>
+        <source>Connecting</source>
+        <translation type="unfinished">正在连接</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="78"/>
-        <source>Plaintext (open / no authentication)</source>
-        <translation type="unfinished"></translation>
+        <location filename="../main/retranslatemanager.cpp" line="92"/>
+        <source>Excellent</source>
+        <translation type="unfinished">极好</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="83"/>
-        <source>Static WEP (no authentication)</source>
-        <translation type="unfinished"></translation>
+        <location filename="../main/retranslatemanager.cpp" line="93"/>
+        <source>Good</source>
+        <translation type="unfinished">优良</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="88"/>
-        <source>Static WEP (Shared Key authentication)</source>
-        <translation type="unfinished"></translation>
+        <location filename="../main/retranslatemanager.cpp" line="94"/>
+        <source>Ok</source>
+        <translation type="unfinished">一般</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="93"/>
-        <source>IEEE 802.1X</source>
-        <translation type="unfinished"></translation>
+        <location filename="../main/retranslatemanager.cpp" line="95"/>
+        <source>Weak</source>
+        <translation type="unfinished">弱</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="98"/>
-        <source>WPA-Personal (PSK)</source>
-        <translation type="unfinished"></translation>
+        <location filename="../main/retranslatemanager.cpp" line="98"/>
+        <source>Forget</source>
+        <translation type="unfinished">取消保存</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="103"/>
-        <source>WPA-Enterprise (EAP)</source>
-        <translation type="unfinished"></translation>
+        <location filename="../main/retranslatemanager.cpp" line="99"/>
+        <source>Complete</source>
+        <translation type="unfinished">确定</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="108"/>
-        <source>WPA2-Personal (PSK)</source>
-        <translation type="unfinished"></translation>
+        <location filename="../main/retranslatemanager.cpp" line="100"/>
+        <source>State</source>
+        <translation type="unfinished">状态</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="113"/>
-        <source>WPA2-Enterprise (EAP)</source>
-        <translation type="unfinished"></translation>
+        <location filename="../main/retranslatemanager.cpp" line="101"/>
+        <source>Signal Strength</source>
+        <translation type="unfinished">信号强度</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="121"/>
-        <source>Encryption</source>
-        <translation type="unfinished">加密</translation>
+        <location filename="../main/retranslatemanager.cpp" line="102"/>
+        <source>Frequency</source>
+        <translation type="unfinished">频率</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="129"/>
-        <source>None</source>
-        <translation type="unfinished"></translation>
+        <location filename="../main/retranslatemanager.cpp" line="103"/>
+        <source>&lt;u&gt;password&lt;/u&gt;</source>
+        <translation type="unfinished">&lt;u&gt;密码&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="134"/>
-        <source>WEP</source>
-        <translation type="unfinished"></translation>
+        <source>address</source>
+        <translation type="vanished">地址：</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="139"/>
-        <source>TKIP</source>
-        <translation type="unfinished"></translation>
+        <location filename="../main/retranslatemanager.cpp" line="74"/>
+        <source>Confirm</source>
+        <translation type="unfinished">确定</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="144"/>
-        <source>CCMP</source>
-        <translation type="unfinished"></translation>
+        <location filename="../main/retranslatemanager.cpp" line="75"/>
+        <source>Cancel Save</source>
+        <translation type="unfinished">取消保存</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="152"/>
-        <source>PSK</source>
-        <translation type="unfinished">预共享秘钥</translation>
+        <location filename="../main/retranslatemanager.cpp" line="76"/>
+        <location filename="../main/retranslatemanager.cpp" line="91"/>
+        <source>Connected</source>
+        <translation type="unfinished">已连接</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="162"/>
-        <source>WPA/WPA2 pre-shared key or passphrase</source>
-        <translation type="unfinished"></translation>
+        <location filename="../main/retranslatemanager.cpp" line="77"/>
+        <source>Pairing</source>
+        <translation type="unfinished">正在配对</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="175"/>
-        <source>EAP method</source>
-        <translation type="unfinished">EAP方式</translation>
+        <location filename="../main/retranslatemanager.cpp" line="78"/>
+        <source>Paired</source>
+        <translation type="unfinished">已配对</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="189"/>
-        <source>Identity</source>
-        <translation type="unfinished">身份</translation>
+        <location filename="../main/retranslatemanager.cpp" line="80"/>
+        <source>Hotspot</source>
+        <translation type="unfinished">&lt;热点&gt;</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="199"/>
-        <source>Username/Identity for EAP methods</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="206"/>
-        <source>Password</source>
+        <location filename="../main/retranslatemanager.cpp" line="82"/>
+        <source>password</source>
         <translation type="unfinished">密码</translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="216"/>
-        <source>Password for EAP methods</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="226"/>
-        <source>CA certificate</source>
-        <translation type="unfinished">发行者凭证</translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="243"/>
-        <source>WEP keys</source>
-        <translation type="unfinished">WEP 秘钥</translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="252"/>
-        <source>key 0</source>
-        <translation type="unfinished">秘钥  0</translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="262"/>
-        <source>key 1</source>
-        <translation type="unfinished">秘钥  1</translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="272"/>
-        <source>key 3</source>
-        <translation type="unfinished">秘钥  3</translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="282"/>
-        <source>key 2</source>
-        <translation type="unfinished">秘钥  2</translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="323"/>
-        <source>Optional Settings</source>
-        <translation type="unfinished">可选设置</translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="329"/>
-        <source>Network Identification String</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="336"/>
-        <source>Network Priority</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="349"/>
-        <source>IDString</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="356"/>
-        <source>Priority</source>
-        <translation type="unfinished">优先级</translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="363"/>
-        <source>Inner auth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="386"/>
-        <source>Remove</source>
-        <translation type="unfinished">删除</translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="393"/>
-        <source>Add</source>
-        <translation type="unfinished">添加</translation>
     </message>
 </context>
 <context>
     <name>SettingTopWidgets</name>
     <message>
-        <location filename="../top/settingtopwidgets.cpp" line="25"/>
-        <location filename="../top/settingtopwidgets.cpp" line="47"/>
+        <location filename="../top/settingtopwidgets.cpp" line="24"/>
+        <location filename="../top/settingtopwidgets.cpp" line="52"/>
         <source>Setting</source>
         <translation type="unfinished">设置</translation>
+    </message>
+</context>
+<context>
+    <name>SwitchHead</name>
+    <message>
+        <source>Hotspot</source>
+        <translation type="obsolete">&lt;热点&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>SwitchHeader</name>
+    <message>
+        <source>OPEN</source>
+        <translation type="obsolete">打开</translation>
+    </message>
+    <message>
+        <source>CLOSE</source>
+        <translation type="obsolete">关闭</translation>
     </message>
 </context>
 <context>
@@ -386,14 +670,12 @@
         <translation type="obsolete">IP地址：</translation>
     </message>
     <message>
-        <location filename="../wifi/tabcurrentstatus.cpp" line="70"/>
         <source>Connect</source>
-        <translation type="unfinished">连接</translation>
+        <translation type="obsolete">连接</translation>
     </message>
     <message>
-        <location filename="../wifi/tabcurrentstatus.cpp" line="81"/>
         <source>Disconnect</source>
-        <translation type="unfinished">断开</translation>
+        <translation type="obsolete">断开</translation>
     </message>
 </context>
 <context>
@@ -552,12 +834,12 @@
         <translation type="obsolete">设置时间</translation>
     </message>
     <message>
-        <location filename="../calendar/widget.cpp" line="49"/>
+        <location filename="../calendar/widget.cpp" line="54"/>
         <source>隐藏界面</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendar/widget.cpp" line="51"/>
+        <location filename="../calendar/widget.cpp" line="56"/>
         <source>退出程序</source>
         <translation type="unfinished"></translation>
     </message>
@@ -565,339 +847,147 @@
 <context>
     <name>WifiWidgets</name>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="56"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="166"/>
         <source>OPEN WIFI</source>
-        <translation type="unfinished">Wi-Fi</translation>
+        <translation type="obsolete">Wi-Fi</translation>
     </message>
     <message>
         <source>reScan</source>
         <translation type="obsolete">扫描</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="63"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="180"/>
         <source>Connect</source>
-        <translation type="unfinished">连接</translation>
+        <translation type="obsolete">连接</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="64"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="181"/>
         <source>Disconnect</source>
-        <translation type="unfinished">断开</translation>
+        <translation type="obsolete">断开</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="66"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="183"/>
         <source>Last message:</source>
-        <translation type="unfinished">最后信息：</translation>
+        <translation type="obsolete">最后信息：</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="67"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="184"/>
         <source>Authentication:</source>
-        <translation type="unfinished">身份认证：</translation>
+        <translation type="obsolete">身份认证：</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="68"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="185"/>
         <source>EncryptionLabel:</source>
-        <translation type="unfinished">加密：</translation>
+        <translation type="obsolete">加密：</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="69"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="186"/>
         <source>SSID:</source>
-        <translation type="unfinished">SSID:</translation>
+        <translation type="obsolete">SSID:</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="70"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="187"/>
         <source>BSSID:</source>
-        <translation type="unfinished">BSSID:</translation>
+        <translation type="obsolete">BSSID:</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="71"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="188"/>
         <source>IP Address:</source>
-        <translation type="unfinished">IP地址：</translation>
+        <translation type="obsolete">IP地址：</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="74"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="177"/>
         <source>Scan</source>
-        <translation type="unfinished">扫描</translation>
+        <translation type="obsolete">扫描</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="76"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="178"/>
         <source>remove</source>
-        <translation type="unfinished">删除</translation>
+        <translation type="obsolete">删除</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="77"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="179"/>
         <source>edit</source>
-        <translation type="unfinished">编辑</translation>
+        <translation type="obsolete">编辑</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="78"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="173"/>
         <source>Scan Result</source>
-        <translation type="unfinished">扫描结果</translation>
+        <translation type="obsolete">扫描结果</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="79"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="174"/>
         <source>Current Status</source>
-        <translation type="unfinished">当前状态</translation>
+        <translation type="obsolete">当前状态</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="80"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="175"/>
         <source>Network Manager</source>
-        <translation type="unfinished">网络管理</translation>
+        <translation type="obsolete">网络管理</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="84"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="167"/>
         <source>START HOSTAP</source>
-        <translation type="unfinished">个人热点</translation>
+        <translation type="obsolete">个人热点</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="92"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="169"/>
         <source>HotSpot Name:</source>
-        <translation type="unfinished">热点名称：</translation>
+        <translation type="obsolete">热点名称：</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="103"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="170"/>
         <source>HotSpot Password:</source>
-        <translation type="unfinished">热点密码：</translation>
+        <translation type="obsolete">热点密码：</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="116"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="171"/>
         <source>Status:</source>
-        <translation type="unfinished">状态：</translation>
+        <translation type="obsolete">状态：</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="239"/>
         <source>Close hostap first.</source>
-        <translation type="unfinished">请先关闭热点.</translation>
+        <translation type="obsolete">请先关闭热点.</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="239"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="255"/>
         <source>Confirm</source>
-        <translation type="unfinished">确定</translation>
+        <translation type="obsolete">确定</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="239"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="255"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation type="obsolete">取消</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="252"/>
         <source>Warning</source>
-        <translation type="unfinished">提示</translation>
+        <translation type="obsolete">提示</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="252"/>
         <source>Name can&apos;t be null,and password can&apos;t be less 8!</source>
-        <translation type="unfinished">名称不能为空,密码不少于８位数8!</translation>
+        <translation type="obsolete">名称不能为空,密码不少于８位数8!</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="255"/>
         <source>Close wifi first.</source>
-        <translation type="unfinished">请先关闭WiFi.</translation>
+        <translation type="obsolete">请先关闭WiFi.</translation>
     </message>
 </context>
 <context>
-    <name>WpaManager</name>
+    <name>WlanListTable</name>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="58"/>
-        <source>Connecting to wpa_supplicant service</source>
-        <translation type="unfinished"></translation>
+        <source>Connected</source>
+        <translation type="obsolete">已连接</translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="146"/>
-        <source>wpa_supplicant service is not running.
-Do you want to start it?</source>
-        <translation type="unfinished"></translation>
+        <source>Connecting</source>
+        <translation type="obsolete">正在连接</translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="282"/>
-        <source>Could not get status from wpa_supplicant</source>
-        <translation type="unfinished"></translation>
+        <source>Saved</source>
+        <translation type="obsolete">已保存</translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="299"/>
-        <source>No network interfaces in use.
-Would you like to add one?</source>
-        <translation type="unfinished"></translation>
+        <source>Auth Failed</source>
+        <translation type="obsolete">密码错误</translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="422"/>
-        <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <source> </source>
+        <translation type="obsolete"> </translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="424"/>
-        <source>Inactive</source>
-        <translation type="unfinished"></translation>
+        <source>Excellent</source>
+        <translation type="obsolete">极好</translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="426"/>
-        <source>Scanning</source>
-        <translation type="unfinished"></translation>
+        <source>Good</source>
+        <translation type="obsolete">优良</translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="428"/>
-        <source>Authenticating</source>
-        <translation type="unfinished"></translation>
+        <source>Ok</source>
+        <translation type="obsolete">一般</translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="430"/>
-        <source>Associating</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="432"/>
-        <source>Associated</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="434"/>
-        <source>4-Way Handshake</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="436"/>
-        <source>Group Handshake</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="438"/>
-        <source>Completed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="440"/>
-        <source>Unknown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1186"/>
-        <source>Failed to save configuration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1187"/>
-        <source>The configuration could not be saved.
-
-The update_config=1 configuration option
-must be used for configuration saving to
-be permitted.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1194"/>
-        <source>Saved configuration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1195"/>
-        <source>The current configuration was saved.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1412"/>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1440"/>
-        <source>OpenSCManager failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1418"/>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1446"/>
-        <source>OpenService failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1424"/>
-        <source>Failed to start wpa_supplicant service</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1452"/>
-        <source>Failed to stop wpa_supplicant service</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>netConfigDialog</name>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="224"/>
-        <source>WPA Pre-Shared Key Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="225"/>
-        <source>WPA-PSK requires a passphrase of 8 to 63 characters
-or 64 hex digit PSK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="237"/>
-        <source>Network ID Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="238"/>
-        <source>Network ID String contains non-word characters.
-It must be a simple string, without spaces, containing
-only characters in this range: [A-Za-z0-9_-]
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="257"/>
-        <source>Failed to add network to wpa_supplicant
-configuration.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="433"/>
-        <source>Failed to enable network in wpa_supplicant
-configuration.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="502"/>
-        <source>This will permanently remove the network
-from the configuration. Do you really want
-to remove this network?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="505"/>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="505"/>
-        <source>No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="513"/>
-        <source>Failed to remove network from wpa_supplicant
-configuration.</source>
-        <translation type="unfinished"></translation>
+        <source>Weak</source>
+        <translation type="obsolete">弱</translation>
     </message>
 </context>
 </TS>

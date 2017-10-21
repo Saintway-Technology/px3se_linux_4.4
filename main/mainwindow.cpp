@@ -1,8 +1,9 @@
 #include "mainwindow.h"
-#include "global_value.h"
+#include "retranslatemanager.h"
+#include "constant.h"
 #include <QVBoxLayout>
 
-MainWindow::MainWindow(QWidget *parent) :BaseWindow(parent)
+MainWindow::MainWindow(QWidget *parent) : BaseWindow(parent)
 {
     initData();
     initLayout();
@@ -10,16 +11,21 @@ MainWindow::MainWindow(QWidget *parent) :BaseWindow(parent)
 
 void MainWindow::initData()
 {
-    // Initialize global main class of 'MainWindow' for other widgets invokes.
     mainWindow = this;
+
+    RetranslateManager *manager = RetranslateManager::getInstance(this);
+    manager->updateString();
+    connect(this, SIGNAL(retranslateUi()), manager, SLOT(updateString()));
 }
 
-void MainWindow::initLayout(){
+void MainWindow::initLayout()
+{
     QVBoxLayout *mainLayout = new QVBoxLayout;
+
     m_setttingsWid = new SettingWidgets(this);
 
     mainLayout->addWidget(m_setttingsWid);
-    mainLayout->setContentsMargins(0,0,0,0);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->setSpacing(0);
 
     setLayout(mainLayout);
@@ -39,23 +45,5 @@ void MainWindow::enableApplication()
 
 void MainWindow::slot_appQuit()
 {
-    this->close();
-}
-
-void MainWindow::keyPressEvent(QKeyEvent *event)
-{
-    qDebug()<<"Get key value input:"<<event->key();
-    switch(event->key())
-    {
-    // When key_power enter.
-    case Qt::Key_PowerOff:
-        QTimer::singleShot(100, this, SLOT(slot_standby()));
-        break;
-    default:
-        break;
-    }
-}
-
-void MainWindow::slot_standby()
-{
+    qApp->closeAllWindows();
 }

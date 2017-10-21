@@ -2,18 +2,103 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
-    <name>BluetoothScannerWidgets</name>
+    <name>BluetoothDeviceTable</name>
     <message>
-        <location filename="../bluetooth/bluetoothscannerwidgets.cpp" line="53"/>
-        <location filename="../bluetooth/bluetoothscannerwidgets.cpp" line="121"/>
-        <source>Bluetooth(%1)</source>
-        <translation type="unfinished">Bluetooth(%1)</translation>
+        <source>Connected</source>
+        <translation type="obsolete">Connected</translation>
     </message>
     <message>
-        <location filename="../bluetooth/bluetoothscannerwidgets.cpp" line="72"/>
-        <location filename="../bluetooth/bluetoothscannerwidgets.cpp" line="120"/>
+        <source>Pairing..</source>
+        <translation type="obsolete">Pairing..</translation>
+    </message>
+    <message>
+        <source>Paired</source>
+        <translation type="obsolete">Paired</translation>
+    </message>
+    <message>
+        <source> </source>
+        <translation type="obsolete"> </translation>
+    </message>
+</context>
+<context>
+    <name>BluetoothScannerWidgets</name>
+    <message>
+        <source>Bluetooth(%1)</source>
+        <translation type="obsolete">Bluetooth(%1)</translation>
+    </message>
+    <message>
+        <source>Connected</source>
+        <translation type="obsolete">Connected</translation>
+    </message>
+    <message>
+        <source>Paired</source>
+        <translation type="obsolete">Paired</translation>
+    </message>
+    <message>
+        <source>Connect with </source>
+        <translation type="obsolete">Connect with </translation>
+    </message>
+    <message>
+        <source>Connect</source>
+        <translation type="obsolete">Connect</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="obsolete">Cancel</translation>
+    </message>
+    <message>
+        <source>Disconnect with </source>
+        <translation type="obsolete">Connect with </translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation type="obsolete">Disconnect</translation>
+    </message>
+    <message>
+        <source>Pair with </source>
+        <translation type="obsolete">Pair with </translation>
+    </message>
+    <message>
+        <source>Pair</source>
+        <translation type="obsolete">Pair</translation>
+    </message>
+    <message>
+        <source>Pairing..</source>
+        <translation type="obsolete">Pairing..</translation>
+    </message>
+    <message>
         <source>Available Devices</source>
-        <translation type="unfinished">Available Devices</translation>
+        <translation type="obsolete">Available Devices</translation>
+    </message>
+</context>
+<context>
+    <name>BluetoothStateItem</name>
+    <message>
+        <source>Connected</source>
+        <translation type="obsolete">Connected</translation>
+    </message>
+    <message>
+        <source>Paired</source>
+        <translation type="obsolete">Paired</translation>
+    </message>
+</context>
+<context>
+    <name>BluetoothSwitchHeader</name>
+    <message>
+        <source>Bluetooth(%1)</source>
+        <translation type="obsolete">Bluetooth(%1)</translation>
+    </message>
+    <message>
+        <source>Bluetooth-</source>
+        <translation type="obsolete">Bluetooth-</translation>
+    </message>
+    <message>
+        <source>Available Devices</source>
+        <translation type="obsolete">Available Devices</translation>
+    </message>
+    <message>
+        <source>Available Devices1</source>
+        <translation type="obsolete">Available Devices1</translation>
     </message>
 </context>
 <context>
@@ -27,58 +112,48 @@
 <context>
     <name>DeviceDiscovery</name>
     <message>
-        <location filename="../bluetooth/btscanner.ui" line="14"/>
         <source>Bluetooth Scanner</source>
-        <translation type="unfinished">Bluetooth Scanner</translation>
+        <translation type="obsolete">Bluetooth Scanner</translation>
     </message>
     <message>
-        <location filename="../bluetooth/btscanner.ui" line="23"/>
         <source>Local Device</source>
-        <translation type="unfinished">Local Device</translation>
+        <translation type="obsolete">Local Device</translation>
     </message>
     <message>
-        <location filename="../bluetooth/btscanner.ui" line="29"/>
         <source>Bluetooth Powered On</source>
-        <translation type="unfinished">Bluetooth Powered On</translation>
+        <translation type="obsolete">Bluetooth Powered On</translation>
     </message>
     <message>
-        <location filename="../bluetooth/btscanner.ui" line="39"/>
         <source>Discoverable</source>
-        <translation type="unfinished">Discoverable</translation>
+        <translation type="obsolete">Discoverable</translation>
     </message>
     <message>
-        <location filename="../bluetooth/btscanner.ui" line="52"/>
         <source>General Unlimited Inquiry</source>
-        <translation type="unfinished">General Unlimited Inquiry</translation>
+        <translation type="obsolete">General Unlimited Inquiry</translation>
     </message>
     <message>
-        <location filename="../bluetooth/btscanner.ui" line="64"/>
         <source>Scan</source>
-        <translation type="unfinished">Scan</translation>
+        <translation type="obsolete">Scan</translation>
     </message>
     <message>
-        <location filename="../bluetooth/btscanner.ui" line="71"/>
         <source>Clear</source>
-        <translation type="unfinished">Clear</translation>
-    </message>
-</context>
-<context>
-    <name>ErrorMsg</name>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1382"/>
-        <source>wpa_gui error</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Clear</translation>
     </message>
 </context>
 <context>
     <name>Funtiontablewidget</name>
     <message>
-        <location filename="../middle/funtiontablewidget.cpp" line="52"/>
+        <location filename="../middle/funtiontablewidget.cpp" line="51"/>
         <source>Wifi</source>
         <translation type="unfinished">WiFi</translation>
     </message>
     <message>
-        <location filename="../middle/funtiontablewidget.cpp" line="56"/>
+        <location filename="../middle/funtiontablewidget.cpp" line="54"/>
+        <source>Hotspot</source>
+        <translation type="unfinished">Hotspot</translation>
+    </message>
+    <message>
+        <location filename="../middle/funtiontablewidget.cpp" line="57"/>
         <source>BlueTooth</source>
         <translation type="unfinished">BlueTooth</translation>
     </message>
@@ -88,24 +163,43 @@
         <translation type="unfinished">Brightness</translation>
     </message>
     <message>
-        <location filename="../middle/funtiontablewidget.cpp" line="64"/>
+        <location filename="../middle/funtiontablewidget.cpp" line="63"/>
         <source>Time&amp;Calendar</source>
         <translation type="unfinished">Time&amp;Calendar</translation>
     </message>
     <message>
-        <location filename="../middle/funtiontablewidget.cpp" line="68"/>
+        <location filename="../middle/funtiontablewidget.cpp" line="66"/>
         <source>Volumn</source>
         <translation type="unfinished">Volumn</translation>
     </message>
     <message>
-        <location filename="../middle/funtiontablewidget.cpp" line="72"/>
+        <location filename="../middle/funtiontablewidget.cpp" line="69"/>
         <source>Updater</source>
         <translation type="unfinished">Updater</translation>
     </message>
     <message>
-        <location filename="../middle/funtiontablewidget.cpp" line="76"/>
+        <location filename="../middle/funtiontablewidget.cpp" line="72"/>
         <source>Language</source>
         <translation type="unfinished">Language</translation>
+    </message>
+</context>
+<context>
+    <name>HotspotMainWidget</name>
+    <message>
+        <source>name</source>
+        <translation type="obsolete">name</translation>
+    </message>
+    <message>
+        <source>password</source>
+        <translation type="obsolete">password</translation>
+    </message>
+    <message>
+        <source>warning</source>
+        <translation type="obsolete">warning</translation>
+    </message>
+    <message>
+        <source>name or password is not available.</source>
+        <translation type="obsolete">name or password is not available.</translation>
     </message>
 </context>
 <context>
@@ -122,210 +216,404 @@
     </message>
 </context>
 <context>
+    <name>NetConfigDialog</name>
+    <message>
+        <source>Connect</source>
+        <translation type="obsolete">Connect</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="obsolete">Cancel</translation>
+    </message>
+    <message>
+        <source>Forget</source>
+        <translation type="obsolete">Forget</translation>
+    </message>
+</context>
+<context>
+    <name>NetConnectDialog</name>
+    <message>
+        <source>&lt;u&gt;password&lt;/u&gt;</source>
+        <translation type="obsolete">&lt;u&gt;password&lt;/u&gt;</translation>
+    </message>
+    <message>
+        <source>Connect</source>
+        <translation type="obsolete">Connect</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="obsolete">Cancel</translation>
+    </message>
+</context>
+<context>
+    <name>NetConnectedInfoDialog</name>
+    <message>
+        <location filename="../wlan/netconnectedinfodialog.cpp" line="61"/>
+        <source>State</source>
+        <translation type="unfinished">State</translation>
+    </message>
+    <message>
+        <location filename="../wlan/netconnectedinfodialog.cpp" line="61"/>
+        <source>Connected</source>
+        <translation type="unfinished">Connected</translation>
+    </message>
+    <message>
+        <location filename="../wlan/netconnectedinfodialog.cpp" line="62"/>
+        <source>Signal Strength</source>
+        <translation type="unfinished">Signal Strength</translation>
+    </message>
+    <message>
+        <location filename="../wlan/netconnectedinfodialog.cpp" line="63"/>
+        <source>Frequency</source>
+        <translation type="unfinished">Frequency</translation>
+    </message>
+    <message>
+        <location filename="../wlan/netconnectedinfodialog.cpp" line="67"/>
+        <source>Forget</source>
+        <translation type="unfinished">Forget</translation>
+    </message>
+    <message>
+        <location filename="../wlan/netconnectedinfodialog.cpp" line="68"/>
+        <source>Complete</source>
+        <translation type="unfinished">Complete</translation>
+    </message>
+</context>
+<context>
     <name>NetworkConfig</name>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="28"/>
         <source>NetworkConfig</source>
-        <translation type="unfinished">NetworkConfig</translation>
+        <translation type="obsolete">NetworkConfig</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="34"/>
         <source>Close</source>
-        <translation type="unfinished">Close</translation>
+        <translation type="obsolete">Close</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="53"/>
         <source>SSID</source>
-        <translation type="unfinished">SSID</translation>
+        <translation type="obsolete">SSID</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="60"/>
-        <source>Network name (Service Set IDentifier)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="70"/>
         <source>Authentication</source>
-        <translation type="unfinished">Authentication</translation>
+        <translation type="obsolete">Authentication</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="78"/>
-        <source>Plaintext (open / no authentication)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="83"/>
-        <source>Static WEP (no authentication)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="88"/>
-        <source>Static WEP (Shared Key authentication)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="93"/>
-        <source>IEEE 802.1X</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="98"/>
-        <source>WPA-Personal (PSK)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="103"/>
-        <source>WPA-Enterprise (EAP)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="108"/>
-        <source>WPA2-Personal (PSK)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="113"/>
-        <source>WPA2-Enterprise (EAP)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="121"/>
         <source>Encryption</source>
-        <translation type="unfinished">Encryption</translation>
+        <translation type="obsolete">Encryption</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="129"/>
-        <source>None</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="134"/>
-        <source>WEP</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="139"/>
-        <source>TKIP</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="144"/>
-        <source>CCMP</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="152"/>
         <source>PSK</source>
-        <translation type="unfinished">PSK</translation>
+        <translation type="obsolete">PSK</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="162"/>
-        <source>WPA/WPA2 pre-shared key or passphrase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="175"/>
         <source>EAP method</source>
-        <translation type="unfinished">EAP method</translation>
+        <translation type="obsolete">EAP method</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="189"/>
         <source>Identity</source>
-        <translation type="unfinished">identity</translation>
+        <translation type="obsolete">identity</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="199"/>
-        <source>Username/Identity for EAP methods</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="206"/>
         <source>Password</source>
-        <translation type="unfinished">Password</translation>
+        <translation type="obsolete">Password</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="216"/>
-        <source>Password for EAP methods</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="226"/>
         <source>CA certificate</source>
-        <translation type="unfinished">CA certificate</translation>
+        <translation type="obsolete">CA certificate</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="243"/>
         <source>WEP keys</source>
-        <translation type="unfinished">WEP keys</translation>
+        <translation type="obsolete">WEP keys</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="252"/>
         <source>key 0</source>
-        <translation type="unfinished">key 0</translation>
+        <translation type="obsolete">key 0</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="262"/>
         <source>key 1</source>
-        <translation>key 1</translation>
+        <translation type="vanished">key 1</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="272"/>
         <source>key 3</source>
-        <translation type="unfinished">key 3</translation>
+        <translation type="obsolete">key 3</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="282"/>
         <source>key 2</source>
-        <translation type="unfinished">key 2</translation>
+        <translation type="obsolete">key 2</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="323"/>
         <source>Optional Settings</source>
-        <translation type="unfinished">Optional Settings</translation>
+        <translation type="obsolete">Optional Settings</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="329"/>
-        <source>Network Identification String</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="336"/>
-        <source>Network Priority</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="349"/>
-        <source>IDString</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="356"/>
         <source>Priority</source>
-        <translation type="unfinished">Priority</translation>
+        <translation type="obsolete">Priority</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="363"/>
-        <source>Inner auth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/networkconfig.ui" line="386"/>
         <source>Remove</source>
-        <translation type="unfinished">remove</translation>
+        <translation type="obsolete">remove</translation>
     </message>
     <message>
-        <location filename="../wifi/networkconfig.ui" line="393"/>
         <source>Add</source>
-        <translation type="unfinished">Add</translation>
+        <translation type="obsolete">Add</translation>
+    </message>
+</context>
+<context>
+    <name>PairedInformationDialog</name>
+    <message>
+        <source>name: </source>
+        <translation type="obsolete">name: </translation>
+    </message>
+    <message>
+        <source>address: </source>
+        <translation type="obsolete">address: </translation>
+    </message>
+    <message>
+        <source>Confirm</source>
+        <translation type="obsolete">Confirm</translation>
+    </message>
+    <message>
+        <source>Cancel save</source>
+        <translation type="obsolete">Forget</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Connected</source>
+        <translation type="obsolete">Connected</translation>
+    </message>
+    <message>
+        <source>Connecting</source>
+        <translation type="obsolete">Connecting</translation>
+    </message>
+    <message>
+        <source>Saved</source>
+        <translation type="obsolete">Saved</translation>
+    </message>
+    <message>
+        <source>Auth Failed</source>
+        <translation type="obsolete">Auth Failed</translation>
+    </message>
+    <message>
+        <source> </source>
+        <translation type="obsolete"> </translation>
+    </message>
+</context>
+<context>
+    <name>RetranslateManager</name>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="63"/>
+        <source>Bluetooth(%1)</source>
+        <translation type="unfinished">Bluetooth(%1)</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="64"/>
+        <source>Available Devices</source>
+        <translation type="unfinished">Available Devices</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="65"/>
+        <source>Connect with </source>
+        <translation type="unfinished">Connect with </translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="66"/>
+        <source>Disconnect with </source>
+        <translation type="unfinished">Disconnect with </translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="67"/>
+        <source>Pair with </source>
+        <translation type="unfinished">Pair with </translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="68"/>
+        <location filename="../main/retranslatemanager.cpp" line="96"/>
+        <source>Connect</source>
+        <translation type="unfinished">Connect</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="69"/>
+        <source>Disconnect</source>
+        <translation type="unfinished">Disconnect</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="70"/>
+        <source>Pair</source>
+        <translation type="unfinished">Pair</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="71"/>
+        <location filename="../main/retranslatemanager.cpp" line="97"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Cancel</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="72"/>
+        <source>name:</source>
+        <translation type="unfinished">name:</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="73"/>
+        <source>address:</source>
+        <translation type="unfinished">address:</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="81"/>
+        <source>name</source>
+        <translation type="unfinished">name</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="83"/>
+        <source>warning</source>
+        <translation type="unfinished">warning</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="84"/>
+        <source>name or password is not available.</source>
+        <translation type="unfinished">name or password is not available.</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="86"/>
+        <source>OPEN</source>
+        <translation type="unfinished">OPEN</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="87"/>
+        <source>CLOSE</source>
+        <translation type="unfinished">CLOSE</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="88"/>
+        <source>Saved</source>
+        <translation type="unfinished">Saved</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="89"/>
+        <source>Auth Failed</source>
+        <translation type="unfinished">Auth Failed</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="90"/>
+        <source>Connecting</source>
+        <translation type="unfinished">Connecting</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="92"/>
+        <source>Excellent</source>
+        <translation type="unfinished">Excellent</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="93"/>
+        <source>Good</source>
+        <translation type="unfinished">Good</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="94"/>
+        <source>Ok</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="95"/>
+        <source>Weak</source>
+        <translation type="unfinished">Weak</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="98"/>
+        <source>Forget</source>
+        <translation type="unfinished">Forget</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="99"/>
+        <source>Complete</source>
+        <translation type="unfinished">Complete</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="100"/>
+        <source>State</source>
+        <translation type="unfinished">State</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="101"/>
+        <source>Signal Strength</source>
+        <translation type="unfinished">Signal Strength</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="102"/>
+        <source>Frequency</source>
+        <translation type="unfinished">Frequency</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="103"/>
+        <source>&lt;u&gt;password&lt;/u&gt;</source>
+        <translation type="unfinished">&lt;u&gt;password&lt;/u&gt;</translation>
+    </message>
+    <message>
+        <source>address</source>
+        <translation type="vanished">address:</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="74"/>
+        <source>Confirm</source>
+        <translation type="unfinished">Confirm</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="75"/>
+        <source>Cancel Save</source>
+        <translation type="unfinished">Forget</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="76"/>
+        <location filename="../main/retranslatemanager.cpp" line="91"/>
+        <source>Connected</source>
+        <translation type="unfinished">Connected</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="77"/>
+        <source>Pairing</source>
+        <translation type="unfinished">Pairing</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="78"/>
+        <source>Paired</source>
+        <translation type="unfinished">Paired</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="80"/>
+        <source>Hotspot</source>
+        <translation type="unfinished">&lt;Hotspot&gt;</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="82"/>
+        <source>password</source>
+        <translation type="unfinished">password</translation>
     </message>
 </context>
 <context>
     <name>SettingTopWidgets</name>
     <message>
-        <location filename="../top/settingtopwidgets.cpp" line="25"/>
-        <location filename="../top/settingtopwidgets.cpp" line="47"/>
+        <location filename="../top/settingtopwidgets.cpp" line="24"/>
+        <location filename="../top/settingtopwidgets.cpp" line="52"/>
         <source>Setting</source>
         <translation type="unfinished">Setting</translation>
+    </message>
+</context>
+<context>
+    <name>SwitchHead</name>
+    <message>
+        <source>Hotspot</source>
+        <translation type="obsolete">&lt;Hotspot&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>SwitchHeader</name>
+    <message>
+        <source>OPEN</source>
+        <translation type="obsolete">OPEN</translation>
+    </message>
+    <message>
+        <source>CLOSE</source>
+        <translation type="obsolete">CLOSE</translation>
     </message>
 </context>
 <context>
@@ -355,14 +643,12 @@
         <translation type="obsolete">IP Address:</translation>
     </message>
     <message>
-        <location filename="../wifi/tabcurrentstatus.cpp" line="70"/>
         <source>Connect</source>
-        <translation type="unfinished">Connect</translation>
+        <translation type="obsolete">Connect</translation>
     </message>
     <message>
-        <location filename="../wifi/tabcurrentstatus.cpp" line="81"/>
         <source>Disconnect</source>
-        <translation type="unfinished">Disconnect</translation>
+        <translation type="obsolete">Disconnect</translation>
     </message>
 </context>
 <context>
@@ -489,12 +775,12 @@
         <translation type="unfinished">SetTime</translation>
     </message>
     <message>
-        <location filename="../calendar/widget.cpp" line="49"/>
+        <location filename="../calendar/widget.cpp" line="54"/>
         <source>隐藏界面</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendar/widget.cpp" line="51"/>
+        <location filename="../calendar/widget.cpp" line="56"/>
         <source>退出程序</source>
         <translation type="unfinished"></translation>
     </message>
@@ -502,335 +788,147 @@
 <context>
     <name>WifiWidgets</name>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="56"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="166"/>
         <source>OPEN WIFI</source>
-        <translation type="unfinished">OPEN WIFI</translation>
+        <translation type="obsolete">OPEN WIFI</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="63"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="180"/>
         <source>Connect</source>
-        <translation type="unfinished">Connect</translation>
+        <translation type="obsolete">Connect</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="64"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="181"/>
         <source>Disconnect</source>
-        <translation type="unfinished">Disconnect</translation>
+        <translation type="obsolete">Disconnect</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="66"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="183"/>
         <source>Last message:</source>
-        <translation type="unfinished">Last message:</translation>
+        <translation type="obsolete">Last message:</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="67"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="184"/>
         <source>Authentication:</source>
-        <translation type="unfinished">Authentication:</translation>
+        <translation type="obsolete">Authentication:</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="68"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="185"/>
         <source>EncryptionLabel:</source>
-        <translation type="unfinished">EncryptionLabel:</translation>
+        <translation type="obsolete">EncryptionLabel:</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="69"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="186"/>
         <source>SSID:</source>
-        <translation type="unfinished">SSID:</translation>
+        <translation type="obsolete">SSID:</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="70"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="187"/>
         <source>BSSID:</source>
-        <translation type="unfinished">BSSID:</translation>
+        <translation type="obsolete">BSSID:</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="71"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="188"/>
         <source>IP Address:</source>
-        <translation type="unfinished">IP Address:</translation>
+        <translation type="obsolete">IP Address:</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="74"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="177"/>
         <source>Scan</source>
-        <translation type="unfinished">Scan</translation>
+        <translation type="obsolete">Scan</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="76"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="178"/>
         <source>remove</source>
-        <translation type="unfinished">remove</translation>
+        <translation type="obsolete">remove</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="77"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="179"/>
         <source>edit</source>
-        <translation type="unfinished">edit</translation>
+        <translation type="obsolete">edit</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="78"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="173"/>
         <source>Scan Result</source>
-        <translation type="unfinished">Scan Result</translation>
+        <translation type="obsolete">Scan Result</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="79"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="174"/>
         <source>Current Status</source>
-        <translation type="unfinished">Current Status</translation>
+        <translation type="obsolete">Current Status</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="80"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="175"/>
         <source>Network Manager</source>
-        <translation type="unfinished">Network Manager</translation>
+        <translation type="obsolete">Network Manager</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="84"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="167"/>
         <source>START HOSTAP</source>
-        <translation type="unfinished">START HOSTAP</translation>
+        <translation type="obsolete">START HOSTAP</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="92"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="169"/>
         <source>HotSpot Name:</source>
-        <translation type="unfinished">HotSpot Name:</translation>
+        <translation type="obsolete">HotSpot Name:</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="103"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="170"/>
         <source>HotSpot Password:</source>
-        <translation type="unfinished">HotSpot Password:</translation>
+        <translation type="obsolete">HotSpot Password:</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="116"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="171"/>
         <source>Status:</source>
-        <translation type="unfinished">Status:</translation>
+        <translation type="obsolete">Status:</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="239"/>
         <source>Close hostap first.</source>
-        <translation type="unfinished">Close hostap first.</translation>
+        <translation type="obsolete">Close hostap first.</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="239"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="255"/>
         <source>Confirm</source>
-        <translation type="unfinished">Confirm</translation>
+        <translation type="obsolete">Confirm</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="239"/>
-        <location filename="../wifi/wifiwidgets.cpp" line="255"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="obsolete">Cancel</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="252"/>
         <source>Warning</source>
-        <translation type="unfinished">Warning</translation>
+        <translation type="obsolete">Warning</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="252"/>
         <source>Name can&apos;t be null,and password can&apos;t be less 8!</source>
-        <translation type="unfinished">Name can&apos;t be null,and password can&apos;t be less 8!</translation>
+        <translation type="obsolete">Name can&apos;t be null,and password can&apos;t be less 8!</translation>
     </message>
     <message>
-        <location filename="../wifi/wifiwidgets.cpp" line="255"/>
         <source>Close wifi first.</source>
-        <translation type="unfinished">Close wifi first.</translation>
+        <translation type="obsolete">Close wifi first.</translation>
     </message>
 </context>
 <context>
-    <name>WpaManager</name>
+    <name>WlanListTable</name>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="58"/>
-        <source>Connecting to wpa_supplicant service</source>
-        <translation type="unfinished"></translation>
+        <source>Connected</source>
+        <translation type="obsolete">Connected</translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="146"/>
-        <source>wpa_supplicant service is not running.
-Do you want to start it?</source>
-        <translation type="unfinished"></translation>
+        <source>Connecting</source>
+        <translation type="obsolete">Connecting</translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="282"/>
-        <source>Could not get status from wpa_supplicant</source>
-        <translation type="unfinished"></translation>
+        <source>Saved</source>
+        <translation type="obsolete">Saved</translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="299"/>
-        <source>No network interfaces in use.
-Would you like to add one?</source>
-        <translation type="unfinished"></translation>
+        <source>Auth Failed</source>
+        <translation type="obsolete">Auth failed</translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="422"/>
-        <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <source> </source>
+        <translation type="obsolete"> </translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="424"/>
-        <source>Inactive</source>
-        <translation type="unfinished"></translation>
+        <source>Excellent</source>
+        <translation type="obsolete">Excellent</translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="426"/>
-        <source>Scanning</source>
-        <translation type="unfinished"></translation>
+        <source>Good</source>
+        <translation type="obsolete">Good</translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="428"/>
-        <source>Authenticating</source>
-        <translation type="unfinished"></translation>
+        <source>Common</source>
+        <translation type="obsolete">Common</translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="430"/>
-        <source>Associating</source>
-        <translation type="unfinished"></translation>
+        <source>Ok</source>
+        <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="432"/>
-        <source>Associated</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="434"/>
-        <source>4-Way Handshake</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="436"/>
-        <source>Group Handshake</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="438"/>
-        <source>Completed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="440"/>
-        <source>Unknown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1186"/>
-        <source>Failed to save configuration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1187"/>
-        <source>The configuration could not be saved.
-
-The update_config=1 configuration option
-must be used for configuration saving to
-be permitted.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1194"/>
-        <source>Saved configuration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1195"/>
-        <source>The current configuration was saved.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1412"/>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1440"/>
-        <source>OpenSCManager failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1418"/>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1446"/>
-        <source>OpenService failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1424"/>
-        <source>Failed to start wpa_supplicant service</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/wpa_supplicant/wpamanager.cpp" line="1452"/>
-        <source>Failed to stop wpa_supplicant service</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>netConfigDialog</name>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="224"/>
-        <source>WPA Pre-Shared Key Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="225"/>
-        <source>WPA-PSK requires a passphrase of 8 to 63 characters
-or 64 hex digit PSK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="237"/>
-        <source>Network ID Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="238"/>
-        <source>Network ID String contains non-word characters.
-It must be a simple string, without spaces, containing
-only characters in this range: [A-Za-z0-9_-]
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="257"/>
-        <source>Failed to add network to wpa_supplicant
-configuration.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="433"/>
-        <source>Failed to enable network in wpa_supplicant
-configuration.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="502"/>
-        <source>This will permanently remove the network
-from the configuration. Do you really want
-to remove this network?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="505"/>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="505"/>
-        <source>No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wifi/netconfigdialog.cpp" line="513"/>
-        <source>Failed to remove network from wpa_supplicant
-configuration.</source>
-        <translation type="unfinished"></translation>
+        <source>Weak</source>
+        <translation type="obsolete">Weak</translation>
     </message>
 </context>
 </TS>

@@ -1,10 +1,12 @@
 #include "settingwidgets.h"
-#include <QVBoxLayout>
-#include <QHBoxLayout>
+#include "constant.h"
 
-SettingWidgets::SettingWidgets(QWidget *parent):BaseWidget(parent)
+#include <QVBoxLayout>
+
+SettingWidgets::SettingWidgets(QWidget *parent) : BaseWidget(parent)
 {
     setStyleSheet("QLabel{color:white;}");
+
     initLayout();
     initConnection();
 }
@@ -19,7 +21,7 @@ void SettingWidgets::initLayout()
 
     vmainlyout->addWidget(m_topWid);
     vmainlyout->addWidget(m_middleWid);
-    vmainlyout->setContentsMargins(0,0,0,0);
+    vmainlyout->setContentsMargins(0, 0, 0, 0);
     vmainlyout->setSpacing(0);
 
     setLayout(vmainlyout);
@@ -27,7 +29,7 @@ void SettingWidgets::initLayout()
 
 void SettingWidgets::initConnection()
 {
-    connect(m_topWid,SIGNAL(returnClicked()),mainWindow,SLOT(slot_appQuit()));
+    connect(m_topWid, SIGNAL(returnClicked()), mainWindow, SLOT(slot_appQuit()));
 }
 
 SettingWidgets::~SettingWidgets()

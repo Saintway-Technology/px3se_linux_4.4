@@ -6,7 +6,6 @@ SettingMiddleWidgets::SettingMiddleWidgets(QWidget *parent):BaseWidget(parent)
     initLayout();
     initConnection();
 
-    /* Initial widget in wifi part */
     slot_currentWidgetChanged(0);
 }
 
@@ -17,8 +16,9 @@ void SettingMiddleWidgets::initLayout()
     m_leftWid = new LeftWidgets(this);
     m_stackedWid = new QStackedWidget(this);
 
-    m_wifiWid = new WifiWidgets(m_stackedWid);
-    m_bluetoothWid = new BluetoothWidgets(m_stackedWid);
+    m_wifiWid = new WlanMainWidget(m_stackedWid);
+    m_hotspotWid = new HotspotMainWidget(m_stackedWid);
+    m_bluetoothWid = new BluetoothScannerWidgets(m_stackedWid);
     m_brightnessWid = new BrightnessWidgets(m_stackedWid);
     m_calendarWid = new CalendarWidgets(m_stackedWid);
     m_volumnWid = new VolumeWidgets(m_stackedWid);
@@ -26,6 +26,7 @@ void SettingMiddleWidgets::initLayout()
     m_languageWid = new LanguageWidgets(m_stackedWid);
 
     m_stackedWid->addWidget(m_wifiWid);
+    m_stackedWid->addWidget(m_hotspotWid);
     m_stackedWid->addWidget(m_bluetoothWid);
     m_stackedWid->addWidget(m_brightnessWid);
     m_stackedWid->addWidget(m_calendarWid);
@@ -33,47 +34,45 @@ void SettingMiddleWidgets::initLayout()
     m_stackedWid->addWidget(m_updaterWid);
     m_stackedWid->addWidget(m_languageWid);
 
-#ifdef DEVICE_EVB
-    hmainlyout->addWidget(m_leftWid,1);
-    hmainlyout->addWidget(m_stackedWid,3);
-#else
-    hmainlyout->addWidget(m_leftWid,1);
-    hmainlyout->addWidget(m_stackedWid,4);
-#endif
+    hmainlyout->addWidget(m_leftWid, 1);
+    hmainlyout->addWidget(m_stackedWid, 4);
 
-    hmainlyout->setContentsMargins(0,0,0,0);
+    hmainlyout->setContentsMargins(0, 0, 0, 0);
     hmainlyout->setSpacing(0);
     setLayout(hmainlyout);
 }
 
 void SettingMiddleWidgets::initConnection()
 {
-    connect(m_leftWid->getList(),SIGNAL(currentIndexChanged(int)),this,SLOT(slot_currentWidgetChanged(int)));
+    connect(m_leftWid->getList(), SIGNAL(currentIndexChanged(int)), this, SLOT(slot_currentWidgetChanged(int)));
 }
 
 void SettingMiddleWidgets::slot_currentWidgetChanged(int index)
 {
-    m_leftWid->getList()->setCurrentCell(index,0);
-    switch(index){
+    m_leftWid->getList()->setCurrentCell(index, 0);
+    switch (index) {
     case 0:
         m_stackedWid->setCurrentWidget(m_wifiWid);
         break;
     case 1:
-        m_stackedWid->setCurrentWidget(m_bluetoothWid);
+        m_stackedWid->setCurrentWidget(m_hotspotWid);
         break;
     case 2:
-        m_stackedWid->setCurrentWidget(m_brightnessWid);
+        m_stackedWid->setCurrentWidget(m_bluetoothWid);
         break;
     case 3:
-        m_stackedWid->setCurrentWidget(m_calendarWid);
+        m_stackedWid->setCurrentWidget(m_brightnessWid);
         break;
     case 4:
-        m_stackedWid->setCurrentWidget(m_volumnWid);
+        m_stackedWid->setCurrentWidget(m_calendarWid);
         break;
     case 5:
-        m_stackedWid->setCurrentWidget(m_updaterWid);
+        m_stackedWid->setCurrentWidget(m_volumnWid);
         break;
     case 6:
+        m_stackedWid->setCurrentWidget(m_updaterWid);
+        break;
+    case 7:
         m_stackedWid->setCurrentWidget(m_languageWid);
         break;
     default:

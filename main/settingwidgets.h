@@ -7,6 +7,7 @@
 #include "middle/settingmiddlewidgets.h"
 
 class SettingMiddleWidgets;
+
 /**
  * The main layout of settings widgets.It is made up of The following module.
  * include Wifi、Bluetooth、Volumn、calendar etc.
@@ -15,14 +16,16 @@ class SettingMiddleWidgets;
  * The layout include top、middle widgets and each has their own
  * layout control and  logic processing.
  */
-class SettingWidgets:public BaseWidget
+class SettingWidgets : public BaseWidget
 {
 public:
     SettingWidgets(QWidget *parent = 0);
     ~SettingWidgets();
+
 public:
     SettingTopWidgets *m_topWid;
     SettingMiddleWidgets *m_middleWid;
+
 private:
     void initLayout();
     void initConnection();

@@ -7,26 +7,31 @@
 #include <QEventLoop>
 #include "cpushbutton.h"
 
-enum ChosseResult
-{
-    RESULT_CONFIRM,
-    RESULT_CANCEL
-};
-
-class CMessageBox:public QDialog
+class CMessageBox : public QDialog
 {
     Q_OBJECT
 public:
-    CMessageBox(QWidget *parent=0);
+    CMessageBox(QWidget *parent = 0);
+
 public:
-    void setBoxText(QString contentText,QString confirmText,QString cancelText);
-    int static showCMessageBox(QWidget *parent,QString contentText,QString confirmText,QString cancelText);
+    void setBoxText(QString contentText, QString confirmText, QString cancelText);
+    int static showCMessageBox(QWidget *parent, QString contentText,
+                               QString confirmText, QString cancelText);
+
+    enum ChosseResult
+    {
+        RESULT_CONFIRM,
+        RESULT_CANCEL
+    };
+
 protected:
     void closeEvent(QCloseEvent *event);
+
 private:
     void initLayout();
     void initConnection();
     int exec();
+
 private:
     QLabel *m_labelContent;
     CPushButton *m_btnConfirm;
@@ -34,6 +39,7 @@ private:
 
     QEventLoop* m_eventLoop;
     ChosseResult m_chooseResult;
+
 private slots:
     void slot_onConfirmClicked();
     void slot_onCancelClicked();

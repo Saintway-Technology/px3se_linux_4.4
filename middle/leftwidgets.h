@@ -11,12 +11,11 @@ public:
     ~LeftWidgets();
 
     Funtiontablewidget* getList(){return m_funtionlist;}
+
 private:
     void initLayout();
 
     Funtiontablewidget *m_funtionlist;
-public slots:
-    void retranslateUi();
 };
 
 #endif // LEFTWIDGETS_H

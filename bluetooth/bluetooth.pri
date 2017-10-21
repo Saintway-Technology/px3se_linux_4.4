@@ -1,7 +1,6 @@
 INCLUDEPATH +=$$PWD bluez5
 
 HEADERS += \
-    $$PWD/bluetoothwidgets.h \
     $$PWD/bluetoothscannerwidgets.h \
     $$PWD/bluetoothdevicetable.h \
     $$PWD/bluez5/bluez5helper.h \
@@ -11,7 +10,6 @@ HEADERS += \
     $$PWD/pairedinformationdialog.h
 
 SOURCES += \
-    $$PWD/bluetoothwidgets.cpp \
     $$PWD/bluetoothscannerwidgets.cpp \
     $$PWD/bluetoothdevicetable.cpp \
     $$PWD/bluez5/bluez5helper.cpp \

@@ -227,8 +227,20 @@ void SwitchButton::setChecked(bool checked)
 {
     if (this->checked != checked) {
         this->checked = checked;
+
+        if (checked) {
+            if (buttonStyle == ButtonStyle_Rect) {
+                endX = width() - width() / 2;
+            } else if (buttonStyle == ButtonStyle_CircleIn) {
+                endX = width() - height();
+            } else if (buttonStyle == ButtonStyle_CircleOut) {
+                endX = width() - height() + space;
+            }
+        } else {
+            endX = 0;
+        }
+        timer->start();
         emit checkedChanged(checked);
-        update();
     }
 }
 

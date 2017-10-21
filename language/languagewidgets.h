@@ -10,14 +10,12 @@ class LanguageWidgets : public BaseWidget
     Q_OBJECT
 public:
     explicit LanguageWidgets(QWidget *parent = 0);
+
 private:
     LanguageForm *m_languageForm;
 
     void initData();
     void initLayout();
-signals:
-
-public slots:
 };
 
 #endif // LANGUAGEWIDGETS_H

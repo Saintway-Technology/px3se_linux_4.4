@@ -19,17 +19,15 @@ public:
 
 private slots:
     void on_m_VolumnDownPushButton_clicked();
-
     void on_m_VolumnUpPushButton_clicked();
     void on_m_VolumnHorizontalSlider_sliderMoved(int position);
-
     void on_m_VolumnHorizontalSlider_valueChanged(int value);
-
     void on_m_VolumnHorizontalSlider_sliderReleased();
 
 private:
     static void onVolumnChange(int volumn);
     void saveVolumn(int volumn);
+
 private:
     Ui::VolumnWidget *ui;
     QFile *volumnFile;

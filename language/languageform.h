@@ -10,7 +10,6 @@ class LanguageForm;
 class LanguageForm : public QWidget
 {
     Q_OBJECT
-
 public:
     explicit LanguageForm(QWidget *parent = 0);
     ~LanguageForm();
@@ -21,7 +20,6 @@ private slots:
 private:
     Ui::LanguageForm *ui;
     QStringList qmFiles;
-
 };
 
 #endif // LANGUAGEFORM_H
