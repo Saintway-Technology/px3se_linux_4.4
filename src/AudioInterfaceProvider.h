@@ -1,11 +1,12 @@
 #ifndef __INTERFACE_PROVIDER_H__
 #define __INTERFACE_PROVIDER_H__
 
-#include <mutex>
 #include "message_queue_constant.h"
 
-class AudioInterfaceProvider{
+#include <mutex>
 
+class AudioInterfaceProvider
+{
 public:
     AudioInterfaceProvider();
     ~AudioInterfaceProvider(){}
@@ -14,7 +15,7 @@ public:
     void pause();
     void stop();
 
-    void setMedia(char* filePath);
+    void setMedia(char *filePath);
     char* currentMedia();
     char* getArtist();
     char* getTitle();
@@ -33,6 +34,7 @@ public:
 
     void clientConnectStateChanged(bool isConnected);
     void currentPlayModeChanged(int currentPlayMode);
+
 private:
     std::mutex m_mtx;
 
@@ -42,8 +44,9 @@ private:
     int feedbackQueueId;
 
     void initMessageQueue();
-    void sendMessage(long int msgType,int intValue = 0,char *textValue = 0);
-    bool sendMessageForResult(long int msgType,control_message *message,int intValue = 0,char *textValue = 0);
+    void sendMessage(long int msgType, int intValue = 0, char *textValue = 0);
+    bool sendMessageForResult(long int msgType, control_message *message,
+                              int intValue = 0, char *textValue = 0);
 };
 
 #endif // __INTERFACE_PROVIDER_H__

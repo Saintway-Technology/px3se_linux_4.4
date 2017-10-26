@@ -6,10 +6,11 @@
 
 #define SEARCH_PATH "/mnt"
 
-enum PlayMode{
-    PlayInOrder=0,
-    PlayRandom=1,
-    PlayOneCircle=2
+enum PlayMode
+{
+    PlayInOrder = 0,
+    PlayRandom = 1,
+    PlayOneCircle = 2
 };
 
 typedef std::list<std::string> LIST_STRING;
@@ -25,20 +26,17 @@ class MediaList
 public:
     MediaList();
 
-    void travelDir(char* path);
+    void travelDir(char *path);
     void updateList();
     void setPlayMode(PlayMode);
     std::string getNextSongPath();
     std::string getPathAt(int index);
     void onPlayItemChanged(std::string playItem);
-private:
-    // Current play list.
-    LIST_STRING  m_list;
-    // Current play index.
-    int m_currentIndex;
-    // Current playmode.
-    PlayMode m_playmode;
 
+private:
+    int m_currentIndex;
+    LIST_STRING  m_list;
+    PlayMode m_playmode;
     LIST_STRING m_updateSuffixList;
 
     void init();

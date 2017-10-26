@@ -16,10 +16,11 @@
 #include "message_queue_constant.h"
 #include "MediaList.h"
 
-class AudioPlayer{
-
+class AudioPlayer
+{
 public:
     static AudioPlayer* getInstance();
+
 private:
     /* singleton pattern */
     AudioPlayer();
@@ -35,6 +36,7 @@ private:
 
     MediaList *m_list;
     void updateState(State state);
+
 public:
     /**
      * Gstremer audio playbin init.
@@ -44,7 +46,7 @@ public:
     void createThreadForBusMessage();
     void parseTagList(const GstTagList *tags);
 
-    void setMedia(const char* filePath);
+    void setMedia(const char *filePath);
     std::string getMediaName();
     void sendMediaName();
 
@@ -70,8 +72,13 @@ public:
 
     void processEOS();
     void onClientConnectStateChanged(bool clientConnected);
-    bool isClientConnected(){return m_clientConnected;}
+    bool isClientConnected()
+    {
+        return m_clientConnected;
+    }
 
+    void updateList();
     void changePlayMode(int playMode);
 };
+
 #endif // __AUDIO_PLAYER_H__

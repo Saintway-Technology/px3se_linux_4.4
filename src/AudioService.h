@@ -22,5 +22,4 @@
 #define log_warn(format, ...) LOG_PRINTF(LOG_WARING_FLAG, format, ##__VA_ARGS__)
 #define log_err(format, ...) LOG_PRINTF(LOG_ERROR_FLAG, format, ##__VA_ARGS__)
 
-
 #endif // __AUDIO_SERVER_H__

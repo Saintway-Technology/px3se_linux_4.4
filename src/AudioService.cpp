@@ -1,24 +1,26 @@
 #include "AudioService.h"
-#include <stdlib.h>
-
 #include "AudioPlayer.h"
 #include "MessageHandler.h"
 
-int main(int argc, char *argv[]){
+#include <stdlib.h>
+
+int main(int argc, char *argv[])
+{
     log_info("Start audio service.");
     
     MessageHandler *messageHandler = new MessageHandler();
     
-    // Init gstreamer music player.
+    // init gstreamer music player.
     AudioPlayer *player = AudioPlayer::getInstance();
-    player->initPlayer(argc,argv);
+    player->initPlayer(argc, argv);
     player->createThreadForBusMessage();
     player->setMessageHandler(messageHandler);
     
     control_message message;
-    while(true){
-        if(messageHandler->recvReqFromClient(&message)){
-            switch(message.msg_type){
+
+    while (true) {
+        if (messageHandler->recvReqFromClient(&message)) {
+            switch (message.msg_type) {
             case REQ_TYPE_SET_MEDIA:
                 player->setMedia(message.textValue);
                 break;
@@ -61,8 +63,8 @@ int main(int argc, char *argv[]){
             case REQ_TYPE_PLAY_MODE_CHANGED:
                 player->changePlayMode(message.intValue);
                 break;
-            case REQ_TYPE_CONNECT_STATE_CHANGE:{
-                bool isClientConneted = message.intValue==0?false:true;
+            case REQ_TYPE_CONNECT_STATE_CHANGE: {
+                bool isClientConneted = message.intValue==0 ? false : true;
                 messageHandler->onClientConnectStateChanged(isClientConneted);
                 player->onClientConnectStateChanged(isClientConneted);
                 break;
@@ -72,6 +74,7 @@ int main(int argc, char *argv[]){
             }
         }
     }
+
     return 0;
 }
 

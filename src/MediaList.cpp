@@ -1,20 +1,21 @@
 #include "MediaList.h"
+#include "AudioService.h"
 
 #include <stdio.h>
 #include <dirent.h>
 #include <sys/types.h>
 #include <string.h>
-#include "AudioService.h"
 
-MediaList::MediaList(){
-    m_currentIndex = -1;
+MediaList::MediaList() :
+    m_currentIndex(-1)
+{
     m_list.clear();
     setPlayMode(PlayInOrder);
-
     init();
 }
 
-void MediaList::init(){
+void MediaList::init()
+{
     m_updateSuffixList.push_back("mp3");
     m_updateSuffixList.push_back("wave");
     m_updateSuffixList.push_back("wma");
@@ -30,89 +31,94 @@ void MediaList::init(){
     m_updateSuffixList.push_back("m4a");
 }
 
-void MediaList::setPlayMode(PlayMode playmode){
+void MediaList::setPlayMode(PlayMode playmode)
+{
     m_playmode = playmode;
 }
 
-void MediaList::onPlayItemChanged(std::string playItem){
+void MediaList::onPlayItemChanged(std::string playItem)
+{
     bool hasFind = false;
 
     LIST_STRING::iterator iter = m_list.begin();
-    for(int i =0;i < m_list.size();i++){
-        if((*iter) == playItem){
+    for (int i = 0; i < m_list.size(); i++) {
+        if ((*iter) == playItem) {
             m_currentIndex = i;
             hasFind = true;
-            log_info("find index: %d",i);
             break;
         }
         iter++;
     }
 
-    if(!hasFind){
+    if (!hasFind) {
         m_currentIndex = 0;
         updateList();
     }
 }
 
-std::string MediaList::getNextSongPath(){
-    switch(m_playmode){
+std::string MediaList::getNextSongPath()
+{
+    switch (m_playmode) {
     case PlayOneCircle:
         break;
     case PlayInOrder:
-        if(m_currentIndex+1 >= m_list.size()){
+        if (m_currentIndex + 1 >= m_list.size())
             m_currentIndex = 0;
-        }else{
+        else
             m_currentIndex ++;
-        }
         break;
-    case PlayRandom:
-        int xxx = rand()%m_list.size();
+    case PlayRandom: {
+        int xxx = rand() % m_list.size();
         m_currentIndex = xxx;
         break;
     }
+    default:
+        break;
+    }
+
     return getPathAt(m_currentIndex);
 }
 
 std::string MediaList::getPathAt(int index)
 {
-    if(m_list.empty() || index >= m_list.size() || index < 0){
+    if (m_list.empty() || index >= m_list.size() || index < 0)
         return std::string("");
-    }
+
+    m_currentIndex = index;
 
     LIST_STRING::iterator iter = m_list.begin();
-    for(int i =0;i < index;i++){
+    for (int i = 0; i < index; i++)
         iter++;
-    }
-    m_currentIndex = index;
+
     return (*iter);
 }
 
-void MediaList::travelDir(char * path){
-    DIR* dp;
+void MediaList::travelDir(char * path)
+{
+    DIR *dp;
     struct dirent* file;
     char filePath[512];
 
     dp = opendir(path);
-    if(dp == NULL){
+    if (dp == NULL)
         return;
-    }
 
-    while((file = readdir(dp)) != NULL){
-        if(strncmp(file->d_name, ".", 1) == 0)
+    while ((file=readdir(dp)) != NULL) {
+        if (strncmp(file->d_name, ".", 1) == 0)
             continue;
 
         memset(filePath, 0, sizeof(filePath));
         sprintf(filePath, "%s/%s", path, file->d_name);
 
-        if(file->d_type == DT_DIR){
+        if (file->d_type == DT_DIR) {
             travelDir(filePath);
-        }else{
+        } else {
             std::string filePathStr = std::string(filePath);
-            // Filter file format
+            // filter file format
             LIST_STRING::iterator iter;
-            for(iter = m_updateSuffixList.begin();iter != m_updateSuffixList.end();iter++){
+            for (iter = m_updateSuffixList.begin(); iter != m_updateSuffixList.end(); iter++) {
                 std::string suffix = std::string(".") + *iter;
-                if(filePathStr.find(suffix) != std::string::npos){
+                if (filePathStr.find(suffix) != std::string::npos) {
                     m_list.push_back(filePathStr);
                     break;
                 }
@@ -123,13 +129,8 @@ void MediaList::travelDir(char * path){
     (void)closedir(dp);
 }
 
-void MediaList::updateList(){
+void MediaList::updateList()
+{
     m_list.clear();
     travelDir((char*)SEARCH_PATH);
-
-    /*LIST_STRING::iterator iter;
-    for(iter = m_list.begin();iter != m_list.end();iter++){
-        log_info("file: %s",(*iter).c_str());
-    }*/
 }
-
