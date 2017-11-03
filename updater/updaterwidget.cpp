@@ -186,7 +186,7 @@ void UpdaterWidget::on_m_updatePushButton_clicked()
             theFile.open(QIODevice::ReadOnly);
             QByteArray ba = QCryptographicHash::hash(theFile.readAll(), QCryptographicHash::Md5);
             theFile.close();
-            qDebug() << ba.toHex().constData();
+
             qDebug() << "Found img:" << file->absoluteFilePath() << ba.toHex().constData();
 
             ui->m_textBrowser->append("Found img:" + file->absoluteFilePath());
@@ -197,8 +197,10 @@ void UpdaterWidget::on_m_updatePushButton_clicked()
             return;
         }
     }
+    int size =file->absoluteFilePath().toStdString().size();
+    char path[size];
+    memcpy(path,file->absoluteFilePath().toStdString().c_str(),size);
 
-    char *path = file->absoluteFilePath().toLatin1().data();
     int ret = fw_flag_check(path);
     if (ret) {
         qDebug() << "fw_flag_check faild";
@@ -208,7 +210,6 @@ void UpdaterWidget::on_m_updatePushButton_clicked()
         qDebug()<<"fw_flag_check ok";
         ui->m_textBrowser->append("fw_flag_check ok");
     }
-
     ret = fw_md5_check();
     if (ret) {
         qDebug() << "fw_md5_check faild";
@@ -223,6 +224,8 @@ void UpdaterWidget::on_m_updatePushButton_clicked()
 
     //write fwinfo
     fwinfo.update_mode = MODE_UPDATER;
+
+    memset(fwinfo.update_path,0,sizeof(fwinfo.update_path));
     memcpy(fwinfo.update_path, path, strlen(path));
 
     ret = vendor_storage_write(sizeof(UpdaterInfo), (unsigned char*)&fwinfo, VENDOR_UPDATER_ID);

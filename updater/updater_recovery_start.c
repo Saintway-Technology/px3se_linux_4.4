@@ -31,8 +31,8 @@ int vendor_storage_write(int buf_size, uint8 *buf, uint16 vendor_id)
         close(fd);
         return -1;
     }
+    fsync(fd);
     close(fd);
-
     return 0;
 }
 
