@@ -17,6 +17,8 @@
 #include "constant.h"
 #include "language/language.h"
 
+#include <QtConcurrent/QtConcurrent>
+
 int vendor_storage_write(int buf_size, uint8 *buf, uint16 vendor_id)
 {
     int ret = 0;
@@ -100,45 +102,51 @@ int fw_flag_check(char* path)
     return 0;
 }
 
-int fw_md5_check()
+int UpdaterWidget::fw_md5_check(QString firmwarePath)
 {
-    return 0;
-}
+    QString md5;
+    QString firmwareMd5Path=firmwarePath;
+    QFile hashFile(firmwareMd5Path.replace(".img",".md5"));
+    if(hashFile.exists()){
+        hashFile.open(QIODevice::ReadOnly);
+        QStringList list= QString(QLatin1String(hashFile.readAll().constData())).trimmed().split(" ");
+        if(list.length()>0){
+            md5= list.at(0);
+        }
+        hashFile.close();
+        qDebug()<<firmwareMd5Path<<md5;
+    }
 
-int updater_recovery_start(char* path)
-{
-    int ret = 0;
-    UpdaterInfo fwinfo;
+    if(md5 == ""){
+        ui->m_textBrowser->append(firmwareMd5Path+" not found.");
+        return 1;
+    }
 
-    ret = fw_flag_check(path);
-    if(ret)
-        return ret;
+    ui->m_textBrowser->append("Computing the hash");
+    QFile theFile(firmwarePath);
+    theFile.open(QIODevice::ReadOnly);
+    QByteArray ba = QCryptographicHash::hash(theFile.readAll(), QCryptographicHash::Md5);
+    QString firmwareMd5=QString(QLatin1String((ba.toHex().constData()))).trimmed();
+    theFile.close();
 
-    ret = fw_md5_check();
-    if(ret)
-        return ret;
+    qDebug() << " md5:" << md5 << "firmwareMd5:"<<firmwareMd5;
+    ui->m_textBrowser->append("md5:" + firmwareMd5);
 
-    //read fwinfo
-    ret = vendor_storage_read(sizeof(UpdaterInfo), (unsigned char*)&fwinfo, VENDOR_UPDATER_ID);
-    if(ret)
-        return ret;
+    if(firmwareMd5==md5){
+        return 0;
+    }
 
-    printf("Current Path is %s\n", fwinfo.update_path);
-    printf("Upadater Path is %s\n", path);
-
-    //write fwinfo
-    fwinfo.update_mode = MODE_UPDATER;
-    memcpy(fwinfo.update_path, path, strlen(path));
-
-    return vendor_storage_write(sizeof(UpdaterInfo), (unsigned char*)&fwinfo, VENDOR_UPDATER_ID);
+    return 1;
 }
 
 UpdaterWidget::UpdaterWidget(QWidget *parent) :
-    QWidget(parent),
+    QWidget(parent),state(0),
     ui(new Ui::UpdaterWidget)
 {
     ui->setupUi(this);
-
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(finish()));
+    pIndicator = new QProgressIndicator(this);
     connect(mainWindow, SIGNAL(retranslateUi()), this, SLOT(retranslateUi()));
 
     //read fwinfo
@@ -165,38 +173,51 @@ UpdaterWidget::~UpdaterWidget()
 void UpdaterWidget::on_m_updatePushButton_clicked()
 {
     qDebug("======== click click");
-    file = new QFileInfo("/mnt/sdcard/Firmware.img");
-    if (file->exists()) {
-        qDebug()<< file->absoluteFilePath();
-        QFile theFile(file->absoluteFilePath());
-        theFile.open(QIODevice::ReadOnly);
-        QByteArray ba = QCryptographicHash::hash(theFile.readAll(), QCryptographicHash::Md5);
-        theFile.close();
-        qDebug()<<"Found img:" << file->absoluteFilePath() << " md5:" << ba.toHex().constData();
+    if(state == 0){
+        pIndicator->setColor(Qt::gray);
+        pIndicator->startAnimation();
 
+        pIndicator->setFixedSize(80,80);
+        pIndicator->move(this->width()/2-pIndicator->width()/2,this->height()/2-pIndicator->height()/2);
+        pIndicator->show();
+        ui->m_updatePushButton->setEnabled(false);
+        QtConcurrent::run(this,&UpdaterWidget::update);
+
+        timer->start(1000);
+    }
+}
+
+void UpdaterWidget::finish(){
+    if(state){
+        pIndicator->hide();
+        timer->stop();
+        state = 0;
+        ui->m_updatePushButton->setEnabled(true);
+    }
+}
+
+void UpdaterWidget::update(){
+    file = new QFileInfo("/mnt/sdcard/Firmware.img");
+    QString md5;
+    if (file->exists()) {
         ui->m_textBrowser->append("Found img:" + file->absoluteFilePath());
-        ui->m_textBrowser->append("md5:" + QString(QLatin1String((ba.toHex().constData()))));
+        qDebug()<<"Found img:" << file->absoluteFilePath();
     } else {
         qDebug() << file->absoluteFilePath() << " not found";
         ui->m_textBrowser->append(file->absoluteFilePath() + " not found");
         file = new QFileInfo("/mnt/udisk/Firmware.img");
         if (file->exists()) {
-            qDebug() << file->absoluteFilePath();
-            QFile theFile(file->absoluteFilePath());
-            theFile.open(QIODevice::ReadOnly);
-            QByteArray ba = QCryptographicHash::hash(theFile.readAll(), QCryptographicHash::Md5);
-            theFile.close();
-
-            qDebug() << "Found img:" << file->absoluteFilePath() << ba.toHex().constData();
-
             ui->m_textBrowser->append("Found img:" + file->absoluteFilePath());
-            ui->m_textBrowser->append("md5:" + QString(QLatin1String((ba.toHex().constData()))));
+            qDebug() << "Found img:" << file->absoluteFilePath();
         } else {
             qDebug() << file->absoluteFilePath() << " not found";
             ui->m_textBrowser->append(file->absoluteFilePath() + " not found");
+            state=1;
             return;
         }
     }
+
+
     int size =file->absoluteFilePath().toStdString().size();
     char path[size];
     memcpy(path,file->absoluteFilePath().toStdString().c_str(),size);
@@ -205,19 +226,25 @@ void UpdaterWidget::on_m_updatePushButton_clicked()
     if (ret) {
         qDebug() << "fw_flag_check faild";
         ui->m_textBrowser->append("fw_flag_check faild");
+        state=1;
         return;
     } else {
         qDebug()<<"fw_flag_check ok";
         ui->m_textBrowser->append("fw_flag_check ok");
     }
-    ret = fw_md5_check();
+
+    ret = fw_md5_check(file->absoluteFilePath());
+    state=1;
     if (ret) {
         qDebug() << "fw_md5_check faild";
         ui->m_textBrowser->append("fw_md5_check faild");
+        return;
     } else {
         qDebug()<<"fw_md5_check ok";
         ui->m_textBrowser->append("fw_md5_check ok");
     }
+
+
 
     printf("Current Path is %s\n", fwinfo.update_path);
     printf("Upadater Path is %s\n", path);
@@ -242,4 +269,5 @@ void UpdaterWidget::on_m_updatePushButton_clicked()
         ui->m_textBrowser->append("begin reboot");
         QProcess::execute("reboot");
     }
+
 }

@@ -5,6 +5,7 @@
 #include <QFileInfo>
 
 #include "updater_recovery_start.h"
+#include "QProgressIndicator.h"
 
 namespace Ui {
 class UpdaterWidget;
@@ -20,11 +21,16 @@ public:
 public slots:
     void on_m_updatePushButton_clicked();
     void retranslateUi();
-
+    void finish();
 private:
     Ui::UpdaterWidget *ui;
     QFileInfo *file;
     UpdaterInfo fwinfo;
+    QProgressIndicator *pIndicator;
+    QTimer *timer;
+    bool state;
+    void update();
+    int fw_md5_check(QString firmwarePath);
 };
 
 #endif // UPDATERWIDGET_H
