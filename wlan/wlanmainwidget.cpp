@@ -68,7 +68,7 @@ void WlanMainWidget::initLayout()
     mainlayout->addWidget(m_switchHeader);
     mainlayout->addWidget(m_table);
     mainlayout->addSpacing(wlan_bottom_margin);
-    mainlayout->setContentsMargins(0, 0, 0, 0);
+    mainlayout->setMargin(0);
     mainlayout->setSpacing(0);
 
     QHBoxLayout *layout = new QHBoxLayout;
@@ -175,6 +175,7 @@ void WlanMainWidget::slot_onItemConnecting(QString itemSSID)
     qDebug("WLAN: item connecting: %s", itemSSID.toLocal8Bit().data());
     for (int i = 0; i < m_table->rowCount(); i++) {
         if (m_table->getItemSSID(i) == itemSSID) {
+            m_table->resetConnnectingItem();
             m_table->setItemState(i, WIFI_STATE_CONNECTING);
             m_table->sortTable();
             return;

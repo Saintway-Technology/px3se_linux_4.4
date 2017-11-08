@@ -33,6 +33,7 @@ public:
     void clearTable();
     void sortTable();
     void retranslateTable();
+    void resetConnnectingItem();
 
 private:
     void init();

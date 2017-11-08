@@ -4,12 +4,13 @@
 #include <basewidget.h>
 #include "updaterwidget.h"
 
-class UpdaterWidgets:public BaseWidget
+class UpdaterWidgets : public BaseWidget
 {
     Q_OBJECT
 public:
     UpdaterWidgets(QWidget *parent);
     ~UpdaterWidgets();
+
 private:
     UpdaterWidget *m_updaterWidget;
 

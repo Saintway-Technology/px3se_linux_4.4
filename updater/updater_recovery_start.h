@@ -14,7 +14,7 @@ typedef 	unsigned char		BYTE;
 #define MODE_UPDATER	0xF000
 #define MODE_GENERATE	0x0000
 
-#define RK_PARTITION_TAG 		(0x50464B52)
+#define RK_PARTITION_TAG (0x50464B52)
 
 typedef enum {
     PART_VENDOR = 1 << 0,
@@ -22,7 +22,7 @@ typedef enum {
     PART_KERNEL = 1 << 2,
     PART_BOOT = 1 << 3,
     PART_USER = 1 << 31
-}ENUM_PARTITION_TYPE;
+} ENUM_PARTITION_TYPE;
 
 typedef struct {
     uint16	year;
@@ -32,40 +32,40 @@ typedef struct {
     uint8	min;
     uint8	sec;
     uint8	reserve;
-}STRUCT_DATETIME,*PSTRUCT_DATETIME;
+} STRUCT_DATETIME, *PSTRUCT_DATETIME;
 
 typedef struct {
-    uint32	uiFwTag; //"RKFP"
+    uint32	uiFwTag;            //"RKFP"
     STRUCT_DATETIME	dtReleaseDataTime;
     uint32	uiFwVer;
-    uint32	uiSize;//size of sturct,unit of uint8
-    uint32	uiPartEntryOffset;//unit of sector
+    uint32	uiSize;             //size of sturct,unit of uint8
+    uint32	uiPartEntryOffset;  //unit of sector
     uint32	uiBackupPartEntryOffset;
-    uint32	uiPartEntrySize;//unit of uint8
+    uint32	uiPartEntrySize;    //unit of uint8
     uint32	uiPartEntryCount;
-    uint32	uiFwSize;//unit of uint8
+    uint32	uiFwSize;           //unit of uint8
     uint8	reserved[464];
     uint32	uiPartEntryCrc;
     uint32	uiHeaderCrc;
-}STRUCT_FW_HEADER,*PSTRUCT_FW_HEADER;
+} STRUCT_FW_HEADER, *PSTRUCT_FW_HEADER;
 
 typedef struct {
     uint8	szName[32];
     ENUM_PARTITION_TYPE emPartType;
-    uint32	uiPartOffset;//unit of sector
-    uint32	uiPartSize;//unit of sector
-    uint32	uiDataLength;//unit of uint8
+    uint32	uiPartOffset;   //unit of sector
+    uint32	uiPartSize;     //unit of sector
+    uint32	uiDataLength;   //unit of uint8
     uint32	uiPartProperty;
     uint8	reserved[76];
-}STRUCT_PART_ENTRY,*PSTRUCT_PART_ENTRY;
+} STRUCT_PART_ENTRY, *PSTRUCT_PART_ENTRY;
 
 typedef struct {
-    STRUCT_FW_HEADER hdr;     //0.5KB
+    STRUCT_FW_HEADER hdr;       //0.5KB
     STRUCT_PART_ENTRY part[12]; //1.5KB
-}STRUCT_PART_INFO,*PSTRUCT_PART_INFO;
+} STRUCT_PART_INFO, *PSTRUCT_PART_INFO;
 
 
-typedef struct{
+typedef struct {
     //release date
     unsigned int update_version;
 
@@ -77,8 +77,7 @@ typedef struct{
      *	 0xF000 -> updater mode.
      */
     unsigned short update_mode;
-}UpdaterInfo;
-
+} UpdaterInfo;
 
 #define VERDOR_DEVICE "/dev/vendor_storage"
 
@@ -86,7 +85,7 @@ typedef struct{
 #define VENDOR_READ_IO	_IOW('v', 0x01, unsigned int)
 #define VENDOR_WRITE_IO	_IOW('v', 0x02, unsigned int)
 
-#define VENDOR_UPDATER_ID		14
+#define VENDOR_UPDATER_ID	14
 
 #define VENDOR_DATA_SIZE (3 * 1024)
 

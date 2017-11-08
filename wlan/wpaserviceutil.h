@@ -22,7 +22,7 @@
 
 #define DEBUG_ERR(M, ...) qDebug("DEBUG %d: " M, __LINE__, ##__VA_ARGS__)
 
-static const char WPA_SUPPLICANT_CONF_DIR[]  = "/etc/wpa_supplicant.conf";
+static const char WPA_SUPPLICANT_CONF_DIR[]  = "/data/wpa_supplicant.conf";
 static const char HOSTAPD_CONF_DIR[] = "/etc/hostapd.conf";
 static char WLAN_PID_NAME[] = "wpa_supplicant";
 static char HOSTAPD_PID_NAME[] = "hostapd";
@@ -145,10 +145,16 @@ inline int creat_hostapd_file(const char* name, const char* password)
 
 inline int wifi_start_supplicant()
 {
+    char cmd[256];
+
     if (is_supplicant_running()) {
         return 0;
     }
-    console_run("/usr/sbin/wpa_supplicant -Dnl80211 -iwlan0 -c /etc/wpa_supplicant.conf &");
+
+    memset(cmd, 0, sizeof(cmd));
+    sprintf(cmd, "/usr/sbin/wpa_supplicant -Dnl80211 -iwlan0 -c %s &", WPA_SUPPLICANT_CONF_DIR);
+    console_run(cmd);
+
     return 0;
 }
 

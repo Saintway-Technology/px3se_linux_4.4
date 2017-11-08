@@ -3,9 +3,9 @@
 
 #include <QWidget>
 #include <QFileInfo>
+#include <QProgressIndicator.h>
 
 #include "updater_recovery_start.h"
-#include "QProgressIndicator.h"
 
 namespace Ui {
 class UpdaterWidget;
@@ -22,6 +22,7 @@ public slots:
     void on_m_updatePushButton_clicked();
     void retranslateUi();
     void finish();
+
 private:
     Ui::UpdaterWidget *ui;
     QFileInfo *file;

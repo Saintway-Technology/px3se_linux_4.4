@@ -196,6 +196,16 @@ bool WlanListTable::hasSSIDName(const QString &ssidName)
     return false;
 }
 
+void WlanListTable::resetConnnectingItem()
+{
+    for (int i = 0; i < rowCount(); i++) {
+        if (this->item(i, COLUME_STATE)->whatsThis().toInt() == WIFI_STATE_CONNECTING) {
+            setItemState(i, WIFI_STATE_SAVED);
+            return;
+        }
+    }
+}
+
 void WlanListTable::resizeEvent(QResizeEvent *event)
 {
 #ifdef DEVICE_EVB

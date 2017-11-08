@@ -1,3 +1,5 @@
+#include "updater_recovery_start.h"
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -7,8 +9,6 @@
 #include <errno.h>
 #include <linux/watchdog.h>
 #include <sys/ioctl.h>
-
-#include "updater_recovery_start.h"
 
 int vendor_storage_write(int buf_size, uint8 *buf, uint16 vendor_id)
 {
