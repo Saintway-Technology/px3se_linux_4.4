@@ -44,6 +44,12 @@ QString str_wifi_state = "";
 QString str_wifi_signal_strength = "";
 QString str_wifi_frequency = "";
 QString str_wifi_underline_password = "";
+// keyboard
+QString str_board_close = "";
+QString str_board_lab_upper = "";
+QString str_board_lab_lower = "";
+QString str_board_upper = "";
+QString str_board_lower = "";
 
 RetranslateManager* RetranslateManager::getInstance(QObject *parent = 0)
 {
@@ -101,4 +107,10 @@ void RetranslateManager::updateString()
     str_wifi_signal_strength = tr("Signal Strength");
     str_wifi_frequency = tr("Frequency");
     str_wifi_underline_password = tr("<u>password</u>");
+    // keyboard
+    str_board_close = tr("Close");
+    str_board_lab_upper = tr("Input Method —— Upper-Case");
+    str_board_lab_lower = tr("Input Method —— Lower-Case");
+    str_board_upper = tr("Upper");
+    str_board_lower = tr("Lower");
 }

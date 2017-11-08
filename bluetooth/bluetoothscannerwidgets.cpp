@@ -147,7 +147,8 @@ void BluetoothScannerWidgets::initConnection()
     connect(mainWindow, SIGNAL(retranslateUi()), this, SLOT(retranslateUi()));
 }
 
-void BluetoothScannerWidgets::retranslateUi(){
+void BluetoothScannerWidgets::retranslateUi()
+{
     m_switchHeader->setTitle(m_localDevice->name());
     availableTitle->setText(str_bluetooth_enable_devices);
     m_table->retranslateTable();

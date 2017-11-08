@@ -5,6 +5,7 @@
 #include "netconnectedinfodialog.h"
 #include "retranslatemanager.h"
 #include "constant.h"
+#include "qkeyboard.h"
 
 #include <QVBoxLayout>
 
@@ -54,6 +55,8 @@ void WlanMainWidget::initData()
 {
     creat_supplicant_file();
     m_manager = WPAManager::getInstance(this);
+
+    QKeyBoard::getInstance()->globalInit(QKeyBoard::Black, 45, 16);
 }
 
 void WlanMainWidget::initLayout()

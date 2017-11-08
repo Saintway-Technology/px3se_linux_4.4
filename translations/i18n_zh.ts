@@ -275,34 +275,28 @@
 <context>
     <name>NetConnectedInfoDialog</name>
     <message>
-        <location filename="../wlan/netconnectedinfodialog.cpp" line="61"/>
         <source>State</source>
-        <translation type="unfinished">状态</translation>
+        <translation type="obsolete">状态</translation>
     </message>
     <message>
-        <location filename="../wlan/netconnectedinfodialog.cpp" line="61"/>
         <source>Connected</source>
-        <translation type="unfinished">已连接</translation>
+        <translation type="obsolete">已连接</translation>
     </message>
     <message>
-        <location filename="../wlan/netconnectedinfodialog.cpp" line="62"/>
         <source>Signal Strength</source>
-        <translation type="unfinished">信号强度</translation>
+        <translation type="obsolete">信号强度</translation>
     </message>
     <message>
-        <location filename="../wlan/netconnectedinfodialog.cpp" line="63"/>
         <source>Frequency</source>
-        <translation type="unfinished">频率</translation>
+        <translation type="obsolete">频率</translation>
     </message>
     <message>
-        <location filename="../wlan/netconnectedinfodialog.cpp" line="67"/>
         <source>Forget</source>
-        <translation type="unfinished">取消保存</translation>
+        <translation type="obsolete">取消保存</translation>
     </message>
     <message>
-        <location filename="../wlan/netconnectedinfodialog.cpp" line="68"/>
         <source>Complete</source>
-        <translation type="unfinished">确定</translation>
+        <translation type="obsolete">确定</translation>
     </message>
 </context>
 <context>
@@ -404,6 +398,349 @@
     </message>
 </context>
 <context>
+    <name>QKeyBoard</name>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="14"/>
+        <source>中文输入法面板</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="64"/>
+        <source>输入法--小写</source>
+        <translation>输入法 -- 小写</translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="93"/>
+        <source>关闭</source>
+        <translation>关闭</translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="141"/>
+        <source>,</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="157"/>
+        <source>t</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="173"/>
+        <source>|</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="189"/>
+        <source>(</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="205"/>
+        <source>m</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="221"/>
+        <source>!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="237"/>
+        <source>6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="253"/>
+        <source>9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="269"/>
+        <source>c</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="285"/>
+        <source>l</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="301"/>
+        <source>s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="317"/>
+        <source>&amp;&amp;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="333"/>
+        <source>8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="365"/>
+        <source>%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="381"/>
+        <source>3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="397"/>
+        <source>x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="413"/>
+        <source>?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="429"/>
+        <source>o</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="445"/>
+        <source>g</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="461"/>
+        <source>j</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="477"/>
+        <source>f</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="493"/>
+        <source>+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="509"/>
+        <source>.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="525"/>
+        <source>u</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="541"/>
+        <source>@</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="557"/>
+        <source>5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="573"/>
+        <source>\</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="589"/>
+        <source>b</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="605"/>
+        <source>4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="621"/>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="637"/>
+        <source>/</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="653"/>
+        <source>v</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="669"/>
+        <source>e</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="685"/>
+        <source>i</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="701"/>
+        <source>h</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="717"/>
+        <source>#</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="733"/>
+        <source>7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="749"/>
+        <source>a</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="765"/>
+        <source>n</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="781"/>
+        <source>小写</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="797"/>
+        <source>^</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="813"/>
+        <source>d</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="829"/>
+        <source>$</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="845"/>
+        <source>z</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="861"/>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="877"/>
+        <source>k</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="893"/>
+        <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="909"/>
+        <source>w</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="925"/>
+        <source>r</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="941"/>
+        <source>←</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="957"/>
+        <source>*</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="973"/>
+        <source>q</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="989"/>
+        <source>y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="1005"/>
+        <source>)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="1021"/>
+        <source>p</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="1037"/>
+        <source>:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="1069"/>
+        <source>-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="1085"/>
+        <source>_</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="1101"/>
+        <source>&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.ui" line="1117"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.cpp" line="156"/>
+        <source>Upper-Case</source>
+        <translation>大写</translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.cpp" line="157"/>
+        <source>Input Method -- Upper-Case</source>
+        <translation>输入法 -- 大写</translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.cpp" line="162"/>
+        <source>Lower-Case</source>
+        <translation>小写</translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.cpp" line="163"/>
+        <source>Input Method -- Lower-Case</source>
+        <translation>输入法 -- 小写</translation>
+    </message>
+    <message>
+        <location filename="../base/qkeyboard.cpp" line="185"/>
+        <source>close</source>
+        <translation>关闭</translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Connected</source>
@@ -429,189 +766,214 @@
 <context>
     <name>RetranslateManager</name>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="63"/>
+        <location filename="../main/retranslatemanager.cpp" line="69"/>
         <source>Bluetooth(%1)</source>
         <translation type="unfinished">蓝牙(%1)</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="64"/>
+        <location filename="../main/retranslatemanager.cpp" line="70"/>
         <source>Available Devices</source>
         <translation type="unfinished">可选蓝牙设备</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="65"/>
+        <location filename="../main/retranslatemanager.cpp" line="71"/>
         <source>Connect with </source>
         <translation type="unfinished">与以下设备进行连接 </translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="66"/>
+        <location filename="../main/retranslatemanager.cpp" line="72"/>
         <source>Disconnect with </source>
         <translation type="unfinished">与以下设备取消连接 </translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="67"/>
+        <location filename="../main/retranslatemanager.cpp" line="73"/>
         <source>Pair with </source>
         <translation type="unfinished">与以下设备进行配对 </translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="68"/>
-        <location filename="../main/retranslatemanager.cpp" line="96"/>
+        <location filename="../main/retranslatemanager.cpp" line="74"/>
+        <location filename="../main/retranslatemanager.cpp" line="102"/>
         <source>Connect</source>
         <translation type="unfinished">连接</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="69"/>
+        <location filename="../main/retranslatemanager.cpp" line="75"/>
         <source>Disconnect</source>
         <translation type="unfinished">断开</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="70"/>
+        <location filename="../main/retranslatemanager.cpp" line="76"/>
         <source>Pair</source>
         <translation type="unfinished">配对</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="71"/>
-        <location filename="../main/retranslatemanager.cpp" line="97"/>
+        <location filename="../main/retranslatemanager.cpp" line="77"/>
+        <location filename="../main/retranslatemanager.cpp" line="103"/>
         <source>Cancel</source>
         <translation type="unfinished">取消</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="72"/>
+        <location filename="../main/retranslatemanager.cpp" line="78"/>
         <source>name:</source>
         <translation type="unfinished">名字：</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="73"/>
+        <location filename="../main/retranslatemanager.cpp" line="79"/>
         <source>address:</source>
         <translation type="unfinished">地址：</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="81"/>
+        <location filename="../main/retranslatemanager.cpp" line="87"/>
         <source>name</source>
         <translation type="unfinished">热点名</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="83"/>
+        <location filename="../main/retranslatemanager.cpp" line="89"/>
         <source>warning</source>
         <translation type="unfinished">警告</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="84"/>
+        <location filename="../main/retranslatemanager.cpp" line="90"/>
         <source>name or password is not available.</source>
         <translation type="unfinished">热点名或密码不符合要求.</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="86"/>
+        <location filename="../main/retranslatemanager.cpp" line="92"/>
         <source>OPEN</source>
         <translation type="unfinished">打开</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="87"/>
+        <location filename="../main/retranslatemanager.cpp" line="93"/>
         <source>CLOSE</source>
         <translation type="unfinished">关闭</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="88"/>
+        <location filename="../main/retranslatemanager.cpp" line="94"/>
         <source>Saved</source>
         <translation type="unfinished">已保存</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="89"/>
+        <location filename="../main/retranslatemanager.cpp" line="95"/>
         <source>Auth Failed</source>
         <translation type="unfinished">密码错误</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="90"/>
+        <location filename="../main/retranslatemanager.cpp" line="96"/>
         <source>Connecting</source>
         <translation type="unfinished">正在连接</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="92"/>
+        <location filename="../main/retranslatemanager.cpp" line="98"/>
         <source>Excellent</source>
         <translation type="unfinished">极好</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="93"/>
+        <location filename="../main/retranslatemanager.cpp" line="99"/>
         <source>Good</source>
         <translation type="unfinished">优良</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="94"/>
+        <location filename="../main/retranslatemanager.cpp" line="100"/>
         <source>Ok</source>
         <translation type="unfinished">一般</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="95"/>
+        <location filename="../main/retranslatemanager.cpp" line="101"/>
         <source>Weak</source>
         <translation type="unfinished">弱</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="98"/>
+        <location filename="../main/retranslatemanager.cpp" line="104"/>
         <source>Forget</source>
         <translation type="unfinished">取消保存</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="99"/>
+        <location filename="../main/retranslatemanager.cpp" line="105"/>
         <source>Complete</source>
         <translation type="unfinished">确定</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="100"/>
+        <location filename="../main/retranslatemanager.cpp" line="106"/>
         <source>State</source>
         <translation type="unfinished">状态</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="101"/>
+        <location filename="../main/retranslatemanager.cpp" line="107"/>
         <source>Signal Strength</source>
         <translation type="unfinished">信号强度</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="102"/>
+        <location filename="../main/retranslatemanager.cpp" line="108"/>
         <source>Frequency</source>
         <translation type="unfinished">频率</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="103"/>
+        <location filename="../main/retranslatemanager.cpp" line="109"/>
         <source>&lt;u&gt;password&lt;/u&gt;</source>
         <translation type="unfinished">&lt;u&gt;密码&lt;/u&gt;</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="111"/>
+        <source>Close</source>
+        <translation type="unfinished">关闭</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="112"/>
+        <source>Input Method —— Upper-Case</source>
+        <translation type="unfinished">输入法 —— 大写</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="113"/>
+        <source>Input Method —— Lower-Case</source>
+        <translation type="unfinished">输入法 —— 小写</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="114"/>
+        <source>Upper</source>
+        <translation type="unfinished">大写</translation>
+    </message>
+    <message>
+        <location filename="../main/retranslatemanager.cpp" line="115"/>
+        <source>Lower</source>
+        <translation type="unfinished">小写</translation>
     </message>
     <message>
         <source>address</source>
         <translation type="vanished">地址：</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="74"/>
+        <location filename="../main/retranslatemanager.cpp" line="80"/>
         <source>Confirm</source>
         <translation type="unfinished">确定</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="75"/>
+        <location filename="../main/retranslatemanager.cpp" line="81"/>
         <source>Cancel Save</source>
         <translation type="unfinished">取消保存</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="76"/>
-        <location filename="../main/retranslatemanager.cpp" line="91"/>
+        <location filename="../main/retranslatemanager.cpp" line="82"/>
+        <location filename="../main/retranslatemanager.cpp" line="97"/>
         <source>Connected</source>
         <translation type="unfinished">已连接</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="77"/>
+        <location filename="../main/retranslatemanager.cpp" line="83"/>
         <source>Pairing</source>
         <translation type="unfinished">正在配对</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="78"/>
+        <location filename="../main/retranslatemanager.cpp" line="84"/>
         <source>Paired</source>
         <translation type="unfinished">已配对</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="80"/>
+        <location filename="../main/retranslatemanager.cpp" line="86"/>
         <source>Hotspot</source>
         <translation type="unfinished">&lt;热点&gt;</translation>
     </message>
     <message>
-        <location filename="../main/retranslatemanager.cpp" line="82"/>
+        <location filename="../main/retranslatemanager.cpp" line="88"/>
         <source>password</source>
         <translation type="unfinished">密码</translation>
     </message>
@@ -619,8 +981,8 @@
 <context>
     <name>SettingTopWidgets</name>
     <message>
-        <location filename="../top/settingtopwidgets.cpp" line="24"/>
-        <location filename="../top/settingtopwidgets.cpp" line="52"/>
+        <location filename="../top/settingtopwidgets.cpp" line="30"/>
+        <location filename="../top/settingtopwidgets.cpp" line="54"/>
         <source>Setting</source>
         <translation type="unfinished">设置</translation>
     </message>

@@ -56,7 +56,8 @@ include (updater/updater.pri)
 INCLUDEPATH +=$$PWD language
 include (language/language.pri)
 
-FORMS = brightness/brightness.ui \
+FORMS = base/qkeyboard.ui \
+        brightness/brightness.ui \
         calendar/widget.ui \
         volume/volumnwidget.ui \
         updater/updaterwidget.ui \

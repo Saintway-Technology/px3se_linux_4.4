@@ -123,6 +123,7 @@ void HotspotMainWidget::showEvent(QShowEvent *event)
 {
     BaseWidget::showEvent(event);
 
+    m_header->setFocus();
     m_header->setChecked(is_hostapd_running());
 }
 

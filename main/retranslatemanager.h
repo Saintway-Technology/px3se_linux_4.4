@@ -45,6 +45,12 @@ extern QString str_wifi_state;
 extern QString str_wifi_signal_strength;
 extern QString str_wifi_frequency;
 extern QString str_wifi_underline_password;
+// keyboard
+extern QString str_board_close;
+extern QString str_board_lab_upper;
+extern QString str_board_lab_lower;
+extern QString str_board_upper;
+extern QString str_board_lower;
 
 class RetranslateManager : public QObject
 {

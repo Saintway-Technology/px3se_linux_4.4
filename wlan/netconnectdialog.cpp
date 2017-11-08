@@ -41,7 +41,6 @@ void NetConnectDialog::initLayout()
     nameLabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
     m_passWordEdit = new QLineEdit(this);
-    m_passWordEdit->setText("123456789");
 
     // button layout.
     QHBoxLayout *buttonlayout = new QHBoxLayout;

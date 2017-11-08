@@ -465,6 +465,9 @@ void WPAManager::removeNetwork(int networkId)
     QString cmd = QString::number(networkId);
     cmd.prepend("REMOVE_NETWORK ");
     ctrlRequest(cmd.toLocal8Bit().constData(), reply, &reply_len);
+
+    memset(reply, 0, sizeof(reply));
+    ctrlRequest("SAVE_CONFIG", reply, &reply_len);
     scan();
 }
 
