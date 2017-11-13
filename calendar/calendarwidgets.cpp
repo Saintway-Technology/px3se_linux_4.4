@@ -1,7 +1,7 @@
 #include "calendarwidgets.h"
 #include <QVBoxLayout>
 
-CalendarWidgets::CalendarWidgets(QWidget *parent):BaseWidget(parent)
+CalendarWidgets::CalendarWidgets(QWidget *parent) : BaseWidget(parent)
 {
     setBackgroundColor(33, 36, 43);
 

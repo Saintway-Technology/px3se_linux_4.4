@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "retranslatemanager.h"
 #include "constant.h"
+
+#include <QApplication>
 #include <QVBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent) : BaseWindow(parent)

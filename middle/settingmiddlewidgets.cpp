@@ -1,7 +1,7 @@
 #include "settingmiddlewidgets.h"
 #include <QHBoxLayout>
 
-SettingMiddleWidgets::SettingMiddleWidgets(QWidget *parent):BaseWidget(parent)
+SettingMiddleWidgets::SettingMiddleWidgets(QWidget *parent) : BaseWidget(parent)
 {
     initLayout();
     initConnection();
@@ -20,7 +20,6 @@ void SettingMiddleWidgets::initLayout()
     m_hotspotWid = new HotspotMainWidget(m_stackedWid);
     m_bluetoothWid = new BluetoothScannerWidgets(m_stackedWid);
     m_brightnessWid = new BrightnessWidgets(m_stackedWid);
-    m_calendarWid = new CalendarWidgets(m_stackedWid);
     m_volumnWid = new VolumeWidgets(m_stackedWid);
     m_updaterWid = new UpdaterWidgets(m_stackedWid);
     m_languageWid = new LanguageWidgets(m_stackedWid);
@@ -29,7 +28,6 @@ void SettingMiddleWidgets::initLayout()
     m_stackedWid->addWidget(m_hotspotWid);
     m_stackedWid->addWidget(m_bluetoothWid);
     m_stackedWid->addWidget(m_brightnessWid);
-    m_stackedWid->addWidget(m_calendarWid);
     m_stackedWid->addWidget(m_volumnWid);
     m_stackedWid->addWidget(m_updaterWid);
     m_stackedWid->addWidget(m_languageWid);
@@ -37,7 +35,7 @@ void SettingMiddleWidgets::initLayout()
     hmainlyout->addWidget(m_leftWid, 1);
     hmainlyout->addWidget(m_stackedWid, 4);
 
-    hmainlyout->setContentsMargins(0, 0, 0, 0);
+    hmainlyout->setMargin(0);
     hmainlyout->setSpacing(0);
     setLayout(hmainlyout);
 }
@@ -46,6 +44,7 @@ void SettingMiddleWidgets::initConnection()
 {
     connect(m_leftWid->getList(), SIGNAL(currentIndexChanged(int)), this, SLOT(slot_currentWidgetChanged(int)));
 }
+
 
 void SettingMiddleWidgets::slot_currentWidgetChanged(int index)
 {
@@ -64,15 +63,12 @@ void SettingMiddleWidgets::slot_currentWidgetChanged(int index)
         m_stackedWid->setCurrentWidget(m_brightnessWid);
         break;
     case 4:
-        m_stackedWid->setCurrentWidget(m_calendarWid);
-        break;
-    case 5:
         m_stackedWid->setCurrentWidget(m_volumnWid);
         break;
-    case 6:
+    case 5:
         m_stackedWid->setCurrentWidget(m_updaterWid);
         break;
-    case 7:
+    case 6:
         m_stackedWid->setCurrentWidget(m_languageWid);
         break;
     default:

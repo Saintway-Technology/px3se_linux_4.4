@@ -9,7 +9,6 @@
 #include "hotspot/hotspotmainwidget.h"
 #include "bluetooth/bluetoothscannerwidgets.h"
 #include "brightness/brightnesswidgets.h"
-#include "calendar/calendarwidgets.h"
 #include "volume/volumewidgets.h"
 #include "updater/updaterwidgets.h"
 #include "language/languagewidgets.h"
@@ -20,7 +19,7 @@
  *
  * Every stacked item has their own ui and logic processing.
  */
-class SettingMiddleWidgets:public BaseWidget
+class SettingMiddleWidgets : public BaseWidget
 {
     Q_OBJECT
 public:
@@ -36,7 +35,6 @@ private:
     HotspotMainWidget *m_hotspotWid;
     BluetoothScannerWidgets *m_bluetoothWid;
     BrightnessWidgets *m_brightnessWid;
-    CalendarWidgets *m_calendarWid;
     VolumeWidgets *m_volumnWid;
     UpdaterWidgets *m_updaterWid;
     LanguageWidgets *m_languageWid;

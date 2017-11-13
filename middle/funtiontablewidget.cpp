@@ -60,15 +60,12 @@ void Funtiontablewidget::reflushItemName(int i){
         item->setText(tr("Brightness"));
         break;
     case 4:
-        item->setText(tr("Time&Calendar"));
-        break;
-    case 5:
         item->setText(tr("Volumn"));
         break;
-    case 6:
+    case 5:
         item->setText(tr("Updater"));
         break;
-    case 7:
+    case 6:
         item->setText(tr("Language"));
         break;
     default:

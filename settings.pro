@@ -44,8 +44,8 @@ include(bluetooth/bluetooth.pri)
 INCLUDEPATH +=$$PWD brightness
 include(brightness/brightness.pri)
 
-INCLUDEPATH +=$$PWD calendar
-include (calendar/calendar.pri)
+#INCLUDEPATH +=$$PWD calendar
+#include (calendar/calendar.pri)
 
 INCLUDEPATH +=$$PWD volume
 include (volume/volume.pri)

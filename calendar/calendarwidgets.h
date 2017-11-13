@@ -4,7 +4,7 @@
 #include <basewidget.h>
 #include "widget.h"
 
-class CalendarWidgets:public BaseWidget
+class CalendarWidgets : public BaseWidget
 {
     Q_OBJECT
 public:
