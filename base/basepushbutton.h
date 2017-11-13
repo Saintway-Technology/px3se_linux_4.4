@@ -1,5 +1,6 @@
 #ifndef BASEPUSHBUTTON_H
 #define BASEPUSHBUTTON_H
+
 #include <QObject>
 #include <QWidget>
 #include <QPushButton>
@@ -42,9 +43,25 @@ class FlatButton : public QPushButton
     Q_OBJECT
 public:
     FlatButton(QWidget *parent = 0);
-    FlatButton(const QString& str ,QWidget *parent=0);
+    FlatButton(const QString& str ,QWidget *parent = 0);
 
     void setBackgroundImage(const QString &imageRess);
+
+private:
+    // it stands for the button current is be long pressed.
+    bool longPressedFlag;
+    // used for identify long press event.
+    QTimer *m_timer;
+
+private slots:
+    void slot_timerTimeout();
+
+protected:
+    void mousePressEvent(QMouseEvent *e);
+    void mouseReleaseEvent(QMouseEvent *e);
+
+signals:
+    void longPressedEvent();
 };
 
 class FourStateButton : public QPushButton

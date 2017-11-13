@@ -13,18 +13,21 @@ RotatableButton::RotatableButton(const QString &icon, QWidget *parent) : QPushBu
     currentPix_ = QPixmap(icon);
 }
 
-bool RotatableButton::isAnimated () const {
+bool RotatableButton::isAnimated () const
+{
     return (timerId_ != -1);
 }
 
-void RotatableButton::startAnimation() {
+void RotatableButton::startAnimation()
+{
     angle_ = 0;
 
     if (timerId_ == -1)
         timerId_ = startTimer(delay_);
 }
 
-void RotatableButton::stopAnimation() {
+void RotatableButton::stopAnimation()
+{
     if (timerId_ != -1)
         killTimer(timerId_);
 
@@ -32,13 +35,15 @@ void RotatableButton::stopAnimation() {
     update();
 }
 
-void RotatableButton::timerEvent(QTimerEvent * /*event*/) {
+void RotatableButton::timerEvent(QTimerEvent * /*event*/)
+{
     angle_ = (angle_ + 30) % 360;
 
     update();
 }
 
-void RotatableButton::paintEvent(QPaintEvent * /*event*/) {
+void RotatableButton::paintEvent(QPaintEvent * /*event*/)
+{
     QPainter p(this);
     p.setRenderHint(QPainter::Antialiasing);
     if (!displayedWhenStopped_ && !isAnimated()) {
@@ -59,8 +64,7 @@ void RotatableButton::paintEvent(QPaintEvent * /*event*/) {
     if (progress_ > 0 && progress_ < 100) {
         p.setPen(color_);
         p.drawText(rect(), Qt::AlignCenter, QString("%1%").arg(progress_));
-    }
-    else if (progress_ == 100) {
+    } else if (progress_ == 100) {
         stopAnimation();
     }
 
@@ -78,17 +82,52 @@ void RotatableButton::paintEvent(QPaintEvent * /*event*/) {
 }
 
 FlatButton::FlatButton(QWidget *parent) : QPushButton(parent)
+  , longPressedFlag(false)
 {
     setCursor(Qt::PointingHandCursor);
     setFlat(true);
     setStyleSheet("QPushButton{background:transparent;}");
+
+    m_timer = new QTimer(this);
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(slot_timerTimeout()));
 }
 
-FlatButton::FlatButton(const QString& str, QWidget *parent):QPushButton(str, parent)
+FlatButton::FlatButton(const QString& str, QWidget *parent) : QPushButton(str, parent)
+  , longPressedFlag(false)
 {
     setCursor(Qt::PointingHandCursor);
     setFlat(true);
     setStyleSheet("QPushButton{background:transparent;}");
+
+    m_timer = new QTimer(this);
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(slot_timerTimeout()));
+}
+
+void FlatButton::slot_timerTimeout()
+{
+    m_timer->stop();
+    longPressedFlag = true;
+    // once longPressedFlag be setted, send signal every 500 milliseconds.
+    m_timer->start(500);
+    emit longPressedEvent();
+}
+
+void FlatButton::mousePressEvent(QMouseEvent *event)
+{
+    QPushButton::mousePressEvent(event);
+    m_timer->start(1000);
+}
+
+void FlatButton::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (longPressedFlag) {
+        event->accept();
+        longPressedFlag = false;
+    } else {
+        QPushButton::mouseReleaseEvent(event);
+    }
+
+    m_timer->stop();
 }
 
 void FlatButton::setBackgroundImage(const QString &imageRess)
