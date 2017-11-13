@@ -7,13 +7,9 @@
 #include <linux/input.h>
 #include "PowerManager.h"
 
-#ifdef PLATFORM_WAYLAND
-#define DEV_PATH "/dev/input/event2"   //difference is possible
-#else
-#define DEV_PATH "/dev/input/event1"   //difference is possible
-#endif
-
 #define KEY_POWER            116
+
+static char dev_path[20] = "/dev/input/event2";
 
 static void* key_event_handler(void *arg)
 {
@@ -22,10 +18,10 @@ static void* key_event_handler(void *arg)
 
 	printf("[PowerManager] key_event_handler enter! \n");
 
-	keys_fd=open(DEV_PATH, O_RDONLY);
+	keys_fd=open(dev_path, O_RDONLY);
     if(keys_fd <= 0)
     {
-        printf("[PowerManager] open %s device error!\n", DEV_PATH);
+        printf("[PowerManager] open %s device error!\n", dev_path);
         return NULL;
     }
     while(1)
@@ -56,12 +52,38 @@ static void* key_event_handler(void *arg)
 	return NULL;
 }
 
+
+static void find_powerkey_devpath()
+{
+	int id = 0, event_name_fd;
+	char event_name_path[40];
+	char event_name[32];
+	for(; id < 5; ++id) {
+		memset(event_name_path, 0, sizeof(event_name_path));
+		memset(event_name, 0, sizeof(event_name_path));
+		sprintf(event_name_path, "/sys/class/input/event%d/device/name", id);
+		event_name_fd = open(event_name_path, O_RDONLY);
+		if(read(event_name_fd, &event_name, sizeof(event_name)) != -1 && strstr(event_name, "rk816_pwrkey")) {
+			memset(dev_path, 0, sizeof(dev_path));
+			sprintf(dev_path, "/dev/input/event%d", id);
+			close(event_name_fd);
+			break;
+		}
+		close(event_name_fd);
+	}
+
+	printf("[PowerManager] find_powerkey_devpath dev_path:%s \n", dev_path);
+}
+
 int main(int argc, char **argv)
 {
 	pthread_t key_event_thread;
 	int ret = 0;
 
-
+#ifndef PLATFORM_WAYLAND
+	find_powerkey_devpath();
+#endif
+	
 	pm_init();
 
 	ret = pthread_create(&key_event_thread, NULL, key_event_handler, NULL);
