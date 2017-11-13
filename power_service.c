@@ -10,7 +10,7 @@
 #ifdef PLATFORM_WAYLAND
 #define DEV_PATH "/dev/input/event2"   //difference is possible
 #else
-#define DEV_PATH "/dev/input/event0"   //difference is possible
+#define DEV_PATH "/dev/input/event1"   //difference is possible
 #endif
 
 #define KEY_POWER            116
@@ -25,7 +25,7 @@ static void* key_event_handler(void *arg)
 	keys_fd=open(DEV_PATH, O_RDONLY);
     if(keys_fd <= 0)
     {
-        printf("[PowerManager] open /dev/input/event2 device error!\n");
+        printf("[PowerManager] open %s device error!\n", DEV_PATH);
         return NULL;
     }
     while(1)
