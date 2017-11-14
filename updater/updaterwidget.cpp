@@ -221,7 +221,7 @@ void UpdaterWidget::update()
     }
 
     int size =file->absoluteFilePath().toStdString().size();
-    char path[size];
+    char path[size+1]={0};
     memcpy(path,file->absoluteFilePath().toStdString().c_str(),size);
 
     int ret = fw_flag_check(path);
