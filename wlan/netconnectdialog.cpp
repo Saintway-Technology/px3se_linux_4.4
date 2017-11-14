@@ -48,6 +48,7 @@ void NetConnectDialog::initLayout()
     m_cancelButton = new CPushButton(str_wifi_cancel,this);
     m_confirmButton->setFixedSize(net_dialog_button_width, net_dialog_button_height);
     m_cancelButton->setFixedSize(net_dialog_button_width, net_dialog_button_height);
+    m_confirmButton->setEnabled(false);
 
     buttonlayout->addStretch(0);
     buttonlayout->addWidget(m_cancelButton);
@@ -80,7 +81,7 @@ void NetConnectDialog::setWifiName(QString name)
 
 void NetConnectDialog::slot_onEditTextChanged(QString text)
 {
-    if (text.length() >= 9)
+    if (text.length() >= 8)
         m_confirmButton->setEnabled(true);
     else
         m_confirmButton->setEnabled(false);
