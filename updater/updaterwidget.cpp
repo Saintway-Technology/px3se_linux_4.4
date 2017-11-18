@@ -150,13 +150,18 @@ UpdaterWidget::UpdaterWidget(QWidget *parent) : QWidget(parent)
     pIndicator = new QProgressIndicator(this);
     connect(mainWindow, SIGNAL(retranslateUi()), this, SLOT(retranslateUi()));
 
+    char version[255] = {0};
+    sprintf(version,"%d.%d.%d", fwinfo.update_version >> 24 & 0xFF,
+            fwinfo.update_version >> 16 & 0xFF, fwinfo.update_version & 0xFF);
+
     //read fwinfo
     int ret = vendor_storage_read(sizeof(UpdaterInfo), (unsigned char*)&fwinfo, VENDOR_UPDATER_ID);
-    if (ret)
+    if (ret){
+        ui->m_update_version_LineEdit->setText(QString(version));
         return;
+    }
 
-    char version[255] = {0};
-    sprintf(version,"%d.%d.%d\n", fwinfo.update_version >> 24 & 0xFF,
+    sprintf(version,"%d.%d.%d", fwinfo.update_version >> 24 & 0xFF,
             fwinfo.update_version >> 16 & 0xFF, fwinfo.update_version & 0xFF);
     ui->m_update_version_LineEdit->setText(QString(version));
 }
