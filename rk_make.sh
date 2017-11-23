@@ -7,10 +7,14 @@ BUILD_DIR=$(pwd)/build
 BUILDROOT_TARGET_PATH=$(pwd)/../../buildroot/output/target/
 TARGET_BIN_PATH=$BUILDROOT_TARGET_PATH/usr/bin/
 TOOLCHAIN_FILE=$(pwd)/../../buildroot/output/host/usr/share/buildroot/toolchainfile.cmake
-STRIP=$(pwd)/../../buildroot/output/host/usr/bin/arm-rockchip-linux-gnueabihf-strip
 PRODUCT_NAME=`ls ../../device/rockchip/px3-se`
 TARGET_EXECUTABLE=""
 
+if [ "$PRODUCT_NAME"x = "px3-se"x ]; then
+	STRIP=$(pwd)/../../buildroot/output/host/usr/bin/arm-rockchip-linux-gnueabihf-strip
+elif [ "$PRODUCT_NAME"x = "rk3399"x ]; then
+	STRIP=$(pwd)/../../buildroot/output/host/usr/bin/aarch64-rockchip-linux-gnu-strip
+fi
 #define build err exit function
 check_err_exit(){
   if [ $1 -ne "0" ]; then
