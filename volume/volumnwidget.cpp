@@ -55,7 +55,7 @@ int audio_volume(audio_volume_action action, long* outvol)
         if (snd_mixer_elem_get_type(elem) == SND_MIXER_ELEM_SIMPLE &&
                 snd_mixer_selem_is_active(elem)) {
             //printf("------%s----------\n",snd_mixer_selem_get_name(elem));
-            if (strcmp(snd_mixer_selem_get_name(elem), "DAC") == 0)
+            if (strcmp(snd_mixer_selem_get_name(elem), "DAC") == 0 || strcmp(snd_mixer_selem_get_name(elem), "DAC1") == 0)
                 break;
         }
     }
