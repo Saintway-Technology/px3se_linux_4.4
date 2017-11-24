@@ -22,7 +22,12 @@
 
 #define DEBUG_ERR(M, ...) qDebug("DEBUG %d: " M, __LINE__, ##__VA_ARGS__)
 
+#ifdef DEVICE_EVB
+static const char WPA_SUPPLICANT_CONF_DIR[]  = "/etc/wpa_supplicant.conf";
+#else
 static const char WPA_SUPPLICANT_CONF_DIR[]  = "/data/wpa_supplicant.conf";
+#endif
+
 static const char HOSTAPD_CONF_DIR[] = "/etc/hostapd.conf";
 static char WLAN_PID_NAME[] = "wpa_supplicant";
 static char HOSTAPD_PID_NAME[] = "hostapd";
