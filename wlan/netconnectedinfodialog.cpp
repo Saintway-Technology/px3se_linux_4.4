@@ -8,7 +8,7 @@
 int net_connected_dialog_height = 400;
 int net_connected_dialog_width = 600;
 int net_connected_dialog_button_height = 50;
-int net_connected_dialog_button_width = 120;
+int net_connected_dialog_button_width = 150;
 #else
 int net_connected_dialog_height = 180;
 int net_connected_dialog_width = 400;
