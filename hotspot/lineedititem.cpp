@@ -17,7 +17,13 @@ void LineEditItem::initLayout()
     nameLabel = new QLabel(this);
     nameLabel->setStyleSheet("background-color:rgb(69,75,83);");
     nameLabel->setContentsMargins(0, 10, 10, 10);
+
+#ifdef DEVICE_EVB
+    nameLabel->setFixedWidth(200);
+#else
     nameLabel->setFixedWidth(100);
+#endif
+
     nameLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
     valueEdit = new QLineEdit(this);
