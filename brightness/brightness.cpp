@@ -11,7 +11,11 @@ Brightness::Brightness(QWidget *parent) :
 {
     ui->setupUi(this);
 
+#ifdef DEVICE_EVB
+    QFile brightnessPath("/sys/devices/platform/backlight/backlight/backlight/brightness");
+#else
     QFile brightnessPath("/sys/class/backlight/rk28_bl/brightness");
+#endif
     brightnessPath.open(QFile::ReadOnly | QIODevice::Truncate);
     QByteArray readAll= brightnessPath.readAll();
     QString brightnessString(readAll);
