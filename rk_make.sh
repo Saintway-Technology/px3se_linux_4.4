@@ -7,7 +7,7 @@ BUILD_DIR=$(pwd)/build
 BUILDROOT_TARGET_PATH=$(pwd)/../../buildroot/output/target/
 TARGET_BIN_PATH=$BUILDROOT_TARGET_PATH/usr/bin/
 TOOLCHAIN_FILE=$(pwd)/../../buildroot/output/host/usr/share/buildroot/toolchainfile.cmake
-PRODUCT_NAME=`ls ../../device/rockchip/px3-se`
+PRODUCT_NAME=`ls ../../device/rockchip`
 TARGET_EXECUTABLE=""
 
 if [ "$PRODUCT_NAME"x = "px3-se"x ]; then
