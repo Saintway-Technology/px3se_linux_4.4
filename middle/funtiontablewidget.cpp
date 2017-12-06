@@ -3,7 +3,7 @@
 #include "constant.h"
 
 #ifdef DEVICE_EVB
-int table_item_height = 80;
+int table_item_height = 100;
 #else
 int table_item_height = 50;
 #endif
@@ -32,7 +32,12 @@ Funtiontablewidget:: Funtiontablewidget(QWidget *parent) : QTableWidget(parent)
     connect(this, SIGNAL(cellClicked(int,int)), SLOT(listCellClicked(int,int)));
     connect(mainWindow, SIGNAL(retranslateUi()), this, SLOT(retranslateUi()));
 
+#ifdef DEVICE_EVB
+    setIconSize(QSize(50, 50));
+#else
     setIconSize(QSize(25, 25));
+#endif
+
 }
 
 void Funtiontablewidget::retranslateUi(){
