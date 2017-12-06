@@ -17,7 +17,12 @@ SwitchHead::SwitchHead(QWidget *parent) : BaseWidget(parent)
     setWidgetFontBold(m_switchText);
 
     m_switchButton = new SwitchButton(this);
+
+#ifdef DEVICE_EVB
+    m_switchButton->setFixedSize(100, 40);
+#else
     m_switchButton->setFixedSize(50, 23);
+#endif
 
     layout->addWidget(m_switchText);
     layout->addStretch(0);
