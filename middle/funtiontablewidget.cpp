@@ -147,9 +147,9 @@ void Funtiontablewidget::resizeEvent(QResizeEvent*)
 #ifdef DEVICE_EVB
     QHeaderView *headerview = horizontalHeader();
     headerview->setVisible(false);
-    headerview->resizeSection(0, 40);
-    headerview->resizeSection(1, 70);
-    headerview->resizeSection(2, width() - 110);
+    headerview->resizeSection(0, 30);
+    headerview->resizeSection(1, 60);
+    headerview->resizeSection(2, width() - 90);
 #else
     QHeaderView *headerview = horizontalHeader();
     headerview->setVisible(false);
