@@ -7,8 +7,8 @@
 #ifdef DEVICE_EVB
 int net_dialog_height = 400;
 int net_dialog_width = 600;
-int net_dialog_button_height = 50;
-int net_dialog_button_width = 120;
+int net_dialog_button_height = 60;
+int net_dialog_button_width = 180;
 #else
 int net_dialog_height = 230;
 int net_dialog_width = 330;
