@@ -23,10 +23,6 @@ check_err_exit(){
   fi
 }
 
-if [ "$PRODUCT_NAME"x = "px3-se"x ];then
-sed -i '/DEVICE_EVB/s/^/#&/' $EXT_PROJECT_FILE 
-fi
-
 #get parameter for "-j2~8 and clean"
 result=$(echo "$1" | grep -Eo '*clean')
 if [ "$result" = "" ];then
@@ -71,7 +67,3 @@ if [ "$1" = "cleanthen" ] || [ "$2" = "cleanthen" ];then
         make clean
 fi
 
-#we should restore the modifcation which is made on this script above.
-if [ "$PRODUCT_NAME"x = "px3-se"x ];then
-sed -i '/DEVICE_EVB/s/^.//' $EXT_PROJECT_FILE 
-fi
