@@ -60,10 +60,11 @@ do
 done
 
 make clean
+cd $TOP_DIR
 rm -rf $BUILD_DIR
 
 #call just for buid_all.sh
-if [ "$1" = "cleanthen" ] || [ "$2" = "cleanthen" ];then
-        make clean
-fi
+#if [ "$1" = "cleanthen" ] || [ "$2" = "cleanthen" ];then
+        #make clean
+#fi
 
