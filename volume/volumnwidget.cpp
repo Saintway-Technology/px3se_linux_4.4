@@ -56,10 +56,10 @@ int audio_volume(audio_volume_action action, long* outvol)
                 snd_mixer_selem_is_active(elem)) {
             //printf("------%s----------\n",snd_mixer_selem_get_name(elem));
             if (strcmp(snd_mixer_selem_get_name(elem), "DAC") == 0
-		|| strcmp(snd_mixer_selem_get_name(elem), "DAC1") == 0
-		|| strcmp(snd_mixer_selem_get_name(elem), "Speaker") == 0)
+                    || strcmp(snd_mixer_selem_get_name(elem), "DAC1") == 0
+                    || strcmp(snd_mixer_selem_get_name(elem), "Speaker") == 0)
             {
-		break;
+                break;
             }
         }
     }
@@ -121,7 +121,6 @@ VolumnWidget::VolumnWidget(QWidget *parent) :
     long volumnInt = volumnString.toInt();
     qDebug() << "read volumnInt from sys:" << volumnInt;
 
-    audio_volume(AUDIO_VOLUME_SET, &volumnInt);
     ui->m_VolumnHorizontalSlider->setValue(volumnInt);
 
     ui->m_VolumnDownPushButton->setIconSize(QSize(60, 60));
@@ -194,13 +193,12 @@ void VolumnWidget::on_m_VolumnHorizontalSlider_sliderMoved(int position)
     QtConcurrent::run(onVolumnChange, position);
 }
 
-
 void VolumnWidget::on_m_VolumnHorizontalSlider_valueChanged(int value)
 {
-    QtConcurrent::run(onVolumnChange,value);
+    QtConcurrent::run(onVolumnChange, value);
 }
 
 void VolumnWidget::on_m_VolumnHorizontalSlider_sliderReleased()
 {
-    saveVolumn( ui->m_VolumnHorizontalSlider->value());
+    saveVolumn(ui->m_VolumnHorizontalSlider->value());
 }
