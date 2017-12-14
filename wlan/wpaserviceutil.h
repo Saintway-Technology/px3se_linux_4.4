@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <qlogging.h>
+#include <QProcess>
 
 #define DBG false
 
@@ -33,7 +34,8 @@ static char WLAN_PID_NAME[] = "wpa_supplicant";
 static char HOSTAPD_PID_NAME[] = "hostapd";
 static char UDHCPC_PID_NAME[] = "udhcpc";
 
-inline bool console_run(const char *cmdline) {
+inline bool console_run(const char *cmdline)
+{
     qDebug("consule run cmd: %s", cmdline);
     DEBUG_INFO("cmdline = %s\n",cmdline);
 #if 0
@@ -53,7 +55,13 @@ inline bool console_run(const char *cmdline) {
     return true;
 }
 
-inline int get_pid(char *Name) {
+inline void detached_run(const char *cmdline)
+{
+    QProcess::startDetached(QString(cmdline));
+}
+
+inline int get_pid(char *Name)
+{
     int len;
     char name[20] = {0};
     len = strlen(Name);
@@ -158,7 +166,7 @@ inline int wifi_start_supplicant()
 
     memset(cmd, 0, sizeof(cmd));
     sprintf(cmd, "/usr/sbin/wpa_supplicant -Dnl80211 -iwlan0 -c %s &", WPA_SUPPLICANT_CONF_DIR);
-    console_run(cmd);
+    detached_run(cmd);
 
     return 0;
 }
@@ -198,7 +206,7 @@ inline int wifi_start_hostapd()
     console_run("iptables --append FORWARD --in-interface wlan0 -j ACCEPT");
     memset(cmd, 0, sizeof(cmd));
     sprintf(cmd,"/usr/sbin/hostapd %s -B", HOSTAPD_CONF_DIR);
-    console_run(cmd);
+    detached_run(cmd);
 
     return 0;
 }
@@ -242,7 +250,7 @@ inline void get_IP_address()
         console_run(cmd);
     }
 
-    console_run("udhcpc -i wlan0 &");
+    detached_run("udhcpc -i wlan0 &");
 }
 
 #endif // WPASERVICEUTIL_H
