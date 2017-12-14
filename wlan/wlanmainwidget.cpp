@@ -113,7 +113,7 @@ void WlanMainWidget::slot_checkStateChanged(bool checked)
 {
     m_switchHeader->setChecked(checked);
     if (checked) {
-	m_manager->openCtrlConnection("wlan0");
+        m_manager->openCtrlConnection("wlan0");
         m_manager->startWPAConnection();
         wifi_stop_hostapd();
         wifi_start_supplicant();
