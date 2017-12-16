@@ -388,7 +388,8 @@ int pm_wakeup(void)
 
 	return 0;
 }
-
+ssize_t pm_uevent_kernel_multicast_uid_recv(int socket, void *buffer,
+                                            size_t length, uid_t *user);
 
 /**
  * Like recv(), but checks that messages actually originate from the kernel.
