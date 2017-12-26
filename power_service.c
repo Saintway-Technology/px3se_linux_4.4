@@ -29,7 +29,7 @@ static void* key_event_handler(void *arg)
         if(read(keys_fd, &t, sizeof(t)) == sizeof(t))
         {
                 printf("[PowerManager] key_event_handler key %d %s\n", t.code, (t.value) ? "Pressed" : "Released");
-                if( t.value==1 && t.code==KEY_POWER)
+                if( t.value==0 && t.code==KEY_POWER)
                 {
                 	printf("[PowerManager] key_event_handler key Power\n");
                     if(SCREEN_ON == get_screen_status())
