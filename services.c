@@ -127,6 +127,16 @@ void reboot_service(int fd, void *arg)
         goto cleanup;
     }
 
+    if (!strstr(arg, "loader")) {
+	system("reboot loader");
+	while(1) { pause(); }
+    }
+
+    if (!strstr(arg, "reboot")) {
+	system("reboot");
+	while(1) { pause(); }
+    }
+
     ret = property_set(ANDROID_RB_PROPERTY, property_val);
     if (ret < 0) {
         snprintf(buf, sizeof(buf), "reboot failed: %d\n", ret);
