@@ -127,7 +127,7 @@ void reboot_service(int fd, void *arg)
         goto cleanup;
     }
 
-    if (!strstr(arg, "loader")) {
+    if (!strstr(arg, "reboot loader") || !strstr(arg, "reboot bootloader")) {
 	system("reboot loader");
 	while(1) { pause(); }
     }
