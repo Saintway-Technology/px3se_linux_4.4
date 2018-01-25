@@ -4,6 +4,8 @@
 #include <list>
 #include <string>
 
+using namespace std;
+
 #define SEARCH_PATH "/mnt"
 
 enum PlayMode
@@ -13,31 +15,27 @@ enum PlayMode
     PlayOneCircle = 2
 };
 
-typedef std::list<std::string> LIST_STRING;
+typedef list<string> SList;
 
-/**
- * Used for manager the music list.
- *
- * Each video item saved with url and you can add、remove
- * or get music item.
- */
 class MediaList
 {
 public:
     MediaList();
+    ~MediaList() {}
 
-    void travelDir(char *path);
+    void travelDir(const char *path);
     void updateList();
+
     void setPlayMode(PlayMode);
-    std::string getNextSongPath();
-    std::string getPathAt(int index);
-    void onPlayItemChanged(std::string playItem);
+    string getNextSongPath();
+    string getPathAt(int index);
+    void onPlayItemChanged(string playItem);
 
 private:
     int m_currentIndex;
-    LIST_STRING  m_list;
     PlayMode m_playmode;
-    LIST_STRING m_updateSuffixList;
+    SList  m_list;
+    SList m_suffixs;
 
     void init();
 };
