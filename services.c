@@ -127,13 +127,8 @@ void reboot_service(int fd, void *arg)
         goto cleanup;
     }
 
-    if (!strstr(arg, "reboot loader") || !strstr(arg, "reboot bootloader")) {
+    if (strstr(arg, "loader")) {
 	system("reboot loader");
-	while(1) { pause(); }
-    }
-
-    if (!strstr(arg, "reboot")) {
-	system("reboot");
 	while(1) { pause(); }
     }
 
@@ -145,10 +140,12 @@ void reboot_service(int fd, void *arg)
     }
     // Don't return early. Give the reboot command time to take effect
     // to avoid messing up scripts which do "adb reboot && adb wait-for-device"
+    system("reboot");
     while(1) { pause(); }
 cleanup:
     free(arg);
     adb_close(fd);
+    system("reboot");
 }
 
 #endif
