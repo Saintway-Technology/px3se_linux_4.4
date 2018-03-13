@@ -1293,6 +1293,7 @@ int adb_main(int is_daemon, int server_port)
     // No SIGCHLD. Let the service subproc handle its children.
     signal(SIGPIPE, SIG_IGN);
 #endif
+    signal(SIGPIPE, SIG_IGN);
 
     init_transport_registration();
 #if ADB_HOST
