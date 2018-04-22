@@ -170,7 +170,6 @@ my $testList = {
     "float"         => undef,
     "double"        => undef,
     "arithoh"       => undef,
-    "C"             => undef,
     "dc"            => undef,
     "hanoi"         => undef,
     "grep"          => undef,
