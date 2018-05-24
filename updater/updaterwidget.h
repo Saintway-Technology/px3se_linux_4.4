@@ -23,6 +23,11 @@ public slots:
     void retranslateUi();
     void finish();
 
+private slots:
+    void on_m_rstpushButton_clicked();
+
+    void on_m_otapushButton_clicked();
+
 private:
     Ui::UpdaterWidget *ui;
     QFileInfo *file;

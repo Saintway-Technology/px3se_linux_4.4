@@ -275,3 +275,39 @@ void UpdaterWidget::update()
         QProcess::execute("reboot");
     }
 }
+
+void UpdaterWidget::on_m_rstpushButton_clicked()
+{
+    FILE *stream = NULL;
+    char buf[1024];
+
+    ui->m_textBrowser->setPlainText("");
+    ui->m_textBrowser->append("--- Factory Reset ---");
+
+    memset(buf, '\0', sizeof(buf));
+    if ((stream = popen("/usr/bin/update reset", "r")) != NULL) {
+        while (fgets(buf, 1024, stream)) {
+            ui->m_textBrowser->append(buf);
+        }
+    }
+
+    pclose(stream);
+}
+
+void UpdaterWidget::on_m_otapushButton_clicked()
+{
+    FILE *stream = NULL;
+    char buf[1024];
+
+    ui->m_textBrowser->setPlainText("");
+    ui->m_textBrowser->append("--- System OTA ---");
+
+    memset(buf, '\0', sizeof(buf));
+    if ((stream = popen("/usr/bin/update ota", "r")) != NULL) {
+        while (fgets(buf, 1024, stream)) {
+            ui->m_textBrowser->append(buf);
+        }
+    }
+
+    pclose(stream);
+}

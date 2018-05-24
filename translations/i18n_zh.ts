@@ -1071,9 +1071,19 @@
         <translation type="unfinished">当前版本：</translation>
     </message>
     <message>
-        <location filename="../updater/updaterwidget.ui" line="41"/>
+        <location filename="../updater/updaterwidget.ui" line="55"/>
         <source>update</source>
         <translation type="unfinished">更新</translation>
+    </message>
+    <message>
+        <location filename="../updater/updaterwidget.ui" line="41"/>
+        <source>factory reset</source>
+        <translation type="unfinished">恢复出厂设置</translation>
+    </message>
+    <message>
+        <location filename="../updater/updaterwidget.ui" line="48"/>
+        <source>ota</source>
+        <translation type="unfinished">系统升级</translation>
     </message>
 </context>
 <context>
