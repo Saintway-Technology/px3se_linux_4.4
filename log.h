@@ -27,7 +27,7 @@ void log_write(int level, const char *fmt, ...)
 #define NOTICE(x...)  log_write(5, "<5>ueventd: " x)
 #define INFO(x...)    log_write(6, "<6>ueventd: " x)
 
-#define LOG_DEFAULT_LEVEL  3  /* messages <= this level are logged */
-#define LOG_UEVENTS        0  /* log uevent messages if 1. verbose */
+#define LOG_DEFAULT_LEVEL  4  /* messages <= this level are logged */
+#define LOG_UEVENTS        1  /* log uevent messages if 1. verbose */
 
 #endif
