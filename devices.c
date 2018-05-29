@@ -239,6 +239,8 @@ static void handle_block_partition(struct uevent *uevent)
 		!strncmp(uevent->path, "/devices/platform/", 18)) {
 		INFO("%s partition %s\n", uevent->action, uevent->partition_name);
 		if(!strcmp(uevent->action,"add")) {
+			if(!strcmp(uevent->partition_name,"misc"))
+				make_link(uevent->path, "/misc");
 			system("mount -a");
 		} else if(!strcmp(uevent->action,"remove")){
 			;
