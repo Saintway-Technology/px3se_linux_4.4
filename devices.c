@@ -274,9 +274,9 @@ static void parse_event(const char *msg, struct uevent *uevent)
             ;
     }
 
-    //log_event_print("event { '%s', '%s', '%s', '%s', %d, %d }\n",
-    //                uevent->action, uevent->path, uevent->subsystem,
-    //                uevent->firmware, uevent->major, uevent->minor);
+    log_event_print("event { '%s', '%s', '%s', '%s', %d, %d }\n",
+                    uevent->action, uevent->path, uevent->subsystem,
+                    uevent->firmware, uevent->major, uevent->minor);
 }
 
 static char **parse_platform_block_device(struct uevent *uevent)
@@ -293,14 +293,11 @@ static char **parse_platform_block_device(struct uevent *uevent)
     char *p;
     unsigned int size;
     struct stat info;
-    log_event_print("parse_platform_block_device { '%s', '%s', '%s', '%s', %d, %d }\n",
-                    uevent->action, uevent->path, uevent->subsystem,
-                    uevent->firmware, uevent->major, uevent->minor);
 
-    char **links = malloc(sizeof(char *) * 4);
+    char **links = malloc(sizeof(char *) * 5);
     if (!links)
         return NULL;
-    memset(links, 0, sizeof(char *) * 4);
+    memset(links, 0, sizeof(char *) * 5);
 
     /* Drop "/devices/platform/" */
     path = uevent->path;
@@ -318,10 +315,15 @@ static char **parse_platform_block_device(struct uevent *uevent)
     if (uevent->partition_name) {
         p = strdup(uevent->partition_name);
         sanitize(p);
-        if (asprintf(&links[link_num], "%s/by-name/%s", link_path, p) > 0)
+        if (asprintf(&links[link_num], "%s/by-name/%s", link_path, p) > 0){
             link_num++;
-        else
+            if (asprintf(&links[link_num], "/dev/block/by-name/%s", p) > 0)
+                link_num++;
+            else
+                links[link_num] = NULL;
+        } else {
             links[link_num] = NULL;
+        }
         free(p);
     }
 
