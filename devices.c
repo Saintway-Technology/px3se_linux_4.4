@@ -240,13 +240,6 @@ static void handle_block_partition(struct uevent *uevent)
 		INFO("%s partition %s\n", uevent->action, uevent->partition_name);
 		if(!strcmp(uevent->action,"add")) {
 			system("mount -a");
-			if(!strcmp(uevent->partition_name,"misc")){
-				char *cmd;
-				if (asprintf(&cmd, "ln -s %s /misc", uevent->path) > 0){
-					ERROR("create link cmd: %s\n", cmd);
-					system(cmd);
-				}
-			}
 		} else if(!strcmp(uevent->action,"remove")){
 			;
 		}
@@ -465,6 +458,14 @@ static void handle_device_event(struct uevent *uevent)
             for (i = 0; links[i]; i++)
                 make_link(devpath, links[i]);
         }
+		if(uevent->partition_name){
+			char *cmd;
+			if(!strcmp(uevent->partition_name,"misc"))
+				if (asprintf(&cmd, "ln -s %s /misc", devpath) > 0){
+					INFO("create link cmd: %s\n", cmd);
+					system(cmd);
+				}
+		}
     }
 
     if(!strcmp(uevent->action, "remove")) {
