@@ -230,6 +230,22 @@ static inline suseconds_t get_usecs(void)
 
 #endif
 
+static void handle_block_partition(struct uevent *uevent)
+{
+    int block;
+    int i;
+
+    if (uevent->partition_name && !strncmp(uevent->subsystem, "block", 5) && 
+		!strncmp(uevent->path, "/devices/platform/", 18)) {
+		INFO("%s partition %s\n", uevent->action, uevent->partition_name);
+		if(!strcmp(uevent->action,"add")) {
+			system("mount -a");
+		} else if(!strcmp(uevent->action,"remove")){
+			;
+		}
+    }
+}
+
 static void parse_event(const char *msg, struct uevent *uevent)
 {
     uevent->action = "";
@@ -325,6 +341,7 @@ static char **parse_platform_block_device(struct uevent *uevent)
             links[link_num] = NULL;
         }
         free(p);
+		handle_block_partition(uevent);
     }
 
     if (uevent->partition_num >= 0) {
