@@ -364,6 +364,51 @@ err:
     return NULL;
 }
 
+static char **parse_rknand_block_device(struct uevent *uevent)
+{
+    const char *path;
+    char *rknand;
+    char *partition;
+    int width;
+    char buf[256];
+    char link_path[256];
+    int fd;
+    int link_num = 0;
+    int ret;
+    char *p;
+    unsigned int size;
+    struct stat info;
+
+    char **links = malloc(sizeof(char *) * 5);
+    if (!links)
+        return NULL;
+    memset(links, 0, sizeof(char *) * 5);
+
+    /* Drop "/devices/virtual/block/" */
+    path = uevent->path;
+    rknand = path + 23;
+	ERROR("rknand: %s", rknand);
+
+    if (!strncmp(rknand, "rknand_", 7)) {
+        p = strdup(rknand + 7);
+		ERROR("rknand partition: %s", p);
+        sanitize(p);
+        if (asprintf(&links[link_num], "/dev/block/by-name/%s", p) > 0){
+			ERROR("rknand link: %s", links[link_num]);
+            link_num++;
+        } else {
+            links[link_num] = NULL;
+        }
+        free(p);
+    }
+
+    return links;
+
+err:
+    free(links);
+    return NULL;
+}
+
 static void handle_device_event(struct uevent *uevent)
 {
     char devpath[96];
@@ -397,6 +442,8 @@ static void handle_device_event(struct uevent *uevent)
         mkdir(base, 0755);
         if (!strncmp(uevent->path, "/devices/platform/", 18))
             links = parse_platform_block_device(uevent);
+		else if(!strncmp(uevent->path, "/devices/virtual/block/", 23))
+            links = parse_rknand_block_device(uevent);
     } else {
         block = 0;
             /* this should probably be configurable somehow */
