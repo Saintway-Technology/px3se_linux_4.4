@@ -56,6 +56,15 @@ struct uevent {
     int minor;
 };
 
+void remount(struct uevent *uevent)
+{	
+	if(!strcmp(uevent->action,"add")) {
+		system("mount -a");
+	} else if(!strcmp(uevent->action,"remove")){
+		;
+	}
+}
+
 static int open_uevent_socket(void)
 {
     struct sockaddr_nl addr;
@@ -238,11 +247,7 @@ static void handle_block_partition(struct uevent *uevent)
     if (uevent->partition_name && !strncmp(uevent->subsystem, "block", 5) && 
 		!strncmp(uevent->path, "/devices/platform/", 18)) {
 		INFO("%s partition %s\n", uevent->action, uevent->partition_name);
-		if(!strcmp(uevent->action,"add")) {
-			system("mount -a");
-		} else if(!strcmp(uevent->action,"remove")){
-			;
-		}
+		remount(uevent);
     }
 }
 
@@ -386,21 +391,23 @@ static char **parse_rknand_block_device(struct uevent *uevent)
 
     /* Drop "/devices/virtual/block/" */
     path = uevent->path;
-    rknand = path + 23;
-	ERROR("rknand: %s", rknand);
+	rknand = path + 23;
 
-    if (!strncmp(rknand, "rknand_", 7)) {
+	/****rknand using GPT partition***/
+    if (uevent->partition_name) {
+        p = strdup(uevent->partition_name);
+    } else if (!strncmp(rknand, "rknand_", 7)) {
+	/****rknand using parameter partition***/
         p = strdup(rknand + 7);
-		ERROR("rknand partition: %s", p);
-        sanitize(p);
-        if (asprintf(&links[link_num], "/dev/block/by-name/%s", p) > 0){
-			ERROR("rknand link: %s", links[link_num]);
-            link_num++;
-        } else {
-            links[link_num] = NULL;
-        }
-        free(p);
-    }
+    } else goto err;
+	
+	sanitize(p);
+	if (asprintf(&links[link_num], "/dev/block/by-name/%s", p) > 0)
+		link_num++;
+	else
+		links[link_num] = NULL;
+	free(p);
+	remount(uevent);
 
     return links;
 
