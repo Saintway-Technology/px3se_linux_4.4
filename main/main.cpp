@@ -18,7 +18,12 @@ int main(int argc, char *argv[])
     app.setFont(appFont);
 
     MainWindow w;
+
+#ifdef PLATFORM_WAYLAND
     w.showFullScreen();
+#else
+    w.showMaximized();
+#endif
 
     return app.exec();
 }

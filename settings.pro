@@ -3,7 +3,6 @@
 # Project created by QtCreator 2017-06-30T10:13:11
 #
 #-------------------------------------------------
-
 QT += bluetooth network sql dbus
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,7 +13,6 @@ CONFIG+= qt warn_on release
 
 DEFINES += CONFIG_CTRL_IFACE
 
-# 3399Linux、Big DPI
 DEFINES += DEVICE_EVB
 
 LIBS += -lasound

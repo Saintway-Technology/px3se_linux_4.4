@@ -59,8 +59,10 @@ void WlanMainWidget::initData()
 {
     creat_supplicant_file();
     m_manager = WPAManager::getInstance(this);
+
+/* TODO: we shoud need set it for fullscreen mode */ 
 #ifdef DEVICE_EVB
-    QKeyBoard::getInstance()->globalInit(QKeyBoard::Black, 75, 8);
+    QKeyBoard::getInstance()->globalInit(QKeyBoard::Black, 40, 6);
 #else
     QKeyBoard::getInstance()->globalInit(QKeyBoard::Black, 45, 16);
 #endif
