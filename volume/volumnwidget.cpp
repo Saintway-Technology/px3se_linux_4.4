@@ -56,8 +56,10 @@ int audio_volume(audio_volume_action action, long* outvol)
                 snd_mixer_selem_is_active(elem)) {
             //printf("------%s----------\n",snd_mixer_selem_get_name(elem));
             if (strcmp(snd_mixer_selem_get_name(elem), "DAC") == 0
-                    || strcmp(snd_mixer_selem_get_name(elem), "DAC1") == 0
-                    || strcmp(snd_mixer_selem_get_name(elem), "Speaker") == 0)
+		|| strcmp(snd_mixer_selem_get_name(elem), "DAC1") == 0
+		|| strcmp(snd_mixer_selem_get_name(elem), "Playback Path") == 0
+		|| strcmp(snd_mixer_selem_get_name(elem), "Capture MIC Path") == 0
+		|| strcmp(snd_mixer_selem_get_name(elem), "Speaker") == 0)
             {
                 break;
             }
