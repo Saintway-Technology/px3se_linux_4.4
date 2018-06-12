@@ -63,7 +63,7 @@ static void find_powerkey_devpath()
 		memset(event_name, 0, sizeof(event_name_path));
 		sprintf(event_name_path, "/sys/class/input/event%d/device/name", id);
 		event_name_fd = open(event_name_path, O_RDONLY);
-		if(read(event_name_fd, &event_name, sizeof(event_name)) != -1 && (strstr(event_name, "rk816_pwrkey") || strstr(event_name, "gpio-keys") || strstr(event_name, "rk29-keypad"))) {
+		if(read(event_name_fd, &event_name, sizeof(event_name)) != -1 && (strstr(event_name, "rk816_pwrkey") || strstr(event_name, "rk8xx_pwrkey") || strstr(event_name, "gpio-keys") || strstr(event_name, "rk29-keypad"))) {
 			memset(dev_path, 0, sizeof(dev_path));
 			sprintf(dev_path, "/dev/input/event%d", id);
 			close(event_name_fd);
