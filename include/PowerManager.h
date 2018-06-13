@@ -8,7 +8,7 @@
 #define POWER_STATE_ON	"off"
 #define POWER_STATE	"/sys/power/autosleep"
 
-#define BACKLIGHT_BRIGHTNESS	"/sys/class/backlight/rk28_bl/brightness"
+#define BACKLIGHT_BRIGHTNESS	"/sys/devices/platform/backlight/backlight/backlight/brightness"
 #define DISP_DEV "/dev/fb0"
 
 
