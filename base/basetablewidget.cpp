@@ -47,7 +47,7 @@ void BaseTableWidget::init()
 
     horizontalHeader()->setVisible(false);
     verticalHeader()->setVisible(false);
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     verticalScrollBar()->setStyleSheet("QScrollBar{background:transparent; width: 8px;margin: 0px 0px 0px 0px;}"
                                        "QScrollBar::handle{background:rgb(217,217,217);border-radius:0px;}"
