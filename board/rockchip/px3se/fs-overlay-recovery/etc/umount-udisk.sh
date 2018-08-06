@@ -2,5 +2,5 @@
 
 sync
 
-umount /mnt/udisk
+umount /udisk
 

@@ -2,5 +2,5 @@
 
 sync
 
-umount /mnt/sdcard
+umount /sdcard
 
