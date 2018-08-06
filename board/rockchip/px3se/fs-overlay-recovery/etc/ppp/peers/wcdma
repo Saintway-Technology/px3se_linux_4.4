@@ -1,0 +1,12 @@
+#/etc/ppp/peers/wcdma
+#This is pppd script, used SIMCOM 5360(Union)
+/dev/ttyUSB3
+115200
+crtscts
+modem
+debug
+nodetach
+usepeerdns
+defaultroute
+user "3gnet"
+connect '/usr/sbin/chat -s -v -f /etc/ppp/peers/wcdma-connect-chat'

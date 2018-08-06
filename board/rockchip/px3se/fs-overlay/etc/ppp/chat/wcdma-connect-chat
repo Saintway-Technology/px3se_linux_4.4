@@ -1,0 +1,16 @@
+#/etc/ppp/wcdma-connect-chat
+TIMEOUT 5 
+ABORT "DELAYED"
+ABORT "BUSY"
+ABORT "ERROR"
+ABORT "NO DIALTONE"
+ABORT "NO CARRIER" #异常处理
+#"AT
+#'OK-+++\c-OK' ATH0
+''      AT
+OK     AT+CFUN=1 #实现基本的全功能模式
+OK     AT+CNAOP=2 #设置为WCDMA
+OK     AT+CNMP=14 #设置WCDMA模式
+OK     AT+CGDCONT=1,"IP","3gnet",,0,0 #VPN服务器
+OK     ATDT*99# #联通3G特殊号码
+CONNECT    ''
