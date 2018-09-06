@@ -1,0 +1,43 @@
+/ {
+
+        lvds-panel {
+                compatible = "samsung,lsl070nl01","simple-panel";
+                power-supply = <&vcc33_lcd>;
+                backlight = <&backlight>;
+		//prepare-delay-ms = <120>;
+		//enable-delay-ma = <120>;
+		//unprepare-delay-ms = <120>;
+		//disable-delay-ms = <120>;  
+		bus-format = <MEDIA_BUS_FMT_RGB666_1X18>;  
+		//rockchip,data-mapping = "jeida";
+                rockchip,data-width = <18>;
+                rockchip,output = "rgb";
+                status = "okay";
+
+                display-timings {
+                        timing {
+                                clock-frequency = <35000000>;
+                                hactive = <800>;
+                                vactive = <480>;
+                                hback-porch = <46>;
+                                hfront-porch = <210>;
+                                vback-porch = <23>;
+                                vfront-porch = <22>;
+                                hsync-len = <20>;
+                                vsync-len = <13>;
+                                hsync-active = <0>;
+                                vsync-active = <0>;
+                                de-active = <0>;
+                                pixelclk-active = <0>;
+                        };
+                };
+
+                port {
+                        panel_in_lvds: endpoint {
+                                remote-endpoint = <&lvds_out_panel>;
+                        };
+                };
+        };
+          
+};
+
