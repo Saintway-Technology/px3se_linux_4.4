@@ -6,11 +6,11 @@
 # Target arch
 ARCH=arm
 # Uboot defconfig
-UBOOT_DEFCONFIG=evb-px3se
+UBOOT_DEFCONFIG=saintway-px3se
 # Kernel defconfig
-KERNEL_DEFCONFIG=rockchip_linux_defconfig
+KERNEL_DEFCONFIG=saintway_linux_defconfig
 # Kernel dts
-KERNEL_DTS=px3se-evb
+KERNEL_DTS=px3se-saintway
 # Buildroot config
 CFG_BUILDROOT=rockchip_px3se
 # Recovery config
