@@ -224,6 +224,20 @@
 		vin-supply = <&vcc_io>;
 	};
 
+	vcc_mcu: vcc-mcu {
+		compatible = "regulator-fixed";
+		enable-active-high;
+		gpio = <&gpio0 12 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&mcu_pwr>;
+		regulator-name = "vcc_mcu";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-always-on;
+		regulator-boot-on;
+		vin-supply = <&vcc_io>;
+	};
+
 	vcc_cif: vcc-cif {
 		compatible = "regulator-fixed";
 		enable-active-high;
@@ -545,7 +559,7 @@
 
 &i2s_8ch {
 	#sound-dai-cells = <0>;
-	status = "okay";
+	status = "disabled";
 };
 
 &pwm0 {
@@ -773,6 +787,12 @@
 	gps {
 		gps_pwr: gps-pwr {
 			rockchip,pins = <2 25 RK_FUNC_GPIO &pcfg_pull_default>;
+		};
+	};
+
+	mcu {
+		mcu_pwr: mcu-pwr {
+			rockchip,pins = <0 12 RK_FUNC_GPIO &pcfg_pull_default>;
 		};
 	};
 
