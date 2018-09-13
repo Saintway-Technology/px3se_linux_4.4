@@ -775,7 +775,7 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 		pinctrl-names = "default";
-		pinctrl-0 = <&sdio_pwren &sdio_cmd &sdio_clk &sdio_bus4>;
+		pinctrl-0 = <&sdio_cmd &sdio_clk &sdio_bus4>;
 		clock-freq-min-max = <400000 50000000>;
 		clocks = <&cru HCLK_SDIO>, <&cru SCLK_SDIO>;
 		clock-names = "biu", "ciu";
