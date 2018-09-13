@@ -22,9 +22,36 @@ int wakein;
 int dtr;
 int rst;
 int disable;
+int spk;
+int hp;
+
 
 int gprs_init(struct device_node *np)
 {
+	if(gpio_request(spk,NULL))
+	{
+		printk("gpio %d request faild\n",spk);
+		return -1;	
+	}	
+	if(gpio_direction_output(spk, 1))
+	{
+		printk("set %d gpio_direction_output err\n",spk);
+		return -1;	
+	}
+        gpio_set_value(spk, 1);	
+
+	if(gpio_request(hp,NULL))
+	{
+		printk("gpio %d request faild\n",hp);
+		return -1;	
+	}	
+	if(gpio_direction_output(hp, 1))
+	{
+		printk("set %d gpio_direction_output err\n",hp);
+		return -1;	
+	}
+        gpio_set_value(hp, 1);	
+
 	if(gpio_request(wakein,NULL))
 	{
 		printk("gpio %d request faild\n",wakein);
@@ -89,6 +116,18 @@ int get_gprs_gpio(struct device_node *np)
 {
 	unsigned long gpios;
 	
+        spk = of_get_named_gpio_flags(np, "spk-ctl-gpios", 0,(enum of_gpio_flags *)&gpios);
+	if (!gpio_is_valid(spk)){
+		printk("invalid wakein_gpio: %d\n",spk);
+		return -1;
+	}
+ 
+        hp = of_get_named_gpio_flags(np, "hp-ctl-gpios", 0,(enum of_gpio_flags *)&gpios);
+	if (!gpio_is_valid(hp)){
+		printk("invalid wakein_gpio: %d\n",hp);
+		return -1;
+	}
+ 
         wakein = of_get_named_gpio_flags(np, "wakein", 0,(enum of_gpio_flags *)&gpios);
 	if (!gpio_is_valid(wakein)){
 		printk("invalid wakein_gpio: %d\n",wakein);
