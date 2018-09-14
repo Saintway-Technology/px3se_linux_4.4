@@ -4,7 +4,7 @@
 #include "rk3128.dtsi"
 #include <dt-bindings/display/drm_mipi_dsi.h>
 #include <dt-bindings/input/input.h>
-//#include <lcd-mipi.dtsi>
+#include <lcd-lvds.dtsi>
 
 
 / {
@@ -80,6 +80,10 @@
 
 		default-brightness-level = <128>;
 		pwms = <&pwm0 0 25000 0>;
+        enable-gpios = <&gpio0 10 GPIO_ACTIVE_HIGH>;
+        pinctrl-names = "default";
+        pinctrl-0 = <&bl_en>;
+
 
 		status = "okay";
 	};
@@ -153,7 +157,7 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&lcdc_pwr_en>;
 
-		gpio = <&gpio0 27 GPIO_ACTIVE_HIGH>;
+		gpio = <&gpio0 8 GPIO_ACTIVE_HIGH>;
 		enable-active-high;
 
 		regulator-name = "vcc33_lcd";
@@ -211,6 +215,7 @@
 		regulator-boot-on;
 		vin-supply = <&vcc_io>;
 	};
+
 
 	vcc_gprs: vcc-gprs {
 		compatible = "regulator-fixed";
@@ -363,6 +368,21 @@
 
 &display_subsystem {
 	status = "okay";
+};
+
+&lvds {
+    status = "okay";
+        pinctrl-names = "default";
+        pinctrl-0 = <&lcdc_lcdc>;
+    ports {
+        port@1 {
+            reg = <1>;
+
+            lvds_out_panel: endpoint {
+                remote-endpoint = <&panel_in_lvds>;
+            };
+        };
+    };
 };
 
 &gpu {
@@ -767,6 +787,11 @@
 
 
 &pinctrl {
+    backlight {
+        bl_en: bl-en {
+            rockchip,pins = <0 10 RK_FUNC_GPIO &pcfg_pull_none>;
+        };
+    };
 	camera {
 		cif_int: cif-int {
 			rockchip,pins = <2 2 RK_FUNC_GPIO &pcfg_pull_default>;
@@ -811,7 +836,7 @@
 
 	lcdc {
 		lcdc_pwr_en: lcdc-pwr-en {
-			rockchip,pins = <0 27 RK_FUNC_GPIO &pcfg_pull_default>;
+			rockchip,pins = <0 8 RK_FUNC_GPIO &pcfg_pull_default>;
 		};
 	};
 
