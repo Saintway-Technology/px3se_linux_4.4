@@ -245,6 +245,21 @@
 		vin-supply = <&vcc_io>;
 	};
 
+    vcc_tp: vcc-tp {
+        compatible = "regulator-fixed";
+        enable-active-high;
+        gpio = <&gpio2 19 GPIO_ACTIVE_HIGH>;
+        pinctrl-names = "default";
+        pinctrl-0 = <&tp_pwr>;
+        regulator-name = "vcc_tp";
+        regulator-min-microvolt = <3300000>;
+        regulator-max-microvolt = <3300000>;
+        regulator-always-on;
+        regulator-boot-on;
+        vin-supply = <&vcc_io>;
+    };
+
+
 	vcc_cif: vcc-cif {
 		compatible = "regulator-fixed";
 		enable-active-high;
@@ -549,6 +564,15 @@
 	status = "okay";
 	clock-frequency = <400000>;
 
+
+    touchscreen: ts@40 {
+        compatible = "GSL,GSL3673";
+                reg = <0x40>;
+                irq_gpio_number = <&gpio1 8 IRQ_TYPE_EDGE_RISING>;
+                rst_gpio_number = <&gpio0 25 GPIO_ACTIVE_LOW>;
+        status = "okay";
+    };
+
 	camera: adv7180@20 {
 		compatible = "adi,adv7180";
 		reg = <0x20>;
@@ -821,6 +845,12 @@
 			rockchip,pins = <0 12 RK_FUNC_GPIO &pcfg_pull_default>;
 		};
 	};
+
+    tp {
+        tp_pwr: tp-pwr {
+            rockchip,pins = <2 19 RK_FUNC_GPIO &pcfg_pull_default>;
+        };
+    };
 
 	gprs {
 		gprs_pwr: gprs-pwr {
